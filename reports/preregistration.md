@@ -182,7 +182,7 @@ The names are resolved through Open Tree TNRS to species, or to the type species
   - Positive ⇒ the geometry tracks dated phylogeny (H_time).
   - ≈ 0 ⇒ it tracks rank only (H_rank).
 
-### Causal hypothesis (confirmatory, stage 6, separate Holm family of 2)
+### Causal hypothesis (confirmatory, stage 3 — renumbered from stage 6 on 2026-11-20, see Deviations; separate Holm family of 2)
 - **C-abl.** Mean-ablating the learned k=10 phylogeny subspace (stage 2 flat probe) at the selected layer lowers the log-probability of the correct class word in `The {name} is a kind of ___` more than ablating a variance-matched random subspace drawn inside the span of the species activations. Measured on held-out species.
 - **C-swap.** Swapping the subspace coordinates of species A into species B switches the predicted class word to A's class more often than a random-subspace swap.
 
@@ -334,3 +334,5 @@ All deviations below were made **before any activation was extracted** (species 
    - Silverfish's scientific name was corrected to *Lepisma saccharina*.
 7. **2026-11-20 — batch size 1 for extraction.** Batched bf16 forward passes on Qwen3.5-2B differ by up to 2.5% relative norm from unbatched ones (not caused by padding), so every prompt is run alone. This is exact and reproducible.
 8. **2026-11-20 — S1 reference distance, clarified.** Edge-count path length (S1, as registered) is *not* consistent with rooted triplets (unit test `test_path_length_is_not_triplet_consistent`). S1 is kept as registered. The LCA-depth ultrametric (max depth − depth(LCA)), which is triplet-consistent, is added as an **exploratory** second reference distance for the Mantel analysis.
+9. **2026-11-20 — stage order (user request).** Stages were renumbered: causal and behavioral tests (formerly stage 6) are now **stage 3**; ablations → stage 4; sensitivity → stage 5; more models → stage 6. Only the execution order changed. Hypotheses, metrics, tests and multiplicity families are unchanged.
+10. **2026-11-20 — exploratory C3b (after the Pythia-410m pilot, before any Qwen activation).** The pilot showed that C3 (overlay length vs *fully* shuffled leaves) passes at every layer, including layer 0 (token embeddings). Any class clustering shortens the overlay, so C3 cannot separate "tree" from "clusters". An exploratory check **C3b** was therefore added: the same statistic against leaves shuffled *within strata*, which tests branching beyond the coarse classes. C3 and the preregistered reading rule are unchanged, and C3b is reported alongside them.
