@@ -65,3 +65,14 @@ def test_probe_recovers_planted_tree_and_control_fails(tree30, rng):
     rc = cv_probe(V, D[np.ix_(perm, perm)], fam, k=5, n_folds=3, n_pca=20, steps=400, seed=0)
     assert r["test_test_pearson"][0] > 0.4
     assert r["test_test_pearson"][0] > rc["test_test_pearson"][0] + 0.2
+
+
+@pytest.mark.parametrize("metric", ["euclid", "poincare"])
+def test_probe_metrics_recover_planted_tree(tree30, rng, metric):
+    X = brownian_on_tree(tree30, 40, rng)
+    V = np.hstack([X, rng.normal(size=(30, 60))])
+    fam = np.arange(30) // 2
+    r = cv_probe(V, tree30.path_length(), fam, k=5, n_folds=3, n_pca=20, steps=400, seed=0, metric=metric,
+                 groups=np.arange(30) // 10)
+    assert r["test_test_pearson"][0] > 0.3
+    assert "test_test_within_group_spearman" in r

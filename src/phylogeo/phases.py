@@ -42,6 +42,11 @@ def names_and_templates(name_set: str) -> tuple[list[str], list[str]]:
         return DAYS, CALIB_TEMPLATES
     if name_set == "months":
         return MONTHS, CALIB_TEMPLATES
+    if name_set == "species_sci":  # stage-4 ablation: scientific binomials (no article before a binomial)
+        from phylogeo.prompts import SCI_TEMPLATES
+
+        df = pd.read_csv(DATA_REPO_DIR / "species.csv", keep_default_na=False)
+        return df["sci_name"].tolist(), SCI_TEMPLATES
     df = pd.read_csv(DATA_REPO_DIR / f"{name_set}.csv", keep_default_na=False)
     return df["common_name"].tolist(), TEMPLATES
 
@@ -325,3 +330,10 @@ def phase_site(cfg: RunConfig) -> None:
     from phylogeo.site import build_site
 
     log.info("site written to %s", build_site(cfg.extra.get("site_run", "qwen35_2b")))
+
+
+def phase_stage4(cfg: RunConfig) -> None:
+    """Stage 4: ablations (readout, normalization, prompt format, binomials, polysemy, probe metric/dim, kNN K)."""
+    from phylogeo.stage4 import run_stage4
+
+    run_stage4(cfg, load_species, layer_distances, act_dir, out_dir, write_json)

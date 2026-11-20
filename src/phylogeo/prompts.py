@@ -24,6 +24,10 @@ TEMPLATES = [
     "We read a book about the {name}.",
 ]
 
+# Stage-4 ablation: the same 8 sentences for scientific binomials (English does not
+# put "the" before a binomial, e.g. "Here is a fact about Panthera leo.").
+SCI_TEMPLATES = [t.replace("the {name}", "{name}").replace("The {name}", "{name}") for t in TEMPLATES]
+
 # Calibration concept sets (positive controls with known circular structure).
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August",
