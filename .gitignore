@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+.pytest_cache/
+
+# Secrets / local config
+.env
+
+# Large or non-redistributable data (lives in DATA_DIR / Hugging Face)
+data/cache/
+data/timetree/
+*.npy
+*.npz
+*.pt
+*.safetensors
+
+# Logs are kept locally; summaries go to reports/
+logs/*.log
+!logs/.gitkeep
+
+# Tooling
+.trackio/
+site/_build/
