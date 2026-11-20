@@ -60,3 +60,18 @@ Running log of what was learned from the literature, from errors, and from the e
   - The release code falls back to the default token path. The token is never logged or copied.
 - **API drift.** `HfApi.upload_large_folder` no longer exists in huggingface_hub 2.4; `upload_folder` now splits large folders into several commits and resumes when re-run.
 - **Generated text blocks keep docs honest.** The README and summary headline tables are injected by the `report` phase between markers, so no hand-typed number can go stale.
+
+## From the final independent review (round 1)
+- **A probe's all-pairs correlation can be produced by the coarse groups alone.**
+  - A predictor that knows only the 13 strata correlates highly with tree path length.
+  - A probe trained on a class-blob input (coarse groups, no within-group tree) generalized to held-out families as well as the model.
+  - Shuffled-tree and random-input controls cannot detect this, because they destroy the class structure too.
+  - *Lesson:* every distance probe needs a **class-only input** control, and it should be judged on a within-group metric.
+- **Pooled within-group correlations have a Simpson-type flaw.** When groups differ in typical within-group distance, one Spearman over all same-group pairs rewards any predictor that knows the group means. *Lesson:* compute the correlation per group and average; check the metric with a group-mean predictor, which should score about 0.
+- **Compare every positive secondary result with the untrained controls, not only with chance.**
+  - S2 passed against chance but was matched by an untrained network.
+  - The conflict-triplet pattern was also present in untrained networks.
+  - *Lesson:* report paired control comparisons for every subset.
+- **Label results by content, not by storage key.** A report labelled whatever sat under `C_abl` as "final", which published superseded numbers as final on the public site.
+- **Registered corrections must exist in code.** The BH-FDR correction was registered and advertised in the README but never implemented. *Lesson:* grep the code for each registered statistical procedure before writing it up.
+- **Cosine distance depends on the origin.** The reviewer found that residualizing covariates without re-centring made H1 look fragile. *Lesson:* re-centre after any linear adjustment before using cosine distances.

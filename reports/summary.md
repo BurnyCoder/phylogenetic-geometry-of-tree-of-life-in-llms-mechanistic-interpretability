@@ -33,16 +33,26 @@
 <!-- KEY-RESULTS:END -->
 
 **Interpretation.**
-- **Positive.** Qwen3.5-2B encodes a modest but robust amount of within-group phylogenetic order that untrained networks and simple name statistics do not explain. A 10-dimensional linear subspace carries tree distances that generalize to held-out families.
-- **Negative 1: lexical and co-occurrence statistics are not ruled out.** The order is not significant where spelling or co-occurrence disagree with the tree.
-- **Negative 2: no time signal.** It does not follow divergence times beyond topology.
-- **Negative 3: ecology wins on conflicts.** Where ecology and phylogeny conflict (whale vs hippo and shark), the geometry follows ecology. The dominant late-layer direction is an aquatic-to-terrestrial habitat axis, confirmed on held-out species.
-- **Overall.** The picture is a representation that mixes folk taxonomy, ecology and some genuine phylogenetic signal. It is not a clean "tree of life" manifold like the one reported for Evo 2.
+- **Positive.**
+  - Qwen3.5-2B encodes a modest amount of within-group tree order that the untrained networks and simple name statistics do not explain.
+  - It is robust across seeds, templates and species subsamples.
+  - It is clear in mammals and birds, the largest groups.
+  - It also beats the untrained networks on lexically neutral triplets (post hoc).
+- **Negative.**
+  - *Spelling and co-occurrence.* Where spelling or co-occurrence disagree with the tree, the model does no better than untrained networks. So phylogenetic information beyond those statistics is not shown.
+  - *Untrained match.* An untrained network matches the order within taxonomic orders (S2).
+  - *Time.* No divergence-time signal is detected beyond topology.
+  - *Conflict cases.* The geometry does not follow the tree on phylogeny-vs-folk conflict triplets, but untrained networks behave the same.
+  - *Probe.* The Goodfire-style flat probe's held-out correlation is matched by a class-only input, and within groups it adds little over raw distances.
+- **Ecology.** The top late-layer component orders animals from aquatic to terrestrial. It is confirmed on held-out species, with the caveat that names with water words were not controlled.
+- **Overall.** The representation mixes coarse folk categories, ecology and a modest phylogenetic signal. It is not a clean "tree of life" manifold like the one reported for Evo 2.
 
 **Main limitations.**
 - One main model of 2B parameters.
-- Vernacular names only: Latin binomials carry no structure.
+- Vernacular names only: Latin binomials carry much weaker structure.
 - The co-occurrence control uses GloVe, not the model's own training corpus.
-- Topology comes from Open Tree and ranks from NCBI. Both are imperfect references for deep splits.
+- Topology comes from Open Tree and ranks from NCBI. Both are imperfect for deep splits, and edge-count path length depends on how densely each clade is sampled.
+- The within-group signal rests mostly on mammals and birds.
+- Ecological and body-size similarity, which is phylogenetically conserved, is not controlled. So "agreement with the tree" is the precise claim, not "phylogenetic knowledge".
 
 Full details: [paper](paper.pdf), [all tables](../results/RESULTS.md), [experiments](experiments/experiments.md).

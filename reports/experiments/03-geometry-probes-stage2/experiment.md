@@ -46,3 +46,10 @@ Whether the model *uses* this subspace is tested causally in stage 3.
 ## Learnings
 - **A probe's high correlation must be benchmarked against the class oracle.** Path length is dominated by deep splits, so "r = 0.75" partly reflects class membership. Always also report within-class held-out performance.
 - **Geodesics on smallest-connected kNN graphs can hurt when the data are clustered.** Long bridging edges distort between-cluster distances, and with k = 3 the graph is very sparse.
+
+## Revision after the final review (round 1, 2026-11-20)
+The probe interpretation above ("a trained probe can isolate it") is **withdrawn**. See the [review](../../reviews/2026-11-20-final-review-round1.md), M1 and M2.
+- **Class-only inputs.** A predictor that knows only the 13 strata already correlates highly with path length over all pairs. The same probe trained on a class-blob input, which has coarse groups and no within-stratum tree, generalizes to held-out families at least as well as the model. So the held-out all-pairs correlation mainly measures coarse-group separation.
+- **The within-group metric was flawed.** It pooled all same-stratum pairs into one Spearman, which a group-mean predictor already scores well on. The corrected metric is the mean of the per-stratum Spearman values. On it the model's probe shows some within-stratum order, but no more than the raw distances without any probe.
+- **Neighbour-joining** is now also compared with trees built from class-blob inputs.
+- **Numbers:** `results/qwen35_2b/SUMMARY.md`, stage 2.

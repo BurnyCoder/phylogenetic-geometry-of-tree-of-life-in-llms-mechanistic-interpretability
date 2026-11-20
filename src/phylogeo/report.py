@@ -607,7 +607,8 @@ def inject_block(path: Path, text: str, tag: str = "KEY-RESULTS") -> bool:
 
 
 def probe_bar_png(run: str) -> None:
-    """Bar chart of held-out-family probe correlation: model vs controls (error bars = seed sd)."""
+    """Two panels: held-out probe correlation over all pairs, and within strata (mean of per-stratum
+    Spearman), for the model and every control. Error bars = SD over probe seeds (not CIs)."""
     r = _load(RESULTS_DIR / run / "stage2" / "results.json")
     if not r:
         return
@@ -616,16 +617,32 @@ def probe_bar_png(run: str) -> None:
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
-    keys = [k for k in r["probe"] if k != "selectivity_test_test"]
-    m = [r["probe"][k]["test_test_pearson"][0] for k in keys]
-    sd = [r["probe"][k]["test_test_pearson"][1] for k in keys]
-    fig, ax = plt.subplots(figsize=(6, 3.6))
-    ax.bar(keys, m, yerr=sd, color=["#2a78d6" if k == "model" else "#b8b7b2" for k in keys], capsize=4)
-    ax.axhline(0, color="0.3", lw=0.8)
-    ax.set_ylabel("Pearson r, held-out families")
-    ax.set_title(f"Flat-subspace probe (k=10), layer {r['layer']}: predicted vs tree distance", fontsize=9)
-    for i, v in enumerate(m):
-        ax.text(i, v + 0.02 if v >= 0 else v - 0.06, f"{v:.2f}", ha="center", fontsize=8)
+    keys = [k for k, v in r["probe"].items() if isinstance(v, dict)]
+    panels = [("test_test_pearson", "all held-out pairs: Pearson r")]
+    if all("test_test_within_stratum_spearman" in r["probe"][k] for k in keys):
+        panels.append(("test_test_within_stratum_spearman", "within strata: mean Spearman"))
+    fig, axes = plt.subplots(1, len(panels), figsize=(5.2 * len(panels), 3.8), squeeze=False)
+    for ax, (key, title) in zip(axes[0], panels):
+        m = [r["probe"][k][key][0] for k in keys]
+        sd = [r["probe"][k][key][1] for k in keys]
+        ax.bar(keys, m, yerr=sd, color=["#2a78d6" if k == "model" else "#b8b7b2" for k in keys], capsize=4,
+               edgecolor="white", linewidth=1)
+        ax.axhline(0, color="0.3", lw=0.8)
+        if key == "test_test_pearson" and "class_only_predictor_pearson_all_pairs" in r["probe"]:
+            v = r["probe"]["class_only_predictor_pearson_all_pairs"]
+            ax.axhline(v, ls=":", color="0.4", lw=1)
+            ax.text(len(keys) - 0.5, v, "class-only predictor ", ha="right", va="bottom", fontsize=7, color="0.3")
+        if key != "test_test_pearson" and "raw_angular_within_stratum_spearman_all_species" in r["probe"]:
+            v = r["probe"]["raw_angular_within_stratum_spearman_all_species"]
+            ax.axhline(v, ls=":", color="0.4", lw=1)
+            ax.text(len(keys) - 0.5, v, "raw distances, no probe ", ha="right", va="bottom", fontsize=7, color="0.3")
+        for i_, v in enumerate(m):
+            ax.text(i_, v + 0.02 if v >= 0 else v - 0.06, f"{v:.2f}", ha="center", fontsize=8)
+        ax.set_title(title, fontsize=9)
+        ax.tick_params(axis="x", labelrotation=20, labelsize=8)
+    axes[0][0].set_ylabel("held-out families (5-fold)")
+    fig.suptitle(f"Flat-subspace probe (k = 10), layer {r['layer']}: predicted vs tree distance; bars = mean, "
+                 "error = SD over seeds", fontsize=9)
     fig.tight_layout()
     fig.savefig(RESULTS_DIR / run / "stage2" / "probe_heldout_r.png", dpi=150)
     plt.close(fig)

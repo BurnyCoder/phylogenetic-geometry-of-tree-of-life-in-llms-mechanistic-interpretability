@@ -207,7 +207,7 @@ def build_paper() -> Path:
         "Confirmatory secondary hypotheses (Holm family of 5).")
     probe_tab = _table(["probe input / target", "held-out-family r", "train r"], [
         [esc(k.replace("_", " ")), f"{f3(v['test_test_pearson'][0])} ± {f3(v['test_test_pearson'][1])}",
-         f3(v["train_train_pearson"][0])] for k, v in probe.items() if k != "selectivity_test_test"],
+         f3(v["train_train_pearson"][0])] for k, v in probe.items() if isinstance(v, dict)],
         "Flat-subspace probe (k = 10), 5-fold family holdout, 5 seeds (mean ± SD).")
 
     # --- Optional sections ------------------------------------------------------------------------------
@@ -251,11 +251,16 @@ def build_paper() -> Path:
         stage4_txt = (f"\n== Ablations (stage 4, exploratory)\nSingle-change ablations are listed in the evaluation table. "
                       f"Normalization (z-scoring, stratum-centering), prompt format (no chat template) and including polysemous "
                       f"names leave TA#sub[within] essentially unchanged; raw cosine and the mean over name tokens are lower. "
-                      f"With scientific binomials, TA on genus-split triplets is {f3(bn.get('ta_within_modal'))} versus "
-                      f"{f3(bn.get('common_names_same_triplets_modal'))} for common names on the same triplets. The within-stratum "
-                      f"held-out Spearman of the k = 10 probe is {f3(pr['angular_k10']['test_test_within_group_spearman'])} "
-                      f"(shuffled-tree control {f3(pr['angular_k10_shuffled_tree']['test_test_within_group_spearman'])}), so the "
-                      f"probe captures order inside strata, not only stratum membership.\n"
+                      f"With scientific binomials on genus-split, head-noun-disjoint triplets, TA is "
+                      f"{f3(bn.get('head_disjoint_binomial_modal'))} at layer {s4['modal_layer']} (best layer "
+                      f"{f3(bn.get('head_disjoint_binomial_max'))}) versus {f3(bn.get('head_disjoint_common_names_modal'))} for "
+                      f"common names on the same triplets: much weaker, and only in late layers. Within strata (mean of "
+                      f"per-stratum Spearman on held-out pairs), the k = 10 probe reaches "
+                      f"{f3(pr['angular_k10'].get('test_test_within_stratum_spearman'))}, the shuffled-tree probe "
+                      f"{f3(pr['angular_k10_shuffled_tree'].get('test_test_within_stratum_spearman'))} and the class-blob input "
+                      f"{f3(pr.get('angular_k10_class_blob', {}).get('test_test_within_stratum_spearman'))}. An earlier version "
+                      f"pooled all within-stratum pairs into one Spearman; that metric is inflated by strata differing in typical "
+                      f"distance and is not used.\n"
                       + _table(["probe dimension k", "angular", "Euclidean", "Poincaré"],
                                [[str(k)] + [f3(pr[f"{m}_k{k}"]["test_test_pearson"]) if f"{m}_k{k}" in pr else "–"
                                             for m in ("angular", "euclid", "poincare")] for k in (2, 3, 5, 10, 20)],
@@ -275,7 +280,12 @@ def build_paper() -> Path:
                    "before any held-out species was selected. On "
                    f"{eco['n_mammals']} held-out mammals and {eco['n_birds']} held-out birds (EltonTraits foraging strata "
                    f"{cite('elton')}), projected onto the fixed layer-{eco['layer']} PC1 axis of the primary set: "
-                   + "; ".join(lines) + ". The aquatic end is confirmed; the aerial end is not.\n")
+                   + "; ".join(lines) + ". The aquatic end is confirmed and the aerial end is not. Caveats: the marine "
+                   "mammals are few and their names carry aquatic cues (whale, seal, porpoise, sea otter), water foraging in "
+                   "birds is phylogenetically clustered, and the axis holds "
+                   + (f"{100 * s1a[eco['layer']]['explained_variance_ratio'][0]:.1f}%" if s1a else "a small share")
+                   + " of the variance at that layer. The registered reading is that the geometry mixes ecology with "
+                   "taxonomy.\n")
     stage5_txt = ""
     if s5:
         fin = sorted([x for x in s5["runs"] if x["step"] is None], key=lambda x: (x["model_id"].split("/")[0], x["params"]))
@@ -323,6 +333,51 @@ def build_paper() -> Path:
         s1a_txt = (f"Class purity of 5-nearest neighbours in PC1–3 peaks at layer {best} ({f3(s1a[best]['C1_purity'])} vs "
                    f"permutation null {f3(s1a[best]['C1_purity_null'])}). ")
 
+    # Post-hoc analyses added after the final review (round 1); all labelled as such in the text.
+    exb = s1b.get("exploratory", {})
+    posthoc_tab, stratum_tab = "", ""
+    if "posthoc_vs_untrained" in exb:
+        ph = exb["posthoc_vs_untrained"]
+        ctl = [k for k in next(iter(ph.values())) if k != "n_triplets" and not k.startswith(("diff_", RUN))]
+        labels_ph = {"S2_within_order": "S2: within orders", "S3_lexical_discordant": "S3: spelling-discordant",
+                     "S4_cooccurrence_discordant": "S4: GloVe-discordant",
+                     "char3_tie_lexically_neutral": "spelling has no preference (lexically neutral)"}
+        posthoc_tab = _table(["subset", "triplets", "Qwen3.5-2B"] + [f"{esc(c)} (diff. CI)" for c in ctl], [
+            [labels_ph.get(k, esc(k)), str(v["n_triplets"]), f3(v[RUN])]
+            + [f"{f3(v[c])} ({v[f'diff_ci95_vs_{c}'][0]:+.3f}, {v[f'diff_ci95_vs_{c}'][1]:+.3f})" for c in ctl]
+            for k, v in ph.items()], "Post hoc: the model vs the untrained controls on the same triplet subsets (paired "
+            "family-block bootstrap CI of the difference).")
+    if "per_stratum_ci95" in exb:
+        stratum_tab = _table(["stratum", "decision nodes", "TA_within", "95% CI"], [
+            [esc(k), str(v["n_nodes"]), f3(v["ta"]), f"{f3(v['ci95'][0])}–{f3(v['ci95'][1])}"]
+            for k, v in sorted(exb["per_stratum_ci95"].items(), key=lambda kv: -kv[1]["n_nodes"])],
+            f"Post hoc: TA#sub[within] per stratum at layer {L} (family-block bootstrap CIs).")
+    mm = s1b.get("baselines_mantel_pathlen", {})
+    s1_ctx = (f" S1 is not specific to phylogeny: the class oracle alone reaches a Mantel r of {f3(mm.get('class_oracle'))} and "
+              f"log popularity alone {f3(mm.get('log_popularity'))}." if mm else "")
+    conf_ctl = [(k, v) for k, v in conf["summary"].items() if k != RUN and "mcnemar_vs_main" in v]
+    conflict_ctl_txt = ("; ".join(f"{esc(k)} {v['phylo_choice']}/{v['n']} (McNemar vs the model p "
+                                  f"{fp(v['mcnemar_vs_main']['p_two_sided'])})" for k, v in conf_ctl))
+    bh = _j(RUN, "exploratory_bh.json")
+    bh_txt = (f" Exploratory p-values are corrected with BH-FDR over the {bh['n_tests']} registered exploratory tests; "
+              "q-values are listed in the repository." if bh else "")
+    pcb = probe.get("class_blob")
+    probe_ctrl_txt = ""
+    if pcb:
+        probe_ctrl_txt = (
+            f"The headline held-out correlation mainly measures coarse-group separation. A predictor that knows only the 13 "
+            f"strata reaches r = {f3(probe.get('class_only_predictor_pearson_all_pairs'))} with path length over all pairs, "
+            f"and the same probe trained on a class-blob input (each species at its stratum centroid plus matched noise, no "
+            f"within-stratum tree) reaches held-out r = {f3(pcb['test_test_pearson'][0])}. Within strata (mean of per-stratum "
+            f"Spearman on held-out pairs) the model's probe reaches "
+            f"{f3(probe['model'].get('test_test_within_stratum_spearman', [float('nan')])[0])}, the class-blob input "
+            f"{f3(pcb.get('test_test_within_stratum_spearman', [float('nan')])[0])}, and the raw angular distances without any "
+            f"probe {f3(probe.get('raw_angular_within_stratum_spearman_all_species'))}: the representation carries some "
+            f"within-stratum order, but the probe adds little to it. ")
+    nj = s2["nj_rf"]
+    nj_txt = (f" Against NJ trees built from class-blob inputs ({f3(nj['class_blob_null_mean'])}, 20 draws) the model's tree is "
+              + ("closer to the reference" if nj["model"] < nj["class_blob_null_mean"] else "not closer to the reference")
+              + "." if "class_blob_null_mean" in nj else "")
     robust_txt = ""
     if s6:
         lo = min(s6["triplet_seed"][RUN]["min"], s6["species_subsample"][RUN]["min"], s6["templates"]["half"]["ta_within"]["min"])
@@ -351,13 +406,14 @@ representations of 400 animal species names from Qwen3.5-2B (8 prompts each) and
 Life under a preregistered protocol with untrained-network, lexical, token-count, popularity and co-occurrence controls. Inside
 coarse groups and with shared head nouns excluded, rooted-triplet accuracy is {f3(h1['ta_within_modal'])} (95% CI
 {f3(h1['ci95'][0])}–{f3(h1['ci95'][1])}; chance 0.333; max-T p {fp(h1['maxT_p'])}), above every required control (primary
-hypothesis {sup(h1['supported'])}). A 10-dimensional linear probe predicts tree distances between held-out families with
-r = {f3(probe['model']['test_test_pearson'][0])} (shuffled-tree control {f3(probe['shuffled_tree']['test_test_pearson'][0])}). The
-signal is not significant on triplets where spelling or GloVe co-occurrence points the wrong way, does not track divergence time
-beyond topology, and on 36 phylogeny-versus-folk conflict triplets the geometry follows the tree in only {cs['phylo_choice']}
-(binomial p {fp(cs['binom_p_two_sided'])}). The dominant late-layer direction is an aquatic-to-terrestrial habitat axis,
-confirmed on held-out species. Qwen3.5-2B thus encodes partial within-group phylogenetic order entangled with folk categories
-and ecology, rather than a clean phylogenetic manifold.
+hypothesis {sup(h1['supported'])}), though by a modest margin and clearly only in mammals and birds. The signal is not
+significant on triplets where spelling or GloVe co-occurrence points the wrong way, where the model equals untrained networks;
+it is not detected in divergence times beyond topology; and on phylogeny-versus-folk conflict triplets the geometry rarely
+follows the tree, as for untrained networks. A Goodfire-style 10-dimensional probe predicts tree distances between held-out
+families with r = {f3(probe['model']['test_test_pearson'][0])}, but a class-only input does at least as well
+({f3(probe.get('class_blob', {}).get('test_test_pearson', [float('nan')])[0])}), so this correlation mainly reflects coarse
+groups. The top late-layer component orders animals from aquatic to terrestrial, confirmed on held-out species. Qwen3.5-2B thus
+encodes modest within-group tree order entangled with folk categories and ecology, rather than a phylogenetic manifold.
 
 = Introduction
 *Context.* Representation geometry is a window into what models learn. Days of the week and months form circles in LLMs
@@ -371,8 +427,9 @@ work found sentence embeddings uncorrelated with the mammal tree {cite('phylotex
 
 *Contributions.* (i) A preregistered, controlled test with a topology-only primary metric: node-balanced rooted-triplet accuracy
 inside coarse groups with head nouns disjoint, against a fixed set of untrained-network and nuisance controls. (ii) Goodfire-style
-probe and manifold analyses with family-held-out evaluation and shuffled-tree selectivity, which the Evo 2 post did not report.
-(iii) Behavioural judgments and causal ablation and interchange of the probe subspace against variance-matched random subspaces.
+probe and manifold analyses with family-held-out evaluation, a shuffled-tree control and a class-only control; the last shows that
+the probe's held-out correlation mostly reflects coarse groups. (iii) Behavioural judgments and causal ablation and interchange
+of the probe subspace against variance-matched random subspaces and a class-only subspace.
 (iv) An out-of-sample test of a post-hoc observation (a habitat axis), registered before new species were selected.
 (v) Scale, training-dynamics and sensitivity analyses on the same metric.
 
@@ -399,10 +456,10 @@ when the most recent common ancestor of a and b lies strictly below that of all 
 d(b, c)). Accuracy is averaged per decision node (at most 200 triplets per node) and then over nodes, restricted to triplets inside
 one stratum whose three names have distinct head nouns (TA#sub[within]). *Inference.* Max-T permutation over layers (species
 shuffled within strata, 1000 permutations), family-blocked 2-fold cross-fitting of the layer (20 splits), family-block bootstrap
-CIs (1000 draws). H1 additionally requires paired-bootstrap differences above zero against random-init Qwen3.5-2B, Pythia-410m
+CIs (1000 draws); exploratory tests are BH-corrected over the registered family. H1 additionally requires paired-bootstrap differences above zero against random-init Qwen3.5-2B, Pythia-410m
 step 0 {cite('pythia')}, character 3-grams, the input embedding, name token count and log Wikipedia sitelinks. GloVe
 {cite('glove')} defines the co-occurrence-discordant subset (S4). A power simulation on the frozen tree gave a minimum detectable
-TA#sub[within] of {f3(power['min_detectable_ta_within_80pct_power'])} at 80% power. *Probe.* Following Goodfire, z = W(x − b) with
+TA#sub[within] of {f3(power['min_detectable_ta_within_80pct_power'])} at 80% power (40 simulations per cell, so this is a rough estimate). *Probe.* Following Goodfire, z = W(x − b) with
 d̂ = β·arccos(cos(z#sub[1], z#sub[2])), PCA-100 fitted inside each fold, whole families held out. *Causal tests.* Forward hooks
 replace the residual stream after the chosen decoder layer. *Rigor.* All hypotheses, metrics and tests were preregistered before
 extraction; every deviation is timestamped in the repository. Practices follow Lones {cite('lones')}.
@@ -419,45 +476,64 @@ hold only a small share of the variance.
 == Triplet accuracy and controls (stage 1b, confirmatory)
 {eval_tab}
 H1 is {sup(h1['supported'])}: cross-fitted TA#sub[within] {f3(h1['crossfit_ta_within'])} (modal layer {L}), max-T p
-{fp(h1['maxT_p'])}, and every paired-bootstrap difference to the required controls excludes zero. The untrained networks are
-above chance because similar token strings map to similar vectors even without training; this is why they are required controls.
+{fp(h1['maxT_p'])} (the permutation floor), and every paired-bootstrap difference to the required controls excludes zero.
+The margin over the strongest required control is modest, and the signal is clear only in mammals and birds, which hold about
+half of the within-stratum decision nodes (Table below). The untrained networks are themselves above chance; one hypothesis is
+that name form and length cluster by family, but they stay above chance even on triplets with no shared token.
 {sec_tab}
+{s1_ctx} S2 passes its registered test against chance, but the untrained random-init Qwen reaches the same value; on the
+spelling- and GloVe-discordant subsets (S3, S4) the model also equals the untrained networks. On triplets where spelling has no
+preference, the model exceeds them (post hoc):
+{posthoc_tab}
+{stratum_tab}
 {_fig('ta', 'TA#sub[within] by layer for the model and controls.', '85%')}
 *Conflict triplets.* The representation picks the tree-closer partner in {cs['phylo_choice']}/{cs['n']} triplets (binomial p
-{fp(cs['binom_p_two_sided'])}); for example, the blue whale is closer to the whale shark than to the hippopotamus.
+{fp(cs['binom_p_two_sided'])}); for example, the blue whale is closer to the whale shark than to the hippopotamus. The untrained
+controls behave the same ({conflict_ctl_txt}), and the triplets share anchors and partners, so this does not show a learned folk
+or ecological taxonomy; it shows only that the geometry does not follow the tree in these hand-picked cases.{bh_txt}
 
-== A linear phylogeny subspace and manifold tests (stage 2, exploratory)
+== Flat-subspace probe and manifold tests (stage 2, exploratory)
 {probe_tab}
-{_fig('probe', 'Held-out-family correlation of the flat probe and its controls.', '75%')}
-kNN-geodesic distance does not order triplets better than angular distance. Gromov δ#sub[rel] of the model
+{_fig('probe', 'Held-out-family performance of the flat probe and its controls: all pairs (left) and within strata (right). Error bars are SDs over probe seeds.', '100%')}
+{probe_ctrl_txt}kNN-geodesic distance does not order triplets better than angular distance. Gromov δ#sub[rel] of the model
 ({f3(s2['delta_rel']['model'])}) lies between a spectrum-matched Gaussian ({f3(s2['delta_rel']['matched_gaussian_mean'])}) and pure
 class clusters ({f3(s2['delta_rel']['class_blob_mean'])}), so it does not separate trees from clusters. A neighbour-joining tree
 from the representations has normalized Robinson–Foulds distance {f3(s2['nj_rf']['model'])} to the reference (permutation null
-{f3(s2['nj_rf']['perm_null_mean'])}; with 20 permutations the smallest attainable p is 0.048).
+{f3(s2['nj_rf']['perm_null_mean'])}; with 20 permutations the smallest attainable p is 0.048).{nj_txt}
 {stage3_txt}{stage4_txt}{eco_txt}{stage5_txt}{stage6_txt}
 = Discussion
 *Claims and evidence.* (1) *Systematic, correlational:* Qwen3.5-2B's species geometry agrees with the tree of life within coarse
-groups beyond untrained-network, lexical, token-count and popularity controls{robust_txt}. (2) *Correlational with held-out generalization:* a 10-dimensional linear subspace carries tree distances that
-generalize to unseen families and rank species inside strata. (3) *Negative:* the order is not significant on triplets where
-spelling or GloVe co-occurrence disagree with the tree, so we cannot claim it goes beyond such statistics; distances do not track
-divergence time once topology is controlled; on conflict triplets the geometry follows folk or ecological partners. (4)
-*Out-of-sample confirmation of a post-hoc pattern:* the dominant late-layer direction separates aquatic from terrestrial animals.
-Causal claims are limited to what the stage-3 tests show above.
+groups beyond untrained-network, lexical, token-count and popularity controls{robust_txt}. The margin is modest and the
+signal is concentrated in mammals and birds. Because ecology and body size are phylogenetically conserved and were not
+controlled, the precise claim is agreement with the tree, not phylogenetic knowledge per se. (2) *Negative for the probe:* the
+Goodfire-style flat probe generalizes to held-out families, but a class-only input does at least as well, and within strata it
+adds little over the raw distances; we therefore do not claim that a linear subspace "carries the tree". (3) *Negative:* the
+order is not significant on triplets where spelling or GloVe co-occurrence disagree with the tree, where the model equals
+untrained networks, so we cannot claim it goes beyond such statistics; S2 is matched by an untrained network; no divergence-time
+signal is detected once topology is controlled; on conflict triplets the geometry does not follow the tree, as for untrained
+networks. (4) *Out-of-sample confirmation of a post-hoc pattern:* the top late-layer component separates aquatic from terrestrial
+animals. Causal claims are limited to what the stage-3 tests show above.
 
 *Implications.* For interpretability, global distance correlations with a taxonomy are weak evidence of a phylogenetic
-representation: class clusters, ecology and naming conventions all contribute. Topology-only, within-group metrics with untrained
-and nuisance controls separate these. For the analogy with Evo 2, a text model's species geometry is better described as a mixture
-of folk taxonomy, ecology and partial phylogenetic order than as a tree-shaped manifold.
+representation: class clusters, ecology and naming conventions all contribute, and untrained networks already reach above-chance
+values on several metrics. Topology-only, within-group metrics with untrained and nuisance controls separate these. Distance
+probes evaluated on all held-out pairs should be compared with a class-only input, because coarse groups alone can produce high
+correlations. For the analogy with Evo 2, a text model's species geometry is better described as a mixture of folk taxonomy,
+ecology and modest phylogenetic order than as a tree-shaped manifold.
 
 = Limitations
 One main 2B-parameter model (stage 5 adds smaller and older models, not larger ones); English common names only (binomials carry
-no structure); one tree source (Open Tree) and NCBI ranks, both imperfect for deep splits; GloVe is a proxy for co-occurrence in
-the model's own training data; S3 and S4 subsets are harder by construction (they select triplets where simple statistics fail);
-probes and interventions use a single layer chosen by cross-fitting; the habitat addendum has only 6 marine mammals and no bats.
+much weaker, late-layer structure); one tree source (Open Tree) and NCBI ranks, both imperfect for deep splits, and edge-count
+path length depends on how densely each clade is sampled; GloVe is a proxy for co-occurrence in the model's own training data;
+S3 and S4 select triplets where simple statistics fail and are therefore adversarial by construction; the within-group signal
+rests mostly on mammals and birds; ecological and body-size similarity is not controlled; probes and interventions use a single
+layer chosen by cross-fitting; the conflict triplets are few and share anchors; the habitat addendum has only 6 marine mammals,
+whose names carry aquatic cues, and no bats.
 
 = Conclusion
-Within this preregistered design, Qwen3.5-2B represents some genuine phylogenetic order among animals, carried by a
-low-dimensional linear subspace, but the geometry is dominated by folk categories and ecology, and the evidence does not show
+Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest,
+robust margin over untrained networks and name statistics, clearly so for mammals and birds. The geometry is otherwise dominated
+by coarse folk categories and ecology, the Goodfire-style probe mostly recovers the coarse groups, and the evidence does not show
 phylogenetic information beyond what lexical and co-occurrence statistics could supply.
 {ex_txt}
 = References
