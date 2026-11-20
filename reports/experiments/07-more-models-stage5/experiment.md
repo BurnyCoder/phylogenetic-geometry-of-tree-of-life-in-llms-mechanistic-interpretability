@@ -1,6 +1,6 @@
 # Experiment 07 (stage 5): more models (scale, architecture, training dynamics)
 
-**Status:** running 2026-11-20 (descriptive; no confirmatory test). This is planned run R5 in [planned-runs](../../planned-runs.md).
+**Status:** done 2026-11-20 (descriptive; no confirmatory test). This is planned run R5 in [planned-runs](../../planned-runs.md).
 
 **Commands:** for each config the chain runs `extract`, then `scale`, then the summary:
 ```powershell
@@ -28,4 +28,24 @@ uv run python -m phylogeo.run --phases scale_summary
 - **Comparison lines.** The untrained references (random-init Qwen3.5-2B, Pythia-410m step 0) and the lexical baselines from stage 1b are drawn as reference lines. Pythia-1.4B step 0 is the untrained reference for the checkpoint series.
 
 ## Results in words
-*(to be written when the chain has finished)*
+Numbers are in [`results/RESULTS.md`](../../../results/RESULTS.md), section "Stage 5". Figures: [`scale.png`](../../../results/stage5/scale.png) and [`training_dynamics.png`](../../../results/stage5/training_dynamics.png).
+
+1. **Scale (Pythia, one corpus).**
+   - Within-group triplet accuracy rises with size from 70M to 2.8B, roughly monotonically. 160M sits below 70M, within noise.
+   - The two smallest Pythia models stay below the untrained Pythia-410m step-0 control from stage 1b. Only from about 410M do trained Pythia models clearly exceed the untrained references.
+   - Pythia-2.8B reaches about the level of Qwen3.5-2B.
+2. **Architecture.**
+   - Qwen3-1.7B (standard full attention) is close to Qwen3.5-2B (hybrid Gated-DeltaNet).
+   - Qwen3.5-0.8B is lower.
+   - The effect is therefore not specific to the hybrid architecture, and within the Qwen3.5 family it grows with size.
+3. **Training dynamics (Pythia-1.4B).**
+   - At initialization and over the first 512 steps, accuracy is at chance and the max-T test is not significant.
+   - It jumps by step 1000 and then keeps rising slowly to the final checkpoint.
+   - The Mantel correlation with path length rises over the same period, from about zero to its final value.
+   - Within-group tree order is therefore *learned* from text and keeps improving late in training. An untrained network does not provide it.
+4. **Untrained references differ by architecture.** Pythia-1.4B at step 0 is near chance, while the untrained Pythia-410m and random-init Qwen3.5-2B are above chance. The required untrained controls therefore matter, and a single "untrained baseline" number should not be generalized across architectures.
+
+## Caveats
+- **Lighter analysis.** Only 199 permutations (p floor 0.005), cross-fitting with 10 splits and no bootstrap CIs. For the main model this gives a slightly different cross-fitted value than stage 1b.
+- **Untrained twins.** Only Pythia-410m and Pythia-1.4B have untrained versions in this study.
+- **Layer counts.** These differ across models, so the best layer is compared by relative depth.

@@ -66,7 +66,12 @@
         0.2777777777777778,
         0.3333333333333333,
         0.3888888888888889
-      ]
+      ],
+      "mcnemar_vs_main": {
+        "main_only": 7,
+        "control_only": 9,
+        "p_two_sided": 0.803619384765625
+      }
     },
     "pythia410m_step0": {
       "layer": 6,
@@ -100,7 +105,12 @@
         0.3888888888888889,
         0.3611111111111111,
         0.3888888888888889
-      ]
+      ],
+      "mcnemar_vs_main": {
+        "main_only": 5,
+        "control_only": 7,
+        "p_two_sided": 0.7744140625
+      }
     },
     "pythia410m": {
       "layer": 6,
@@ -134,7 +144,12 @@
         0.2777777777777778,
         0.25,
         0.25
-      ]
+      ],
+      "mcnemar_vs_main": {
+        "main_only": 4,
+        "control_only": 3,
+        "p_two_sided": 1.0
+      }
     },
     "char3": {
       "layer": 0,
@@ -144,7 +159,12 @@
       "binom_p_two_sided": 0.00393317302223295,
       "accuracy_by_layer": [
         0.25
-      ]
+      ],
+      "mcnemar_vs_main": {
+        "main_only": 9,
+        "control_only": 7,
+        "p_two_sided": 0.803619384765625
+      }
     },
     "glove": {
       "layer": 0,
@@ -154,7 +174,12 @@
       "binom_p_two_sided": 0.24298495403490966,
       "accuracy_by_layer": [
         0.3888888888888889
-      ]
+      ],
+      "mcnemar_vs_main": {
+        "main_only": 4,
+        "control_only": 7,
+        "p_two_sided": 0.548828125
+      }
     }
   },
   "triplets": [
