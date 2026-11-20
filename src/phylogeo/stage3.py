@@ -7,9 +7,10 @@ behavioral analyses; deviation 19). Steps:
   2. Causal: fit the flat-probe subspace on half of the families at the stage-1b
      layer; on the other (held-out) half, mean-ablate it at the name tokens and
      measure the drop in log P(correct class word), vs 99 variance-matched random
-     subspaces (rank p-value, floor 0.01); interchange it between species of
-     different classes and measure how often the answer switches to the source's
-     class; off-target effect = change in token-weighted next-token loss on 20
+     subspaces (rank p-value, floor 0.01) and vs a class-only subspace (the same
+     probe trained on the class-oracle distance; deviation 20); interchange it
+     between species of different classes and measure how often the answer switches
+     to the source's class; off-target effect = change in token-weighted next-token loss on 20
      neutral sentences under the same ablation applied at every position.
 Candidate class words are scored by their full-sequence log-probability in one
 right-padded batch (first tokens collide for Qwen3.5: "Mammal"/"Mollusc").
@@ -168,6 +169,7 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
     the causal tests; earlier causal results are kept under ``C_abl_v1`` / ``C_swap_v1``."""
     from phylogeo.behavior import CANDIDATES, CLASS_QUESTION, CLASS_WORD, chat_prefix
     from phylogeo.analysis import holm
+    from phylogeo.baselines import class_oracle
     from phylogeo.causal import ablate_fn, name_positions, probe_subspace, random_subspaces, swap_fn
     from phylogeo.extract import load_activations, load_model
     from phylogeo.geometry import species_vectors
@@ -204,6 +206,8 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
     test = folds[0] & has
     train = ~folds[0]
     U, var = probe_subspace(Vl, tree.path_length(), train, k=10, seed=cfg.seed)
+    # Class-only control (deviation 20): the same probe trained on the class-oracle distance.
+    U_cls, var_cls = probe_subspace(Vl, class_oracle(strata), train, k=10, seed=cfg.seed)
     Urs = random_subspaces(Vl[train], 10, var, n_rand, np.random.default_rng([cfg.seed, 1]))
     cand_ids = _candidate_token_ids(tok, CANDIDATES)
     pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
@@ -229,6 +233,7 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
         return np.array(out)
 
     d_probe = drop(U)
+    d_cls = drop(U_cls)
     d_rand = np.array([drop(Ur) for Ur in Urs])
     w = wilcoxon(d_probe, d_rand.mean(0), alternative="greater")
 
@@ -244,6 +249,7 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
                     "neutral_loss_probe_ablated": off_target(U),
                     "neutral_loss_random_ablated": float(np.mean([off_target(Ur) for Ur in Urs[:10]]))}
     log.info("C-abl: %s", {k_: v for k_, v in res["C_abl"].items() if k_ != "random_mean_drops"})
+    write_json(od / "results.json", res)  # checkpoint: keep C-abl if the (long) interchange part fails
 
     # Interchange: pairs (source A, target B) of held-out species with different class words.
     rng_pairs = np.random.default_rng([cfg.seed, 2])
@@ -253,18 +259,22 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
         if cw[a] != cw[b]:
             pairs.append((a, b))
 
-    def switch_rate(Ux):
-        """Fraction of pairs where writing A's subspace coordinates into B's name token
-        makes A's class word the top candidate for B."""
-        sw = 0
+    def switches(Ux) -> np.ndarray:
+        """Per pair: 1 if writing A's subspace coordinates into B's name token makes A's class
+        word the top candidate for B."""
+        out = []
         for a, b in pairs:
             with residual_edit(model, layer, swap_fn(Ux, H[a], pos[b][-1])):
                 lp = _class_logp(model, prompts[b], cand_ids, pad_id)
-            sw += int(np.argmax(lp) == cw[a])
-        return sw / len(pairs)
+            out.append(int(np.argmax(lp) == cw[a]))
+        return np.array(out)
+
+    def switch_rate(Ux) -> float:
+        return float(switches(Ux).mean())
 
     base_sw = np.mean([int(np.argmax(base_lp[b]) == cw[a]) for a, b in pairs])
-    sr_probe = switch_rate(U)
+    sw_probe, sw_cls = switches(U), switches(U_cls)
+    sr_probe = float(sw_probe.mean())
     sr_rand = [switch_rate(Ur) for Ur in Urs]
     res["C_swap"] = {"n_pairs": len(pairs), "n_random_subspaces": n_rand, "switch_rate_no_edit": float(base_sw),
                      "switch_rate_probe": sr_probe, "switch_rate_random": sr_rand,
@@ -272,6 +282,17 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
     res["causal_holm"] = holm({"C_abl": res["C_abl"]["p_rank_vs_random"], "C_swap": res["C_swap"]["p_rank_vs_random"]})
     log.info("C-swap: %s", {k_: v for k_, v in res["C_swap"].items() if k_ != "switch_rate_random"})
     log.info("causal Holm (rank p): %s", res["causal_holm"])
+    # Interpretation check (deviation 20): phylogeny probe vs class-only subspace, paired.
+    b_, c_ = int(np.sum((sw_probe == 1) & (sw_cls == 0))), int(np.sum((sw_probe == 0) & (sw_cls == 1)))
+    res["class_control"] = {
+        "class_var_captured": var_cls, "mean_drop_logp_class": float(d_cls.mean()),
+        "p_rank_class_vs_random": _rank_p(d_cls.mean(), d_rand.mean(1)),
+        "wilcoxon_p_probe_gt_class": float(wilcoxon(d_probe, d_cls, alternative="greater").pvalue),
+        "switch_rate_class": float(sw_cls.mean()), "mcnemar_probe_only": b_, "mcnemar_class_only": c_,
+        "mcnemar_p_probe_gt_class": float(binomtest(b_, b_ + c_, 0.5, alternative="greater").pvalue) if b_ + c_ else 1.0}
+    cc = res["class_control"]
+    cc["phylogeny_specific"] = bool(cc["wilcoxon_p_probe_gt_class"] < 0.05 and cc["mcnemar_p_probe_gt_class"] < 0.05)
+    log.info("class-only control: %s", cc)
     write_json(od / "results.json", res)
     del model
     torch.cuda.empty_cache()
