@@ -87,6 +87,16 @@ Edit `.env` so that `HF_HOME` and `DATA_DIR` point to a drive with space. PyTorc
 
 Running instructions will be added here once the pipeline is implemented.
 
+## Live training dashboard
+
+Probe training (stage 2) streams its metrics to [trackio](https://github.com/gradio-app/trackio). The dashboard must use the same `HF_HOME` as the training process, which the code sets from `.env`:
+
+```powershell
+$env:HF_HOME="D:/AI/hf_cache"; uv run trackio show --project phylogeo-probes
+```
+
+Then open http://127.0.0.1:7860.
+
 ## Data and models on Hugging Face
 
 - Collection: [Phylogenetic geometry of the tree of life in LLMs](https://huggingface.co/collections/BurnyCoder/phylogenetic-geometry-of-the-tree-of-life-in-llms-6afffc252e04f452d5e7d905)
