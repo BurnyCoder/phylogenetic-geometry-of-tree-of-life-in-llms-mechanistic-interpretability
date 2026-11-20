@@ -91,3 +91,22 @@ def test_random_subspaces_variance_matched():
     got = np.mean([((Vc @ U) ** 2).sum() / (Vc**2).sum() for U in Us])
     assert abs(got - target) < 0.1
     assert all(np.allclose(U.T @ U, np.eye(3), atol=1e-8) for U in Us)
+
+
+def test_batched_candidate_scoring_matches_sequential(tiny_qwen):
+    """stage3._class_logp (batched, right-padded) equals per-candidate sequence log-probs."""
+    from phylogeo.stage3 import _class_logp
+
+    torch.manual_seed(0)
+    prefix = torch.randint(0, 1000, (1, 6))
+    cands = [[5, 7], [9], [11, 12, 13]]
+    got = _class_logp(tiny_qwen, prefix, cands, pad_id=0)
+    seq = []
+    with torch.no_grad():
+        for c in cands:
+            ids = torch.cat([prefix[0], torch.tensor(c)])[None]
+            lp = torch.log_softmax(tiny_qwen(input_ids=ids).logits[0].float(), -1)
+            seq.append(sum(lp[5 + j, t] for j, t in enumerate(c)))
+    s = torch.stack(seq)
+    want = (s - torch.logsumexp(s, 0)).numpy()
+    assert np.allclose(got, want, atol=1e-4)

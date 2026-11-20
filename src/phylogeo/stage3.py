@@ -51,18 +51,33 @@ NEUTRAL = [
 ]
 
 
-def _first_token_ids(tok, words: list[str]) -> list[int]:
-    ids = [tok(w.capitalize(), add_special_tokens=False)["input_ids"][0] for w in words]
-    if len(set(ids)) != len(ids):
-        raise ValueError(f"candidate words share first tokens: {dict(zip(words, ids))}")
-    return ids
+def _candidate_token_ids(tok, words: list[str]) -> list[list[int]]:
+    """Token ids of each (capitalized) candidate class word.
+
+    First tokens are NOT unique for Qwen3.5 ("Mammal" and "Mollusc" both start
+    with "M"), so candidates are scored by their full-sequence log-probability.
+    """
+    return [tok(w.capitalize(), add_special_tokens=False)["input_ids"] for w in words]
 
 
 @torch.no_grad()
-def _class_logp(model, ids: torch.Tensor, cand_ids: list[int]) -> np.ndarray:
-    """log-softmax over candidate first tokens at the next position (renormalized)."""
-    lg = model(input_ids=ids).logits[0, -1].float()
-    s = lg[cand_ids]
+def _class_logp(model, ids: torch.Tensor, cand: list[list[int]], pad_id: int) -> np.ndarray:
+    """log-softmax over candidates of log P(candidate | prompt), one batched forward pass.
+
+    Rows are prompt + candidate, right-padded (padding after the content cannot
+    affect earlier positions in a causal model). Interventions registered as hooks
+    act on the shared prompt positions in every row.
+    """
+    T = ids.shape[1]
+    L = T + max(len(c) for c in cand)
+    batch = torch.full((len(cand), L), pad_id, dtype=ids.dtype, device=ids.device)
+    attn = torch.zeros_like(batch)
+    for k, c in enumerate(cand):
+        batch[k, :T] = ids[0]
+        batch[k, T:T + len(c)] = torch.tensor(c, device=ids.device)
+        attn[k, :T + len(c)] = 1
+    lp = torch.log_softmax(model(input_ids=batch, attention_mask=attn).logits.float(), -1)
+    s = torch.stack([sum(lp[k, T - 1 + j, t] for j, t in enumerate(c)) for k, c in enumerate(cand)])
     return (s - torch.logsumexp(s, 0)).cpu().numpy()
 
 
@@ -157,7 +172,8 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
     train = ~folds[0]
     U, var = probe_subspace(Vl, tree.path_length(), train, k=10, seed=cfg.seed)
     Urs = random_subspaces(Vl[train], 10, var, int(cfg.extra.get("n_random_subspaces", 20)), rng)
-    cand_ids = _first_token_ids(tok, CANDIDATES)
+    cand_ids = _candidate_token_ids(tok, CANDIDATES)
+    pad_id = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     prompts, pos = {}, {}
     for i in np.where(has)[0]:
         text = chat_prefix(tok, CLASS_QUESTION.format(name=names[i]))
@@ -171,9 +187,9 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
     def drop(Ux):
         out = []
         for i in np.where(test)[0]:
-            base = _class_logp(model, prompts[i], cand_ids)[cw[i]]
+            base = _class_logp(model, prompts[i], cand_ids, pad_id)[cw[i]]
             with residual_edit(model, layer, ablate_fn(Ux, mu, pos[i])):
-                ab = _class_logp(model, prompts[i], cand_ids)[cw[i]]
+                ab = _class_logp(model, prompts[i], cand_ids, pad_id)[cw[i]]
             out.append(base - ab)
         return np.array(out)
 
@@ -211,11 +227,11 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
         sw = 0
         for a, b in pairs:
             with residual_edit(model, layer, swap_fn(Ux, H[a], pos[b][-1])):
-                lp = _class_logp(model, prompts[b], cand_ids)
+                lp = _class_logp(model, prompts[b], cand_ids, pad_id)
             sw += int(np.argmax(lp) == cw[a])
         return sw / len(pairs)
 
-    base_sw = np.mean([int(np.argmax(_class_logp(model, prompts[b], cand_ids)) == cw[a]) for a, b in pairs])
+    base_sw = np.mean([int(np.argmax(_class_logp(model, prompts[b], cand_ids, pad_id)) == cw[a]) for a, b in pairs])
     sr_probe = switch_rate(U)
     sr_rand = [switch_rate(Ur) for Ur in Urs[:10]]
     res["C_swap"] = {"n_pairs": len(pairs), "switch_rate_no_edit": float(base_sw), "switch_rate_probe": sr_probe,
