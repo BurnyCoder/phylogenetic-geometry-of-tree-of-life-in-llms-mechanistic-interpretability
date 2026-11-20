@@ -91,6 +91,9 @@ def stage1b_tables(run: str) -> str:
             "| representation | TA_within | 95% CI | Mantel r (path length) |", "|---|---|---|---|"]
     mm = r.get("baselines_mantel_pathlen", {})
     for k, v in r["point_ta_within"].items():
+        if k not in r["ci95_ta_within"]:  # e.g. glove_known_names_only (no bootstrap)
+            out.append(f"| {k} | {v:.3f} | – | – |")
+            continue
         lo, hi = r["ci95_ta_within"][k]
         mr = r["models"][k]["mantel_pathlen_by_layer"][r["models"][k]["modal_layer"]] if k in r["models"] else mm.get(k)
         out.append(f"| {k} | {v:.3f} | [{lo:.3f}, {hi:.3f}] | {fmt(mr)} |")
@@ -147,4 +150,9 @@ def write_results_md(runs: list[str]) -> Path:
                   "\n### Conflict triplets (phylogeny vs folk/lexical)\n", conflict_table(run)]
     path = RESULTS_DIR / "RESULTS.md"
     path.write_text("\n".join(parts), encoding="utf-8")
+    for run in runs:  # per-run summary next to the run's results (linked from experiment notes)
+        (RESULTS_DIR / run / "SUMMARY.md").write_text(
+            "\n".join([f"# Run `{run}` (auto-generated; do not edit)\n", "## Stage 1a\n", stage1a_table(run),
+                       "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run)]),
+            encoding="utf-8")
     return path
