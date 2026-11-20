@@ -1,0 +1,339 @@
+{
+  "layer": 6,
+  "behavior_conflict": {
+    "n": 36,
+    "chose_tree_closer": 11,
+    "accuracy": 0.3055555555555556,
+    "binom_p": 0.028816719655878845,
+    "triplets": [
+      {
+        "id": 1,
+        "anchor": "blue whale",
+        "tree_closer": "hippopotamus",
+        "other": "whale shark",
+        "log_odds_tree_closer": -0.9375
+      },
+      {
+        "id": 2,
+        "anchor": "Nile crocodile",
+        "tree_closer": "house sparrow",
+        "other": "green iguana",
+        "log_odds_tree_closer": -0.8125
+      },
+      {
+        "id": 3,
+        "anchor": "Atlantic bluefin tuna",
+        "tree_closer": "human",
+        "other": "great white shark",
+        "log_odds_tree_closer": 0.125
+      },
+      {
+        "id": 4,
+        "anchor": "common starfish",
+        "tree_closer": "human",
+        "other": "common octopus",
+        "log_odds_tree_closer": -0.4375
+      },
+      {
+        "id": 5,
+        "anchor": "Atlantic horseshoe crab",
+        "tree_closer": "goliath birdeater",
+        "other": "blue crab",
+        "log_odds_tree_closer": 0.0
+      },
+      {
+        "id": 6,
+        "anchor": "little brown bat",
+        "tree_closer": "cattle",
+        "other": "house mouse",
+        "log_odds_tree_closer": -1.1875
+      },
+      {
+        "id": 7,
+        "anchor": "rock hyrax",
+        "tree_closer": "African bush elephant",
+        "other": "guinea pig",
+        "log_odds_tree_closer": 0.25
+      },
+      {
+        "id": 8,
+        "anchor": "thylacine",
+        "tree_closer": "red kangaroo",
+        "other": "gray wolf",
+        "log_odds_tree_closer": -0.0625
+      },
+      {
+        "id": 9,
+        "anchor": "European eel",
+        "tree_closer": "human",
+        "other": "sea lamprey",
+        "log_odds_tree_closer": -2.0
+      },
+      {
+        "id": 10,
+        "anchor": "western honey bee",
+        "tree_closer": "American lobster",
+        "other": "goliath birdeater",
+        "log_odds_tree_closer": -0.0625
+      },
+      {
+        "id": 11,
+        "anchor": "sugar glider",
+        "tree_closer": "red kangaroo",
+        "other": "southern flying squirrel",
+        "log_odds_tree_closer": -1.9375
+      },
+      {
+        "id": 12,
+        "anchor": "aardvark",
+        "tree_closer": "African bush elephant",
+        "other": "giant anteater",
+        "log_odds_tree_closer": -0.3750000298023224
+      },
+      {
+        "id": 13,
+        "anchor": "Chinese pangolin",
+        "tree_closer": "cat",
+        "other": "giant anteater",
+        "log_odds_tree_closer": -1.1875
+      },
+      {
+        "id": 14,
+        "anchor": "European hedgehog",
+        "tree_closer": "common shrew",
+        "other": "North American porcupine",
+        "log_odds_tree_closer": 0.625
+      },
+      {
+        "id": 15,
+        "anchor": "West Indian manatee",
+        "tree_closer": "African bush elephant",
+        "other": "walrus",
+        "log_odds_tree_closer": -0.1875
+      },
+      {
+        "id": 16,
+        "anchor": "coelacanth",
+        "tree_closer": "human",
+        "other": "Atlantic bluefin tuna",
+        "log_odds_tree_closer": -0.3125
+      },
+      {
+        "id": 17,
+        "anchor": "Australian lungfish",
+        "tree_closer": "human",
+        "other": "Atlantic salmon",
+        "log_odds_tree_closer": -0.0625
+      },
+      {
+        "id": 18,
+        "anchor": "Komodo dragon",
+        "tree_closer": "king cobra",
+        "other": "Nile crocodile",
+        "log_odds_tree_closer": -0.625
+      },
+      {
+        "id": 19,
+        "anchor": "acorn barnacle",
+        "tree_closer": "edible crab",
+        "other": "common limpet",
+        "log_odds_tree_closer": -0.625
+      },
+      {
+        "id": 20,
+        "anchor": "common woodlouse",
+        "tree_closer": "American lobster",
+        "other": "seven-spot ladybird",
+        "log_odds_tree_closer": -0.5
+      },
+      {
+        "id": 21,
+        "anchor": "elephant shrew",
+        "tree_closer": "African bush elephant",
+        "other": "common shrew",
+        "log_odds_tree_closer": -0.8125
+      },
+      {
+        "id": 22,
+        "anchor": "red panda",
+        "tree_closer": "raccoon",
+        "other": "giant panda",
+        "log_odds_tree_closer": -1.25
+      },
+      {
+        "id": 23,
+        "anchor": "koala",
+        "tree_closer": "red kangaroo",
+        "other": "brown bear",
+        "log_odds_tree_closer": 0.8125
+      },
+      {
+        "id": 24,
+        "anchor": "killer whale",
+        "tree_closer": "bottlenose dolphin",
+        "other": "blue whale",
+        "log_odds_tree_closer": 2.1875
+      },
+      {
+        "id": 25,
+        "anchor": "Indian flying fox",
+        "tree_closer": "little brown bat",
+        "other": "red fox",
+        "log_odds_tree_closer": 1.8125
+      },
+      {
+        "id": 26,
+        "anchor": "California sea lion",
+        "tree_closer": "harbor seal",
+        "other": "lion",
+        "log_odds_tree_closer": 1.5
+      },
+      {
+        "id": 27,
+        "anchor": "common starfish",
+        "tree_closer": "purple sea urchin",
+        "other": "Atlantic cod",
+        "log_odds_tree_closer": 1.5625
+      },
+      {
+        "id": 28,
+        "anchor": "moon jellyfish",
+        "tree_closer": "sea anemone",
+        "other": "Atlantic cod",
+        "log_odds_tree_closer": 2.5625
+      },
+      {
+        "id": 29,
+        "anchor": "silverfish",
+        "tree_closer": "western honey bee",
+        "other": "goldfish",
+        "log_odds_tree_closer": 0.25
+      },
+      {
+        "id": 30,
+        "anchor": "guinea pig",
+        "tree_closer": "house mouse",
+        "other": "pig",
+        "log_odds_tree_closer": -0.75
+      },
+      {
+        "id": 31,
+        "anchor": "seahorse",
+        "tree_closer": "Atlantic cod",
+        "other": "horse",
+        "log_odds_tree_closer": -0.1875
+      },
+      {
+        "id": 32,
+        "anchor": "electric eel",
+        "tree_closer": "channel catfish",
+        "other": "European eel",
+        "log_odds_tree_closer": 2.9802322387695312e-08
+      },
+      {
+        "id": 33,
+        "anchor": "spotted hyena",
+        "tree_closer": "cat",
+        "other": "dog",
+        "log_odds_tree_closer": -0.3125
+      },
+      {
+        "id": 34,
+        "anchor": "fossa",
+        "tree_closer": "meerkat",
+        "other": "cat",
+        "log_odds_tree_closer": -0.3125
+      },
+      {
+        "id": 35,
+        "anchor": "pronghorn",
+        "tree_closer": "giraffe",
+        "other": "impala",
+        "log_odds_tree_closer": -1.8125
+      },
+      {
+        "id": 36,
+        "anchor": "bottlenose dolphin",
+        "tree_closer": "cattle",
+        "other": "great white shark",
+        "log_odds_tree_closer": -0.3749999701976776
+      }
+    ]
+  },
+  "behavior_species_triplets": {
+    "n": 300,
+    "behavioral_accuracy": 0.5666666666666667,
+    "binom_p": 0.02418198247326274,
+    "representation_pairwise_accuracy_same_triplets": 0.6133333333333333,
+    "agreement_behavior_vs_representation": 0.6333333333333333
+  },
+  "class_accuracy": {
+    "n": 385,
+    "accuracy": 0.9090909090909091,
+    "by_stratum": {
+      "amphibians": 1.0,
+      "arachnids": 0.9333333333333333,
+      "birds": 0.9857142857142858,
+      "cartilaginous fish": 1.0,
+      "cnidarians": 0.8,
+      "crustaceans": 0.8666666666666667,
+      "echinoderms": 0.5,
+      "insects": 0.7555555555555555,
+      "mammals": 0.9666666666666667,
+      "molluscs": 0.65,
+      "ray-finned fish": 0.9555555555555556,
+      "reptiles": 0.9666666666666667
+    }
+  },
+  "C_abl": {
+    "n_test_species": 188,
+    "probe_var_captured": 0.09959078580141068,
+    "mean_drop_logp_probe": 0.08258166164159775,
+    "mean_drop_logp_random": 0.016350017860531807,
+    "random_mean_drops": [
+      -0.014554650522768497,
+      0.03794492408633232,
+      0.021697303280234337,
+      -0.00946557056158781,
+      0.0032505153212696314,
+      -0.011775584891438484,
+      0.048332635313272476,
+      0.04089408367872238,
+      -0.0012627709656953812,
+      0.03375380486249924,
+      0.03869423642754555,
+      -0.01546805165708065,
+      -0.017097488045692444,
+      0.04684998095035553,
+      0.028745271265506744,
+      0.0024643552023917437,
+      0.02729249745607376,
+      0.009605005383491516,
+      -0.0006886308547109365,
+      0.05778849869966507
+    ],
+    "p_rank_vs_random": 0.047619047619047616,
+    "wilcoxon_p_probe_gt_random": 2.882180706365034e-05,
+    "neutral_loss_base": 3.2727638016576353,
+    "neutral_loss_probe_ablated": 3.2324069499969483,
+    "neutral_loss_random_ablated": 3.2552901554107665
+  },
+  "C_swap": {
+    "n_pairs": 200,
+    "switch_rate_no_edit": 0.02,
+    "switch_rate_probe": 0.065,
+    "switch_rate_random": [
+      0.02,
+      0.025,
+      0.045,
+      0.03,
+      0.03,
+      0.03,
+      0.02,
+      0.025,
+      0.035,
+      0.03
+    ],
+    "p_rank_vs_random": 0.09090909090909091
+  }
+}
