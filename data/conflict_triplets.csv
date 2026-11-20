@@ -1,0 +1,37 @@
+id,anchor,anchor_sci,phylo,phylo_sci,folk,folk_sci,conflict_type
+1,blue whale,Balaenoptera musculus,hippopotamus,Hippopotamus amphibius,whale shark,Rhincodon typus,ecology+lexical
+2,Nile crocodile,Crocodylus niloticus,house sparrow,Passer domesticus,green iguana,Iguana iguana,folk reptile
+3,Atlantic bluefin tuna,Thunnus thynnus,human,Homo sapiens,great white shark,Carcharodon carcharias,folk fish
+4,common starfish,Asterias rubens,human,Homo sapiens,common octopus,Octopus vulgaris,folk sea creature+lexical
+5,Atlantic horseshoe crab,Limulus polyphemus,goliath birdeater,Theraphosa blondi,blue crab,Callinectes sapidus,lexical crab
+6,little brown bat,Myotis myotis,cattle,Bos taurus,house mouse,Mus musculus,folk flying mouse
+7,rock hyrax,Procavia capensis,African bush elephant,Loxodonta africana,guinea pig,Cavia porcellus,folk rodent-like
+8,thylacine,Thylacinus cynocephalus,red kangaroo,Osphranter rufus,gray wolf,Canis lupus,convergence
+9,European eel,Anguilla anguilla,human,Homo sapiens,sea lamprey,Petromyzon marinus,folk eel-like
+10,western honey bee,Apis mellifera,American lobster,Homarus americanus,goliath birdeater,Theraphosa blondi,folk bugs
+11,sugar glider,Petaurus breviceps,red kangaroo,Osphranter rufus,southern flying squirrel,Glaucomys volans,convergence
+12,aardvark,Orycteropus afer,African bush elephant,Loxodonta africana,giant anteater,Myrmecophaga tridactyla,convergence
+13,Chinese pangolin,Manis pentadactyla,cat,Felis catus,giant anteater,Myrmecophaga tridactyla,convergence
+14,European hedgehog,Erinaceus europaeus,common shrew,Sorex araneus,North American porcupine,Erethizon dorsatum,convergence spines
+15,West Indian manatee,Trichechus manatus,African bush elephant,Loxodonta africana,walrus,Odobenus rosmarus,ecology
+16,coelacanth,Latimeria chalumnae,human,Homo sapiens,Atlantic bluefin tuna,Thunnus thynnus,folk fish
+17,Australian lungfish,Neoceratodus forsteri,human,Homo sapiens,Atlantic salmon,Salmo salar,folk fish
+18,Komodo dragon,Varanus komodoensis,king cobra,Ophiophagus hannah,Nile crocodile,Crocodylus niloticus,folk lizard-like
+19,acorn barnacle,Semibalanus balanoides,edible crab,Cancer pagurus,common limpet,Patella vulgata,folk shell
+20,common woodlouse,Oniscus asellus,American lobster,Homarus americanus,seven-spot ladybird,Coccinella septempunctata,folk bug
+21,elephant shrew,Macroscelides proboscideus,African bush elephant,Loxodonta africana,common shrew,Sorex araneus,lexical shrew
+22,red panda,Ailurus fulgens,raccoon,Procyon lotor,giant panda,Ailuropoda melanoleuca,lexical panda
+23,koala,Phascolarctos cinereus,red kangaroo,Osphranter rufus,brown bear,Ursus arctos,folk koala bear
+24,killer whale,Orcinus orca,bottlenose dolphin,Tursiops truncatus,blue whale,Balaenoptera musculus,lexical whale
+25,Indian flying fox,Pteropus medius,little brown bat,Myotis myotis,red fox,Vulpes vulpes,lexical fox
+26,California sea lion,Zalophus californianus,harbor seal,Phoca vitulina,lion,Panthera leo,lexical lion
+27,common starfish,Asterias rubens,purple sea urchin,Strongylocentrotus purpuratus,Atlantic cod,Gadus morhua,lexical fish
+28,moon jellyfish,Aurelia aurita,sea anemone,Actinia equina,Atlantic cod,Gadus morhua,lexical fish
+29,silverfish,Lepisma saccharina,western honey bee,Apis mellifera,goldfish,Carassius auratus,lexical fish
+30,guinea pig,Cavia porcellus,house mouse,Mus musculus,pig,Sus scrofa,lexical pig
+31,seahorse,Hippocampus hippocampus,Atlantic cod,Gadus morhua,horse,Equus caballus,lexical horse
+32,electric eel,Electrophorus electricus,channel catfish,Ictalurus punctatus,European eel,Anguilla anguilla,lexical eel
+33,spotted hyena,Crocuta crocuta,cat,Felis catus,dog,Canis familiaris,folk dog-like
+34,fossa,Cryptoprocta ferox,meerkat,Suricata suricatta,cat,Felis catus,folk cat-like
+35,pronghorn,Antilocapra americana,giraffe,Giraffa camelopardalis,impala,Aepyceros melampus,folk antelope
+36,bottlenose dolphin,Tursiops truncatus,cattle,Bos taurus,great white shark,Carcharodon carcharias,ecology
