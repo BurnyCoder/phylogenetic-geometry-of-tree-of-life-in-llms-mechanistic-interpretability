@@ -1,0 +1,9 @@
+# Stage 5 (training dynamics): Pythia-1.4B checkpoint at step 512 (log-spaced).
+name: pythia14b_step512
+model_id: EleutherAI/pythia-1.4b
+revision: step512
+chat_template: false
+prepend_bos: true
+name_sets: [species]
+controls: [qwen35_2b_random, pythia410m_step0]
+random_init_run: qwen35_2b_random

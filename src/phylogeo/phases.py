@@ -351,3 +351,17 @@ def phase_paper(cfg: RunConfig) -> None:
     from phylogeo.paper import build_paper
 
     log.info("paper written to %s", build_paper())
+
+
+def phase_scale(cfg: RunConfig) -> None:
+    """Stage 5: light per-run analysis (TA_within by layer, max-T, cross-fit, Mantel)."""
+    from phylogeo.stage5 import run_scale
+
+    run_scale(cfg, load_species, layer_distances, out_dir, write_json)
+
+
+def phase_scale_summary(cfg: RunConfig) -> None:
+    """Stage 5: aggregate all runs into results/stage5/ (summary.json, scale.png, training_dynamics.png)."""
+    from phylogeo.stage5 import summarize
+
+    summarize(write_json)

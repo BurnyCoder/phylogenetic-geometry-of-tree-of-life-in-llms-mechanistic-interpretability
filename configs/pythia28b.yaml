@@ -1,0 +1,8 @@
+# Stage 5 (more models): Pythia scale series, final checkpoint, raw text + BOS.
+name: pythia28b
+model_id: EleutherAI/pythia-2.8b
+chat_template: false
+prepend_bos: true
+name_sets: [species]
+controls: [qwen35_2b_random, pythia410m_step0]
+random_init_run: qwen35_2b_random
