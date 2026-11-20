@@ -337,3 +337,10 @@ def phase_stage4(cfg: RunConfig) -> None:
     from phylogeo.stage4 import run_stage4
 
     run_stage4(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_eco(cfg: RunConfig) -> None:
+    """Addendum A: habitat-gradient test on held-out mammals and birds."""
+    from phylogeo.eco import run_eco
+
+    run_eco(cfg, act_dir, out_dir, write_json)

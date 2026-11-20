@@ -1,0 +1,160 @@
+common_name,sci_name,wikidata,ncbi,ott_id,sitelinks,stratum,phylum,class,order,family,genus,n_words,head_noun,forstrat_mammal,water_pct_bird,aerial_pct_bird
+Eurasian lynx,Lynx lynx,Q43375,13125,886829,115,mammals,Chordata,Mammalia,Carnivora,Felidae,Lynx,2,lynx,G,,
+stoat,Mustela erminea,Q25345,36723,681184,110,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,1,stoat,G,,
+caracal,Caracal caracal,Q30847,61394,1033549,109,mammals,Chordata,Mammalia,Carnivora,Felidae,Caracal,1,caracal,G,,
+roe deer,Capreolus capreolus,Q122069,9858,460517,108,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Capreolus,2,deer,G,,
+arctic fox,Vulpes lagopus,Q82738,494514,775766,105,mammals,Chordata,Mammalia,Carnivora,Canidae,Vulpes,2,fox,G,,
+golden jackal,Canis aureus,Q128098,68724,621168,101,mammals,Chordata,Mammalia,Carnivora,Canidae,Canis,2,jackal,G,,
+serval,Leptailurus serval,Q42699,61405,86170,101,mammals,Chordata,Mammalia,Carnivora,Felidae,Leptailurus,1,serval,G,,
+American black bear,Ursus americanus,Q122783,9643,872577,99,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ursus,3,bear,G,,
+European pine marten,Martes martes,Q26046,29065,532122,96,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Martes,3,marten,S,,
+European bison,Bison bonasus,Q81091,9902,907684,95,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Bison,2,bison,G,,
+honey badger,Mellivora capensis,Q173128,9664,923109,92,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Mellivora,2,badger,G,,
+African wild dog,Lycaon pictus,Q173651,9622,821953,92,mammals,Chordata,Mammalia,Carnivora,Canidae,Lycaon,3,dog,G,,
+Asian black bear,Ursus thibetanus,Q124410,9642,872580,91,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ursus,3,bear,G,,
+ocelot,Leopardus pardalis,Q33261,32538,752746,91,mammals,Chordata,Mammalia,Carnivora,Felidae,Leopardus,1,ocelot,G,,
+jungle cat,Felis chaus,Q42623,61376,983181,91,mammals,Chordata,Mammalia,Carnivora,Felidae,Felis,2,cat,G,,
+dhole,Cuon alpinus,Q132585,68730,313163,88,mammals,Chordata,Mammalia,Carnivora,Canidae,Cuon,1,dhole,G,,
+Fennec fox,Vulpes zerda,Q131564,68732,315465,87,mammals,Chordata,Mammalia,Carnivora,Canidae,Vulpes,2,fox,G,,
+bobcat,Lynx rufus,Q131907,61384,507545,85,mammals,Chordata,Mammalia,Carnivora,Felidae,Lynx,1,bobcat,G,,
+European fallow deer,Dama dama,Q159857,30532,906310,85,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Dama,3,deer,G,,
+muskox,Ovibos moschatus,Q184004,37176,123197,85,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Ovibos,1,muskox,G,,
+European polecat,Mustela putorius,Q26582,9668,923126,85,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,2,polecat,G,,
+sand cat,Felis margarita,Q175329,61378,983177,84,mammals,Chordata,Mammalia,Carnivora,Felidae,Felis,2,cat,G,,
+clouded leopard,Neofelis nebulosa,Q36135,61452,763016,83,mammals,Chordata,Mammalia,Carnivora,Felidae,Neofelis,2,leopard,S,,
+leopard cat,Prionailurus bengalensis,Q42627,37029,280108,83,mammals,Chordata,Mammalia,Carnivora,Felidae,Prionailurus,2,cat,S,,
+common raccoon dog,Nyctereutes procyonoides,Q133189,34880,949680,82,mammals,Chordata,Mammalia,Carnivora,Canidae,Nyctereutes,3,dog,G,,
+beech marten,Martes foina,Q27366,9659,348047,82,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Martes,2,marten,G,,
+Iberian lynx,Lynx pardinus,Q129727,191816,442049,81,mammals,Chordata,Mammalia,Carnivora,Felidae,Lynx,2,lynx,G,,
+sun bear,Helarctos malayanus,Q144923,9634,679701,81,mammals,Chordata,Mammalia,Carnivora,Ursidae,Helarctos,2,bear,G,,
+sea otter,Enhydra lutris,Q41407,34882,949676,79,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Enhydra,2,otter,M,,
+saiga antelope,Saiga tatarica,Q126683,34875,274566,78,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Saiga,2,antelope,G,,
+vicuña,Vicugna vicugna,Q167797,9843,986959,77,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Vicugna,1,vicuña,G,,
+Canada lynx,Lynx canadensis,Q146457,61383,507549,76,mammals,Chordata,Mammalia,Carnivora,Felidae,Lynx,2,lynx,G,,
+Javan rhinoceros,Rhinoceros sondaicus,Q170311,102233,668145,75,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Rhinoceros,2,rhinoceros,G,,
+blackbuck,Antilope cervicapra,Q183339,59525,363043,75,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Antilope,1,blackbuck,G,,
+fishing cat,Prionailurus viverrinus,Q190674,61388,862641,75,mammals,Chordata,Mammalia,Carnivora,Felidae,Prionailurus,2,cat,G,,
+African golden cat,Profelis aurata,Q192231,61412,660447,75,mammals,Chordata,Mammalia,Carnivora,Felidae,Caracal,3,cat,S,,
+springbok,Antidorcas marsupialis,Q213084,59523,363040,75,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Antidorcas,1,springbok,G,,
+jaguarundi,Puma yagouaroundi,Q182304,1608482,86162,74,mammals,Chordata,Mammalia,Carnivora,Felidae,Herpailurus,1,jaguarundi,G,,
+sika deer,Cervus nippon,Q190516,9863,754809,74,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Cervus,2,deer,G,,
+European mink,Mustela lutreola,Q26559,9666,923105,74,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,2,mink,G,,
+alpine ibex,Capra ibex,Q168327,72542,698617,73,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,2,ibex,G,,
+Sumatran rhinoceros,Dicerorhinus sumatrensis,Q29220,89632,1061679,73,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Dicerorhinus,2,rhinoceros,G,,
+spectacled bear,Tremarctos ornatus,Q137641,9638,679667,72,mammals,Chordata,Mammalia,Carnivora,Ursidae,Tremarctos,2,bear,G,,
+sloth bear,Melursus ursinus,Q145016,9636,297463,72,mammals,Chordata,Mammalia,Carnivora,Ursidae,Melursus,2,bear,G,,
+argali,Ovis ammon,Q186267,30527,381162,71,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Ovis,1,argali,G,,
+black-footed cat,Felis nigripes,Q204814,61379,983179,70,mammals,Chordata,Mammalia,Carnivora,Felidae,Felis,2,cat,G,,
+Corsac fox,Vulpes corsac,Q187024,9629,523960,69,mammals,Chordata,Mammalia,Carnivora,Canidae,Vulpes,2,fox,G,,
+nilgai,Boselaphus tragocamelus,Q200444,9917,756060,69,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Boselaphus,1,nilgai,G,,
+markhor,Capra falconeri,Q187927,48167,202967,68,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,1,markhor,G,,
+Bengal fox,Vulpes bengalensis,Q214835,2494276,3612511,68,mammals,Chordata,Mammalia,Carnivora,Canidae,Vulpes,2,fox,G,,
+addax,Addax nasomaculatus,Q190154,59515,989805,67,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Addax,1,addax,G,,
+proboscis monkey,Nasalis larvatus,Q192029,43780,860954,67,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Nasalis,2,monkey,S,,
+chital,Axis axis,Q232054,30531,906317,67,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Axis,1,chital,G,,
+banteng,Bos javanicus,Q183035,9906,907672,66,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Bos,1,banteng,G,,
+sambar deer,Rusa unicolor,Q229337,662561,844145,66,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Rusa,2,deer,G,,
+marbled cat,Pardofelis marmorata,Q80191,61410,660452,66,mammals,Chordata,Mammalia,Carnivora,Felidae,Pardofelis,2,cat,S,,
+oncilla,Leopardus tigrinus,Q205948,46842,774309,64,mammals,Chordata,Mammalia,Carnivora,Felidae,Leopardus,1,oncilla,S,,
+arctic hare,Lepus arcticus,Q231625,62618,638196,64,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,2,hare,G,,
+maned wolf,Chrysocyon brachyurus,Q184389,68728,837601,63,mammals,Chordata,Mammalia,Carnivora,Canidae,Chrysocyon,2,wolf,G,,
+Hamadryas baboon,Papio hamadryas,Q189484,9557,115463,63,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Papio,2,baboon,G,,
+Japanese macaque,Macaca fuscata,Q191781,9542,689660,63,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Macaca,2,macaque,S,,
+margay,Leopardus wiedii,Q192421,61382,507553,63,mammals,Chordata,Mammalia,Carnivora,Felidae,Leopardus,1,margay,S,,
+takin,Budorcas taxicolor,Q193469,37181,860784,63,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Budorcas,1,takin,G,,
+Mediterranean monk seal,Monachus monachus,Q208549,248254,759722,63,mammals,Chordata,Mammalia,Carnivora,Phocidae,Monachus,3,seal,M,,
+mountain goat,Oreamnos americanus,Q242602,34873,274550,63,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Oreamnos,2,goat,G,,
+greater kudu,Tragelaphus strepsiceros,Q139487,9946,70827,62,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Tragelaphus,2,kudu,G,,
+Sei whale,Balaenoptera borealis,Q185097,9768,800329,62,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,2,whale,M,,
+bat-eared fox,Otocyon megalotis,Q200400,9624,821973,62,mammals,Chordata,Mammalia,Carnivora,Canidae,Otocyon,2,fox,G,,
+Chinese mountain cat,Felis bieti,Q204322,458418,54743,62,mammals,Chordata,Mammalia,Carnivora,Felidae,Felis,3,cat,G,,
+kodkod,Leopardus guigna,Q211042,61386,507542,62,mammals,Chordata,Mammalia,Carnivora,Felidae,Leopardus,1,kodkod,Ar,,
+olive baboon,Papio anubis,Q208561,9555,115449,61,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Papio,2,baboon,G,,
+siamang,Symphalangus syndactylus,Q213889,9590,417961,61,mammals,Chordata,Mammalia,Primates,Hylobatidae,Symphalangus,1,siamang,Ar,,
+white-tailed deer,Odocoileus virginianus,Q215887,9874,410145,61,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Odocoileus,2,deer,G,,
+harbour porpoise,Phocoena phocoena,Q27027,9742,851312,61,mammals,Chordata,Mammalia,Artiodactyla,Phocoenidae,Phocoena,2,porpoise,M,,
+waterbuck,Kobus ellipsiprymnus,Q623434,9962,122645,61,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Kobus,1,waterbuck,G,,
+Virginia opossum,Didelphis virginiana,Q147267,9267,919171,60,mammals,Chordata,Mammalia,Didelphimorphia,Didelphidae,Didelphis,2,opossum,S,,
+bearded seal,Erignathus barbatus,Q149405,39304,931413,60,mammals,Chordata,Mammalia,Carnivora,Phocidae,Erignathus,2,seal,M,,
+Ethiopian wolf,Canis simensis,Q188957,32534,752755,60,mammals,Chordata,Mammalia,Carnivora,Canidae,Canis,2,wolf,G,,
+common minke whale,Balaenoptera acutorostrata,Q201808,9767,800317,60,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,3,whale,M,,
+Eurasian jay,Garrulus glandarius,Q25354,56783,140432,113,birds,Chordata,Aves,Passeriformes,Corvidae,Garrulus,2,jay,,0.0,0.0
+common buzzard,Buteo buteo,Q25385,30397,119214,100,birds,Chordata,Aves,Accipitriformes,Accipitridae,Buteo,2,buzzard,,0.0,0.0
+mute swan,Cygnus olor,Q25402,8869,140314,98,birds,Chordata,Aves,Anseriformes,Anatidae,Cygnus,2,swan,,100.0,0.0
+bearded vulture,Gypaetus barbatus,Q126167,33610,317001,97,birds,Chordata,Aves,Accipitriformes,Accipitridae,Gypaetus,2,vulture,,0.0,0.0
+common pheasant,Phasianus colchicus,Q25432,9054,102719,97,birds,Chordata,Aves,Galliformes,Phasianidae,Phasianus,2,pheasant,,0.0,0.0
+white-tailed eagle,Haliaeetus albicilla,Q25438,8969,263118,97,birds,Chordata,Aves,Accipitriformes,Accipitridae,Haliaeetus,2,eagle,,50.0,10.0
+Eurasian teal,Anas crecca,Q25700,75839,656799,95,birds,Chordata,Aves,Anseriformes,Anatidae,Anas,2,teal,,100.0,0.0
+bald eagle,Haliaeetus leucocephalus,Q127216,52644,1012350,93,birds,Chordata,Aves,Accipitriformes,Accipitridae,Haliaeetus,2,eagle,,40.0,10.0
+grey partridge,Perdix perdix,Q26106,9052,102712,93,birds,Chordata,Aves,Galliformes,Phasianidae,Perdix,2,partridge,,0.0,0.0
+Egyptian vulture,Neophron percnopterus,Q33504,33608,891414,93,birds,Chordata,Aves,Accipitriformes,Accipitridae,Neophron,2,vulture,,0.0,0.0
+ruddy shelduck,Tadorna ferruginea,Q170723,45639,282323,92,birds,Chordata,Aves,Anseriformes,Anatidae,Tadorna,2,shelduck,,100.0,0.0
+Eurasian bittern,Botaurus stellaris,Q25709,188376,273438,91,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Botaurus,2,bittern,,50.0,0.0
+little egret,Egretta garzetta,Q131709,188379,273425,90,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Egretta,2,egret,,70.0,0.0
+Eurasian griffon vulture,Gyps fulvus,Q177856,36247,549517,90,birds,Chordata,Aves,Accipitriformes,Accipitridae,Gyps,3,vulture,,0.0,0.0
+whooper swan,Cygnus cygnus,Q25612,219595,817994,90,birds,Chordata,Aves,Anseriformes,Anatidae,Cygnus,2,swan,,80.0,0.0
+carrion crow,Corvus corone,Q26198,30422,711844,90,birds,Chordata,Aves,Passeriformes,Corvidae,Corvus,2,crow,,0.0,10.0
+purple heron,Ardea purpurea,Q160488,188373,273431,89,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,2,heron,,70.0,0.0
+European turtle dove,Streptopelia turtur,Q168514,177155,801237,87,birds,Chordata,Aves,Columbiformes,Columbidae,Streptopelia,3,dove,,0.0,0.0
+long-eared owl,Asio otus,Q25384,111810,1060752,86,birds,Chordata,Aves,Strigiformes,Strigidae,Asio,2,owl,,0.0,0.0
+yellowhammer,Emberiza citrinella,Q26205,37595,828708,86,birds,Chordata,Aves,Passeriformes,Fringillidae,Emberiza,1,yellowhammer,,0.0,0.0
+Cinereous vulture,Aegypius monachus,Q168677,8959,786449,85,birds,Chordata,Aves,Accipitriformes,Accipitridae,Aegypius,2,vulture,,0.0,0.0
+common shelduck,Tadorna tadorna,Q25761,75865,30847,85,birds,Chordata,Aves,Anseriformes,Anatidae,Tadorna,2,shelduck,,90.0,0.0
+red kite,Milvus milvus,Q156250,43518,38956,84,birds,Chordata,Aves,Accipitriformes,Accipitridae,Milvus,2,kite,,0.0,0.0
+common sandpiper,Actitis hypoleucos,Q18850,320702,792983,84,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Actitis,2,sandpiper,,50.0,0.0
+hen harrier,Circus cyaneus,Q25572,43466,581831,84,birds,Chordata,Aves,Accipitriformes,Accipitridae,Circus,2,harrier,,0.0,0.0
+tufted duck,Aythya fuligula,Q26444,219594,817992,84,birds,Chordata,Aves,Anseriformes,Anatidae,Aythya,2,duck,,100.0,0.0
+black swan,Cygnus atratus,Q131044,8868,140312,83,birds,Chordata,Aves,Anseriformes,Anatidae,Cygnus,2,swan,,100.0,0.0
+black woodpecker,Dryocopus martius,Q143284,187859,459335,83,birds,Chordata,Aves,Piciformes,Picidae,Dryocopus,2,woodpecker,,0.0,0.0
+Eurasian spoonbill,Platalea leucorodia,Q171360,257867,317305,83,birds,Chordata,Aves,Pelecaniformes,Threskiornithidae,Platalea,2,spoonbill,,100.0,0.0
+red junglefowl,Gallus gallus,Q184774,9031,153563,83,birds,Chordata,Aves,Galliformes,Phasianidae,Gallus,2,junglefowl,,0.0,0.0
+common pochard,Aythya ferina,Q26742,219593,817989,83,birds,Chordata,Aves,Anseriformes,Anatidae,Aythya,2,pochard,,100.0,0.0
+emperor penguin,Aptenodytes forsteri,Q161829,9233,494370,82,birds,Chordata,Aves,Sphenisciformes,Spheniscidae,Aptenodytes,2,penguin,,100.0,0.0
+short-toed snake eagle,Circaetus gallicus,Q170251,43465,581835,82,birds,Chordata,Aves,Accipitriformes,Accipitridae,Circaetus,3,eagle,,0.0,20.0
+steppe eagle,Aquila nipalensis,Q179359,193005,1058990,82,birds,Chordata,Aves,Accipitriformes,Accipitridae,Aquila,2,eagle,,0.0,0.0
+shoebill,Balaeniceps rex,Q18700,33584,464697,82,birds,Chordata,Aves,Pelecaniformes,Balaenicipitidae,Balaeniceps,1,shoebill,,100.0,0.0
+Eurasian curlew,Numenius arquata,Q18854,31919,971518,82,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Numenius,2,curlew,,20.0,0.0
+mandarin duck,Aix galericulata,Q200339,8832,765197,82,birds,Chordata,Aves,Anseriformes,Anatidae,Aix,2,duck,,100.0,0.0
+tawny owl,Strix aluco,Q25756,111821,116522,82,birds,Chordata,Aves,Strigiformes,Strigidae,Strix,2,owl,,10.0,0.0
+western marsh harrier,Circus aeruginosus,Q26431,8964,263139,82,birds,Chordata,Aves,Accipitriformes,Accipitridae,Circus,3,harrier,,0.0,0.0
+short-eared owl,Asio flammeus,Q25769,56267,509846,81,birds,Chordata,Aves,Strigiformes,Strigidae,Asio,2,owl,,0.0,0.0
+Canada goose,Branta canadensis,Q26733,8853,714461,81,birds,Chordata,Aves,Anseriformes,Anatidae,Branta,2,goose,,40.0,0.0
+hawfinch,Coccothraustes coccothraustes,Q174088,37609,1083711,80,birds,Chordata,Aves,Passeriformes,Fringillidae,Coccothraustes,1,hawfinch,,0.0,0.0
+Eurasian wryneck,Jynx torquilla,Q25678,189526,467846,80,birds,Chordata,Aves,Piciformes,Picidae,Jynx,2,wryneck,,0.0,0.0
+western house martin,Delichon urbicum,Q26055,88116,36109,80,birds,Chordata,Aves,Passeriformes,Hirundinidae,Delichon,3,martin,,0.0,33.0
+pied avocet,Recurvirostra avosetta,Q26147,171275,917051,80,birds,Chordata,Aves,Charadriiformes,Recurvirostridae,Recurvirostra,2,avocet,,50.0,0.0
+song thrush,Turdus philomelos,Q26349,127946,1082345,80,birds,Chordata,Aves,Passeriformes,Turdidae,Turdus,2,thrush,,0.0,0.0
+European herring gull,Larus argentatus,Q28236,35669,791957,80,birds,Chordata,Aves,Charadriiformes,Laridae,Larus,3,gull,,60.0,0.0
+Eurasian green woodpecker,Picus viridis,Q166171,100825,1010553,79,birds,Chordata,Aves,Piciformes,Picidae,Picus,3,woodpecker,,0.0,0.0
+little ringed plover,Charadrius dubius,Q18851,225396,274628,79,birds,Chordata,Aves,Charadriiformes,Charadriidae,Thinornis,3,plover,,20.0,0.0
+little bustard,Tetrax tetrax,Q188601,172684,5027,79,birds,Chordata,Aves,Otidiformes,Otididae,Tetrax,2,bustard,,0.0,0.0
+fieldfare,Turdus pilaris,Q25777,357736,1050514,79,birds,Chordata,Aves,Passeriformes,Turdidae,Turdus,1,fieldfare,,0.0,0.0
+bluethroat,Luscinia svecica,Q26578,52792,274225,79,birds,Chordata,Aves,Passeriformes,Muscicapidae,Luscinia,1,bluethroat,,0.0,0.0
+common redstart,Phoenicurus phoenicurus,Q26620,121423,1093902,79,birds,Chordata,Aves,Passeriformes,Muscicapidae,Phoenicurus,2,redstart,,0.0,0.0
+European nightjar,Caprimulgus europaeus,Q26717,111811,178687,79,birds,Chordata,Aves,Caprimulgiformes,Caprimulgidae,Caprimulgus,2,nightjar,,0.0,10.0
+crested lark,Galerida cristata,Q26982,215306,207745,79,birds,Chordata,Aves,Passeriformes,Alaudidae,Galerida,2,lark,,0.0,0.0
+Eurasian nuthatch,Sitta europaea,Q156767,50251,82242,78,birds,Chordata,Aves,Passeriformes,Sittidae,Sitta,2,nuthatch,,0.0,0.0
+eastern imperial eagle,Aquila heliaca,Q168976,52410,588044,78,birds,Chordata,Aves,Accipitriformes,Accipitridae,Aquila,3,eagle,,0.0,0.0
+European honey buzzard,Pernis apivorus,Q170466,43551,1035863,78,birds,Chordata,Aves,Accipitriformes,Accipitridae,Pernis,3,buzzard,,0.0,0.0
+great bustard,Otis tarda,Q171655,73107,458651,78,birds,Chordata,Aves,Otidiformes,Otididae,Otis,2,bustard,,0.0,0.0
+black-throated loon,Gavia arctica,Q184432,57069,1085739,78,birds,Chordata,Aves,Gaviiformes,Gaviidae,Gavia,2,loon,,100.0,0.0
+northern nutcracker,Nucifraga caryocatactes,Q184820,56786,140439,78,birds,Chordata,Aves,Passeriformes,Corvidae,Nucifraga,2,nutcracker,,0.0,0.0
+white-throated dipper,Cinclus cinclus,Q201831,127875,496009,78,birds,Chordata,Aves,Passeriformes,Cinclidae,Cinclus,2,dipper,,80.0,0.0
+Eurasian oystercatcher,Haematopus ostralegus,Q25928,31908,225423,78,birds,Chordata,Aves,Charadriiformes,Haematopodidae,Haematopus,2,oystercatcher,,40.0,0.0
+bohemian waxwing,Bombycilla garrulus,Q26135,125297,613881,78,birds,Chordata,Aves,Passeriformes,Bombycillidae,Bombycilla,2,waxwing,,0.0,20.0
+Atlantic puffin,Fratercula arctica,Q26685,28701,864865,78,birds,Chordata,Aves,Charadriiformes,Alcidae,Fratercula,2,puffin,,100.0,0.0
+long-tailed tit,Aegithalos caudatus,Q170831,73327,467867,77,birds,Chordata,Aves,Passeriformes,Aegithalidae,Aegithalos,2,tit,,0.0,0.0
+gyrfalcon,Falco rusticolus,Q177688,120794,759238,77,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,1,gyrfalcon,,0.0,10.0
+European roller,Coracias garrulus,Q179367,188338,372551,77,birds,Chordata,Aves,Coraciiformes,Coraciidae,Coracias,2,roller,,0.0,10.0
+black-necked grebe,Podiceps nigricollis,Q185183,85099,651477,77,birds,Chordata,Aves,Podicipediformes,Podicipedidae,Podiceps,2,grebe,,100.0,0.0
+common greenshank,Tringa nebularia,Q18840,171270,917055,77,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Tringa,2,greenshank,,60.0,0.0
+common tern,Sterna hirundo,Q18875,108405,1057459,77,birds,Chordata,Aves,Charadriiformes,Laridae,Sterna,2,tern,,100.0,0.0
+bar-headed goose,Anser indicus,Q191125,8846,190897,77,birds,Chordata,Aves,Anseriformes,Anatidae,Anser,2,goose,,20.0,0.0
+common gull,Larus canus,Q26427,28681,855472,77,birds,Chordata,Aves,Charadriiformes,Laridae,Larus,2,gull,,60.0,0.0
+Taiga bean goose,Anser fabalis,Q26452,132587,325140,77,birds,Chordata,Aves,Anseriformes,Anatidae,Anser,3,goose,,20.0,0.0
+long-tailed duck,Clangula hyemalis,Q26597,197941,316879,77,birds,Chordata,Aves,Anseriformes,Anatidae,Clangula,2,duck,,100.0,0.0
+Eurasian scops owl,Otus scops,Q171563,126827,921080,76,birds,Chordata,Aves,Strigiformes,Strigidae,Otus,3,owl,,0.0,0.0
+Mistle thrush,Turdus viscivorus,Q178942,301543,1002259,76,birds,Chordata,Aves,Passeriformes,Turdidae,Turdus,2,thrush,,0.0,0.0
+red-footed falcon,Falco vespertinus,Q179625,56351,964523,76,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,2,falcon,,0.0,0.0
+Eurasian stone-curlew,Burhinus oedicnemus,Q184834,85105,261314,76,birds,Chordata,Aves,Charadriiformes,Burhinidae,Burhinus,2,curlew,,0.0,0.0
+water rail,Rallus aquaticus,Q185099,54496,32323,76,birds,Chordata,Aves,Gruiformes,Rallidae,Rallus,2,rail,,50.0,0.0
