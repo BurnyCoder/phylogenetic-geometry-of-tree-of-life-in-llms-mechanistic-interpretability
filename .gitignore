@@ -26,3 +26,4 @@ logs/*.log
 # Tooling
 .trackio/
 site/_build/
+logs/*.out

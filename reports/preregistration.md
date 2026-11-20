@@ -377,3 +377,13 @@ All deviations below were made **before any activation was extracted** (species 
     - The stage-1a reading rule now requires C2 in *all three* zoom strata.
     - **Re-frozen 2026-11-20 ~09:20:** species.csv sha256 `4b6dfa9b…`, tree `1f268890…` (`data/FREEZE.json`). NCBI merged taxids are resolved via `merged.dmp`, after which every species has NCBI phylum, order and genus.
     - The power simulation was re-run on the new tree **before** the new activations were extracted.
+19. **2026-11-20, ~11:50 — stage-3 causal test resolution and off-target baseline.** This entry was made after the first stage-3 run and before the rerun. All values from the first run are kept in `results/qwen35_2b/stage3/results.json` as `C_abl_v1` and `C_swap_v1`.
+    - **Problem 1: the tests could not reach significance.** The first run compared the probe subspace with only 20 random subspaces (C-abl) and 10 (C-swap). A rank p-value against n random subspaces cannot be smaller than 1/(n+1), i.e. 0.048 and 0.091. The registered Holm family of 2 needs p ≤ 0.025 for the smaller p-value, so neither hypothesis could have been supported whatever the data.
+    - **Fix 1.** Both tests now use the same **99** variance-matched random subspaces, so the floor is p = 0.01. The p-value floor was not considered when the code was written. The number 99 is fixed here, before the rerun.
+    - **Primary statistic (made explicit; the registration did not name one).** The primary statistic for each hypothesis is the **rank p-value of the probe subspace among the random subspaces**: (1 + number of random subspaces with an effect ≥ the probe's) / (n + 1). Holm correction is applied across C-abl and C-swap. The per-species Wilcoxon test (probe drop vs mean random drop) is secondary: it treats species, not subspaces, as the unit, and ignores the spread across random subspaces.
+    - **Problem 2: invalid off-target comparison.** The no-edit neutral-text loss was token-weighted over all 20 neutral sentences. The ablated losses were unweighted means over the first 10. The two numbers were not comparable.
+    - **Fix 2.** All three losses (no edit, probe ablated, random ablated) are now computed by one function on the same 20 sentences, with token weighting. The random-ablated loss is averaged over the first 10 random subspaces.
+    - **Other changes.**
+      - The base log-probabilities are computed once per species, which is faster and gives identical values.
+      - Random subspaces and swap pairs are drawn from their own seeded streams, so the causal tests no longer depend on the behavioural part of the run.
+      - The mean log P(correct class) without editing is reported, so the size of the drop can be interpreted.
