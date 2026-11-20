@@ -1,0 +1,16 @@
+common_name,sci_name,wikidata,ncbi,ott_id,sitelinks,stratum,phylum,class,order,family,genus,n_words,head_noun,polysemous
+tiger,Panthera tigris,Q19939,9694,42314,237,mammals,Chordata,Mammalia,Carnivora,Felidae,Panthera,1,tiger,True
+leopard,Panthera pardus,Q34706,9691,42324,191,mammals,Chordata,Mammalia,Carnivora,Felidae,Panthera,1,leopard,True
+raccoon,Procyon lotor,Q121439,9654,348040,111,mammals,Chordata,Mammalia,Carnivora,Procyonidae,Procyon,1,raccoon,True
+muskrat,Ondatra zibethicus,Q26283,10060,816252,86,mammals,Chordata,Mammalia,Rodentia,Cricetidae,Ondatra,1,muskrat,True
+onager,Equus hemionus,Q180960,9794,918649,72,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,1,onager,True
+fossa,Cryptoprocta ferox,Q183330,94188,768514,69,mammals,Chordata,Mammalia,Carnivora,Eupleridae,Cryptoprocta,1,fossa,True
+emu,Dromaius novaehollandiae,Q93208,8790,829513,97,birds,Chordata,Aves,Casuariiformes,Dromaiidae,Dromaius,1,emu,True
+adder,Vipera berus,Q192056,31155,579239,90,reptiles,Chordata,,Squamata,Viperidae,Vipera,1,adder,True
+swordfish,Xiphias gladius,Q164327,8245,358621,83,ray-finned fish,Chordata,Actinopteri,Istiophoriformes,Xiphiidae,Xiphias,1,swordfish,True
+haddock,Melanogrammus aeglefinus,Q202406,8056,635904,64,ray-finned fish,Chordata,Actinopteri,Gadiformes,Gadidae,Melanogrammus,1,haddock,True
+turbot,Scophthalmus maximus,Q217329,52904,778695,57,ray-finned fish,Chordata,Actinopteri,Pleuronectiformes,Scophthalmidae,Scophthalmus,1,turbot,True
+beluga,Huso huso,Q191816,61971,751886,56,ray-finned fish,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Huso,1,beluga,True
+Oscar,Astronotus ocellatus,Q3442,50733,952936,50,ray-finned fish,Chordata,Actinopteri,Cichliformes,Cichlidae,Astronotus,1,oscar,True
+cochineal,Dactylopius coccus,Q244274,765876,765295,48,insects,Arthropoda,Insecta,Hemiptera,Dactylopiidae,Dactylopius,1,cochineal,True
+pinworm,Enterobius vermicularis,Q1253087,51028,332069,36,other,Nematoda,Chromadorea,Rhabditida,Oxyuridae,Enterobius,1,pinworm,True

@@ -1,0 +1,23 @@
+{
+  "species": {
+    "csv": "species.csv",
+    "csv_sha256": "f1b24cf416493b09f8653e46b95208f6a959d5bdf37f5f6d4cc4ee2ff8e59f86",
+    "tree": "species_tree.nwk",
+    "tree_sha256": "a7eed0777fccd724ed04692beb4a592656d7fc314a2c79c282c1f6e5d7a3dec3",
+    "n": 400
+  },
+  "species_polysemous": {
+    "csv": "species_polysemous.csv",
+    "csv_sha256": "2ca11e89499ed7ba892dfea4c3ba1754a2b8e28714772405a4d1b91dceba9c30",
+    "tree": "species_polysemous_tree.nwk",
+    "tree_sha256": "81431fdd8204bd53fb63b81984652ad05bfbe69bfa666c79912fd9eecf26c1de",
+    "n": 15
+  },
+  "conflict": {
+    "csv": "conflict.csv",
+    "csv_sha256": "a8d85b8ce8141077d515fbf3dce3c51a98cae77b2495b6a33eb4ff303cf08d19",
+    "tree": "conflict_tree.nwk",
+    "tree_sha256": "fc133434af1a22a3d4703a593586cb5d69590a2e9cf13eb175c9ef44c60a3cd4",
+    "n": 79
+  }
+}

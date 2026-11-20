@@ -22,7 +22,7 @@ flowchart LR
   E --> F1[Stage 1a: top-3 PCA plots<br/>+ tree overlay]
   E --> F2[Stage 1b: rooted-triplet accuracy,<br/>Mantel, depth profile]
   E --> F3[Stage 2: geodesic vs angular,<br/>delta-hyperbolicity, flat-subspace probe]
-  E --> F4[Stage 6: ablate / swap<br/>phylogeny subspace]
+  E --> F4[Stage 3: ablate / swap<br/>phylogeny subspace]
   B --> F1 & F2 & F3 & F4
   G[Controls: random-init Qwen, Pythia step0,<br/>char-3-grams, GloVe, class oracle,<br/>class-blob & Brownian-tree simulations] --> F2 & F3
 ```
@@ -42,7 +42,7 @@ flowchart LR
    - Gromov δ-hyperbolicity against matched nulls.
    - A neighbor-joining tree from the representations compared with the reference.
    - Goodfire's learned 10-d "flat subspace" probe, evaluated on held-out families with a shuffled-tree control.
-7. **Later stages.** Ablations (stage 3), seed and template sensitivity (stage 4), scale and training dynamics with Qwen3.5-0.8B, Qwen3-1.7B and Pythia checkpoints (stage 5), and causal ablation, interchange, steering and behavioral tests (stage 6).
+7. **Later stages.** Causal ablation, interchange, steering and behavioral tests (stage 3), ablations (stage 4), seed and template sensitivity (stage 5), and scale and training dynamics with Qwen3.5-0.8B, Qwen3-1.7B and Pythia checkpoints (stage 6).
 
 The full run matrix is in [`reports/planned-runs.md`](reports/planned-runs.md).
 
@@ -96,7 +96,7 @@ Running instructions will be added here once the pipeline is implemented.
 - [ ] Stage 1a: top-3 PCA plots ("do they look like a tree?")
 - [ ] Stage 1b: triplet accuracy, Mantel, controls, conflict triplets
 - [ ] Stage 2: probes, geodesic, δ-hyperbolicity, neighbor-joining
-- [ ] Stages 3–6: ablations, sensitivity, scale, causal and behavioral tests
+- [ ] Stages 3–6: causal and behavioral tests, ablations, sensitivity, scale
 - [ ] Paper, interactive website (GitHub Pages), Hugging Face collection
 
 *Author: Libor "Burny" Burian.*

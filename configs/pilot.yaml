@@ -1,0 +1,11 @@
+# Pilot / dev run (declared in the preregistration): debug the full pipeline on Pythia-410m.
+name: pilot_pythia410m
+model_id: EleutherAI/pythia-410m
+chat_template: false
+prepend_bos: true
+name_sets: [species, days, months, conflict]
+controls: []
+n_perm: 199
+n_boot: 200
+pca_n_perm: 199
+n_splits: 5

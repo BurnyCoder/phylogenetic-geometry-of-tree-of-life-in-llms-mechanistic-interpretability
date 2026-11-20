@@ -1,0 +1,8 @@
+# Untrained control: Qwen3.5-2B architecture with random weights (seed 0).
+name: qwen35_2b_random
+model_id: Qwen/Qwen3.5-2B
+revision: 15852e8c16360a2fea060d615a32b45270f8a8fc
+random_init: true
+seed: 0
+chat_template: true
+name_sets: [species, days, months, conflict]
