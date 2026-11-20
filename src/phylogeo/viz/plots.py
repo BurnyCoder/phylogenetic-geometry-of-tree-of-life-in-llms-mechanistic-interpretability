@@ -248,7 +248,7 @@ def strip_png(rows: dict[str, dict[str, list]], path: Path, title: str, xlabel: 
                        label=s if yi == 0 or s not in rows[list(rows)[0]] else None, zorder=3)
     for name, v in (vlines or {}).items():
         ax.axvline(v, ls="--", lw=1, color="0.45", zorder=1)
-        ax.text(v, len(rows) - 0.45, f" {name}", fontsize=8, color="0.3", rotation=90, va="top")
+        ax.text(v, -0.55, f" {name}", fontsize=8, color="0.3", rotation=90, va="top", ha="right")  # top (y inverted)
     ax.set_yticks(range(len(rows)), list(rows))
     ax.set_ylim(-0.6, len(rows) - 0.4)
     ax.invert_yaxis()

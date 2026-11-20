@@ -137,6 +137,11 @@ Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-
 *(no stage-2 results for pilot_pythia410m_prefix)*
 
 
+## Stage 3
+
+*(no stage-3 results for pilot_pythia410m_prefix)*
+
+
 ## Stage 4
 
 *(no stage-4 results for pilot_pythia410m_prefix)*
@@ -145,3 +150,8 @@ Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-
 ## Addendum A (habitat gradient)
 
 *(no habitat-addendum results for pilot_pythia410m_prefix)*
+
+
+## Stage 6
+
+*(no stage-6 results for pilot_pythia410m_prefix)*

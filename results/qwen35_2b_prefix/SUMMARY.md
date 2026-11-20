@@ -46,6 +46,11 @@
 *(no stage-2 results for qwen35_2b_prefix)*
 
 
+## Stage 3
+
+*(no stage-3 results for qwen35_2b_prefix)*
+
+
 ## Stage 4
 
 *(no stage-4 results for qwen35_2b_prefix)*
@@ -54,3 +59,8 @@
 ## Addendum A (habitat gradient)
 
 *(no habitat-addendum results for qwen35_2b_prefix)*
+
+
+## Stage 6
+
+*(no stage-6 results for qwen35_2b_prefix)*

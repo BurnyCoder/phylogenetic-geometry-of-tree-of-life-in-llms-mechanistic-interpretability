@@ -27,3 +27,4 @@ logs/*.log
 .trackio/
 site/_build/
 logs/*.out
+.claude/
