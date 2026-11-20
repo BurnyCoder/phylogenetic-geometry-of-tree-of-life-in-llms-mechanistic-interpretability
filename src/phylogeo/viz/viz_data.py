@@ -131,11 +131,12 @@ def build_viz_data(main: str, controls: list[str], layers: list[int], out: Path,
 
 
 def pca3(X: np.ndarray, seed: int = 0) -> tuple[np.ndarray, list[float]]:
-    """Top-3 PCA coordinates scaled to unit RMS radius (so every layer fills the same box), and their
-    explained-variance ratios."""
+    """Top-3 PCA coordinates scaled so the *median* species radius is 1, and their explained-variance ratios.
+    The median is used instead of the RMS radius because in the untrained network a few outlier names dominate
+    the RMS, which would shrink every other species to a dot; with one robust rule, both models fill the same box."""
     p = PCA(n_components=3, random_state=seed).fit(X - X.mean(0))
     C = p.transform(X - X.mean(0))
-    return C / np.sqrt((C**2).sum(1).mean()), p.explained_variance_ratio_.tolist()
+    return C / np.median(np.linalg.norm(C, axis=1)), p.explained_variance_ratio_.tolist()
 
 
 def aligned_pca3_layers(V: np.ndarray, seed: int = 0) -> dict:

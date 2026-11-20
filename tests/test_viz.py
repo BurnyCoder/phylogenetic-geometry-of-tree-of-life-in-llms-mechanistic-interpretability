@@ -68,3 +68,17 @@ def test_aligned_pca3_keeps_within_layer_geometry_and_removes_axis_flips():
     dist = lambda A: np.linalg.norm(A[:, None] - A[None], axis=-1)
     assert np.allclose(dist(C[1]), dist(raw), atol=1e-2)  # rotation only
     assert np.abs(C[1] - C[0]).max() < 2e-2  # aligned back onto the previous layer
+
+
+def test_shared_box_holds_the_trained_model_and_counts_what_it_hides():
+    """The per-layer box contains every trained-model point; points outside it are clipped (NaN) and counted."""
+    from phylogeo.viz.figures import _clip, _lim_at, _lims, n_outside
+
+    rng = np.random.default_rng(2)
+    trained = rng.normal(size=(3, 50, 3))
+    lims = _lims(trained)
+    assert all(n_outside(trained[i], lims[i]) == 0 for i in range(3))
+    untrained = np.vstack([rng.normal(size=(48, 3)), [[50, 0, 0], [0, -60, 0]]])  # two outlier names
+    assert n_outside(untrained, lims[0]) >= 2
+    assert np.isnan(_clip(untrained, lims[0])[-2:]).all()
+    assert np.isclose(_lim_at(lims, 0.5), (lims[0] + lims[1]) / 2)
