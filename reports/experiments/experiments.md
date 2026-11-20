@@ -30,23 +30,29 @@ We give a language model short sentences that mention an animal ("Here is a fact
 | Qwen3.5-2B random init | untrained control | same | none (random weights, seed 0) | – | 2.27B | 24 × 2048 |
 | [EleutherAI/pythia-410m](https://huggingface.co/EleutherAI/pythia-410m) | pilot; second trained model | GPT-NeoX decoder | pretrained by EleutherAI | next-token prediction on the Pile ([Biderman et al. 2023](https://arxiv.org/abs/2304.01373)) | 0.41B | 24 × 1024 |
 | Pythia-410m `step0` | second untrained control | same | none (checkpoint at step 0) | – | 0.41B | 24 × 1024 |
+| [Qwen/Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B) (rev `2fc0636`) | stage 5: scale within family | hybrid, as Qwen3.5-2B | released post-trained model | as Qwen3.5-2B | 0.85B | 24 × 1024 |
+| [Qwen/Qwen3-1.7B](https://huggingface.co/Qwen/Qwen3-1.7B) (rev `70d244c`) | stage 5: standard full-attention architecture | decoder, full attention only | released post-trained model | next-token prediction, then post-training | 1.7B | 28 × 2048 |
+| Pythia 70m / 160m / 1b / 1.4b / 2.8b | stage 5: scale on one training corpus | GPT-NeoX decoder | pretrained by EleutherAI (final checkpoint) | the Pile | 0.07–2.8B | 6 × 512 … 32 × 2560 |
+| Pythia-1.4B at 12 checkpoints (steps 0 … 143000) | stage 5: training dynamics | GPT-NeoX decoder | EleutherAI checkpoints | the Pile | 1.4B | 24 × 2048 |
 
 **Trained by us.** Only small probes: the stage-2 flat-subspace probe, a 10 × 100 linear map plus a scale, trained with Adam (lr 1e-3, 2,000 full-batch steps, α = 0.01), with 5-fold family-holdout CV and 5 seeds.
 - These hyperparameters were fixed in the preregistration, before any results. The dimension k = 10 matches Goodfire's Evo 2 choice; lr, steps and α are standard small-probe settings, and α is small as in Goodfire's note that results are insensitive to it.
-- The sensitivity sweep over k and seeds is stage 6.
+- The sensitivity sweep over seeds is stage 6 ([08](08-sensitivity-stage6/experiment.md)); the sweep over k and metric is stage 4 ([05](05-ablations-stage4/experiment.md)).
 
 ## Experiments
 | # | Experiment | Stage | Status | Details |
 |---|---|---|---|---|
-| 00 | Pilot on Pythia-410m | pilot | done | [00-pilot](00-pilot/experiment.md) |
-| 00b | Power simulation on the frozen tree | power | running | `results/power/` |
-| 01 | Top-3 PCA shape ("do they look like a tree?"), H1a | 1a | running | [01-pca-shape](01-pca-shape/experiment.md) |
-| 02 | Triplet accuracy, Mantel, S1–S5, controls, conflict triplets | 1b | planned | – |
-| 03 | Geodesic vs angular, δ-hyperbolicity, NJ, flat-subspace probe | 2 | code ready | – |
-| 04 | Causal ablation / interchange, steering, behavioral triplets | 3 | planned | – |
-| 05 | Ablations | 4 | planned | – |
-| 06 | More models (scale, architecture, training dynamics) | 5 | planned | – |
-| 07 | Sensitivity (seeds, templates, subsamples) | 6 | planned | – |
+| 00 | Pilot on Pythia-410m (whole pipeline end to end) | pilot | done | [00-pilot](00-pilot/experiment.md) |
+| 00b | Power simulation on the frozen tree | power | done | [00b-power](00b-power/experiment.md) |
+| 01 | Top-3 PCA shape ("do they look like a tree?"), H1a | 1a | done | [01-pca-shape](01-pca-shape/experiment.md) |
+| 02 | Triplet accuracy, Mantel, S1–S5, controls, conflict triplets | 1b | done | [02-triplets-stage1b](02-triplets-stage1b/experiment.md) |
+| 03 | Geodesic vs angular, δ-hyperbolicity, NJ tree, flat-subspace probe | 2 | done | [03-geometry-probes-stage2](03-geometry-probes-stage2/experiment.md) |
+| 04 | Behavioral judgments; causal ablation and interchange of the probe subspace | 3 | behavior done; causal rerun queued (deviation 19) | [04-causal-behavior-stage3](04-causal-behavior-stage3/experiment.md) |
+| 05 | Ablations (readout, normalization, format, names, probe variants) | 4 | done | [05-ablations-stage4](05-ablations-stage4/experiment.md) |
+| 06 | Habitat axis on held-out species (Addendum A) | addendum | done | [06-habitat-addendum](06-habitat-addendum/experiment.md) |
+| 07 | More models: scale, architecture, training dynamics | 5 | running | [07-more-models-stage5](07-more-models-stage5/experiment.md) |
+| 08 | Sensitivity (triplet/probe/split seeds, templates, species subsamples) | 6 | done | [08-sensitivity-stage6](08-sensitivity-stage6/experiment.md) |
+| – | Output examples (nearest neighbours of rule-chosen species) | report | done | `results/qwen35_2b/examples/neighbors.json`, paper section "Output examples" |
 
 ## Methodology choices and why
 - **Last name token readout, 8 templates, per-template centering.** This follows Gurnee & Tegmark's entity readout and Goodfire's pooling. Centering removes the shared anisotropic direction, which otherwise dominates cosine similarity ([Ethayarajh 2019](https://aclanthology.org/D19-1006/)).

@@ -6,7 +6,7 @@ seed 0) on *all* 400 species at the stage-1b layer and writes it as safetensors
 with a generated model card; held-out performance in the card comes from the
 stage-2 and stage-6 results JSON (the released probe itself has no held-out
 species). ``upload_release`` pushes the probe repo and the activation dataset
-(``upload_large_folder`` is resumable) and adds both to the collection.
+(``upload_folder`` splits commits and resumes in huggingface_hub 2.x) and adds both to the collection.
 Docs: https://huggingface.co/docs/huggingface_hub/guides/upload
 """
 
@@ -136,11 +136,16 @@ Layout: `<run>/<name_set>/{last,mean}.npy` and `names.txt`.
 
 
 def upload_release(cfg: RunConfig) -> None:
-    from huggingface_hub import HfApi
+    from pathlib import Path
+
+    from huggingface_hub import HfApi, get_token
 
     ns = os.environ.get("HF_NAMESPACE", "BurnyCoder")
     coll = os.environ.get("HF_COLLECTION")
-    api = HfApi()
+    # HF_HOME points to the D: cache, but `hf auth login` stores the token under the default
+    # ~/.cache/huggingface; fall back to it (the token is never logged or written anywhere).
+    default = Path.home() / ".cache" / "huggingface" / "token"
+    api = HfApi(token=get_token() or (default.read_text().strip() if default.exists() else None))
     probe_id, act_id = f"{ns}/{PROBE_REPO}", f"{ns}/{ACT_REPO}"
     api.create_repo(probe_id, repo_type="model", exist_ok=True)
     api.upload_folder(repo_id=probe_id, folder_path=str(RELEASE_DIR / "probe"), repo_type="model",
@@ -149,9 +154,10 @@ def upload_release(cfg: RunConfig) -> None:
     api.create_repo(act_id, repo_type="dataset", exist_ok=True)
     api.upload_file(path_or_fileobj=ACT_CARD.encode(), path_in_repo="README.md", repo_id=act_id, repo_type="dataset")
     runs = [r for r in os.environ.get("UPLOAD_RUNS", "").split(",") if r]  # optional: only finished runs
-    api.upload_large_folder(repo_id=act_id, folder_path=str(DATA_DIR / "activations"), repo_type="dataset",
-                            allow_patterns=[f"{r}/**" for r in runs] or None,
-                            ignore_patterns=["pilot_*/**", "pilot_*"])
+    # huggingface_hub 2.x: upload_folder splits large folders into several commits and resumes when re-run.
+    api.upload_folder(repo_id=act_id, folder_path=str(DATA_DIR / "activations"), repo_type="dataset",
+                      allow_patterns=[f"{r}/**" for r in runs] or None, ignore_patterns=["pilot_*/**", "pilot_*"],
+                      commit_message=f"Activations: {', '.join(runs) or 'all runs'}")
     log.info("uploaded activations to %s", act_id)
     if coll:
         for item, kind in ((probe_id, "model"), (act_id, "dataset")):

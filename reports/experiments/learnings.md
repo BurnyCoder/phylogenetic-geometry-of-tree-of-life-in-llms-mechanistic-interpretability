@@ -43,3 +43,20 @@ Running log of what was learned from the literature, from errors, and from the e
 
 ## From the pilot (Pythia-410m)
 - **The stage-1a checks C1, C2, C3 and C3b all pass at layer 0 (token embeddings).** At layer 0 the last-name-token vector is the embedding of the head noun ("shark", "crab", "frog"). Species sharing a head noun are usually related, so lexical identity alone produces class purity, order purity and a short tree overlay. *Consequence:* the stage-1a checks cannot separate lexical from phylogenetic structure, and layer 0 must be reported as the lexical reference for every stage-1a effect size. The decisive test is H1, whose triplets are head-noun-disjoint. C3b (within-stratum shuffle) was added after the pilot to separate "tree" from "clusters" (deviation 10).
+
+## From stages 3–6 and the release
+- **A permutation-style test against n random controls cannot give p < 1/(n+1).**
+  - Stage 3 first compared the probe subspace with 20 and 10 random subspaces, so the smallest possible p-values were 0.048 and 0.091.
+  - The registered Holm family of 2 needs p ≤ 0.025, so the test could never succeed whatever the data.
+  - *Lesson:* before running a rank test, compute its p-value floor against the corrected threshold.
+  - Fixed before the rerun, with 99 subspaces (deviation 19).
+- **Compare like with like in off-target checks.**
+  - The no-edit loss was token-weighted over 20 sentences, while the edited losses were unweighted means over the first 10. That apparent effect was an artifact.
+  - *Lesson:* compute baseline and intervention with the same function, and pass the edit as an argument (a unit test now checks that an identity edit reproduces the baseline exactly).
+- **Recompute controls on the same perturbed draw** (stage 6). Comparing marginal spreads overstates uncertainty about the model-vs-control gap; the paired margin is the quantity of interest.
+- **The prompt barely matters with centering and a last-token readout.** Even a single template reproduces the main TA_within (stage 6). Species composition is the main source of variance, which is why the family-block bootstrap is the right CI.
+- **Hugging Face token location.**
+  - With `HF_HOME` moved to D:, `huggingface_hub` looks for the token under `HF_HOME`, but `hf auth login` had stored it in `~/.cache/huggingface/token`, which caused a 401 on upload.
+  - The release code falls back to the default token path. The token is never logged or copied.
+- **API drift.** `HfApi.upload_large_folder` no longer exists in huggingface_hub 2.4; `upload_folder` now splits large folders into several commits and resumes when re-run.
+- **Generated text blocks keep docs honest.** The README and summary headline tables are injected by the `report` phase between markers, so no hand-typed number can go stale.
