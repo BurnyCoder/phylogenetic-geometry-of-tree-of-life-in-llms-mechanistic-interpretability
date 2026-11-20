@@ -1,0 +1,47 @@
+{
+  "min_detectable_ta_within_80pct_power": 0.3860947169338479,
+  "curve": [
+    {
+      "signal": 0.0,
+      "ta_within_mean": 0.32335347448087315,
+      "ta_within_sd": 0.019300222550094753,
+      "power": 0.0
+    },
+    {
+      "signal": 0.05,
+      "ta_within_mean": 0.3313059557565964,
+      "ta_within_sd": 0.027523706141861323,
+      "power": 0.1
+    },
+    {
+      "signal": 0.1,
+      "ta_within_mean": 0.3366549382197432,
+      "ta_within_sd": 0.018454265643685602,
+      "power": 0.025
+    },
+    {
+      "signal": 0.15,
+      "ta_within_mean": 0.3477341226568825,
+      "ta_within_sd": 0.021125970369633595,
+      "power": 0.2
+    },
+    {
+      "signal": 0.2,
+      "ta_within_mean": 0.35842169756777464,
+      "ta_within_sd": 0.02008029233686144,
+      "power": 0.275
+    },
+    {
+      "signal": 0.3,
+      "ta_within_mean": 0.3860947169338479,
+      "ta_within_sd": 0.021109690650794356,
+      "power": 0.8
+    },
+    {
+      "signal": 0.5,
+      "ta_within_mean": 0.4721705733694699,
+      "ta_within_sd": 0.02176563948687336,
+      "power": 1.0
+    }
+  ]
+}
