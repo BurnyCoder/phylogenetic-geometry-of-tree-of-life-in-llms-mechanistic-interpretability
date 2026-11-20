@@ -360,6 +360,18 @@ def phase_upload(cfg: RunConfig) -> None:
     upload_release(cfg)
 
 
+def phase_viz_data(cfg: RunConfig) -> None:
+    """Compact data for the interactive figures (distance percentiles, 2-D PCA, neighbours); CPU only.
+    Layers: the confirmatory modal layer (stage 1b) and the late layer of the habitat axis (Addendum A)."""
+    from phylogeo.viz.viz_data import build_viz_data
+
+    L = int(json.loads((RESULTS_DIR / cfg.name / "stage1b" / "results.json").read_text())["H1"]["modal_layer"])
+    eco = RESULTS_DIR / cfg.name / "eco" / "results.json"
+    layers = [L] + ([int(json.loads(eco.read_text())["layer"])] if eco.exists() else [])
+    build_viz_data(cfg.name, [cfg.extra.get("random_init_run", "qwen35_2b_random"), "pythia410m_step0"], layers,
+                   out_dir(cfg.name, "viz"), seed=cfg.seed)
+
+
 def phase_site(cfg: RunConfig) -> None:
     """Build the static GitHub Pages explorer in site/ from results/."""
     from phylogeo.site import build_site

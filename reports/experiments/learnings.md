@@ -79,3 +79,12 @@ Running log of what was learned from the literature, from errors, and from the e
 - **Label results by content, not by storage key.** A report labelled whatever sat under `C_abl` as "final", which published superseded numbers as final on the public site.
 - **Registered corrections must exist in code.** The BH-FDR correction was registered and advertised in the README but never implemented. *Lesson:* grep the code for each registered statistical procedure before writing it up.
 - **Cosine distance depends on the origin.** The reviewer found that residualizing covariates without re-centring made H1 look fragile. *Lesson:* re-centre after any linear adjustment before using cosine distances.
+
+## From the visualization pass (2026-11-20)
+- **Define a figure once; export it twice.**
+  - Each chart is one Plotly figure. The site embeds it interactively, and kaleido exports a PNG of it for the README, where GitHub renders no JavaScript.
+  - Verdict badges are computed from the results files, so a label cannot disagree with its chart.
+- **Sparse bins dominate a line chart.** In the depth profile, the "same genus" level had only 3 triplets, yet its drop to 0 was the most visible feature. Levels with fewer than 30 triplets are now omitted, and every point shows its n on hover.
+- **Use depth-first order for distance heatmaps.** `RefTree.preorder` is breadth-first, so it interleaves clades. Leaves have to be taken in depth-first order for clades to appear as blocks, and a unit test checks this.
+- **A read-only folder breaks `uv sync` on Windows.** A read-only attribute on `phylogeo-0.1.0.dist-info` made uv fail with "Access is denied" and drop the editable install. No process was holding the folder. `attrib -R` on that folder fixed it.
+

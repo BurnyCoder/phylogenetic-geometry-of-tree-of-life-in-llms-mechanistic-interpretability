@@ -1,5 +1,16 @@
 # Progress
 
+## 2026-11-20 17:30: interactive figures in the README and on the site
+
+- **17 labelled figures**, each with a verdict computed from the results files:
+  - *ground truth vs observed:* taxonomy sunburst, distance heatmaps in tree order, PCA against the Brownian-tree expectation;
+  - *positive:* H1 forest, layer profile, neighbour relatedness, scale and training dynamics, sensitivity;
+  - *mixed:* per-stratum, depth profile, causal, habitat;
+  - *negative:* secondary vs untrained, conflict triplets, flat probe, treeness;
+  - *output examples:* a neighbour grid.
+- **Where they appear.** The site shows them interactively, plus an explorer of the nearest species for all 400 species. The README shows PNGs in a new *Visual summary* section near the top, each linking to its interactive card.
+- **Pipeline.** A new `viz_data` phase derives compact data from the activations on the CPU.
+
 ## 2026-11-20 16:55: all stages complete; stage-3 causal rerun finished
 
 **Done since 12:20**
