@@ -268,6 +268,38 @@ def run_stage1b(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir,
     expl = {"nuisance_discordant": {"n_triplets": int(nuis.sum()),
                                     "ta_modal": float(model_res[main]["ta_nuisance_discordant_by_layer"][modal[main]])},
             "stratum_centered": model_res[main]["stratum_centered"]}
+    # Post hoc (final review round 1; labelled exploratory): compare the model with the untrained
+    # controls on the secondary subsets, on lexically neutral triplets (character 3-grams have no
+    # unique closest pair), and per stratum, all with the paired family-block bootstrap.
+    untrained = [r for r in required_models if r in D_by_run]
+    c3 = char3
+    d1, d2, d3 = c3[trip.a, trip.b], c3[trip.a, trip.c], c3[trip.b, trip.c]
+    mn = np.minimum(np.minimum(d1, d2), d3)
+    char3_tie = within & (((d1 == mn).astype(int) + (d2 == mn) + (d3 == mn)) > 1)
+    Ds_cmp = [Dm] + [D_by_run[r][modal[r]] for r in untrained]
+
+    def paired(mask, tag):
+        bo = clade_bootstrap_ta(Ds_cmp, trip, mask, fam, tree, cfg.n_boot, _rng(cfg, f"posthoc_{tag}"))
+        rec = {"n_triplets": int(mask.sum()), main: float(ta(Dm, trip, mask))}
+        for i, r in enumerate(untrained, start=1):
+            rec[r] = float(ta(Ds_cmp[i], trip, mask))
+            rec[f"diff_ci95_vs_{r}"] = np.nanpercentile(bo[0] - bo[i], [2.5, 97.5]).tolist()
+        rec[f"{main}_ci95"] = np.nanpercentile(bo[0], [2.5, 97.5]).tolist()
+        return rec
+
+    expl["posthoc_vs_untrained"] = {"S2_within_order": paired(in_order, "S2"), "S3_lexical_discordant": paired(s3, "S3"),
+                                    "S4_cooccurrence_discordant": paired(s4, "S4"),
+                                    "char3_tie_lexically_neutral": paired(char3_tie, "char3tie")}
+    expl["per_stratum_ci95"] = {}
+    for s_ in np.unique(strata):
+        m_ = within & (strata[trip.a] == s_)
+        if m_.any():
+            bo = clade_bootstrap_ta([Dm], trip, m_, fam, tree, cfg.n_boot, _rng(cfg, f"stratum_{s_}"))
+            expl["per_stratum_ci95"][s_] = {"ta": float(ta(Dm, trip, m_)), "ci95": np.nanpercentile(bo[0], [2.5, 97.5]).tolist(),
+                                           "n_nodes": int(len(np.unique(trip.node[m_])))}
+    strongest = max(required, key=lambda k: point.get(k, -1))
+    expl["margin_vs_strongest_required"] = {"control": strongest, "margin": point[main] - point[strongest],
+                                            "diff_ci95": diffs.get(strongest)}
     # Depth profile (descriptive) and per-stratum TA.
     levels = ["none"] + RANK_ORDER
     depth = {name: {lv: (float(ta(Dx, trip, shared == lv)) if (shared == lv).any() else None) for lv in levels}
@@ -344,6 +376,17 @@ def run_conflict(cfg: RunConfig, load_conflict, layer_distances, act_dir, out_di
                       "binom_p_two_sided": float(binomtest(k, len(ok), 0.5).pvalue),
                       "accuracy_by_layer": [sum(x[r][ll] for x in ok) / len(ok) for ll in range(D.shape[0])]}
         log.info("conflict %s: %d/%d choose the tree-closer partner (layer %d)", r, k, len(ok), l)
+    # Does the trained model differ from the controls on the same triplets? Exact two-sided McNemar
+    # on the discordant triplets (final review M4; triplets share anchors, so this is descriptive).
+    lm = summary[cfg.name]["layer"]
+    for r in reps:
+        if r == cfg.name:
+            continue
+        lr_ = summary[r]["layer"]
+        b_ = sum(x[cfg.name][lm] == 1 and x[r][lr_] == 0 for x in ok)
+        c_ = sum(x[cfg.name][lm] == 0 and x[r][lr_] == 1 for x in ok)
+        summary[r]["mcnemar_vs_main"] = {"main_only": int(b_), "control_only": int(c_),
+                                         "p_two_sided": float(binomtest(b_, b_ + c_, 0.5).pvalue) if b_ + c_ else 1.0}
     out = {"summary": summary, "triplets": rows}
     write_json(out_dir(cfg.name, "conflict") / "conflict.json", out)
     return out

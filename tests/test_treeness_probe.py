@@ -76,3 +76,26 @@ def test_probe_metrics_recover_planted_tree(tree30, rng, metric):
                  groups=np.arange(30) // 10)
     assert r["test_test_pearson"][0] > 0.3
     assert "test_test_within_group_spearman" in r
+
+
+def test_per_stratum_spearman_not_inflated_by_group_means():
+    """A predictor that only knows each group's mean distance has ~0 per-stratum Spearman, while a pooled
+    within-group Spearman is inflated when groups differ in typical distance (final review M2)."""
+    from scipy.stats import spearmanr
+
+    from phylogeo.probes.flat import per_stratum_spearman
+
+    rng = np.random.default_rng(0)
+    g = np.repeat([0, 1, 2], 10)
+    scale = np.array([1.0, 5.0, 10.0])[g]
+    Dt = rng.uniform(0, 1, (30, 30)) * scale[:, None]
+    Dt = (Dt + Dt.T) / 2
+    Dh = np.zeros_like(Dt)
+    for k in range(3):
+        m = g == k
+        Dh[np.ix_(m, m)] = Dt[np.ix_(m, m)].mean() + rng.normal(0, 1e-6, (10, 10))
+    same = (g[:, None] == g[None, :])[np.triu_indices(30, 1)]
+    pooled = spearmanr(Dh[np.triu_indices(30, 1)][same], Dt[np.triu_indices(30, 1)][same]).statistic
+    assert pooled > 0.5
+    assert abs(per_stratum_spearman(Dh, Dt, g)) < 0.2
+    assert per_stratum_spearman(Dt, Dt, g) > 0.99

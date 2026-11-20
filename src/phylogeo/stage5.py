@@ -67,7 +67,7 @@ def summarize(write_json) -> dict:
     out = {"runs": runs, "reference_ta_within": ref}
     (RESULTS_DIR / "stage5").mkdir(exist_ok=True)
     write_json(RESULTS_DIR / "stage5" / "summary.json", out)
-    final = [r for r in runs if r["step"] is None or r["step"] == 143000]
+    final = [r for r in runs if r["step"] is None]  # checkpoints (incl. step 143000) only in the dynamics plot
     fig, ax = plt.subplots(figsize=(6.5, 4))
     for fam, mk, col in (("Qwen", "o", "#2a78d6"), ("pythia", "s", "#eb6834")):
         rs = sorted([r for r in final if fam.lower() in r["model_id"].lower()], key=lambda r: r["params"] or 0)

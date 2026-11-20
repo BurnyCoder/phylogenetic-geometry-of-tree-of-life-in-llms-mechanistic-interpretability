@@ -47,7 +47,7 @@ def run_stage2(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
     from phylogeo.baselines import glove_vectors
     from phylogeo.extract import load_activations
     from phylogeo.geometry import angular_distance, cosine_distance, knn_geodesic, species_vectors
-    from phylogeo.probes.flat import cv_probe
+    from phylogeo.probes.flat import cv_probe, per_stratum_spearman
     from phylogeo.stats.mantel import mantel_r
     from phylogeo.stats.triplets import distinct_mask, sample_triplets, ta, within_group_mask
     from phylogeo.treeness import delta_rel, nj_newick, rf_normalized
@@ -129,7 +129,7 @@ def run_stage2(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
     probe = {}
 
     def run(tag, X, D):
-        out = [cv_probe(X, D, fam, k=10, seed=s, tracker=tracker, tag=f"{tag}/seed{s}") for s in seeds]
+        out = [cv_probe(X, D, fam, k=10, seed=s, tracker=tracker, tag=f"{tag}/seed{s}", groups=strata) for s in seeds]
         probe[tag] = {key: (float(np.mean([o[key][0] for o in out])), float(np.std([o[key][0] for o in out])))
                       for key in out[0]}
         log.info("probe %s: test-test r = %.3f ± %.3f", tag, *probe[tag]["test_test_pearson"])
@@ -145,9 +145,34 @@ def run_stage2(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
         run("random_init", Vr[lr.get("modal_layer", layer)], P)
     gv, _ = glove_vectors(df["common_name"].tolist())
     run("glove", gv, P)
+    # Class-only control (final review round 1, M1): each species at its stratum centroid plus
+    # matched noise, i.e. coarse-group structure with no within-group tree. Own random stream, so
+    # the earlier components are unchanged.
+    rng_cb = np.random.default_rng([cfg.seed, 7])
+    run("class_blob", matched_class_blob(V, strata, rng_cb), P)
     if tracker is not None:
         trackio.finish()
     probe["selectivity_test_test"] = probe["model"]["test_test_pearson"][0] - probe["shuffled_tree"]["test_test_pearson"][0]
+    # References without any probe: a predictor that knows only the strata (mean path length of each
+    # stratum pair; all pairs) and the raw angular distances (per-stratum Spearman, all species).
+    si = np.unique(strata, return_inverse=True)[1]
+    pred = np.zeros_like(P)
+    for a_ in np.unique(si):
+        for b_ in np.unique(si):
+            m_ = (si[:, None] == a_) & (si[None, :] == b_)
+            np.fill_diagonal(m_, False)
+            if m_.any():
+                pred[m_] = P[m_].mean()
+    iu = np.triu_indices(len(P), 1)
+    probe["class_only_predictor_pearson_all_pairs"] = float(np.corrcoef(pred[iu], P[iu])[0, 1])
+    probe["raw_angular_within_stratum_spearman_all_species"] = per_stratum_spearman(A, P, strata)
     res["probe"] = probe
+    # NJ against a class-only null (review S9): NJ trees from class-blob inputs (own random stream).
+    rng_nj = np.random.default_rng([cfg.seed, 8])
+    rf_blob = [rf_normalized(nj_newick(angular_distance(matched_class_blob(V, strata, rng_nj)), labels), ref)
+               for _ in range(20)]
+    res["nj_rf"].update({"class_blob_null_mean": float(np.mean(rf_blob)), "class_blob_null_sd": float(np.std(rf_blob)),
+                         "class_blob_p": float((1 + np.sum(np.array(rf_blob) <= rf_model)) / 21)})
+    log.info("NJ RF vs class-blob null: %s", res["nj_rf"])
     write_json(od / "results.json", res)
     return res

@@ -86,6 +86,13 @@ def run_stage4(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
         add("scientific binomials (genus-split triplets)", Ds, m, "common-name TA on the same triplets in note")
         res["variants"]["scientific binomials (genus-split triplets)"]["common_names_same_triplets_modal"] = \
             float(ta(D_main[L0], trip, m))
+        # Fairer comparator (final review S5): the same genus-split triplets made head-noun-disjoint,
+        # for both name forms (common names otherwise get easy shared-head-noun triplets).
+        mh = m & distinct_mask(trip, df["head_noun"].to_numpy())
+        res["variants"]["scientific binomials (genus-split triplets)"].update({
+            "head_disjoint_binomial_modal": float(ta(Ds[L0], trip, mh)),
+            "head_disjoint_binomial_max": float(np.nanmax(np.atleast_1d(ta(Ds, trip, mh)))),
+            "head_disjoint_common_names_modal": float(ta(D_main[L0], trip, mh)), "n_head_disjoint": int(mh.sum())})
         del Xs
 
     # Polysemous names included: combined set and Open Tree tree.
@@ -127,6 +134,12 @@ def run_stage4(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
     perm = _rng(cfg, "probe_shuffle").permutation(len(df))
     r = [cv_probe(V, P[np.ix_(perm, perm)], fam, k=10, seed=s, groups=strata) for s in range(3)]
     probes["angular_k10_shuffled_tree"] = {key: float(np.mean([x[key][0] for x in r])) for key in r[0]}
+    # Class-only control (final review M1/M2): coarse-group structure without a within-group tree.
+    from phylogeo.stage2 import matched_class_blob
+
+    B = matched_class_blob(V, strata, _rng(cfg, "probe_class_blob"))
+    r = [cv_probe(B, P, fam, k=10, seed=s, groups=strata) for s in range(3)]
+    probes["angular_k10_class_blob"] = {key: float(np.mean([x[key][0] for x in r])) for key in r[0]}
     res["probe"] = probes
 
     # kNN K sweep for the geodesic analysis at the modal layer.

@@ -99,6 +99,27 @@ def family_folds(families: np.ndarray, n_folds: int, rng: np.random.Generator) -
     return [fid == i for i in range(n_folds)]
 
 
+def per_stratum_spearman(Dh: np.ndarray, Dt: np.ndarray, groups: np.ndarray, min_n: int = 3) -> float:
+    """Mean over groups of the Spearman correlation between predicted and tree distance on
+    pairs *inside* each group (groups with >= ``min_n`` items; NaN groups skipped).
+
+    Unlike one Spearman over all pooled within-group pairs, this cannot be inflated by
+    groups differing in their typical within-group distance (a Simpson-type artifact that
+    a group-only predictor already exploits; final review round 1, M2).
+    """
+    g = np.asarray(groups)
+    vals = []
+    for s in np.unique(g):
+        m = g == s
+        if m.sum() < min_n:
+            continue
+        t = np.triu_indices(int(m.sum()), 1)
+        r = spearmanr(Dh[np.ix_(m, m)][t], Dt[np.ix_(m, m)][t]).statistic
+        if np.isfinite(r):
+            vals.append(r)
+    return float(np.mean(vals)) if vals else float("nan")
+
+
 def cv_probe(V: np.ndarray, D_tree: np.ndarray, families: np.ndarray, k: int = 10, n_folds: int = 5,
              n_pca: int = 100, steps: int = 2000, seed: int = 0, tracker=None, tag: str = "probe",
              metric: str = "angular", groups: np.ndarray | None = None) -> dict:
@@ -111,7 +132,8 @@ def cv_probe(V: np.ndarray, D_tree: np.ndarray, families: np.ndarray, k: int = 1
     scale = np.pi / D_tree.max()
     res = {"test_test_pearson": [], "test_test_spearman": [], "train_test_pearson": [], "train_train_pearson": []}
     if groups is not None:
-        res["test_test_within_group_spearman"] = []
+        res["test_test_within_group_spearman"] = []  # pooled over groups (kept for continuity; Simpson-prone)
+        res["test_test_within_stratum_spearman"] = []  # mean of per-group Spearman (headline metric)
     for fi, te in enumerate(family_folds(families, n_folds, rng)):
         tr = ~te
         pca = PCA(n_components=min(n_pca, tr.sum() - 1), random_state=seed).fit(V[tr])
@@ -131,4 +153,6 @@ def cv_probe(V: np.ndarray, D_tree: np.ndarray, families: np.ndarray, k: int = 1
             g = np.asarray(groups)[te]
             same = (g[:, None] == g[None, :])[tt]
             res["test_test_within_group_spearman"].append(float(spearmanr(a[same], b[same]).statistic))
+            res["test_test_within_stratum_spearman"].append(
+                per_stratum_spearman(Dh[np.ix_(te, te)], D_tree[np.ix_(te, te)], g))
     return {k_: (float(np.mean(v)), float(np.std(v))) for k_, v in res.items()}
