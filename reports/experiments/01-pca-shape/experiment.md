@@ -17,7 +17,7 @@
   uv run python -m phylogeo.run --config configs/qwen35_2b.yaml --phases pca
   ```
 - **Outputs:** `results/qwen35_2b/stage1a/`. Interactive 3D: `pca3d.html` (colored, tree overlay, layer slider) and `pca3d_uncolored.html`.
-- **Animated view (added 2026-11-20, display only).** The site's 3-D player and `reports/figures/viz/pca3d.gif` show the same top-3 PCs at every layer. Consecutive layers are rotated onto each other by orthogonal Procrustes, so axes do not flip, and each layer is scaled to unit RMS radius. This changes no statistic. Data: `results/qwen35_2b/viz/pca3d.json` (phase `viz_data`).
+- **Animated view (added 2026-11-20, display only).** The site's 3-D player and `reports/figures/viz/pca3d.gif` show the same top-3 PCs at every layer. The trained model (left) is shown next to its random-init twin (right), at the same layer. Consecutive layers are rotated onto each other by orthogonal Procrustes, so axes do not flip. Each layer is scaled so the median species radius is 1; the RMS radius was not used because a few outlier names dominate it in the untrained network. Both panels share a per-layer box that holds every trained-model species, and the untrained network's names outside it (about 6% in most layers) are counted in its title. This changes no statistic. Data: `results/qwen35_2b/viz/pca3d.json` (phase `viz_data`).
 
 ## Anti-bias procedure
 1. Look only at the uncolored grids (`grid_uncolored_pc12.png`, `grid_uncolored_pc23.png`) and describe the shape. **Description 1** below is written before any colored plot is opened.

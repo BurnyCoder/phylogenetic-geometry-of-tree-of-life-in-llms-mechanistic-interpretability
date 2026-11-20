@@ -1,5 +1,11 @@
 # Progress
 
+## 2026-11-20 18:10: 3-D view now trained vs random init, side by side
+
+- **Player.** Trained Qwen3.5-2B (left) and random-init Qwen3.5-2B (right) are shown at the same layer, with one clock and linked cameras.
+- **Fair comparison.** Each layer is scaled by its median species radius, and both panels share a per-layer box. The untrained network's outlier names outside the box are counted in its title.
+- **README.** The GIF is now side by side.
+
 ## 2026-11-20 17:50: animated 3-D view of the top-3 principal components
 
 - **The player.** The site's player shows every layer:
