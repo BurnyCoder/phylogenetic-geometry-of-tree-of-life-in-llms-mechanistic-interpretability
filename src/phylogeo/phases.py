@@ -75,6 +75,11 @@ def layer_distances(run: str, name_set: str = "species", readout: str = "last", 
     from phylogeo.geometry import cosine_distance, species_vectors, zscore_dims
 
     X = load_activations(act_dir(run, name_set), readout)
+    # Guard: stored activations must belong to the current frozen name list (review finding).
+    stored = (act_dir(run, name_set) / "names.txt").read_text(encoding="utf-8").splitlines()
+    expected = names_and_templates(name_set)[0]
+    if stored != expected:
+        raise ValueError(f"activations of {run}/{name_set} do not match the current name list; re-extract")
     V = species_vectors(X, center=(variant != "raw"))
     if variant == "zscore":
         V = zscore_dims(V)
@@ -133,7 +138,7 @@ def phase_pca(cfg: RunConfig) -> None:
     from phylogeo.geometry import species_vectors
     from phylogeo.simulate import brownian_tree
     from phylogeo.viz.pca import classify_h1a, h1a_checks, knn_purity, pca_top3
-    from phylogeo.viz.plots import circle_png, pca_2d_png, pca_3d_html, pca_layer_grid_png
+    from phylogeo.viz.plots import circle_png, pca_2d_png, pca_3d_html, pca_layer_grid_png, pca_spotlight_png
 
     rng = np.random.default_rng(cfg.seed)
     n_perm = int(cfg.extra.get("pca_n_perm", 1000))
@@ -191,6 +196,10 @@ def phase_pca(cfg: RunConfig) -> None:
     # 2D panels for the layer with the strongest tree-overlay effect and the middle/last layers.
     best = int(np.argmin([c["C3_overlay_length"] / c["C3_null_mean"] for c in checks]))
     for l in sorted({best, L // 2, L - 1}):
+        pca_spotlight_png(coords[l], evrs[l], strata, od / f"spotlight_layer{l}_pc12.png",
+                          f"{title} — layer {l}, PC1–PC2, one stratum highlighted per panel")
+        pca_spotlight_png(coords[l], evrs[l], strata, od / f"spotlight_layer{l}_pc23.png",
+                          f"{title} — layer {l}, PC2–PC3, one stratum highlighted per panel", dims=(1, 2))
         pca_2d_png(coords[l], evrs[l], strata, tree, od / f"pca2d_layer{l}.png", f"{title} — layer {l}")
         pca_2d_png(coords[l], evrs[l], strata, None, od / f"pca2d_layer{l}_uncolored.png",
                    f"{title} — layer {l} (uncolored)", colored=False)
@@ -293,3 +302,10 @@ def phase_stage2(cfg: RunConfig) -> None:
     from phylogeo.stage2 import run_stage2
 
     run_stage2(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_stage3(cfg: RunConfig) -> None:
+    """Stage 3: behavioral judgments and causal ablation / interchange of the probe subspace."""
+    from phylogeo.stage3 import run_stage3
+
+    run_stage3(cfg, load_species, load_conflict, act_dir, out_dir, write_json)

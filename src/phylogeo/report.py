@@ -81,7 +81,8 @@ def stage1b_tables(run: str) -> str:
         if k == "S1":
             stat, val = "Mantel Spearman (cosine vs path length) at modal layer", v["mantel_spearman_pathlen_modal"]
         elif k == "S5":
-            stat, val = "pooled within-rank Spearman (distance vs TimeTree age)", v["pooled_spearman"]
+            stat = "pooled within-rank partial Spearman (distance vs TimeTree age, controlling LCA depth)"
+            val = v.get("pooled_partial_spearman", v.get("pooled_spearman"))
         else:
             stat, val = f"TA at modal layer (n = {v['n_triplets']} triplets)", v["ta_modal"]
         out.append(f"| {k} | {stat} | {val:.3f} | {p_fmt(v['maxT_p'])} | {p_fmt(v['holm_p'])} |")

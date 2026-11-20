@@ -72,11 +72,13 @@ def load_glove():
     return {w: i for i, w in enumerate(vocab)}, W
 
 
-def glove_vectors(names: list[str]) -> tuple[np.ndarray, float]:
+def glove_vectors(names: list[str]) -> tuple[np.ndarray, np.ndarray]:
     """Mean GloVe vector of each name's words (lowercased, hyphens/apostrophes split).
 
-    Returns (vectors [n, 300], fraction of names with at least one known word).
-    Names with no known word get the mean vector of all names (uninformative).
+    Returns (vectors [n, 300], boolean mask of names with at least one known word).
+    Names with no known word get the mean vector of all names as a placeholder;
+    callers must exclude triplets involving them (``mask``), since their distances
+    are float noise around the centre (review finding, minor).
     """
     vocab, W = load_glove()
     vecs, ok = [], []
@@ -89,4 +91,10 @@ def glove_vectors(names: list[str]) -> tuple[np.ndarray, float]:
     fill = np.nanmean(V, axis=0)
     V[~np.array(ok)] = fill
     log.info("GloVe coverage: %d / %d names", int(np.sum(ok)), len(names))
-    return V, float(np.mean(ok))
+    return V, np.array(ok)
+
+
+def scalar_distance(x: np.ndarray) -> np.ndarray:
+    """|x_i - x_j| for a 1-D nuisance variable (token count, log popularity)."""
+    x = np.asarray(x, dtype=float)
+    return np.abs(x[:, None] - x[None, :])

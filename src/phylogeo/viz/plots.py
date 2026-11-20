@@ -18,7 +18,9 @@ import numpy as np
 import plotly.graph_objects as go
 
 from phylogeo.data.tree import RefTree
-from phylogeo.viz.pca import STRATUM_COLORS, overlay_positions
+from phylogeo.viz.pca import STRATUM_STYLE, overlay_positions
+
+GRAY = "#d6d5d0"  # recessive context color for non-highlighted points
 
 
 def _edge_xyz(tree: RefTree, coords: np.ndarray) -> tuple[list, list, list]:
@@ -46,7 +48,7 @@ def pca_3d_html(coords_by_layer: list[np.ndarray], evr_by_layer: list[np.ndarray
     hidden by default; toggle in the legend).
     """
     strata = np.asarray(strata)
-    groups = list(STRATUM_COLORS) if colored else ["all"]
+    groups = list(STRATUM_STYLE) if colored else ["all"]
 
     def frame_traces(l: int):
         c = coords_by_layer[l]
@@ -57,7 +59,8 @@ def pca_3d_html(coords_by_layer: list[np.ndarray], evr_by_layer: list[np.ndarray
                 continue
             tr.append(go.Scatter3d(x=c[m, 0], y=c[m, 1], z=c[m, 2], mode="markers", name=g,
                                    text=[names[i] for i in np.where(m)[0]], hoverinfo="text+name",
-                                   marker=dict(size=4, color=STRATUM_COLORS[g] if colored else "#555")))
+                                   marker=dict(size=4, color=STRATUM_STYLE[g][0] if colored else "#555",
+                                               symbol=STRATUM_STYLE[g][2] if colored else "circle")))
         if tree is not None:
             xs, ys, zs = _edge_xyz(tree, c)
             tr.append(go.Scatter3d(x=xs, y=ys, z=zs, mode="lines", name="reference tree",
@@ -98,10 +101,11 @@ def pca_2d_png(coords: np.ndarray, evr: np.ndarray, strata: np.ndarray, tree: Re
                     p = tree.parent[v]
                     ax.plot([pos[p, a], pos[v, a]], [pos[p, b], pos[v, b]], color="0.7", lw=0.4, zorder=1)
         if colored:
-            for g, col in STRATUM_COLORS.items():
+            for g, (col, mk, _) in STRATUM_STYLE.items():
                 m = strata == g
                 if m.any():
-                    ax.scatter(coords[m, a], coords[m, b], s=10, color=col, label=g, zorder=2)
+                    ax.scatter(coords[m, a], coords[m, b], s=14, color=col, marker=mk, label=g, zorder=2,
+                               edgecolors="white", linewidths=0.3)
         else:
             ax.scatter(coords[:, a], coords[:, b], s=10, color="0.3", zorder=2)
         ax.set_xlabel(f"PC{a + 1} ({evr[a]:.1%} var)")
@@ -130,10 +134,10 @@ def pca_layer_grid_png(coords_by_layer: list[np.ndarray], evr_by_layer: list[np.
             continue
         c = coords_by_layer[l]
         if colored:
-            for g, col in STRATUM_COLORS.items():
+            for g, (col, mk, _) in STRATUM_STYLE.items():
                 m = strata == g
                 if m.any():
-                    ax.scatter(c[m, a], c[m, b], s=3, color=col, label=g)
+                    ax.scatter(c[m, a], c[m, b], s=6, color=col, marker=mk, label=g, linewidths=0)
         else:
             ax.scatter(c[:, a], c[:, b], s=3, color="0.3")
         ev = evr_by_layer[l]
@@ -183,4 +187,34 @@ def line_by_layer_png(series: dict[str, np.ndarray], path: Path, title: str, yla
     fig.tight_layout()
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=150)
+    plt.close(fig)
+
+
+def pca_spotlight_png(coords: np.ndarray, evr: np.ndarray, strata: np.ndarray, path: Path, title: str,
+                      dims=(0, 1)) -> None:
+    """Small multiples: one panel per stratum, that stratum highlighted, all others gray.
+
+    Identity is carried by the panel title (not by color), which satisfies the
+    dataviz rule for >3 categories in a scatter (facet instead of more hues).
+    """
+    strata = np.asarray(strata)
+    groups = [g for g in STRATUM_STYLE if (strata == g).any()]
+    ncol = 5
+    nrow = int(np.ceil(len(groups) / ncol))
+    a, b = dims
+    fig, axes = plt.subplots(nrow, ncol, figsize=(3.0 * ncol, 2.8 * nrow), sharex=True, sharey=True)
+    for ax, g in zip(axes.ravel(), groups):
+        m = strata == g
+        ax.scatter(coords[~m, a], coords[~m, b], s=4, color=GRAY, linewidths=0)
+        ax.scatter(coords[m, a], coords[m, b], s=10, color=STRATUM_STYLE["mammals"][0], linewidths=0)
+        ax.set_title(f"{g} (n={int(m.sum())})", fontsize=9)
+        ax.set_xticks([]); ax.set_yticks([])
+    for ax in axes.ravel()[len(groups):]:
+        ax.axis("off")
+    fig.supxlabel(f"PC{a + 1} ({evr[a]:.1%} var)", fontsize=9)
+    fig.supylabel(f"PC{b + 1} ({evr[b]:.1%} var)", fontsize=9)
+    fig.suptitle(title, fontsize=10)
+    fig.tight_layout()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path, dpi=130)
     plt.close(fig)
