@@ -110,3 +110,27 @@ def test_batched_candidate_scoring_matches_sequential(tiny_qwen):
     s = torch.stack(seq)
     want = (s - torch.logsumexp(s, 0)).numpy()
     assert np.allclose(got, want, atol=1e-4)
+
+
+def test_rank_p_floor_and_ties():
+    """Rank p-value counts ties against the probe and cannot go below 1/(n+1)."""
+    from phylogeo.stage3 import _rank_p
+
+    assert _rank_p(5.0, [1, 2, 3]) == 0.25  # above all 3 nulls -> floor 1/4
+    assert _rank_p(2.0, [1, 2, 3]) == 0.75  # tie counts as >=
+    assert _rank_p(0.0, [1, 2, 3]) == 1.0
+
+
+def test_neutral_loss_base_and_edit_use_same_computation(tiny_qwen):
+    """Deviation 19: an identity edit reproduces the no-edit loss exactly; an ablation changes it."""
+    from phylogeo.stage3 import _neutral_loss
+
+    def tok(s, return_tensors="pt"):  # toy tokenizer: characters -> ids in the tiny vocab
+        return {"input_ids": torch.tensor([[ord(c) % 1000 for c in s[:12]]])}
+
+    base = _neutral_loss(tok, tiny_qwen, device="cpu")
+    same = _neutral_loss(tok, tiny_qwen, 2, lambda n: (lambda h: h), device="cpu")
+    assert abs(base - same) < 1e-6
+    U = orthonormal(np.random.default_rng(0).normal(size=(3, 64)))
+    changed = _neutral_loss(tok, tiny_qwen, 2, lambda n: ablate_fn(U, np.ones(64), list(range(n))), device="cpu")
+    assert abs(base - changed) > 1e-6
