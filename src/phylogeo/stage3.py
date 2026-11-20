@@ -128,6 +128,9 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
     beh = np.array([triplet_judgment(tok, model, names[trip.a[i]], names[trip.b[i]], names[trip.c[i]]) for i in idx])
     from phylogeo.geometry import cosine_distance
 
+    from phylogeo.phases import check_names
+
+    check_names(cfg.name, "species")
     Vl = species_vectors(load_activations(act_dir(cfg.name, "species"), "last"))[layer]
     D = cosine_distance(Vl)
     rep = np.array([D[trip.a[i], trip.b[i]] < D[trip.a[i], trip.c[i]] for i in idx])

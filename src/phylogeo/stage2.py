@@ -67,6 +67,9 @@ def run_stage2(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
     res: dict = {"layer": layer}
 
     # 1. Geodesic vs angular, all layers, model and matched class-blob simulation.
+    from phylogeo.phases import check_names
+
+    check_names(cfg.name, "species")
     V_all = species_vectors(load_activations(act_dir(cfg.name, "species"), "last"))
     geo = {"angular_mantel": [], "geodesic_mantel": [], "angular_ta": [], "geodesic_ta": [], "k": [],
            "blob_gain_mantel": [], "blob_gain_ta": []}
@@ -136,6 +139,7 @@ def run_stage2(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
     run("shuffled_tree", V, P[np.ix_(perm, perm)])
     ctrl = cfg.extra.get("random_init_run")
     if ctrl and (act_dir(ctrl, "species") / "last.npy").exists():
+        check_names(ctrl, "species")
         Vr = species_vectors(load_activations(act_dir(ctrl, "species"), "last"))
         lr = json.loads((RESULTS_DIR / cfg.name / "stage1b" / "results.json").read_text())["models"].get(ctrl, {})
         run("random_init", Vr[lr.get("modal_layer", layer)], P)

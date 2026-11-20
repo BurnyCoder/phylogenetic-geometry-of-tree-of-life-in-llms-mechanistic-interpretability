@@ -69,6 +69,13 @@ def write_json(path: Path, obj) -> None:
     path.write_text(json.dumps(obj, indent=2, default=conv), encoding="utf-8")
 
 
+def check_names(run: str, name_set: str) -> None:
+    """Raise if stored activations were extracted for a different name list."""
+    stored = (act_dir(run, name_set) / "names.txt").read_text(encoding="utf-8").splitlines()
+    if stored != names_and_templates(name_set)[0]:
+        raise ValueError(f"activations of {run}/{name_set} do not match the current name list; re-extract")
+
+
 def layer_distances(run: str, name_set: str = "species", readout: str = "last", variant: str = "centered"):
     """[L, n, n] cosine distances for a run (variants: centered | raw | zscore)."""
     from phylogeo.extract import load_activations
@@ -146,6 +153,7 @@ def phase_pca(cfg: RunConfig) -> None:
     names = df["common_name"].tolist()
     strata = df["stratum"].to_numpy()
     od = out_dir(cfg.name, "stage1a")
+    check_names(cfg.name, "species")
     X = load_activations(act_dir(cfg.name, "species"), "last")
     V = species_vectors(X)  # [L, n, d]
     L = V.shape[0]
@@ -176,6 +184,7 @@ def phase_pca(cfg: RunConfig) -> None:
     ctrl_V = None
     ctrl = cfg.extra.get("random_init_run")
     if ctrl and (act_dir(ctrl, "species") / "last.npy").exists():
+        check_names(ctrl, "species")
         ctrl_V = species_vectors(load_activations(act_dir(ctrl, "species"), "last"))
     checks = []
     for l in range(L):
