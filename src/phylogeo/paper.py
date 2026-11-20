@@ -211,7 +211,7 @@ def build_paper() -> Path:
         "Flat-subspace probe (k = 10), 5-fold family holdout, 5 seeds (mean ± SD).")
 
     # --- Optional sections ------------------------------------------------------------------------------
-    stage3_txt = ""
+    stage3_txt = causal_abs = causal_disc = causal_concl = causal_lim = ""  # causal_* filled only when the class control exists
     if s3:
         bs, bc = s3["behavior_species_triplets"], s3["behavior_conflict"]
         stage3_txt = (f"\n== Behaviour and causal tests (stage 3)\n*Behaviour (exploratory).* Asked which of two animals is more "
@@ -234,16 +234,56 @@ def build_paper() -> Path:
                 f"{nr} variance-matched random subspaces: rank p {fp(ca['p_rank_vs_random'])}, Holm p {fp(hp['C_abl'])} "
                 f"(C-abl {sup(hp['C_abl'] < 0.05)}). The same ablation applied to every token of 20 neutral sentences changed "
                 f"next-token loss from {ca['neutral_loss_base']:.4f} to {ca['neutral_loss_probe_ablated']:.4f} (random subspaces: "
-                f"{ca['neutral_loss_random_ablated']:.4f}). Copying the subspace coordinates of species A into species B switched "
+                f"{ca['neutral_loss_random_ablated']:.4f}). Copying the subspace coordinates of species A into species B (at its last name token) switched "
                 f"the predicted class to A's in {100 * cw['switch_rate_probe']:.1f}% of {cw['n_pairs']} pairs, against "
                 f"{100 * cw['switch_rate_no_edit']:.1f}% without an edit and a mean of "
                 f"{100 * sum(cw['switch_rate_random']) / len(cw['switch_rate_random']):.1f}% for random subspaces: rank p "
-                f"{fp(cw['p_rank_vs_random'])}, Holm p {fp(hp['C_swap'])} (C-swap {sup(hp['C_swap'] < 0.05)}).\n")
+                f"{fp(cw['p_rank_vs_random'])}, Holm p {fp(hp['C_swap'])} (C-swap {sup(hp['C_swap'] < 0.05)}). "
+                # How many random subspaces reach the probe's ablation drop explains a large rank p despite a small Wilcoxon p.
+                f"{sum(r >= ca['mean_drop_logp_probe'] for r in ca['random_mean_drops'])} of the {nr} random subspaces caused "
+                f"an ablation drop at least as large as the probe's (largest {f3(max(ca['random_mean_drops']))}); the secondary "
+                f"per-species Wilcoxon test against the mean random drop gives p {fp(ca['wilcoxon_p_probe_gt_random'])}.\n")
             if "C_abl_v1" in s3:
                 na1, ns1 = len(s3["C_abl_v1"]["random_mean_drops"]), len(s3["C_swap_v1"]["switch_rate_random"])
                 stage3_txt += (f"A first run used only {na1} and {ns1} random subspaces, whose rank-p floors "
                                f"({f3(1 / (na1 + 1))}, {f3(1 / (ns1 + 1))}) could not pass the Holm threshold; it was replaced by "
                                f"this run (deviation 19) and is kept in the repository.\n")
+            if "class_control" in s3:
+                # Deviation 20: the readout is the class word, so a class-only subspace is the control for phylogeny-specificity.
+                cc = s3["class_control"]
+                spec = cc["phylogeny_specific"]
+                stage3_txt += (
+                    f"\n*Class-only control (deviation 20).* Because the readout is the class word, passing these tests shows only "
+                    f"that the subspace carries class information the model uses. A probe of the same size trained on the "
+                    f"class-oracle distance (capturing {100 * cc['class_var_captured']:.1f}% of the variance) lowered log P(correct "
+                    f"class) by {f3(cc['mean_drop_logp_class'])} nats (rank p against the random subspaces "
+                    f"{fp(cc['p_rank_class_vs_random'])}) and switched answers in {100 * cc['switch_rate_class']:.1f}% of the pairs. "
+                    f"The phylogeny probe did not exceed it: one-sided Wilcoxon over species p {fp(cc['wilcoxon_p_probe_gt_class'])}; "
+                    f"exact McNemar over the same pairs ({cc['mcnemar_probe_only']} vs {cc['mcnemar_class_only']} discordant "
+                    f"pairs) p {fp(cc['mcnemar_p_probe_gt_class'])}. The registered rule for a phylogeny-specific causal role "
+                    f"(both p < 0.05) is {'met' if spec else 'not met'}.\n")
+                causal_abs = (f" Swapping the probe subspace between species switches the class answer more often than random "
+                              f"subspaces (Holm p {fp(hp['C_swap'])}; {100 * cw['switch_rate_probe']:.1f}% of pairs vs "
+                              f"{100 * cw['switch_rate_no_edit']:.1f}% unedited), ablating it does "
+                              f"{'' if hp['C_abl'] < 0.05 else 'not '}beat random subspaces (Holm p {fp(hp['C_abl'])}), and a "
+                              f"class-only subspace {'does worse' if spec else 'does as well'} on both, so "
+                              f"{'a phylogeny-specific causal role is supported' if spec else 'no phylogeny-specific causal role is shown'}.")
+                causal_disc = (f" (5) *Causal (interventions):* C-swap is {sup(hp['C_swap'] < 0.05)} (Holm p {fp(hp['C_swap'])}) "
+                               f"but the effect is small ({100 * cw['switch_rate_probe']:.1f}% of pairs switch, "
+                               f"{100 * cw['switch_rate_no_edit']:.1f}% without an edit); C-abl is {sup(hp['C_abl'] < 0.05)} "
+                               f"(Holm p {fp(hp['C_abl'])}). The phylogeny probe "
+                               f"{'beats' if spec else 'does not beat'} a class-only subspace (ablation p "
+                               f"{fp(cc['wilcoxon_p_probe_gt_class'])}, interchange p {fp(cc['mcnemar_p_probe_gt_class'])}), so "
+                               + ("the model uses the subspace for phylogenetic structure beyond class." if spec else
+                                  "the interventions show that the model uses this subspace for coarse class answers, not that "
+                                  "it uses within-class phylogenetic structure."))
+                causal_concl = (" Causal interventions show that the probe subspace is used for class answers"
+                                + (" and carries phylogeny-specific information." if spec else
+                                   ", but give no evidence for a phylogeny-specific causal role."))
+                causal_lim = (f" The causal readout is the class word, so it cannot test within-class phylogeny directly; the "
+                              f"class-only subspace captures more variance than the phylogeny probe "
+                              f"({100 * cc['class_var_captured']:.1f}% vs {100 * ca['probe_var_captured']:.1f}%) and was not "
+                              f"variance-matched to it.")
     stage4_txt = ""
     if s4:
         pr = s4["probe"]
@@ -412,8 +452,8 @@ it is not detected in divergence times beyond topology; and on phylogeny-versus-
 follows the tree, as for untrained networks. A Goodfire-style 10-dimensional probe predicts tree distances between held-out
 families with r = {f3(probe['model']['test_test_pearson'][0])}, but a class-only input does at least as well
 ({f3(probe.get('class_blob', {}).get('test_test_pearson', [float('nan')])[0])}), so this correlation mainly reflects coarse
-groups. The top late-layer component orders animals from aquatic to terrestrial, confirmed on held-out species. Qwen3.5-2B thus
-encodes modest within-group tree order entangled with folk categories and ecology, rather than a phylogenetic manifold.
+groups.{causal_abs} The top late-layer component orders animals from aquatic to terrestrial, confirmed on held-out species.
+Qwen3.5-2B thus encodes modest within-group tree order entangled with folk categories and ecology, rather than a phylogenetic manifold.
 
 = Introduction
 *Context.* Representation geometry is a window into what models learn. Days of the week and months form circles in LLMs
@@ -512,7 +552,7 @@ order is not significant on triplets where spelling or GloVe co-occurrence disag
 untrained networks, so we cannot claim it goes beyond such statistics; S2 is matched by an untrained network; no divergence-time
 signal is detected once topology is controlled; on conflict triplets the geometry does not follow the tree, as for untrained
 networks. (4) *Out-of-sample confirmation of a post-hoc pattern:* the top late-layer component separates aquatic from terrestrial
-animals. Causal claims are limited to what the stage-3 tests show above.
+animals.{causal_disc}
 
 *Implications.* For interpretability, global distance correlations with a taxonomy are weak evidence of a phylogenetic
 representation: class clusters, ecology and naming conventions all contribute, and untrained networks already reach above-chance
@@ -528,13 +568,13 @@ path length depends on how densely each clade is sampled; GloVe is a proxy for c
 S3 and S4 select triplets where simple statistics fail and are therefore adversarial by construction; the within-group signal
 rests mostly on mammals and birds; ecological and body-size similarity is not controlled; probes and interventions use a single
 layer chosen by cross-fitting; the conflict triplets are few and share anchors; the habitat addendum has only 6 marine mammals,
-whose names carry aquatic cues, and no bats.
+whose names carry aquatic cues, and no bats.{causal_lim}
 
 = Conclusion
 Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest,
 robust margin over untrained networks and name statistics, clearly so for mammals and birds. The geometry is otherwise dominated
 by coarse folk categories and ecology, the Goodfire-style probe mostly recovers the coarse groups, and the evidence does not show
-phylogenetic information beyond what lexical and co-occurrence statistics could supply.
+phylogenetic information beyond what lexical and co-occurrence statistics could supply.{causal_concl}
 {ex_txt}
 = References
 {refs}
