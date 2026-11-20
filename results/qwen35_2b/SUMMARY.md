@@ -243,6 +243,28 @@ On the same species triplets, the layer-6 representation is closer to the tree-c
 Class-word accuracy by stratum: amphibians 1.00, arachnids 0.93, birds 0.99, cartilaginous fish 1.00, cnidarians 0.80, crustaceans 0.87, echinoderms 0.50, insects 0.76, mammals 0.97, molluscs 0.65, ray-finned fish 0.96, reptiles 0.97.
 
 
+**Causal tests, final run (deviations 19-20)** (layer 6; k = 10 probe subspace fit on half of the families; 188 held-out species; captured variance 0.123)
+
+| hypothesis | probe subspace | random subspaces: mean [max] | rank p | Holm p | secondary |
+|---|---|---|---|---|---|
+| C-abl: drop in log P(correct class) | 0.083 | 0.027 [0.106] (n = 99) | 0.120 | 0.120 | Wilcoxon over species p = 0.003 |
+| C-swap: answer switches to the source's class | 0.055 | 0.025 [0.040] (n = 99) | 0.010 | 0.020 | no edit: 0.020 (200 pairs) |
+
+Mean log P(correct class) without editing: -0.352.
+
+Off-target next-token loss on neutral sentences: no edit 3.2728, probe subspace ablated 3.2565, random ablated 3.2968.
+
+**Class-only subspace control** (deviation 20; the same probe trained on the class-oracle distance)
+
+| quantity | value |
+|---|---|
+| captured variance, class-only subspace | 0.144 |
+| mean drop in log P(correct class), class-only subspace | 0.146 |
+| phylogeny probe > class-only, ablation (one-sided Wilcoxon over species) p | 0.966 |
+| switch rate, class-only subspace | 0.060 |
+| phylogeny probe > class-only, interchange (exact McNemar; 3 vs 4 discordant pairs) p | 0.773 |
+| **phylogeny-specific causal role** (both p < 0.05) | **no** |
+
 **Causal tests, first run (superseded: p floor above the Holm threshold)** (layer 6; k = 10 probe subspace fit on half of the families; 188 held-out species; captured variance 0.100)
 
 | hypothesis | probe subspace | random subspaces: mean [max] | rank p | Holm p | secondary |

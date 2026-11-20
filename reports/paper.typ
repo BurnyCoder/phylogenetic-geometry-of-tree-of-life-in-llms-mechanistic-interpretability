@@ -24,8 +24,8 @@ it is not detected in divergence times beyond topology; and on phylogeny-versus-
 follows the tree, as for untrained networks. A Goodfire-style 10-dimensional probe predicts tree distances between held-out
 families with r = 0.749, but a class-only input does at least as well
 (0.833), so this correlation mainly reflects coarse
-groups. The top late-layer component orders animals from aquatic to terrestrial, confirmed on held-out species. Qwen3.5-2B thus
-encodes modest within-group tree order entangled with folk categories and ecology, rather than a phylogenetic manifold.
+groups. Swapping the probe subspace between species switches the class answer more often than random subspaces (Holm p \= 0.020; 5.5% of pairs vs 2.0% unedited), ablating it does not beat random subspaces (Holm p \= 0.120), and a class-only subspace does as well on both, so no phylogeny-specific causal role is shown. The top late-layer component orders animals from aquatic to terrestrial, confirmed on held-out species.
+Qwen3.5-2B thus encodes modest within-group tree order entangled with folk categories and ecology, rather than a phylogenetic manifold.
 
 = Introduction
 *Context.* Representation geometry is a window into what models learn. Days of the week and months form circles in LLMs
@@ -155,7 +155,7 @@ preference, the model exceeds them (post hoc):
 *Conflict triplets.* The representation picks the tree-closer partner in 11/36 triplets (binomial p
 \= 0.029); for example, the blue whale is closer to the whale shark than to the hippopotamus. The untrained
 controls behave the same (qwen35\_2b\_random 13/36 (McNemar vs the model p \= 0.804); pythia410m\_step0 13/36 (McNemar vs the model p \= 0.774); pythia410m 10/36 (McNemar vs the model p \= 1.000); char3 9/36 (McNemar vs the model p \= 0.804); glove 14/36 (McNemar vs the model p \= 0.549)), and the triplets share anchors and partners, so this does not show a learned folk
-or ecological taxonomy; it shows only that the geometry does not follow the tree in these hand-picked cases. Exploratory p-values are corrected with BH-FDR over the 176 registered exploratory tests; q-values are listed in the repository.
+or ecological taxonomy; it shows only that the geometry does not follow the tree in these hand-picked cases. Exploratory p-values are corrected with BH-FDR over the 178 registered exploratory tests; q-values are listed in the repository.
 
 == Flat-subspace probe and manifold tests (stage 2, exploratory)
 #figure(table(columns: 3, align: left, stroke: 0.4pt + luma(180),
@@ -177,6 +177,11 @@ from the representations has normalized Robinson–Foulds distance 0.812 to the 
 
 == Behaviour and causal tests (stage 3)
 *Behaviour (exploratory).* Asked which of two animals is more closely related to a third (answer letters A/B scored by log-probability, both orders averaged), the model chose the tree-closer animal in 56.7% of 300 within-stratum triplets (binomial p \= 0.024); on the same triplets its layer-6 representation picks the tree-closer animal in 61.3%, and the two agree in 63.3%. On the conflict triplets it chose the tree-closer animal in 11/36 (binomial p \= 0.029). Class-word accuracy was 90.9% over 385 species.
+
+*Causal tests (confirmatory, Holm family of 2).* The flat probe was fit on half of the families; interventions act on the residual stream of the 188 held-out species at layer 6. Mean-ablating the 10-d probe subspace (capturing 12.3% of species-vector variance) at the name tokens lowered log P(correct class word) by 0.083 nats (no-edit mean log P = -0.352), against a mean of 0.027 for 99 variance-matched random subspaces: rank p \= 0.120, Holm p \= 0.120 (C-abl not supported). The same ablation applied to every token of 20 neutral sentences changed next-token loss from 3.2728 to 3.2565 (random subspaces: 3.2968). Copying the subspace coordinates of species A into species B (at its last name token) switched the predicted class to A's in 5.5% of 200 pairs, against 2.0% without an edit and a mean of 2.5% for random subspaces: rank p \= 0.010, Holm p \= 0.020 (C-swap supported). 11 of the 99 random subspaces caused an ablation drop at least as large as the probe's (largest 0.106); the secondary per-species Wilcoxon test against the mean random drop gives p \= 0.003.
+A first run used only 20 and 10 random subspaces, whose rank-p floors (0.048, 0.091) could not pass the Holm threshold; it was replaced by this run (deviation 19) and is kept in the repository.
+
+*Class-only control (deviation 20).* Because the readout is the class word, passing these tests shows only that the subspace carries class information the model uses. A probe of the same size trained on the class-oracle distance (capturing 14.4% of the variance) lowered log P(correct class) by 0.146 nats (rank p against the random subspaces \= 0.010) and switched answers in 6.0% of the pairs. The phylogeny probe did not exceed it: one-sided Wilcoxon over species p \= 0.966; exact McNemar over the same pairs (3 vs 4 discordant pairs) p \= 0.773. The registered rule for a phylogeny-specific causal role (both p < 0.05) is not met.
 
 == Ablations (stage 4, exploratory)
 Single-change ablations are listed in the evaluation table. Normalization (z-scoring, stratum-centering), prompt format (no chat template) and including polysemous names leave TA#sub[within] essentially unchanged; raw cosine and the mean over name tokens are lower. With scientific binomials on genus-split, head-noun-disjoint triplets, TA is 0.320 at layer 6 (best layer 0.380) versus 0.476 for common names on the same triplets: much weaker, and only in late layers. Within strata (mean of per-stratum Spearman on held-out pairs), the k = 10 probe reaches 0.353, the shuffled-tree probe 0.000 and the class-blob input 0.003. An earlier version pooled all within-stratum pairs into one Spearman; that metric is inflated by strata differing in typical distance and is not used.
@@ -231,7 +236,7 @@ order is not significant on triplets where spelling or GloVe co-occurrence disag
 untrained networks, so we cannot claim it goes beyond such statistics; S2 is matched by an untrained network; no divergence-time
 signal is detected once topology is controlled; on conflict triplets the geometry does not follow the tree, as for untrained
 networks. (4) *Out-of-sample confirmation of a post-hoc pattern:* the top late-layer component separates aquatic from terrestrial
-animals. Causal claims are limited to what the stage-3 tests show above.
+animals. (5) *Causal (interventions):* C-swap is supported (Holm p \= 0.020) but the effect is small (5.5% of pairs switch, 2.0% without an edit); C-abl is not supported (Holm p \= 0.120). The phylogeny probe does not beat a class-only subspace (ablation p \= 0.966, interchange p \= 0.773), so the interventions show that the model uses this subspace for coarse class answers, not that it uses within-class phylogenetic structure.
 
 *Implications.* For interpretability, global distance correlations with a taxonomy are weak evidence of a phylogenetic
 representation: class clusters, ecology and naming conventions all contribute, and untrained networks already reach above-chance
@@ -247,13 +252,13 @@ path length depends on how densely each clade is sampled; GloVe is a proxy for c
 S3 and S4 select triplets where simple statistics fail and are therefore adversarial by construction; the within-group signal
 rests mostly on mammals and birds; ecological and body-size similarity is not controlled; probes and interventions use a single
 layer chosen by cross-fitting; the conflict triplets are few and share anchors; the habitat addendum has only 6 marine mammals,
-whose names carry aquatic cues, and no bats.
+whose names carry aquatic cues, and no bats. The causal readout is the class word, so it cannot test within-class phylogeny directly; the class-only subspace captures more variance than the phylogeny probe (14.4% vs 12.3%) and was not variance-matched to it.
 
 = Conclusion
 Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest,
 robust margin over untrained networks and name statistics, clearly so for mammals and birds. The geometry is otherwise dominated
 by coarse folk categories and ecology, the Goodfire-style probe mostly recovers the coarse groups, and the evidence does not show
-phylogenetic information beyond what lexical and co-occurrence statistics could supply.
+phylogenetic information beyond what lexical and co-occurrence statistics could supply. Causal interventions show that the probe subspace is used for class answers, but give no evidence for a phylogeny-specific causal role.
 
 = Output examples
 Nearest neighbours (3) of the most-linked species of every stratum (query rule fixed in advance), under the reference tree, the model, the random-init control, character 3-grams and GloVe.

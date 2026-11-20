@@ -422,6 +422,28 @@ On the same species triplets, the layer-6 representation is closer to the tree-c
 Class-word accuracy by stratum: amphibians 1.00, arachnids 0.93, birds 0.99, cartilaginous fish 1.00, cnidarians 0.80, crustaceans 0.87, echinoderms 0.50, insects 0.76, mammals 0.97, molluscs 0.65, ray-finned fish 0.96, reptiles 0.97.
 
 
+**Causal tests, final run (deviations 19-20)** (layer 6; k = 10 probe subspace fit on half of the families; 188 held-out species; captured variance 0.123)
+
+| hypothesis | probe subspace | random subspaces: mean [max] | rank p | Holm p | secondary |
+|---|---|---|---|---|---|
+| C-abl: drop in log P(correct class) | 0.083 | 0.027 [0.106] (n = 99) | 0.120 | 0.120 | Wilcoxon over species p = 0.003 |
+| C-swap: answer switches to the source's class | 0.055 | 0.025 [0.040] (n = 99) | 0.010 | 0.020 | no edit: 0.020 (200 pairs) |
+
+Mean log P(correct class) without editing: -0.352.
+
+Off-target next-token loss on neutral sentences: no edit 3.2728, probe subspace ablated 3.2565, random ablated 3.2968.
+
+**Class-only subspace control** (deviation 20; the same probe trained on the class-oracle distance)
+
+| quantity | value |
+|---|---|
+| captured variance, class-only subspace | 0.144 |
+| mean drop in log P(correct class), class-only subspace | 0.146 |
+| phylogeny probe > class-only, ablation (one-sided Wilcoxon over species) p | 0.966 |
+| switch rate, class-only subspace | 0.060 |
+| phylogeny probe > class-only, interchange (exact McNemar; 3 vs 4 discordant pairs) p | 0.773 |
+| **phylogeny-specific causal role** (both p < 0.05) | **no** |
+
 **Causal tests, first run (superseded: p floor above the Holm threshold)** (layer 6; k = 10 probe subspace fit on half of the families; 188 held-out species; captured variance 0.100)
 
 | hypothesis | probe subspace | random subspaces: mean [max] | rank p | Holm p | secondary |
@@ -627,7 +649,7 @@ Reference TA_within from stage 1b (same triplets): qwen35_2b_random 0.382, pythi
 
 ## Exploratory tests: BH-FDR over the registered family
 
-BH-FDR over all 176 registered exploratory tests with a p-value. The 150 H1a checks are summarized (148 with q < 0.05; they are per-layer stage-1a checks, see the stage-1a table).
+BH-FDR over all 178 registered exploratory tests with a p-value. The 150 H1a checks are summarized (148 with q < 0.05; they are per-layer stage-1a checks, see the stage-1a table).
 
 | test | p | BH q |
 |---|---|---|
@@ -636,19 +658,21 @@ BH-FDR over all 176 registered exploratory tests with a p-value. The 150 H1a che
 | conflict triplets (representation) | 0.029 | 0.031 |
 | conflict triplets (behavior) | 0.029 | 0.031 |
 | species triplets (behavior) | 0.024 | 0.026 |
+| C-abl probe > class-only subspace | 0.966 | 0.966 |
+| C-swap probe > class-only subspace | 0.773 | 0.778 |
 | stage 5 max-T pythia14b | 0.005 | 0.006 |
-| stage 5 max-T pythia14b_step0 | 0.180 | 0.182 |
-| stage 5 max-T pythia14b_step1 | 0.180 | 0.182 |
+| stage 5 max-T pythia14b_step0 | 0.180 | 0.184 |
+| stage 5 max-T pythia14b_step1 | 0.180 | 0.184 |
 | stage 5 max-T pythia14b_step1000 | 0.005 | 0.006 |
 | stage 5 max-T pythia14b_step143000 | 0.005 | 0.006 |
 | stage 5 max-T pythia14b_step16000 | 0.020 | 0.022 |
 | stage 5 max-T pythia14b_step3000 | 0.020 | 0.022 |
 | stage 5 max-T pythia14b_step33000 | 0.005 | 0.006 |
-| stage 5 max-T pythia14b_step512 | 0.340 | 0.342 |
-| stage 5 max-T pythia14b_step64 | 0.155 | 0.159 |
+| stage 5 max-T pythia14b_step512 | 0.340 | 0.346 |
+| stage 5 max-T pythia14b_step64 | 0.155 | 0.160 |
 | stage 5 max-T pythia14b_step66000 | 0.005 | 0.006 |
-| stage 5 max-T pythia14b_step8 | 0.465 | 0.465 |
-| stage 5 max-T pythia14b_step8000 | 0.040 | 0.042 |
+| stage 5 max-T pythia14b_step8 | 0.465 | 0.470 |
+| stage 5 max-T pythia14b_step8000 | 0.040 | 0.043 |
 | stage 5 max-T pythia160m | 0.030 | 0.032 |
 | stage 5 max-T pythia1b | 0.010 | 0.011 |
 | stage 5 max-T pythia28b | 0.005 | 0.006 |
