@@ -176,7 +176,7 @@ def timetree_mrca_age(ncbi_ids: list[int]) -> float | None:
     return float(age)
 
 
-def date_tree(tree: RefTree, ncbi_by_leaf: list[int], tries: int = 4) -> np.ndarray:
+def date_tree(tree: RefTree, ncbi_by_leaf: list[int], tries: int = 8) -> np.ndarray:
     """Date every internal node with TimeTree; return node ages (Mya), leaves = 0.
 
     Local: for internal node v, pick one representative leaf from each of two
@@ -185,8 +185,9 @@ def date_tree(tree: RefTree, ncbi_by_leaf: list[int], tries: int = 4) -> np.ndar
     then made monotone (a parent is never younger than any child).
     Global: produces the dated ultrametric tree for secondary hypothesis S5.
     """
-    age = np.zeros(tree.N)
+    age = np.zeros(tree.N)  # leaves = 0 Mya
     dated = np.zeros(tree.N, dtype=bool)
+    dated[: tree.n] = True
     rng = np.random.default_rng(0)
     for v in tree.internal_nodes:
         ch = tree.children[v]
@@ -198,10 +199,18 @@ def date_tree(tree: RefTree, ncbi_by_leaf: list[int], tries: int = 4) -> np.ndar
             if t is not None:
                 age[v], dated[v] = t, True
                 break
-    # Postorder pass (internal nodes are numbered in postorder): enforce monotonicity.
+    # Postorder pass (internal nodes are numbered in postorder): a dated node is
+    # never younger than any dated descendant (TimeTree estimates for different
+    # pairs can be slightly inconsistent). Undated nodes stay NaN: they are NOT
+    # given a child's age (that produced impossible 0-Mya splits; review finding 4).
+    max_desc = np.where(dated, age, -np.inf)
     for v in tree.internal_nodes:
-        ch_max = max(age[c] for c in tree.children[v])
-        if not dated[v] or age[v] < ch_max:
-            age[v] = max(age[v], ch_max)
-    log.info("TimeTree dated %d / %d internal nodes", int(dated.sum()), tree.N - tree.n)
+        m = max(max_desc[c] for c in tree.children[v])
+        if dated[v]:
+            age[v] = max(age[v], m)
+            max_desc[v] = age[v]
+        else:
+            max_desc[v] = m
+    age[~dated] = np.nan
+    log.info("TimeTree dated %d / %d internal nodes (others NaN)", int(dated[tree.n:].sum()), tree.N - tree.n)
     return age

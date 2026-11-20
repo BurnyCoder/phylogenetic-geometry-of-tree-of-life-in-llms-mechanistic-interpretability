@@ -59,7 +59,9 @@ def request_json(
             r = requests.request(
                 method, url, params=params, json=payload, headers=HEADERS, timeout=timeout
             )
-            if r.status_code == 200 or (accept_error_json and 400 <= r.status_code < 500):
+            # 429 (rate limit) is transient: never cache it; other 4xx JSON errors are
+            # deterministic answers (e.g. Open Tree "unknown ids") and may be cached.
+            if r.status_code == 200 or (accept_error_json and 400 <= r.status_code < 500 and r.status_code != 429):
                 data = r.json()
                 path.write_text(json.dumps(data), encoding="utf-8")
                 return data
@@ -81,6 +83,9 @@ def request_text(url: str, *, namespace: str, params: dict | None = None, retrie
     for attempt in range(retries):
         try:
             r = requests.get(url, params=params, headers={**HEADERS, "Accept": "text/csv"}, timeout=300)
+            # SPARQL CSV is UTF-8 but servers may omit the charset, in which case requests
+            # falls back to ISO-8859-1 and garbles names ("Grévy's" -> "GrÃ©vy's").
+            r.encoding = "utf-8"
             if r.status_code == 200:
                 path.write_text(r.text, encoding="utf-8")
                 return r.text

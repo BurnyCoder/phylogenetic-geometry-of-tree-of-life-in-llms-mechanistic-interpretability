@@ -26,8 +26,11 @@ def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--config", required=False, help="YAML run config (configs/*.yaml)")
     ap.add_argument("--phases", required=True, help="comma-separated phases to run in order")
+    ap.add_argument("--name-sets", default=None, help="override name_sets for the extract phase")
     args = ap.parse_args(argv)
     cfg = load_config(args.config) if args.config else RunConfig(name="data")
+    if args.name_sets:
+        cfg.extra["name_sets"] = args.name_sets.split(",")
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # Windows console: allow any token text
     setup_logging(cfg.name)

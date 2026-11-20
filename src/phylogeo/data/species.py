@@ -21,6 +21,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from phylogeo.config import DATA_DIR, DATA_REPO_DIR
@@ -190,7 +191,8 @@ def common_name(title: str, sci_name: str, proper: set[str]) -> str | None:
     """Turn an English Wikipedia title into a common name, or None if it is not one.
 
     Local: drops a trailing parenthetical ("Jaguar (animal)" -> "Jaguar"), rejects
-    titles equal to the scientific name or to its genus, keeps Wikipedia's casing
+    titles equal to the scientific name (the preregistered rule; a title equal to the
+    genus, e.g. "Hippopotamus", IS the species' common name and is kept), keeps Wikipedia's casing
     for non-initial words (titles are sentence case, so only proper nouns are
     capitalized there) and lowercases the first word unless
     :func:`first_word_is_proper` says it is a proper noun.
@@ -198,8 +200,7 @@ def common_name(title: str, sci_name: str, proper: set[str]) -> str | None:
     name = re.sub(r"\s*\(.*\)\s*$", "", title).strip()
     if not name or any(ch.isdigit() for ch in name) or "," in name:
         return None
-    genus = sci_name.split()[0].lower()
-    if name.lower() == sci_name.lower() or name.lower() == genus:
+    if name.lower() == sci_name.lower():
         return None
     words = name.split()
     first = words[0]
@@ -339,11 +340,21 @@ def annotate_with_ott(df: pd.DataFrame) -> pd.DataFrame:
         extinct.append(bool(EXTINCT_FLAGS & set(rec["flags"])))
     df["stratum"] = strata
     for r in RANKS:
-        df[r] = [x[r] for x in ranks]
+        df[f"ott_{r}"] = [x[r] for x in ranks]
     df["extinct"] = extinct
     n0 = len(df)
     df = df[df["stratum"].notna() & ~df["extinct"]].drop_duplicates("ott_id")
     log.info("OTT-annotated: kept %d / %d (dropped non-animal/extinct/duplicate ott ids)", len(df), n0)
+    # Linnaean ranks: NCBI Taxonomy first (complete for most animals), OTT as fallback
+    # (OTT leaves e.g. Primates as "no rank"); see data/ncbi.py and preregistration deviations.
+    from phylogeo.data.ncbi import lineage_ranks as ncbi_ranks
+
+    nr = ncbi_ranks(df["ncbi"].astype(int).tolist())
+    for r in RANKS:
+        ncbi_vals = nr[r].to_numpy()
+        df[r] = np.where(ncbi_vals != "", ncbi_vals, df[f"ott_{r}"].to_numpy())
+        log.info("rank %s: %d from NCBI, %d OTT fallback, %d missing", r, int((ncbi_vals != "").sum()),
+                 int(((ncbi_vals == "") & (df[f"ott_{r}"] != "")).sum()), int((df[r] == "").sum()))
     return df.drop(columns=["extinct"])
 
 
@@ -389,7 +400,7 @@ def build_species_set(min_sitelinks: int = 5, prefilter_factor: int = 6) -> pd.D
     with_poly = select_by_quota(ann, QUOTAS)
     poly = with_poly[with_poly["polysemous"]].reset_index(drop=True)
     cols = ["common_name", "sci_name", "wikidata", "ncbi", "ott_id", "sitelinks", "stratum",
-            *RANKS, "n_words", "head_noun", "polysemous"]
+            *RANKS, *[f"ott_{r}" for r in RANKS], "n_words", "head_noun", "polysemous"]
     out = {}
     for name, d in (("species", primary), ("species_polysemous", poly)):
         d = d[cols].reset_index(drop=True)
