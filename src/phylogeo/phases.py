@@ -346,6 +346,20 @@ def phase_examples(cfg: RunConfig) -> None:
     run_examples(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
 
 
+def phase_release(cfg: RunConfig) -> None:
+    """Train the all-species flat probe and write the Hugging Face release folder (DATA_DIR/release)."""
+    from phylogeo.release import build_release
+
+    build_release(cfg, load_species, layer_distances, act_dir)
+
+
+def phase_upload(cfg: RunConfig) -> None:
+    """Upload the probe and all activations to Hugging Face and add them to the collection."""
+    from phylogeo.release import upload_release
+
+    upload_release(cfg)
+
+
 def phase_site(cfg: RunConfig) -> None:
     """Build the static GitHub Pages explorer in site/ from results/."""
     from phylogeo.site import build_site
