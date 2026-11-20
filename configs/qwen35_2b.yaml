@@ -1,0 +1,12 @@
+# Primary model (stage 1a, 1b): Qwen3.5-2B post-trained release, chat template, bf16 on GPU.
+name: qwen35_2b
+model_id: Qwen/Qwen3.5-2B
+revision: 15852e8c16360a2fea060d615a32b45270f8a8fc
+chat_template: true
+name_sets: [species, days, months, conflict, species_polysemous]
+random_init_run: qwen35_2b_random
+controls: [qwen35_2b_random, pythia410m_step0, pythia410m]
+n_perm: 1000
+n_boot: 1000
+pca_n_perm: 1000
+n_splits: 20

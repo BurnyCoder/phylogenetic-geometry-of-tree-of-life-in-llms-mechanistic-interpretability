@@ -1,0 +1,7 @@
+# Second untrained control: Pythia-410m step0 (random init checkpoint).
+name: pythia410m_step0
+model_id: EleutherAI/pythia-410m
+revision: step0
+chat_template: false
+prepend_bos: true
+name_sets: [species, conflict]

@@ -1,0 +1,6 @@
+# Second trained model / control: Pythia-410m final checkpoint (raw text + BOS).
+name: pythia410m
+model_id: EleutherAI/pythia-410m
+chat_template: false
+prepend_bos: true
+name_sets: [species, conflict]
