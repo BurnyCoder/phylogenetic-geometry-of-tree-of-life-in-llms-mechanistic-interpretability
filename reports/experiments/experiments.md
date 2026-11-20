@@ -33,7 +33,7 @@ We give a language model short sentences that mention an animal ("Here is a fact
 
 **Trained by us.** Only small probes: the stage-2 flat-subspace probe, a 10 × 100 linear map plus a scale, trained with Adam (lr 1e-3, 2,000 full-batch steps, α = 0.01), with 5-fold family-holdout CV and 5 seeds.
 - These hyperparameters were fixed in the preregistration, before any results. The dimension k = 10 matches Goodfire's Evo 2 choice; lr, steps and α are standard small-probe settings, and α is small as in Goodfire's note that results are insensitive to it.
-- The sensitivity sweep over k and seeds is stage 5.
+- The sensitivity sweep over k and seeds is stage 6.
 
 ## Experiments
 | # | Experiment | Stage | Status | Details |
@@ -45,8 +45,8 @@ We give a language model short sentences that mention an animal ("Here is a fact
 | 03 | Geodesic vs angular, δ-hyperbolicity, NJ, flat-subspace probe | 2 | code ready | – |
 | 04 | Causal ablation / interchange, steering, behavioral triplets | 3 | planned | – |
 | 05 | Ablations | 4 | planned | – |
-| 06 | Sensitivity (seeds, templates, subsamples) | 5 | planned | – |
-| 07 | More models (scale, architecture, training dynamics) | 6 | planned | – |
+| 06 | More models (scale, architecture, training dynamics) | 5 | planned | – |
+| 07 | Sensitivity (seeds, templates, subsamples) | 6 | planned | – |
 
 ## Methodology choices and why
 - **Last name token readout, 8 templates, per-template centering.** This follows Gurnee & Tegmark's entity readout and Goodfire's pooling. Centering removes the shared anisotropic direction, which otherwise dominates cosine similarity ([Ethayarajh 2019](https://aclanthology.org/D19-1006/)).

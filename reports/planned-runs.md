@@ -28,18 +28,18 @@
 | R3-steer | 3 | Qwen3.5-2B | geodesic vs linear-chord steering between species | change in taxonomic answer distribution | no | ~20 min |
 | R3-sae | 3 | Qwen3.5-2B (+ Base SAE transfer check) | SAE features on species activations | features aligned with the probe subspace | no | ~10 min |
 | R4-abl | 4 | Qwen3.5-2B | raw text without the chat template; mean-over-name-tokens readout; raw cosine; z-scored cosine; binomial names; polysemous names included; dated tree; kNN K; probe dimension k ∈ {2,3,5,10,20}; Poincaré vs Euclidean probe | effect on H1/S metrics and probe correlation | probes only | ~30 min |
-| R5-sens | 5 | Qwen3.5-2B | 5 probe seeds; 20 random template halves; 20 species subsamples of 80%; family-split seeds | variance of every headline number | probes only | ~30 min |
-| R6-scale | 6 | Qwen3.5-0.8B, Qwen3-1.7B; Pythia 70m/160m/410m/1b/1.4b/2.8b | chat template (Qwen); raw text (Pythia) | H1/S1 across scale and architecture | no | ~30 min |
-| R6-dyn | 6 | Pythia-1.4B at 12 log-spaced checkpoints (step0 … step143000) | raw text | H1/S1 over training; infini-gram Pile frequency and co-occurrence | no | ~30 min |
+| R5-scale | 5 | Qwen3.5-0.8B, Qwen3-1.7B; Pythia 70m/160m/410m/1b/1.4b/2.8b | chat template (Qwen); raw text (Pythia) | H1/S1 across scale and architecture | no | ~30 min |
+| R5-dyn | 5 | Pythia-1.4B at 12 log-spaced checkpoints (step0 … step143000) | raw text | H1/S1 over training; infini-gram Pile frequency and co-occurrence | no | ~30 min |
+| R6-sens | 6 | Qwen3.5-2B | 5 probe seeds; 20 random template halves; 20 species subsamples of 80%; family-split seeds | variance of every headline number | probes only | ~30 min |
 
-**Execution order** (stage order as changed by the user on 2026-11-20):
+**Execution order** (final stage order as changed by the user on 2026-11-20):
 1. R0, then R00.
 2. **R1a**: simple PCA first.
 3. R1b with controls, baselines and conflict triplets.
 4. R2 (trained probes and controls).
 5. R3 (causal and behavioral).
 6. R4 (ablations).
-7. R5 (sensitivity).
-8. R6 (more models).
+7. R5 (more models).
+8. R6 (sensitivity).
 
 After each stage, results, reports, paper, README and site are updated and pushed to GitHub, and data and probes to Hugging Face.
