@@ -1,5 +1,14 @@
 # Progress
 
+## 2026-11-20 17:50: animated 3-D view of the top-3 principal components
+
+- **The player.** The site's player shows every layer:
+  - play and pause, a layer scrubber with smooth interpolation, and speed;
+  - views of Qwen3.5-2B, the untrained Qwen3.5-2B, or the expected Brownian-tree shape;
+  - a tree overlay and auto-rotation.
+- **README.** An animated GIF of the same view leads the *Visual summary*.
+- **Method (display only).** Consecutive layers are aligned by orthogonal Procrustes, so no statistic changes.
+
 ## 2026-11-20 17:30: interactive figures in the README and on the site
 
 - **17 labelled figures**, each with a verdict computed from the results files:
