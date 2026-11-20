@@ -42,7 +42,11 @@ flowchart LR
    - Gromov δ-hyperbolicity against matched nulls.
    - A neighbor-joining tree from the representations compared with the reference.
    - Goodfire's learned 10-d "flat subspace" probe, evaluated on held-out families with a shuffled-tree control.
-7. **Later stages.** Causal ablation, interchange, steering and behavioral tests (stage 3), ablations (stage 4), scale and training dynamics with Qwen3.5-0.8B, Qwen3-1.7B and Pythia checkpoints (stage 5), and seed and template sensitivity (stage 6).
+7. **Later stages, in this order:**
+   - **Stage 3:** causal and behavioral tests: ablation, interchange, steering, relatedness judgments.
+   - **Stage 4:** ablations.
+   - **Stage 5:** more models: scale and training dynamics with Qwen3.5-0.8B, Qwen3-1.7B and Pythia checkpoints.
+   - **Stage 6:** sensitivity: seeds, templates, species subsamples.
 
 The full run matrix is in [`reports/planned-runs.md`](reports/planned-runs.md).
 
@@ -101,7 +105,10 @@ Running instructions will be added here once the pipeline is implemented.
 - [ ] Stage 1a: top-3 PCA plots ("do they look like a tree?")
 - [ ] Stage 1b: triplet accuracy, Mantel, controls, conflict triplets
 - [ ] Stage 2: probes, geodesic, δ-hyperbolicity, neighbor-joining
-- [ ] Stages 3–6: causal and behavioral tests, ablations, more models (scale), sensitivity
+- [ ] Stage 3: causal and behavioral tests (subspace ablation / interchange, steering, relatedness judgments)
+- [ ] Stage 4: ablations (prompt format, readout, distance variants, binomial names, polysemous names, dated tree)
+- [ ] Stage 5: more models (Qwen3.5-0.8B, Qwen3-1.7B, Pythia scale and training checkpoints)
+- [ ] Stage 6: sensitivity (probe seeds, template subsets, species subsamples, kNN / dimension sweeps)
 - [ ] Paper, interactive website (GitHub Pages), Hugging Face collection
 
 *Author: Libor "Burny" Burian.*
