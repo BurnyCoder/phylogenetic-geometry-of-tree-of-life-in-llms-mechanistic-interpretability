@@ -262,6 +262,9 @@ logs/             timestamped run logs (prompts and outputs)
 ## Data and models on Hugging Face
 - Collection: [Phylogenetic geometry of the tree of life in LLMs](https://huggingface.co/collections/BurnyCoder/phylogenetic-geometry-of-the-tree-of-life-in-llms-6afffc252e04f452d5e7d905)
 - Frozen species set, Open Tree trees and conflict triplets: [BurnyCoder/phylogenetic-geometry-species](https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-species)
+- Residual-stream activations for every run and name set: [BurnyCoder/phylogenetic-geometry-activations](https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations)
+- Flat-subspace probe trained on all 400 species (safetensors, with PCA): [BurnyCoder/phylogeo-flat-probe-qwen3.5-2b](https://huggingface.co/BurnyCoder/phylogeo-flat-probe-qwen3.5-2b). Its held-out correlation mostly reflects coarse groups; see the model card and the paper.
+- Interactive results site: https://burnycoder.github.io/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/
 
 ## Documentation
 - [Literature review](reports/literature-review.md) · [State-of-the-art methods review](reports/state-of-the-art-review.md)

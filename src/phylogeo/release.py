@@ -71,6 +71,9 @@ def build_release(cfg: RunConfig, load_species, layer_distances, act_dir) -> Non
     if s6p.exists():
         s6 = json.loads(s6p.read_text())["probe_seed"]["test_test_pearson"]
         sens = f" Over {len(s6['values'])} further seeds: {s6['mean']:.3f} ± {s6['sd']:.3f}."
+    cb = pm.get("class_blob")
+    cb_txt = (f" The same probe trained on a class-only input (each species at its stratum centroid plus noise) reaches "
+              f"held-out r = {cb['test_test_pearson'][0]:.3f}." if cb else "")
     card = f"""---
 license: apache-2.0
 base_model: {cfg.model_id}
@@ -98,7 +101,7 @@ Code, preregistration and paper: https://github.com/BurnyCoder/phylogenetic-geom
 **Limitations.**
 - The probe is fit to path length in the Open Tree topology; it is not a model of divergence times.
 - It was trained on English common names; Latin binomials carry no comparable structure.
-- High held-out correlation partly reflects coarse-group (class) structure. Within groups the held-out Spearman correlation is lower (see the paper).
+- **The held-out correlation mainly reflects coarse groups.**{cb_txt} Within groups the probe adds little over the raw representation distances (see the paper).
 """
     (out / "README.md").write_text(card, encoding="utf-8")
     log.info("release probe written to %s (fit r = %.3f)", out, fit_r)
