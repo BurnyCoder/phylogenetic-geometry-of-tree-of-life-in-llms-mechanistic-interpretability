@@ -20,6 +20,7 @@ import logging
 from pathlib import Path
 
 import numpy as np
+from scipy.linalg import orthogonal_procrustes
 from scipy.stats import rankdata
 from sklearn.decomposition import PCA
 
@@ -117,4 +118,38 @@ def build_viz_data(main: str, controls: list[str], layers: list[int], out: Path,
         "layer": L, "k": k, "names": names, "strata": strata.tolist(), "level_names": LEVEL_NAMES,
         "taxonomy": {c: df[c].tolist() for c in ["phylum", "class", "order", "family", "genus", "sci_name"]},
         "neighbors": {r: idx.tolist() for r, idx in nn.items()}, "levels": lv}), encoding="utf-8")
+    # 4. Top-3 PCA at every layer, aligned layer to layer, for the animated 3-D view (stage-1a look).
+    p3 = {r: aligned_pca3_layers(V[r], seed) for r in [main, controls[0]]}
+    eb, evb = pca3(Xb, seed)
+    R, _ = orthogonal_procrustes(eb, np.array(p3[main]["coords"][L]))  # expected shape, rotated onto the model's view
+    p3["expected"] = {"coords": [np.round(eb @ R, 3).tolist()], "evr": [evb]}
+    (out / "pca3d.json").write_text(json.dumps({
+        "names": names, "strata": strata.tolist(), "modal_layer": L, "reps": p3,
+        "tree": {"n": int(tree.n), "parent": tree.parent.tolist(), "postorder": list(reversed(tree.preorder))}}),
+        encoding="utf-8")
     log.info("viz data written to %s (layers %s, controls %s)", out, layers, controls)
+
+
+def pca3(X: np.ndarray, seed: int = 0) -> tuple[np.ndarray, list[float]]:
+    """Top-3 PCA coordinates scaled to unit RMS radius (so every layer fills the same box), and their
+    explained-variance ratios."""
+    p = PCA(n_components=3, random_state=seed).fit(X - X.mean(0))
+    C = p.transform(X - X.mean(0))
+    return C / np.sqrt((C**2).sum(1).mean()), p.explained_variance_ratio_.tolist()
+
+
+def aligned_pca3_layers(V: np.ndarray, seed: int = 0) -> dict:
+    """[L, n, d] species vectors -> per-layer top-3 PCA coordinates, each layer rotated (orthogonal Procrustes,
+    reflections allowed) onto the previous one. PCA axes are defined only up to sign and order, so without this
+    the animation would flip and jump between layers. The rotation is display-only: within-layer distances and
+    explained variance are unchanged. scipy: https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.orthogonal_procrustes.html"""
+    coords, evr, prev = [], [], None
+    for X in V:
+        C, e = pca3(X, seed)
+        if prev is not None:
+            R, _ = orthogonal_procrustes(C, prev)  # R minimizes ||C R - prev||_F over orthogonal R
+            C = C @ R
+        coords.append(np.round(C, 3).tolist())
+        evr.append([round(x, 4) for x in e])
+        prev = C
+    return {"coords": coords, "evr": evr}

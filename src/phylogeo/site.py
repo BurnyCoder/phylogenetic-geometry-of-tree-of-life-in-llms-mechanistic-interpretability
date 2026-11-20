@@ -92,14 +92,15 @@ def badge(kind: str, verdict: str) -> str:
 
 
 def figure_cards(figs: list[dict]) -> tuple[str, str]:
-    """(jump menu, cards) for the figure records. Plotly.js is loaded once, from the CDN, by the first card."""
+    """(jump menu, cards) for the figure records. Plotly.js is loaded once in the page head (see build_site);
+    a record with ``html`` (the animated 3-D player) supplies its own markup instead of a Plotly figure."""
     nav = '<div class="nav">' + "".join(f'<a href="#fig-{r["key"]}">{ICON[r["kind"]]} {html.escape(r["title"])}</a>'
                                         for r in figs) + '<a href="#fig-explorer">● Explore neighbours</a></div>'
     cards = []
     cfg = {"responsive": True, "displaylogo": False, "toImageButtonOptions": {"format": "png", "scale": 2}}
-    for i, r in enumerate(figs):
-        div = r["fig"].to_html(include_plotlyjs="cdn" if i == 0 else False, full_html=False, config=cfg,
-                               div_id=f"plot-{r['key']}")
+    for r in figs:
+        div = r.get("html") or r["fig"].to_html(include_plotlyjs=False, full_html=False, config=cfg,
+                                                div_id=f"plot-{r['key']}")
         cards.append(f'<div class="card" id="fig-{r["key"]}"><h3>{html.escape(r["title"])}</h3>'
                      f'<div>{badge(r["kind"], r["verdict"])}</div>{div}<p class="cap">{html.escape(r["caption"])} '
                      f'<a href="https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-'
@@ -207,9 +208,12 @@ descendants. Use the slider to move through layers.</p>
 <p class="muted">All numbers are generated from <code>results/</code> by
 <code>python -m phylogeo.run --phases viz_data,report,site</code>.</p>
 """
+    from plotly.offline import get_plotlyjs_version
+
+    plotly_js = f"https://cdn.plot.ly/plotly-{get_plotlyjs_version()}.min.js"  # same build plotly.py targets
     page = (f"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' "
             f"content='width=device-width,initial-scale=1'><title>Phylogenetic geometry in LLMs</title>"
-            f"<style>{CSS}</style></head><body>{body}</body></html>")
+            f"<script src='{plotly_js}' charset='utf-8'></script><style>{CSS}</style></head><body>{body}</body></html>")
     (SITE / "index.html").write_text(page, encoding="utf-8")
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
     return SITE / "index.html"

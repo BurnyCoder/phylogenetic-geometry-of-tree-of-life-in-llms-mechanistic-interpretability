@@ -51,3 +51,20 @@ def test_readme_gallery_links_every_png_to_its_site_card():
     for k in ["a", "b", "c"]:
         assert f'{SITE_URL}#fig-{k}' in md and f"reports/figures/viz/{k}.png" in md
     assert md.count("<tr>") == 2  # two per row
+
+
+def test_aligned_pca3_keeps_within_layer_geometry_and_removes_axis_flips():
+    """Procrustes alignment is display-only: pairwise distances inside a layer are unchanged, and a layer that is
+    the previous one with a flipped/rotated basis maps back onto it."""
+    from phylogeo.viz.viz_data import aligned_pca3_layers, pca3
+
+    rng = np.random.default_rng(1)
+    X = rng.normal(size=(40, 8)) * np.array([5, 3, 2, 1, 1, 1, 1, 1])  # clear top-3 directions
+    Q, _ = np.linalg.qr(rng.normal(size=(8, 8)))
+    V = np.stack([X, -X @ Q])  # layer 2 = layer 1 in a rotated, reflected basis
+    out = aligned_pca3_layers(V)
+    C = [np.array(c) for c in out["coords"]]
+    raw, _ = pca3(V[1])
+    dist = lambda A: np.linalg.norm(A[:, None] - A[None], axis=-1)
+    assert np.allclose(dist(C[1]), dist(raw), atol=1e-2)  # rotation only
+    assert np.abs(C[1] - C[0]).max() < 2e-2  # aligned back onto the previous layer
