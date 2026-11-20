@@ -41,14 +41,15 @@ def stage1a_table(run: str) -> str:
     if not ch:
         return f"*(no stage-1a results for {run})*\n"
     zs = list(ch[0]["C2_within_stratum_order_purity"])
-    head = ("| layer | PC1–3 var | C1 purity (null) p | " + " | ".join(f"C2 {z} (null) p" for z in zs)
+    head = ("| layer | PC1–3 var | C1 purity (null) p | C1 random-init | " + " | ".join(f"C2 {z} (null) p" for z in zs)
             + " | C3 overlay/null p | C3b overlay/within-null p | reading |")
-    rows = [head, "|" + "---|" * (6 + len(zs))]
+    rows = [head, "|" + "---|" * (7 + len(zs))]
     for c in ch:
         ev = sum(c["explained_variance_ratio"])
         c2 = [f"{v['purity']:.2f} ({v['null']:.2f}) {p_fmt(v['p'])}" for v in c["C2_within_stratum_order_purity"].values()]
         rows.append(
             f"| {c['layer']} | {ev:.1%} | {c['C1_purity']:.2f} ({c['C1_purity_null']:.2f}) {p_fmt(c['C1_p'])} | "
+            + (f"{c['C1_purity_random_init']:.2f}" if "C1_purity_random_init" in c else "–") + " | "
             + " | ".join(c2)
             + f" | {c['C3_overlay_length'] / c['C3_null_mean']:.2f} {p_fmt(c['C3_p'])}"
             + f" | {c['C3_overlay_length'] / c['C3b_within_stratum_null_mean']:.2f} {p_fmt(c['C3b_p'])}"
