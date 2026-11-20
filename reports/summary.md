@@ -28,13 +28,16 @@
 | Phylogeny-vs-folk conflict triplets (whale: hippo or whale shark?) | tree-closer partner chosen in 11/36 (binomial p 0.029); untrained: qwen35_2b_random 13/36 (McNemar p 0.804); pythia410m_step0 13/36 (McNemar p 0.774); char3 9/36 (McNemar p 0.804) | geometry does not follow the tree here; no evidence the trained model differs from untrained networks |
 | Learned 10-d flat subspace (Goodfire-style probe; exploratory) | held-out r = 0.749, within-stratum 0.326; shuffled tree -0.015; class-only (class-blob) input 0.833, within-stratum 0.008; raw distances without a probe, within-stratum 0.290 | all-pairs r reflects coarse groups; within strata the probe adds little over raw distances |
 | Tree-like (hyperbolic) metric (exploratory) | Gromov δ_rel = 0.322 vs matched Gaussian 0.460, class-blob 0.188, exact tree 0 | does not separate trees from clusters |
+| Ablating the probe subspace hurts class answers more than random subspaces (C-abl) | drop 0.083 vs 0.027 nats; rank p 0.120, Holm 0.120 | not supported |
+| Swapping the subspace switches the class answer (C-swap) | switch rate 0.055 vs random mean 0.025; rank p 0.010, Holm 0.020; no edit 0.020 (200 pairs) | supported (small effect) |
+| Causal role specific to phylogeny, beyond class (vs class-only subspace) | ablation drop 0.083 vs 0.146 (p 0.966); switches 0.055 vs 0.060 (p 0.773) | no |
 | The model *says* which species are related (exploratory) | chooses the tree-closer animal in 0.567 of 300 within-group triplets (binomial p 0.024, triplets not independent); agreement with the representation 0.633 vs 0.515 expected if independent | weak |
 | Latin binomials carry the same structure (exploratory) | head-noun-disjoint genus-split triplets: binomials 0.320 (best layer 0.380) vs common names 0.476 | much weaker |
 | Late-layer top PC orders aquatic → terrestrial (Addendum A, held-out species) | marine vs ground mammals (n = 6) Holm p 3.6e-07; waterbird ρ = -0.385 (Holm p 4.2e-04); aerial birds ρ = -0.157 | aquatic end supported (name cues not controlled), aerial end not |
 | Robust to seeds, template subsets, species subsamples (stage 6) | lowest TA_within over 20 repetitions of each perturbation 0.437; smallest margin over the best control 0.044 | robust |
 | Other models (stage 5; cross-fitted TA_within) | pythia70m 0.379; pythia160m 0.373; pythia410m 0.416; qwen35_08b 0.432; pythia1b 0.419; pythia14b 0.446; qwen3_17b 0.465; qwen35_2b 0.480; pythia28b 0.470 | descriptive |
 
-Exploratory p-values are corrected with BH-FDR over the 176 registered exploratory tests; q-values are in `results/RESULTS.md`.
+Exploratory p-values are corrected with BH-FDR over the 178 registered exploratory tests; q-values are in `results/RESULTS.md`.
 <!-- KEY-RESULTS:END -->
 
 **Interpretation.**
@@ -49,6 +52,7 @@ Exploratory p-values are corrected with BH-FDR over the 176 registered explorato
   - *Time.* No divergence-time signal is detected beyond topology.
   - *Conflict cases.* The geometry does not follow the tree on phylogeny-vs-folk conflict triplets, but untrained networks behave the same.
   - *Probe.* The Goodfire-style flat probe's held-out correlation is matched by a class-only input, and within groups it adds little over raw distances.
+  - *Causal.* Swapping the probe subspace between species changes the class answer more often than random subspaces do, but in only a small share of pairs. Ablating it does not beat random subspaces. A class-only subspace does as well on both tests, so the subspace is used for coarse class answers; a phylogeny-specific causal role is not shown.
 - **Ecology.** The top late-layer component orders animals from aquatic to terrestrial. It is confirmed on held-out species, with the caveat that names with water words were not controlled.
 - **Overall.** The representation mixes coarse folk categories, ecology and a modest phylogenetic signal. It is not a clean "tree of life" manifold like the one reported for Evo 2.
 
@@ -58,6 +62,7 @@ Exploratory p-values are corrected with BH-FDR over the 176 registered explorato
 - The co-occurrence control uses GloVe, not the model's own training corpus.
 - Topology comes from Open Tree and ranks from NCBI. Both are imperfect for deep splits, and edge-count path length depends on how densely each clade is sampled.
 - The within-group signal rests mostly on mammals and birds.
+- The causal readout is the class word, so the interventions cannot test within-group phylogeny directly.
 - Ecological and body-size similarity, which is phylogenetically conserved, is not controlled. So "agreement with the tree" is the precise claim, not "phylogenetic knowledge".
 
 Full details: [paper](paper.pdf), [all tables](../results/RESULTS.md), [experiments](experiments/experiments.md).
