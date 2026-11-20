@@ -42,7 +42,7 @@ flowchart LR
    - Gromov δ-hyperbolicity against matched nulls.
    - A neighbor-joining tree from the representations compared with the reference.
    - Goodfire's learned 10-d "flat subspace" probe, evaluated on held-out families with a shuffled-tree control.
-7. **Later stages.** Causal ablation, interchange, steering and behavioral tests (stage 3), ablations (stage 4), seed and template sensitivity (stage 5), and scale and training dynamics with Qwen3.5-0.8B, Qwen3-1.7B and Pythia checkpoints (stage 6).
+7. **Later stages.** Causal ablation, interchange, steering and behavioral tests (stage 3), ablations (stage 4), scale and training dynamics with Qwen3.5-0.8B, Qwen3-1.7B and Pythia checkpoints (stage 5), and seed and template sensitivity (stage 6).
 
 The full run matrix is in [`reports/planned-runs.md`](reports/planned-runs.md).
 
@@ -83,6 +83,11 @@ Edit `.env` so that `HF_HOME` and `DATA_DIR` point to a drive with space. PyTorc
 
 Running instructions will be added here once the pipeline is implemented.
 
+## Data and models on Hugging Face
+
+- Collection: [Phylogenetic geometry of the tree of life in LLMs](https://huggingface.co/collections/BurnyCoder/phylogenetic-geometry-of-the-tree-of-life-in-llms-6afffc252e04f452d5e7d905)
+- Frozen species set, Open Tree trees and conflict triplets: [BurnyCoder/phylogenetic-geometry-species](https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-species)
+
 ## Documentation
 
 - [Literature review](reports/literature-review.md) · [State-of-the-art methods review](reports/state-of-the-art-review.md)
@@ -96,7 +101,7 @@ Running instructions will be added here once the pipeline is implemented.
 - [ ] Stage 1a: top-3 PCA plots ("do they look like a tree?")
 - [ ] Stage 1b: triplet accuracy, Mantel, controls, conflict triplets
 - [ ] Stage 2: probes, geodesic, δ-hyperbolicity, neighbor-joining
-- [ ] Stages 3–6: causal and behavioral tests, ablations, sensitivity, scale
+- [ ] Stages 3–6: causal and behavioral tests, ablations, more models (scale), sensitivity
 - [ ] Paper, interactive website (GitHub Pages), Hugging Face collection
 
 *Author: Libor "Burny" Burian.*
