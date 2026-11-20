@@ -50,7 +50,7 @@ We give a language model short sentences that mention an animal ("Here is a fact
 | 04 | Behavioral judgments; causal ablation and interchange of the probe subspace | 3 | behavior done; causal rerun queued (deviation 19) | [04-causal-behavior-stage3](04-causal-behavior-stage3/experiment.md) |
 | 05 | Ablations (readout, normalization, format, names, probe variants) | 4 | done | [05-ablations-stage4](05-ablations-stage4/experiment.md) |
 | 06 | Habitat axis on held-out species (Addendum A) | addendum | done | [06-habitat-addendum](06-habitat-addendum/experiment.md) |
-| 07 | More models: scale, architecture, training dynamics | 5 | running | [07-more-models-stage5](07-more-models-stage5/experiment.md) |
+| 07 | More models: scale, architecture, training dynamics | 5 | done | [07-more-models-stage5](07-more-models-stage5/experiment.md) |
 | 08 | Sensitivity (triplet/probe/split seeds, templates, species subsamples) | 6 | done | [08-sensitivity-stage6](08-sensitivity-stage6/experiment.md) |
 | – | Output examples (nearest neighbours of rule-chosen species) | report | done | `results/qwen35_2b/examples/neighbors.json`, paper section "Output examples" |
 

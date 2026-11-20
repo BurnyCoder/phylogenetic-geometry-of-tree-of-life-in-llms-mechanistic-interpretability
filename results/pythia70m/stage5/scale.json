@@ -1,0 +1,23 @@
+{
+  "run": "pythia70m",
+  "model_id": "EleutherAI/pythia-70m",
+  "revision": null,
+  "params": 70000000.0,
+  "step": null,
+  "n_layers": 6,
+  "ta_within_by_layer": [
+    0.36307008443699795,
+    0.36663994853451976,
+    0.3952760574407412,
+    0.3908402239131696,
+    0.39409461999478373,
+    0.3689763024380093,
+    0.3635299203814905
+  ],
+  "ta_within_max": 0.3952760574407412,
+  "best_layer_rel_depth": 0.3333333333333333,
+  "maxT_p": 0.01,
+  "crossfit_ta_within": 0.3791942331161749,
+  "modal_layer": 4,
+  "mantel_pathlen_modal": 0.06157905553469166
+}

@@ -41,3 +41,11 @@ The "air" part of the stage-1a ordering (birds and insects at one end) is not su
 - No bats.
 - Mammal foraging strata are coarse categorical codes.
 - The axis was defined at one layer chosen during exploration (layer 21). That choice is part of the registered addendum, but it was informed by the stage-1a plots.
+
+## Revision after the final review (round 1, 2026-11-20)
+The interpretation above overstates the result in three places ([review](../../reviews/2026-11-20-final-review-round1.md), S3):
+- **Variance share.** The axis is the *top* late-layer component, but it holds only a few percent of the variance. "Dominant" is replaced by "top component".
+- **Name cues.** All 6 marine mammals have aquatic cues in their names (whale, seal, porpoise, sea otter), and water foraging in birds is phylogenetically clustered (ducks, grebes, loons). Name cues were not controlled.
+- **Link to the conflict triplets is withdrawn.** The untrained networks behave the same on those triplets (final review M4).
+
+The registered reading stands: the geometry mixes ecology with taxonomy.

@@ -45,7 +45,7 @@ def probe_subspace(V: np.ndarray, D: np.ndarray, train: np.ndarray, k: int = 10,
     m = train_probe(Z[train] / s, D[np.ix_(train, train)] * (np.pi / D.max()), k=k, steps=steps, seed=seed)
     M = m.W.detach().numpy() @ pca.components_ / s
     U = orthonormal(M)
-    Vc = V - V.mean(0)
+    Vc = V[train] - V[train].mean(0)  # same species set as the variance-matched random subspaces (deviation 20)
     return U, float(((Vc @ U) ** 2).sum() / (Vc**2).sum())
 
 

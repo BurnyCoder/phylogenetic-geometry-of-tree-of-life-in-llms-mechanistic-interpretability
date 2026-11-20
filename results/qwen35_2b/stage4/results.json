@@ -238,7 +238,11 @@
       "argmax_layer": 20,
       "mantel_pathlen_modal": 0.13433449136385822,
       "note": "common-name TA on the same triplets in note",
-      "common_names_same_triplets_modal": 0.5304885001076091
+      "common_names_same_triplets_modal": 0.5304885001076091,
+      "head_disjoint_binomial_modal": 0.31983411290448266,
+      "head_disjoint_binomial_max": 0.37989148393859884,
+      "head_disjoint_common_names_modal": 0.4760152459403531,
+      "n_head_disjoint": 10950
     }
   },
   "polysemous_included": {
@@ -252,84 +256,104 @@
       "test_test_spearman": 0.645506049961161,
       "train_test_pearson": 0.695057395501408,
       "train_train_pearson": 0.7798803506688813,
-      "test_test_within_group_spearman": 0.11710504532299575
+      "test_test_within_group_spearman": 0.11710504532299575,
+      "test_test_within_stratum_spearman": 0.16649700667746703
     },
     "angular_k3": {
       "test_test_pearson": 0.7156169044695114,
       "test_test_spearman": 0.7241513609360549,
       "train_test_pearson": 0.8055849675465184,
       "train_train_pearson": 0.9036698306115988,
-      "test_test_within_group_spearman": 0.2304068201986349
+      "test_test_within_group_spearman": 0.2304068201986349,
+      "test_test_within_stratum_spearman": 0.28986751528683896
     },
     "angular_k5": {
       "test_test_pearson": 0.7365647976183397,
       "test_test_spearman": 0.7403905483258854,
       "train_test_pearson": 0.8338943125413373,
       "train_train_pearson": 0.9377322837370233,
-      "test_test_within_group_spearman": 0.28519038037778355
+      "test_test_within_group_spearman": 0.28519038037778355,
+      "test_test_within_stratum_spearman": 0.31412840934929426
     },
     "angular_k10": {
       "test_test_pearson": 0.7499330717988114,
       "test_test_spearman": 0.7494251842762286,
       "train_test_pearson": 0.8490065490044922,
       "train_train_pearson": 0.9592699569325696,
-      "test_test_within_group_spearman": 0.3513054695394951
+      "test_test_within_group_spearman": 0.3513054695394951,
+      "test_test_within_stratum_spearman": 0.35304958175939855
     },
     "angular_k20": {
       "test_test_pearson": 0.7527676882907163,
       "test_test_spearman": 0.7533503632917397,
       "train_test_pearson": 0.8538454913937369,
       "train_train_pearson": 0.9656115114383592,
-      "test_test_within_group_spearman": 0.3453517289473036
+      "test_test_within_group_spearman": 0.3453517289473036,
+      "test_test_within_stratum_spearman": 0.3698041059422743
     },
     "euclid_k2": {
       "test_test_pearson": 0.6987269538537794,
       "test_test_spearman": 0.7063093614056762,
       "train_test_pearson": 0.7727627620942474,
       "train_train_pearson": 0.8528390888287838,
-      "test_test_within_group_spearman": 0.20180863927598472
+      "test_test_within_group_spearman": 0.20180863927598472,
+      "test_test_within_stratum_spearman": 0.2048995283121624
     },
     "euclid_k5": {
       "test_test_pearson": 0.7302375186625601,
       "test_test_spearman": 0.7323483106242951,
       "train_test_pearson": 0.817659942784425,
       "train_train_pearson": 0.9121652242020802,
-      "test_test_within_group_spearman": 0.29834867927761377
+      "test_test_within_group_spearman": 0.29834867927761377,
+      "test_test_within_stratum_spearman": 0.28427158683644643
     },
     "euclid_k10": {
       "test_test_pearson": 0.735997315233028,
       "test_test_spearman": 0.7359313476435124,
       "train_test_pearson": 0.8304465136326621,
       "train_train_pearson": 0.9317226141106513,
-      "test_test_within_group_spearman": 0.34192822045738197
+      "test_test_within_group_spearman": 0.34192822045738197,
+      "test_test_within_stratum_spearman": 0.35325758482519287
     },
     "poincare_k2": {
       "test_test_pearson": 0.6745749172846165,
       "test_test_spearman": 0.6802965227313472,
       "train_test_pearson": 0.7546208802297697,
       "train_train_pearson": 0.8434468127001772,
-      "test_test_within_group_spearman": 0.1943250457462072
+      "test_test_within_group_spearman": 0.1943250457462072,
+      "test_test_within_stratum_spearman": 0.19108186618077797
     },
     "poincare_k5": {
       "test_test_pearson": 0.720964908126259,
       "test_test_spearman": 0.7243707879859306,
       "train_test_pearson": 0.8146010635131979,
       "train_train_pearson": 0.9179348404229563,
-      "test_test_within_group_spearman": 0.24502258391613038
+      "test_test_within_group_spearman": 0.24502258391613038,
+      "test_test_within_stratum_spearman": 0.2858834636766441
     },
     "poincare_k10": {
       "test_test_pearson": 0.7275550444838994,
       "test_test_spearman": 0.7286790674883149,
       "train_test_pearson": 0.8245740106979543,
       "train_train_pearson": 0.9323668702806395,
-      "test_test_within_group_spearman": 0.3088435239842834
+      "test_test_within_group_spearman": 0.3088435239842834,
+      "test_test_within_stratum_spearman": 0.3425414436942143
     },
     "angular_k10_shuffled_tree": {
       "test_test_pearson": 0.03371802070525122,
       "test_test_spearman": 0.03863304262460398,
       "train_test_pearson": 0.1933563972038249,
       "train_train_pearson": 0.5853286461952841,
-      "test_test_within_group_spearman": 0.03422248590094068
+      "test_test_within_group_spearman": 0.03422248590094068,
+      "test_test_within_stratum_spearman": 4.6492066993328536e-05
+    },
+    "angular_k10_class_blob": {
+      "test_test_pearson": 0.8335611702931659,
+      "test_test_spearman": 0.8282610270434777,
+      "train_test_pearson": 0.8946733306196646,
+      "train_train_pearson": 0.9587594152528985,
+      "test_test_within_group_spearman": 0.15413385220335127,
+      "test_test_within_stratum_spearman": 0.0025728513232076513
     }
   },
   "geodesic_k_sweep": {

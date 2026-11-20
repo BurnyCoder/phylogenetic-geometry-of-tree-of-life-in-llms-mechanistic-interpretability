@@ -151,7 +151,9 @@ def run_stage6(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir, 
     pr = [cv_probe(V, P, fam, k=10, seed=1000 + s, groups=strata) for s in range(n_rep)]
     res["probe_seed"] = {"test_test_pearson": summarize([p["test_test_pearson"][0] for p in pr]),
                          "test_test_within_group_spearman": summarize([p["test_test_within_group_spearman"][0]
-                                                                       for p in pr])}
+                                                                       for p in pr]),
+                         "test_test_within_stratum_spearman": summarize([p["test_test_within_stratum_spearman"][0]
+                                                                         for p in pr])}
     log.info("probe seeds: held-out r %.3f ± %.3f", res["probe_seed"]["test_test_pearson"]["mean"],
              res["probe_seed"]["test_test_pearson"]["sd"])
     write_json(od / "results.json", res)

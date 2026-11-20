@@ -203,7 +203,10 @@
     "model": 0.8123425692695214,
     "perm_null_mean": 0.9882871536523931,
     "perm_null_sd": 0.0008994242353328411,
-    "perm_p": 0.047619047619047616
+    "perm_p": 0.047619047619047616,
+    "class_blob_null_mean": 0.9539042821158688,
+    "class_blob_null_sd": 0.004108188017707828,
+    "class_blob_p": 0.047619047619047616
   },
   "probe": {
     "model": {
@@ -222,6 +225,14 @@
       "train_train_pearson": [
         0.9593648917195964,
         0.0003653082160916082
+      ],
+      "test_test_within_group_spearman": [
+        0.3240911310778317,
+        0.0552708606535908
+      ],
+      "test_test_within_stratum_spearman": [
+        0.3263368241256751,
+        0.03462721648316587
       ]
     },
     "shuffled_tree": {
@@ -240,6 +251,14 @@
       "train_train_pearson": [
         0.5622102739728507,
         0.004818432576215341
+      ],
+      "test_test_within_group_spearman": [
+        -0.013760269642912909,
+        0.03509241642881865
+      ],
+      "test_test_within_stratum_spearman": [
+        -0.06289577038198911,
+        0.043321134892576184
       ]
     },
     "random_init": {
@@ -258,6 +277,14 @@
       "train_train_pearson": [
         0.5186141540662821,
         0.0036367393763409354
+      ],
+      "test_test_within_group_spearman": [
+        0.0570422724893251,
+        0.018370871952259067
+      ],
+      "test_test_within_stratum_spearman": [
+        0.07449011540139913,
+        0.04844084497541215
       ]
     },
     "glove": {
@@ -276,8 +303,44 @@
       "train_train_pearson": [
         0.845169729777087,
         0.0013614585515076922
+      ],
+      "test_test_within_group_spearman": [
+        0.21295389410656734,
+        0.04126856691194488
+      ],
+      "test_test_within_stratum_spearman": [
+        0.27707662763065144,
+        0.030216391058261124
       ]
     },
-    "selectivity_test_test": 0.7632775287991416
+    "class_blob": {
+      "test_test_pearson": [
+        0.8331338552154504,
+        0.0057975071654718085
+      ],
+      "test_test_spearman": [
+        0.8323516225512897,
+        0.006207237090347933
+      ],
+      "train_test_pearson": [
+        0.8925541244950628,
+        0.0027836634545823527
+      ],
+      "train_train_pearson": [
+        0.9576564234004017,
+        0.00038545978650938203
+      ],
+      "test_test_within_group_spearman": [
+        0.1322201191218924,
+        0.04371517807183289
+      ],
+      "test_test_within_stratum_spearman": [
+        0.007587480038920956,
+        0.0407610522301006
+      ]
+    },
+    "selectivity_test_test": 0.7632775287991416,
+    "class_only_predictor_pearson_all_pairs": 0.8709135606500337,
+    "raw_angular_within_stratum_spearman_all_species": 0.28975960823992997
   }
 }

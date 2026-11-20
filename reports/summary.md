@@ -17,32 +17,47 @@
 
 | Question | Result | Verdict |
 |---|---|---|
-| Tree order *within* coarse groups, beyond names and popularity (H1, primary) | TA_within at layer 6 = 0.475 [95% CI 0.427, 0.535], cross-fitted 0.473; max-T p <0.001; strongest required control pythia410m_step0 0.402; chance 0.333 | supported |
-| Global distance correlation with the tree (S1) | Mantel Spearman r = 0.362, Holm p 0.005 | supported |
-| Order within taxonomic orders (S2) | TA = 0.445, Holm p 0.005 | supported |
-| Survives when spelling points the wrong way (S3) | TA = 0.382, Holm p 0.360 | not supported |
-| Survives when GloVe co-occurrence points the wrong way (S4) | TA = 0.372, Holm p 0.360 | not supported |
-| Distances track divergence time beyond topology (S5) | partial Spearman 0.042, Holm p 0.360 | not supported |
-| Phylogeny-vs-folk conflict triplets (whale: hippo or whale shark?) | representation picks the tree-closer animal in 11/36 (binomial p 0.029) | follows the folk/ecological partner |
-| Learned 10-d flat subspace generalizes to held-out families (exploratory) | held-out r = 0.749 ± 0.010 vs shuffled tree -0.015, GloVe input 0.405 | exploratory |
-| Tree-like (hyperbolic) metric (exploratory) | Gromov δ_rel = 0.322 vs matched Gaussian 0.460, class-blob 0.188, exact tree 0 | exploratory |
-| The model *says* which species are related (exploratory) | chooses the tree-closer animal in 0.567 of 300 within-group triplets (binomial p 0.024) | exploratory |
-| Latin binomials carry the same structure (exploratory) | TA 0.332 vs common names on the same triplets 0.530 | no |
-| Late-layer top PC is an aquatic ↔ terrestrial habitat axis (Addendum A, held-out species) | marine vs ground mammals Holm p <0.001; waterbird ρ = -0.385 (Holm p <0.001); aerial birds ρ = -0.157 | aquatic end supported, aerial end not |
+| Tree order *within* coarse groups, beyond untrained networks, spelling, name length and popularity (H1, primary) | TA_within at layer 6 = 0.475 [95% CI 0.427, 0.535], cross-fitted 0.473; max-T p 0.001 (permutation floor); margin over the strongest required control (pythia410m_step0, 0.402) +0.073 [+0.008, +0.146]; chance 0.333 | supported |
+| Where the within-group signal is (post hoc) | birds 0.504 [0.373, 0.623], 45 nodes; mammals 0.533 [0.435, 0.645], 43 nodes; the other strata have few decision nodes and wide CIs | clear only in the two largest strata |
+| Global distance correlation with the tree (S1) | Mantel r = 0.362, Holm p 0.005; class oracle alone 0.508, log popularity alone 0.296 | supported (not specific to phylogeny) |
+| Order within taxonomic orders (S2) | TA = 0.445, Holm p 0.005; untrained: qwen35_2b_random 0.451, pythia410m_step0 0.424 | supported vs chance; not above the untrained controls |
+| Survives when spelling points the wrong way (S3) | TA = 0.382, Holm p 0.360; untrained: qwen35_2b_random 0.379, pythia410m_step0 0.375 | not supported |
+| Survives when GloVe co-occurrence points the wrong way (S4) | TA = 0.372, Holm p 0.360; untrained: qwen35_2b_random 0.367, pythia410m_step0 0.390 | not supported |
+| Lexically neutral triplets: spelling has no preference (post hoc) | TA = 0.484 (n = 6306); qwen35_2b_random 0.350, diff CI [+0.047, +0.209], pythia410m_step0 0.371, diff CI [+0.036, +0.184] | above the untrained controls |
+| Distances track divergence time beyond topology (S5) | partial Spearman 0.042, Holm p 0.360 | not supported (no time signal detected; low power by design) |
+| Phylogeny-vs-folk conflict triplets (whale: hippo or whale shark?) | tree-closer partner chosen in 11/36 (binomial p 0.029); untrained: qwen35_2b_random 13/36 (McNemar p 0.804); pythia410m_step0 13/36 (McNemar p 0.774); char3 9/36 (McNemar p 0.804) | geometry does not follow the tree here; no evidence the trained model differs from untrained networks |
+| Learned 10-d flat subspace (Goodfire-style probe; exploratory) | held-out r = 0.749, within-stratum 0.326; shuffled tree -0.015; class-only (class-blob) input 0.833, within-stratum 0.008; raw distances without a probe, within-stratum 0.290 | all-pairs r reflects coarse groups; within strata the probe adds little over raw distances |
+| Tree-like (hyperbolic) metric (exploratory) | Gromov δ_rel = 0.322 vs matched Gaussian 0.460, class-blob 0.188, exact tree 0 | does not separate trees from clusters |
+| The model *says* which species are related (exploratory) | chooses the tree-closer animal in 0.567 of 300 within-group triplets (binomial p 0.024, triplets not independent); agreement with the representation 0.633 vs 0.515 expected if independent | weak |
+| Latin binomials carry the same structure (exploratory) | head-noun-disjoint genus-split triplets: binomials 0.320 (best layer 0.380) vs common names 0.476 | much weaker |
+| Late-layer top PC orders aquatic → terrestrial (Addendum A, held-out species) | marine vs ground mammals (n = 6) Holm p 3.6e-07; waterbird ρ = -0.385 (Holm p 4.2e-04); aerial birds ρ = -0.157 | aquatic end supported (name cues not controlled), aerial end not |
 | Robust to seeds, template subsets, species subsamples (stage 6) | lowest TA_within over 20 repetitions of each perturbation 0.437; smallest margin over the best control 0.044 | robust |
+| Other models (stage 5; cross-fitted TA_within) | pythia70m 0.379; pythia160m 0.373; pythia410m 0.416; qwen35_08b 0.432; pythia1b 0.419; pythia14b 0.446; qwen3_17b 0.465; qwen35_2b 0.480; pythia28b 0.470 | descriptive |
+
+Exploratory p-values are corrected with BH-FDR over the 176 registered exploratory tests; q-values are in `results/RESULTS.md`.
 <!-- KEY-RESULTS:END -->
 
 **Interpretation.**
-- **Positive.** Qwen3.5-2B encodes a modest but robust amount of within-group phylogenetic order that untrained networks and simple name statistics do not explain. A 10-dimensional linear subspace carries tree distances that generalize to held-out families.
-- **Negative 1: lexical and co-occurrence statistics are not ruled out.** The order is not significant where spelling or co-occurrence disagree with the tree.
-- **Negative 2: no time signal.** It does not follow divergence times beyond topology.
-- **Negative 3: ecology wins on conflicts.** Where ecology and phylogeny conflict (whale vs hippo and shark), the geometry follows ecology. The dominant late-layer direction is an aquatic-to-terrestrial habitat axis, confirmed on held-out species.
-- **Overall.** The picture is a representation that mixes folk taxonomy, ecology and some genuine phylogenetic signal. It is not a clean "tree of life" manifold like the one reported for Evo 2.
+- **Positive.**
+  - Qwen3.5-2B encodes a modest amount of within-group tree order that the untrained networks and simple name statistics do not explain.
+  - It is robust across seeds, templates and species subsamples.
+  - It is clear in mammals and birds, the largest groups.
+  - It also beats the untrained networks on lexically neutral triplets (post hoc).
+- **Negative.**
+  - *Spelling and co-occurrence.* Where spelling or co-occurrence disagree with the tree, the model does no better than untrained networks. So phylogenetic information beyond those statistics is not shown.
+  - *Untrained match.* An untrained network matches the order within taxonomic orders (S2).
+  - *Time.* No divergence-time signal is detected beyond topology.
+  - *Conflict cases.* The geometry does not follow the tree on phylogeny-vs-folk conflict triplets, but untrained networks behave the same.
+  - *Probe.* The Goodfire-style flat probe's held-out correlation is matched by a class-only input, and within groups it adds little over raw distances.
+- **Ecology.** The top late-layer component orders animals from aquatic to terrestrial. It is confirmed on held-out species, with the caveat that names with water words were not controlled.
+- **Overall.** The representation mixes coarse folk categories, ecology and a modest phylogenetic signal. It is not a clean "tree of life" manifold like the one reported for Evo 2.
 
 **Main limitations.**
 - One main model of 2B parameters.
-- Vernacular names only: Latin binomials carry no structure.
+- Vernacular names only: Latin binomials carry much weaker structure.
 - The co-occurrence control uses GloVe, not the model's own training corpus.
-- Topology comes from Open Tree and ranks from NCBI. Both are imperfect references for deep splits.
+- Topology comes from Open Tree and ranks from NCBI. Both are imperfect for deep splits, and edge-count path length depends on how densely each clade is sampled.
+- The within-group signal rests mostly on mammals and birds.
+- Ecological and body-size similarity, which is phylogenetically conserved, is not controlled. So "agreement with the tree" is the precise claim, not "phylogenetic knowledge".
 
 Full details: [paper](paper.pdf), [all tables](../results/RESULTS.md), [experiments](experiments/experiments.md).

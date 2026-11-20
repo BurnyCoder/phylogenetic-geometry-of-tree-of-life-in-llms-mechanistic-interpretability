@@ -66,3 +66,10 @@
 - One model (2B, post-trained). Scale and other models come in stage 5.
 - The conflict triplets reuse species across triplets, so the binomial test treats them as independent although they are not.
 - S3/S4 subsets are selected on a baseline's errors, which makes them harder by construction for any representation correlated with that baseline.
+
+## Revision after the final review (round 1, 2026-11-20)
+Some statements above are corrected by the independent review ([review](../../reviews/2026-11-20-final-review-round1.md), [response](../../reviews/2026-11-20-final-review-round1-response.md)). The registered verdicts are unchanged. The new numbers are generated in `results/qwen35_2b/SUMMARY.md`.
+- **Conflict triplets (point 5).** The untrained controls pick the tree-closer partner about as rarely as Qwen does, and exact McNemar tests show no difference. "The geometry follows folk / ecological categories" is withdrawn. The supported statement is narrower: the geometry does not follow the tree on these hand-picked, mutually dependent triplets, and neither do untrained networks.
+- **S2.** S2 passes its registered test against chance, but random-init Qwen reaches the same value. On S3 and S4 the model also equals the untrained networks. Post hoc, on lexically neutral triplets (character 3-grams have no preference) the model exceeds the untrained networks.
+- **Where the signal is.** Per-stratum CIs show the within-group signal is clear only in mammals and birds, which have the most decision nodes. The other strata are too small to conclude anything, and arachnids fall below chance.
+- **Overall picture (point "Overall").** The phrase "folk-taxonomic tree … a good deal of family-level structure" overstates what was shown. The supported summary: modest within-group agreement with the tree beyond the registered controls, concentrated in mammals and birds, not shown to go beyond spelling or co-occurrence statistics.

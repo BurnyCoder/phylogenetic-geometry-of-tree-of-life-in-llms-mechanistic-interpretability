@@ -387,3 +387,14 @@ All deviations below were made **before any activation was extracted** (species 
       - The base log-probabilities are computed once per species, which is faster and gives identical values.
       - Random subspaces and swap pairs are drawn from their own seeded streams, so the causal tests no longer depend on the behavioural part of the run.
       - The mean log P(correct class) without editing is reported, so the size of the drop can be interpreted.
+20. **2026-11-20, ~12:45 — stage-3 readout, probe refit and a class-only control.** Recorded after the independent final review ([round 1](reviews/2026-11-20-final-review-round1.md), M6) and **before the deviation-19 rerun started**.
+    - **Undeclared implementation choices.** These were made when the stage-3 code was written, before the first run, but were not logged.
+      - *Prompt.* Registered: the completion "The {name} is a kind of ___". Implemented: a chat question for the post-trained model, "What kind of animal is the {name}? Choose one of: amphibian, …, reptile. Answer with one word." It is scored as a softmax over the candidate class words, each word by its full-sequence log-probability.
+      - *Probe.* The subspace is a flat probe refit on one half of the families, not the stage-2 probe. This is required by "measured on held-out species": the stage-2 probe saw every species.
+    - **Disclosure.** In the first run the probe subspace beat every random subspace, with both rank p-values at their floors. So the decision to rerun with more random subspaces was made after seeing a favourable direction. The floor made the registered test impossible to pass, so the rerun is needed. Both runs are reported side by side.
+    - **Interpretation check, exploratory.**
+      - *Why it is needed.* The probe is trained on all-pairs path length, which is dominated by the 13 coarse groups. The readout is the class word. A positive C-abl or C-swap therefore shows only that the subspace carries *class* information the model uses.
+      - *Control.* The rerun adds a **class-only subspace**: the same k = 10 flat probe, trained on the class-oracle distance (0 within a stratum, 1 between) with the same training species, steps and seed.
+      - *Rule.* A *phylogeny-specific* causal role is claimed only if the phylogeny probe beats this class-only subspace: a larger ablation drop per held-out species (one-sided Wilcoxon) and more answer switches (one-sided exact McNemar over the same pairs), each at p < 0.05.
+      - The registered C-abl and C-swap tests against random subspaces are unchanged.
+    - **Variance matching.** Captured variance is now computed on the training species, the same set the random subspaces are matched on. Previously the probe's variance was computed over all species.

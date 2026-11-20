@@ -47,3 +47,9 @@
 - Report the readout and normalization explicitly. They change the headline number by more than most "method" choices.
 - Using binomials is not a neutral substitution for common names. LLM knowledge is indexed by the names people write.
 - A hyperbolic probe is not automatically better for tree targets. With linear maps into low dimensions, the flat metrics did as well or better here.
+
+## Revision after the final review (round 1, 2026-11-20)
+Corrections from the [review](../../reviews/2026-11-20-final-review-round1.md):
+- **Point 4 is withdrawn.** "The probe captures within-class structure" relied on the pooled within-group Spearman, which a group-mean predictor already saturates (M2). With the per-stratum metric and a class-blob control, the probe's within-stratum order is real but no larger than that of the raw distances.
+- **Point 3 is softened.** On genus-split triplets that are also head-noun-disjoint, binomials carry much weaker structure that appears only in late layers. They are not structureless. The common-name comparator on those triplets is lower than the figure quoted above.
+- **Point 6 is made precise.** The Poincaré probe is never better than the best flat (Euclidean) probe. At k = 2 it does beat the angular probe.
