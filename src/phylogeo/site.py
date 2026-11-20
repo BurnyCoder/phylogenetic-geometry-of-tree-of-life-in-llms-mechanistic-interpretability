@@ -1,27 +1,32 @@
 """Build the static GitHub Pages explorer (site/) from results/ (no hand-typed numbers).
 
-Global context: the ``site`` phase copies the interactive Plotly figures and PNGs
-produced by the analysis phases into ``site/assets/`` and writes ``site/index.html``
-whose tables are rendered from the results JSON (via report.py's Markdown,
-converted to HTML). Deployed by .github/workflows/pages.yml.
+Global context: the ``site`` phase
+1. builds the labelled interactive figures (``viz/figures.py``), embeds them as Plotly HTML cards with a
+   verdict badge, and exports a PNG of each to ``reports/figures/viz/``;
+2. injects a gallery of those PNGs, each linking to its interactive card, near the top of README.md;
+3. adds a nearest-neighbour explorer for every species (data: ``results/<run>/viz/neighbors.json``);
+4. keeps the generated tables and the stage PNGs below (report.py's Markdown converted to HTML).
+Deployed by .github/workflows/pages.yml.
 """
 
 from __future__ import annotations
 
 import html
+import json
 import re
 import shutil
 from pathlib import Path
 
 from phylogeo.config import REPO_ROOT, RESULTS_DIR
-from phylogeo.report import (conflict_table, eco_table, key_results_md, power_table, stage1a_table, stage1b_tables,
-                             stage2_table, stage3_table, stage4_table, stage5_table, stage6_table)
+from phylogeo.report import (conflict_table, eco_table, inject_block, key_results_md, power_table, stage1a_table,
+                             stage1b_tables, stage2_table, stage3_table, stage4_table, stage5_table, stage6_table)
 
 SITE = REPO_ROOT / "site"
+PNG_DIR = REPO_ROOT / "reports" / "figures" / "viz"
 CSS = """
 :root{color-scheme:light dark;--bg:#fcfcfb;--fg:#0b0b0b;--muted:#52514e;--line:#e2e1dc;--accent:#2a78d6}
 @media (prefers-color-scheme:dark){:root{--bg:#1a1a19;--fg:#f0efec;--muted:#c3c2b7;--line:#3a3a37;--accent:#3987e5}}
-body{background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;max-width:1100px;margin:auto;padding:24px}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;max-width:1200px;margin:auto;padding:24px}
 h1{font-size:1.7em}h2{border-bottom:1px solid var(--line);padding-bottom:4px;margin-top:2em}
 a{color:var(--accent)}small,.muted{color:var(--muted)}
 table{border-collapse:collapse;font-size:13px;margin:12px 0;display:block;overflow-x:auto}
@@ -29,7 +34,21 @@ th,td{border:1px solid var(--line);padding:4px 8px;text-align:left;white-space:n
 img{max-width:100%;border:1px solid var(--line);border-radius:4px}
 iframe{width:100%;height:820px;border:1px solid var(--line);border-radius:4px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+/* figure cards keep the light chart surface in both colour schemes (charts are drawn for it) */
+.card{background:#fcfcfb;color:#0b0b0b;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:20px 0}
+.card h3{margin:2px 0 6px;font-size:1.15em}.card .cap{color:#52514e;font-size:13.5px;margin:6px 0 2px}
+.card a{color:#2a78d6}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;margin-right:6px}
+.k-positive{background:#0ca30c}.k-negative{background:#d03b3b}.k-mixed{background:#fab219;color:#0b0b0b}
+.k-ground-truth{background:#2a78d6}.k-example{background:#8a8984}
+.nav{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.nav a{text-decoration:none;font-size:12.5px;padding:3px 9px;
+border:1px solid var(--line);border-radius:6px;color:var(--fg)}
+.nn{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:10px}
+.nn h4{margin:0 0 4px;font-size:13.5px}.chip{display:block;padding:3px 8px;margin:2px 0;border-radius:5px;font-size:12.5px}
+.key span{display:inline-block;padding:2px 8px;border-radius:5px;font-size:12px;margin:2px}
+input{font:inherit;padding:4px 8px;border:1px solid #c3c2b7;border-radius:6px;min-width:260px}
 """
+ICON = {"positive": "✓", "negative": "✗", "mixed": "◐", "ground truth": "◆", "example": "●"}
 
 
 def md_table_to_html(md: str) -> str:
@@ -66,39 +85,81 @@ def _copy(src: Path, dst_dir: Path) -> str | None:
     return f"assets/{dst_dir.name}/{src.name}"
 
 
-def layer_profiles_html(run: str) -> str:
-    """Interactive Plotly chart: TA_within vs relative layer depth for the main run, its controls
-    and every stage-5 model (click legend entries to toggle). Data come from results JSON."""
-    import json
+def badge(kind: str, verdict: str) -> str:
+    """Status-coloured pill with an icon and text, so the verdict never relies on colour alone."""
+    return (f'<span class="badge k-{kind.replace(" ", "-")}">{ICON[kind]} {html.escape(kind)}</span>'
+            f"<b>{html.escape(verdict)}</b>")
 
-    import plotly.graph_objects as go
 
-    traces = {}
-    s1b = RESULTS_DIR / run / "stage1b" / "results.json"
-    if s1b.exists():
-        for r, rec in json.loads(s1b.read_text())["models"].items():
-            traces[f"{r} (stage 1b)"] = rec["ta_within_by_layer"]
-    for f in sorted(RESULTS_DIR.glob("*/stage5/scale.json")):
-        rec = json.loads(f.read_text())
-        traces.setdefault(rec["run"], rec["ta_within_by_layer"])
-    if not traces:
-        return "<p>(not yet computed)</p>"
-    fig = go.Figure()
-    for name, y in traces.items():
-        fig.add_scatter(x=[i / (len(y) - 1) for i in range(len(y))], y=y, mode="lines+markers", name=name,
-                        marker={"size": 5}, line={"width": 2}, visible=True if run in name or "random" in name
-                        or "step0" in name else "legendonly")
-    fig.add_hline(y=1 / 3, line_dash="dot", annotation_text="chance 1/3")
-    fig.update_layout(height=460, margin={"l": 50, "r": 10, "t": 30, "b": 40}, template="plotly_white",
-                      xaxis_title="relative layer depth (0 = embeddings, 1 = last layer)", yaxis_title="TA_within",
-                      legend={"font": {"size": 10}})
-    return fig.to_html(include_plotlyjs="cdn", full_html=False)
+def figure_cards(figs: list[dict]) -> tuple[str, str]:
+    """(jump menu, cards) for the figure records. Plotly.js is loaded once, from the CDN, by the first card."""
+    nav = '<div class="nav">' + "".join(f'<a href="#fig-{r["key"]}">{ICON[r["kind"]]} {html.escape(r["title"])}</a>'
+                                        for r in figs) + '<a href="#fig-explorer">● Explore neighbours</a></div>'
+    cards = []
+    cfg = {"responsive": True, "displaylogo": False, "toImageButtonOptions": {"format": "png", "scale": 2}}
+    for i, r in enumerate(figs):
+        div = r["fig"].to_html(include_plotlyjs="cdn" if i == 0 else False, full_html=False, config=cfg,
+                               div_id=f"plot-{r['key']}")
+        cards.append(f'<div class="card" id="fig-{r["key"]}"><h3>{html.escape(r["title"])}</h3>'
+                     f'<div>{badge(r["kind"], r["verdict"])}</div>{div}<p class="cap">{html.escape(r["caption"])} '
+                     f'<a href="https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-'
+                     f'interpretability/blob/main/reports/figures/viz/{r["key"]}.png">PNG</a></p></div>')
+    return nav, "\n".join(cards)
+
+
+def explorer_html(run: str) -> str:
+    """Nearest-neighbour explorer: type any species, see its nearest species under the tree (ground truth),
+    the model and the untrained controls, coloured by the closest shared rank."""
+    from phylogeo.viz.figures import DISPLAY, LEVEL_COLORS
+
+    f = RESULTS_DIR / run / "viz" / "neighbors.json"
+    if not f.exists():
+        return ""
+    d = json.loads(f.read_text())
+    reps = ["tree", run, *[r for r in d["neighbors"] if r not in ("tree", run)]]
+    data = {"names": d["names"], "strata": d["strata"], "tax": d["taxonomy"], "levels": d["levels"],
+            "nb": d["neighbors"], "reps": reps, "labels": [DISPLAY.get(r, r) for r in reps],
+            "levelNames": d["level_names"], "colors": LEVEL_COLORS}
+    key = "".join(f'<span style="background:{c};color:{"#fff" if i < 3 else "#0b0b0b"}">{n}</span>'
+                  for i, (c, n) in enumerate(zip(LEVEL_COLORS, d["level_names"])))
+    options = "".join(f'<option value="{html.escape(n)}">' for n in sorted(d["names"], key=str.lower))
+    return f"""<div class="card" id="fig-explorer"><h3>Explore: the nearest species of any species</h3>
+<div>{badge("example", f"all {len(d['names'])} species, layer {d['layer']}")}</div>
+<p class="cap">Type or pick a species. Each column lists its {d['k']} nearest species under one representation; the
+colour is the closest Linnaean rank it shares with the query. The first column is the ground truth (reference tree;
+ties in tree distance keep table order).</p>
+<input list="species-list" id="nn-q" value="lion" aria-label="species"><datalist id="species-list">{options}</datalist>
+<span id="nn-tax" class="cap"></span><div class="key">{key}</div><div class="nn" id="nn-out"></div></div>
+<script>
+const NN = {json.dumps(data)};
+function nnRender() {{
+  const q = document.getElementById('nn-q').value, i = NN.names.indexOf(q);
+  if (i < 0) return;
+  const t = NN.tax;
+  document.getElementById('nn-tax').textContent = ' ' + t.sci_name[i] + ' · ' + [t.genus[i], t.family[i], t.order[i],
+    t['class'][i], t.phylum[i]].filter(Boolean).join(' · ');
+  document.getElementById('nn-out').innerHTML = NN.reps.map((r, k) => {{
+    const lv = NN.levels[r][i], nb = NN.nb[r][i], close = lv.filter(v => v <= 2).length;
+    return '<div><h4>' + NN.labels[k] + '<br><small>' + close + '/' + lv.length + ' same order or closer</small></h4>' +
+      nb.map((j, m) => '<span class="chip" title="' + NN.levelNames[lv[m]] + ' · ' + NN.strata[j] + '" style="background:' +
+        NN.colors[lv[m]] + ';color:' + (lv[m] < 3 ? '#fff' : '#0b0b0b') + '">' + (m + 1) + '. ' + NN.names[j] +
+        '</span>').join('') + '</div>';
+  }}).join('');
+}}
+document.getElementById('nn-q').addEventListener('input', nnRender); nnRender();
+</script>"""
 
 
 def build_site(run: str = "qwen35_2b") -> Path:
+    from phylogeo.viz.figures import build_figures, export_pngs, readme_gallery_md
+
     if SITE.exists():
         shutil.rmtree(SITE)
     (SITE / "assets").mkdir(parents=True)
+    figs = build_figures(run)
+    export_pngs(figs, PNG_DIR)
+    inject_block(REPO_ROOT / "README.md", readme_gallery_md(figs), tag="FIGURES")
+    nav, cards = figure_cards(figs)
     s1a = RESULTS_DIR / run / "stage1a"
     a_dir = SITE / "assets" / "stage1a"
     pca3d = _copy(s1a / "pca3d.html", a_dir)
@@ -107,41 +168,48 @@ def build_site(run: str = "qwen35_2b") -> Path:
     stage_imgs = {k: [_copy(p, SITE / "assets" / k) for p in sorted((RESULTS_DIR / run / k).glob("*.png"))]
                   for k in ("stage2", "stage4", "stage6", "eco")}
     s5_imgs = [_copy(p, SITE / "assets" / "stage5") for p in sorted((RESULTS_DIR / "stage5").glob("*.png"))]
-    s2_imgs = stage_imgs["stage2"]
 
     def gallery(paths):
         return '<div class="grid">' + "".join(f'<a href="{p}"><img src="{p}" loading="lazy" alt="{Path(p).stem}"></a>'
                                              for p in paths if p) + "</div>"
 
+    kinds = "".join(f'{badge(k, "")} ' for k in ICON)
     body = f"""
 <h1>Phylogenetic geometry of the tree of life in an LLM</h1>
 <p class="muted">Libor "Burny" Burian · Qwen3.5-2B · 400 animal species · Open Tree of Life reference ·
 <a href="https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability">code &amp; paper</a> ·
 <a href="https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/preregistration.md">preregistration</a></p>
-<p>Do the hidden states an LLM computes for animal names reflect the tree of life? Each point below is one species
-(mean residual-stream vector at the last name token over 8 prompts). Color = super-group (blue vertebrates, orange
-arthropods, green other invertebrates, gray other), marker = class; thin gray lines = the reference tree drawn with
-internal nodes at the centroid of their descendants. Use the slider to move through layers; hover for names.</p>
+<p>Do the hidden states an LLM computes for animal names reflect the tree of life? Each species is represented by the
+residual-stream vector at the last token of its name, averaged over 8 prompts. The figures below compare that geometry
+with the reference tree (ground truth), with untrained networks and with simple name statistics. Every chart is
+interactive (hover, zoom, click legend entries) and labelled with its verdict, computed from the results files.</p>
+<h2>Visual summary</h2><p>{kinds}</p>{nav}
+{cards}
+{explorer_html(run)}
 <h2>Headline results</h2>{md_table_to_html(key_results_md(run))}
-<h2>Stage 1a — top-3 PCA, interactive</h2>
+<h2>Stage 1a — top-3 PCA, interactive 3D</h2>
+<p>Each point is one species; colour = super-group (blue vertebrates, orange arthropods, aqua other invertebrates,
+gray other), marker = stratum; thin gray lines = the reference tree with internal nodes at the centroid of their
+descendants. Use the slider to move through layers.</p>
 {f'<iframe src="{pca3d}" title="3D PCA of species representations"></iframe>' if pca3d else '<p>(not yet computed)</p>'}
 <h2>Stage 1a — figures</h2>{gallery(imgs)}
 <h2>Stage 1a — checks per layer</h2>{md_table_to_html(stage1a_table(run))}
 <h2>Stage 1b — triplet accuracy (primary) and secondary hypotheses</h2>{md_table_to_html(stage1b_tables(run))}
 {gallery(s1b_imgs)}
-<h2>Explore: within-group triplet accuracy across layers and models</h2>
-<p>Click legend entries to show or hide models (stage-5 models are hidden at first).</p>{layer_profiles_html(run)}
 <h2>Phylogeny-vs-folk conflict triplets</h2>{md_table_to_html(conflict_table(run))}
-<h2>Stage 2 — geometry and probes</h2>{md_table_to_html(stage2_table(run))}{gallery(s2_imgs)}
+<h2>Stage 2 — geometry and probes</h2>{md_table_to_html(stage2_table(run))}{gallery(stage_imgs["stage2"])}
 <h2>Stage 3 — behavior and causal tests</h2>{md_table_to_html(stage3_table(run))}
 <h2>Stage 4 — ablations</h2>{md_table_to_html(stage4_table(run))}{gallery(stage_imgs["stage4"])}
 <h2>Addendum A — habitat axis on held-out species</h2>{md_table_to_html(eco_table(run))}{gallery(stage_imgs["eco"])}
 <h2>Stage 5 — other models: scale and training dynamics</h2>{md_table_to_html(stage5_table())}{gallery(s5_imgs)}
 <h2>Stage 6 — sensitivity</h2>{md_table_to_html(stage6_table(run))}{gallery(stage_imgs["stage6"])}
 <h2>Power simulation</h2>{md_table_to_html(power_table())}
-<p class="muted">All numbers are generated from <code>results/</code> by <code>python -m phylogeo.run --phases report,site</code>.</p>
+<p class="muted">All numbers are generated from <code>results/</code> by
+<code>python -m phylogeo.run --phases viz_data,report,site</code>.</p>
 """
-    page = f"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Phylogenetic geometry in LLMs</title><style>{CSS}</style></head><body>{body}</body></html>"
+    page = (f"<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' "
+            f"content='width=device-width,initial-scale=1'><title>Phylogenetic geometry in LLMs</title>"
+            f"<style>{CSS}</style></head><body>{body}</body></html>")
     (SITE / "index.html").write_text(page, encoding="utf-8")
     (SITE / ".nojekyll").write_text("", encoding="utf-8")
     return SITE / "index.html"
