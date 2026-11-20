@@ -1,0 +1,1305 @@
+{
+  "layer": 21,
+  "n_mammals": 79,
+  "n_birds": 80,
+  "tests": {
+    "M1_marine_lt_ground": {
+      "n": 6,
+      "n_ground": 61,
+      "median": -0.5811389684677124,
+      "median_ground": 1.6755118370056152,
+      "p": 1.2024567297430622e-07,
+      "holm_p": 3.6073701892291865e-07
+    },
+    "M2_aerial_gt_ground": {
+      "n": 0,
+      "evaluable": false,
+      "median": null
+    },
+    "B1_water_negative": {
+      "rho": -0.3848617144693185,
+      "p": 0.00021179065999288692,
+      "holm_p": 0.00042358131998577385
+    },
+    "B2_aerial_positive": {
+      "rho": -0.1565777428295368,
+      "p": 0.9172797456923002,
+      "n_nonzero_aerial": 9,
+      "holm_p": 0.9172797456923002
+    }
+  },
+  "heldout_scores": [
+    {
+      "common_name": "Eurasian lynx",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.3550214767456055
+    },
+    {
+      "common_name": "stoat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 3.422588586807251
+    },
+    {
+      "common_name": "caracal",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.9263620376586914
+    },
+    {
+      "common_name": "roe deer",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.7226200103759766
+    },
+    {
+      "common_name": "arctic fox",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.059013843536377
+    },
+    {
+      "common_name": "golden jackal",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.600132703781128
+    },
+    {
+      "common_name": "serval",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.143705368041992
+    },
+    {
+      "common_name": "American black bear",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.4932119846343994
+    },
+    {
+      "common_name": "European pine marten",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 4.309108734130859
+    },
+    {
+      "common_name": "European bison",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.578587532043457
+    },
+    {
+      "common_name": "honey badger",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.1609125137329102
+    },
+    {
+      "common_name": "African wild dog",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.327568769454956
+    },
+    {
+      "common_name": "Asian black bear",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.319445252418518
+    },
+    {
+      "common_name": "ocelot",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.6399362087249756
+    },
+    {
+      "common_name": "jungle cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.222051978111267
+    },
+    {
+      "common_name": "dhole",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.3653595447540283
+    },
+    {
+      "common_name": "Fennec fox",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.7729538679122925
+    },
+    {
+      "common_name": "bobcat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.276824712753296
+    },
+    {
+      "common_name": "European fallow deer",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.511014699935913
+    },
+    {
+      "common_name": "muskox",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.6755118370056152
+    },
+    {
+      "common_name": "European polecat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.6220176219940186
+    },
+    {
+      "common_name": "sand cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.3581640720367432
+    },
+    {
+      "common_name": "clouded leopard",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.8720873594284058
+    },
+    {
+      "common_name": "leopard cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.9275670051574707
+    },
+    {
+      "common_name": "common raccoon dog",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.6138050556182861
+    },
+    {
+      "common_name": "beech marten",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 4.13131046295166
+    },
+    {
+      "common_name": "Iberian lynx",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.58451509475708
+    },
+    {
+      "common_name": "sun bear",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.6927469968795776
+    },
+    {
+      "common_name": "sea otter",
+      "stratum": "mammals",
+      "forstrat_mammal": "M",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": -0.14960522949695587
+    },
+    {
+      "common_name": "saiga antelope",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.0911287069320679
+    },
+    {
+      "common_name": "vicu\u00f1a",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.8677856922149658
+    },
+    {
+      "common_name": "Canada lynx",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.105114459991455
+    },
+    {
+      "common_name": "Javan rhinoceros",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.10163231939077377
+    },
+    {
+      "common_name": "blackbuck",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 3.283447027206421
+    },
+    {
+      "common_name": "fishing cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.28742605447769165
+    },
+    {
+      "common_name": "African golden cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.4838430881500244
+    },
+    {
+      "common_name": "springbok",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 3.3001623153686523
+    },
+    {
+      "common_name": "jaguarundi",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.7669079303741455
+    },
+    {
+      "common_name": "sika deer",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.8489135503768921
+    },
+    {
+      "common_name": "European mink",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.3018827438354492
+    },
+    {
+      "common_name": "alpine ibex",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.1660258769989014
+    },
+    {
+      "common_name": "Sumatran rhinoceros",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": -0.030985668301582336
+    },
+    {
+      "common_name": "spectacled bear",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.1039931774139404
+    },
+    {
+      "common_name": "sloth bear",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.36837613582611084
+    },
+    {
+      "common_name": "argali",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 3.523922920227051
+    },
+    {
+      "common_name": "black-footed cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.4412287473678589
+    },
+    {
+      "common_name": "Corsac fox",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.8938219547271729
+    },
+    {
+      "common_name": "nilgai",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.6478463411331177
+    },
+    {
+      "common_name": "markhor",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.3459858894348145
+    },
+    {
+      "common_name": "Bengal fox",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.5650129318237305
+    },
+    {
+      "common_name": "addax",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.403043746948242
+    },
+    {
+      "common_name": "proboscis monkey",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.1391841173171997
+    },
+    {
+      "common_name": "chital",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 3.0248570442199707
+    },
+    {
+      "common_name": "banteng",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.0789103507995605
+    },
+    {
+      "common_name": "sambar deer",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.5889992117881775
+    },
+    {
+      "common_name": "marbled cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.14967569708824158
+    },
+    {
+      "common_name": "oncilla",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.8573732376098633
+    },
+    {
+      "common_name": "arctic hare",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.2687339782714844
+    },
+    {
+      "common_name": "maned wolf",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.1989049911499023
+    },
+    {
+      "common_name": "Hamadryas baboon",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.9105279445648193
+    },
+    {
+      "common_name": "Japanese macaque",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.0945115089416504
+    },
+    {
+      "common_name": "margay",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.2542431354522705
+    },
+    {
+      "common_name": "takin",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.7462232112884521
+    },
+    {
+      "common_name": "Mediterranean monk seal",
+      "stratum": "mammals",
+      "forstrat_mammal": "M",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": -0.7647963166236877
+    },
+    {
+      "common_name": "mountain goat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.1560068130493164
+    },
+    {
+      "common_name": "greater kudu",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.7547383308410645
+    },
+    {
+      "common_name": "Sei whale",
+      "stratum": "mammals",
+      "forstrat_mammal": "M",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": -2.4657535552978516
+    },
+    {
+      "common_name": "bat-eared fox",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.1636441946029663
+    },
+    {
+      "common_name": "Chinese mountain cat",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.2457400560379028
+    },
+    {
+      "common_name": "kodkod",
+      "stratum": "mammals",
+      "forstrat_mammal": "Ar",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.5661547183990479
+    },
+    {
+      "common_name": "olive baboon",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.10414981842041
+    },
+    {
+      "common_name": "siamang",
+      "stratum": "mammals",
+      "forstrat_mammal": "Ar",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.6427630186080933
+    },
+    {
+      "common_name": "white-tailed deer",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.3841814994812012
+    },
+    {
+      "common_name": "harbour porpoise",
+      "stratum": "mammals",
+      "forstrat_mammal": "M",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": -0.39748165011405945
+    },
+    {
+      "common_name": "waterbuck",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 2.260867118835449
+    },
+    {
+      "common_name": "Virginia opossum",
+      "stratum": "mammals",
+      "forstrat_mammal": "S",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.0156493186950684
+    },
+    {
+      "common_name": "bearded seal",
+      "stratum": "mammals",
+      "forstrat_mammal": "M",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 0.4684637784957886
+    },
+    {
+      "common_name": "Ethiopian wolf",
+      "stratum": "mammals",
+      "forstrat_mammal": "G",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": 1.7209722995758057
+    },
+    {
+      "common_name": "common minke whale",
+      "stratum": "mammals",
+      "forstrat_mammal": "M",
+      "water_pct_bird": "",
+      "aerial_pct_bird": "",
+      "axis_score": -2.112098217010498
+    },
+    {
+      "common_name": "Eurasian jay",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.955774307250977
+    },
+    {
+      "common_name": "common buzzard",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.453694820404053
+    },
+    {
+      "common_name": "mute swan",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 3.321983575820923
+    },
+    {
+      "common_name": "bearded vulture",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.592504501342773
+    },
+    {
+      "common_name": "common pheasant",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.743231296539307
+    },
+    {
+      "common_name": "white-tailed eagle",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "50.0",
+      "aerial_pct_bird": "10.0",
+      "axis_score": 3.661818504333496
+    },
+    {
+      "common_name": "Eurasian teal",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.240303993225098
+    },
+    {
+      "common_name": "bald eagle",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "40.0",
+      "aerial_pct_bird": "10.0",
+      "axis_score": 3.3712449073791504
+    },
+    {
+      "common_name": "grey partridge",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.577205181121826
+    },
+    {
+      "common_name": "Egyptian vulture",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.2642741203308105
+    },
+    {
+      "common_name": "ruddy shelduck",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.60430908203125
+    },
+    {
+      "common_name": "Eurasian bittern",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "50.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.107663154602051
+    },
+    {
+      "common_name": "little egret",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "70.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.1351237297058105
+    },
+    {
+      "common_name": "Eurasian griffon vulture",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.413640022277832
+    },
+    {
+      "common_name": "whooper swan",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "80.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 3.420593500137329
+    },
+    {
+      "common_name": "carrion crow",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "10.0",
+      "axis_score": 4.443661212921143
+    },
+    {
+      "common_name": "purple heron",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "70.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.138106346130371
+    },
+    {
+      "common_name": "European turtle dove",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.664931297302246
+    },
+    {
+      "common_name": "long-eared owl",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.181238174438477
+    },
+    {
+      "common_name": "yellowhammer",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.0828423500061035
+    },
+    {
+      "common_name": "Cinereous vulture",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.514410972595215
+    },
+    {
+      "common_name": "common shelduck",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "90.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.521995544433594
+    },
+    {
+      "common_name": "red kite",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.0889363288879395
+    },
+    {
+      "common_name": "common sandpiper",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "50.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.095139503479004
+    },
+    {
+      "common_name": "hen harrier",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 7.16392707824707
+    },
+    {
+      "common_name": "tufted duck",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 2.96286678314209
+    },
+    {
+      "common_name": "black swan",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 2.398921012878418
+    },
+    {
+      "common_name": "black woodpecker",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.836260795593262
+    },
+    {
+      "common_name": "Eurasian spoonbill",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.648061752319336
+    },
+    {
+      "common_name": "red junglefowl",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 2.7461156845092773
+    },
+    {
+      "common_name": "common pochard",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.558493614196777
+    },
+    {
+      "common_name": "emperor penguin",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 1.2425239086151123
+    },
+    {
+      "common_name": "short-toed snake eagle",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "20.0",
+      "axis_score": 2.89616060256958
+    },
+    {
+      "common_name": "steppe eagle",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.36808443069458
+    },
+    {
+      "common_name": "shoebill",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 1.9876736402511597
+    },
+    {
+      "common_name": "Eurasian curlew",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "20.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 7.026318550109863
+    },
+    {
+      "common_name": "mandarin duck",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 2.1473963260650635
+    },
+    {
+      "common_name": "tawny owl",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "10.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.375722885131836
+    },
+    {
+      "common_name": "western marsh harrier",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 7.589702129364014
+    },
+    {
+      "common_name": "short-eared owl",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.488306045532227
+    },
+    {
+      "common_name": "Canada goose",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "40.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 3.889603853225708
+    },
+    {
+      "common_name": "hawfinch",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.905214786529541
+    },
+    {
+      "common_name": "Eurasian wryneck",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.8179497718811035
+    },
+    {
+      "common_name": "western house martin",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "33.0",
+      "axis_score": 4.744743824005127
+    },
+    {
+      "common_name": "pied avocet",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "50.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.74257755279541
+    },
+    {
+      "common_name": "song thrush",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.199850082397461
+    },
+    {
+      "common_name": "European herring gull",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "60.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.919034004211426
+    },
+    {
+      "common_name": "Eurasian green woodpecker",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.512934684753418
+    },
+    {
+      "common_name": "little ringed plover",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "20.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.811480522155762
+    },
+    {
+      "common_name": "little bustard",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.600759983062744
+    },
+    {
+      "common_name": "fieldfare",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 8.251583099365234
+    },
+    {
+      "common_name": "bluethroat",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.141066551208496
+    },
+    {
+      "common_name": "common redstart",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 7.4489593505859375
+    },
+    {
+      "common_name": "European nightjar",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "10.0",
+      "axis_score": 4.696532249450684
+    },
+    {
+      "common_name": "crested lark",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.163351535797119
+    },
+    {
+      "common_name": "Eurasian nuthatch",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.171520233154297
+    },
+    {
+      "common_name": "eastern imperial eagle",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.0797624588012695
+    },
+    {
+      "common_name": "European honey buzzard",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.574043273925781
+    },
+    {
+      "common_name": "great bustard",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.362826347351074
+    },
+    {
+      "common_name": "black-throated loon",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.844812393188477
+    },
+    {
+      "common_name": "northern nutcracker",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.952690601348877
+    },
+    {
+      "common_name": "white-throated dipper",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "80.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.368437767028809
+    },
+    {
+      "common_name": "Eurasian oystercatcher",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "40.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.096315383911133
+    },
+    {
+      "common_name": "bohemian waxwing",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "20.0",
+      "axis_score": 6.934226036071777
+    },
+    {
+      "common_name": "Atlantic puffin",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 3.8862366676330566
+    },
+    {
+      "common_name": "long-tailed tit",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.134373664855957
+    },
+    {
+      "common_name": "gyrfalcon",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "10.0",
+      "axis_score": 4.288731575012207
+    },
+    {
+      "common_name": "European roller",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "10.0",
+      "axis_score": 0.9186117649078369
+    },
+    {
+      "common_name": "black-necked grebe",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.7710771560668945
+    },
+    {
+      "common_name": "common greenshank",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "60.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.4268341064453125
+    },
+    {
+      "common_name": "common tern",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.095362186431885
+    },
+    {
+      "common_name": "bar-headed goose",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "20.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 3.6244752407073975
+    },
+    {
+      "common_name": "common gull",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "60.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 5.44088077545166
+    },
+    {
+      "common_name": "Taiga bean goose",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "20.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 3.768993377685547
+    },
+    {
+      "common_name": "long-tailed duck",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "100.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 2.8509726524353027
+    },
+    {
+      "common_name": "Eurasian scops owl",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.360726833343506
+    },
+    {
+      "common_name": "Mistle thrush",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.1395263671875
+    },
+    {
+      "common_name": "red-footed falcon",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 4.441839694976807
+    },
+    {
+      "common_name": "Eurasian stone-curlew",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "0.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 6.735677719116211
+    },
+    {
+      "common_name": "water rail",
+      "stratum": "birds",
+      "forstrat_mammal": "",
+      "water_pct_bird": "50.0",
+      "aerial_pct_bird": "0.0",
+      "axis_score": 1.6938939094543457
+    }
+  ]
+}

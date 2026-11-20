@@ -320,6 +320,27 @@ The result is the smallest detectable TA_within at 80% power, which is reported 
 
 ---
 
+## Addendum A (registered 2026-11-20 09:45, before the held-out species were selected or extracted): the habitat-gradient hypothesis
+
+**Origin (post-hoc).** Stage 1a showed that in late layers the top PCA axis orders strata from aquatic groups (sharks, marine invertebrates, fish) through tetrapods to flyers (insects, birds). This suggests an ecological water → land → air axis rather than phylogeny. That observation was made on the 400 primary species, so it is **hypothesis-generating only**. This addendum fixes a test on new species.
+
+**H_eco (directional).** Define the *habitat axis* as PC1 of the layer-21 species vectors of the 400 primary species (Qwen3.5-2B). Orient it so that the mean of birds is positive and the mean of ray-finned fish negative. Then, on **held-out species not in the primary set**:
+- **H_eco-M (mammals):** marine-foraging mammals (EltonTraits `ForStrat-Value` = M) have lower axis scores than ground-foraging mammals (G). Aerial mammals (A, bats) have higher scores than G.
+- **H_eco-B (birds):** Spearman(axis score, % of foraging below or around the water surface) < 0, and Spearman(axis score, % aerial foraging) > 0.
+
+**Data.**
+- Held-out species are mammals and birds from the same Wikidata candidate pool, obtained by the same rules as the primary set: common-name title, OTT match, leaf of the synthetic tree, not polysemous. They must not be in the primary or polysemous sets and must match EltonTraits 1.0 by scientific name ([Wilman et al. 2014, Ecology 95:2027](https://esapubs.org/archive/ecol/E095/178/); files verified by the published MD5).
+- The top 80 mammals and the top 80 birds by sitelinks are taken, with no family cap, so that rare habitats are represented.
+
+**Analysis.**
+- Held-out activations are extracted with the same templates and model. They are centred with the **primary set's** per-template means, so they share the primary PCA frame, then projected onto the fixed axis.
+- Mammals: one-sided Mann–Whitney tests (M < G, A > G).
+- Birds: one-sided Spearman tests.
+- Holm across the 4 tests; α = 0.05.
+- Subgroups with fewer than 5 species (e.g. if fewer than 5 marine or aerial mammals are held out) are reported descriptively only.
+
+**Reading.** If H_eco holds, the dominant top-PC axis encodes habitat or locomotion across clades, i.e. the geometry mixes ecology with taxonomy. If it fails, the stage-1a ordering is not supported as ecological.
+
 ## Deviations
 All deviations below were made **before any activation was extracted** (species set frozen 2026-11-20 07:51, `data/FREEZE.json`, species.csv sha256 `f1b24cf4…`).
 
@@ -334,5 +355,35 @@ All deviations below were made **before any activation was extracted** (species 
    - Silverfish's scientific name was corrected to *Lepisma saccharina*.
 7. **2026-11-20 — batch size 1 for extraction.** Batched bf16 forward passes on Qwen3.5-2B differ by up to 2.5% relative norm from unbatched ones (not caused by padding), so every prompt is run alone. This is exact and reproducible.
 8. **2026-11-20 — S1 reference distance, clarified.** Edge-count path length (S1, as registered) is *not* consistent with rooted triplets (unit test `test_path_length_is_not_triplet_consistent`). S1 is kept as registered. The LCA-depth ultrametric (max depth − depth(LCA)), which is triplet-consistent, is added as an **exploratory** second reference distance for the Mantel analysis.
-9. **2026-11-20 — stage order (user request).** Stages were renumbered: causal and behavioral tests (formerly stage 6) are now **stage 3**; ablations → stage 4; sensitivity → stage 5; more models → stage 6. Only the execution order changed. Hypotheses, metrics, tests and multiplicity families are unchanged.
+9. **2026-11-20 — stage order (user request).** Stages were renumbered: causal and behavioral tests (formerly stage 6) are now **stage 3**; ablations → stage 4; more models → stage 5; sensitivity → stage 6 (final order after a second user request the same day). Only the execution order changed. Hypotheses, metrics, tests and multiplicity families are unchanged.
 10. **2026-11-20 — exploratory C3b (after the Pythia-410m pilot, before any Qwen activation).** The pilot showed that C3 (overlay length vs *fully* shuffled leaves) passes at every layer, including layer 0 (token embeddings). Any class clustering shortens the overlay, so C3 cannot separate "tree" from "clusters". An exploratory check **C3b** was therefore added: the same statistic against leaves shuffled *within strata*, which tests branching beyond the coarse classes. C3 and the preregistered reading rule are unchanged, and C3b is reported alongside them.
+
+**Deviations 11–18 come from the independent implementation review ([reports/reviews/2026-11-20-implementation-review.md](reviews/2026-11-20-implementation-review.md)).**
+- **Timing.** They were made after the first Qwen3.5-2B extraction of the *pre-fix* species set and after viewing its exploratory stage-1a plots. They were made **before any confirmatory (stage-1b) statistic was computed on Qwen**.
+- **Data.** The species set was re-frozen and all activations re-extracted. The pre-fix stage-1a output is archived in `results/qwen35_2b_prefix/` for transparency.
+
+11. **Fixed H1 control set.** Criterion 3 requires beating exactly the registered set: random-init Qwen3.5-2B, Pythia-410m step0, char-3-grams and the input embedding, plus the nuisance baselines of deviation 12. If an untrained-model control is missing, H1 is reported as *not evaluable*; it is never silently judged on the remaining comparisons. Trained Pythia-410m is descriptive only.
+12. **Nuisance controls (stricter).** The review showed that 1-D distances on name token count, and on log Wikipedia sitelinks (popularity), reach TA_within ≈ 0.38–0.40 on their own. Naming conventions and popularity are phylogenetically clustered.
+    - These two baselines are added to H1 criterion 3: Qwen must beat them.
+    - Added as exploratory: TA on triplets where *both* nuisances pick the wrong pair, and a **stratum-centered** cosine variant (subtracting stratum means), which removes a norm-heterogeneity route to the same confound.
+13. **S2 is head-noun-disjoint.** S2 uses within-order triplets whose three head nouns differ, as in H1. Otherwise a purely lexical representation passes S2 (review finding 3).
+14. **S5 ages.** Internal nodes without a TimeTree estimate are NaN, and their pairs are excluded. Previously they inherited a child's age, giving impossible 0-Mya splits. Up to 8 representative pairs are tried per node.
+15. **Ranks from NCBI Taxonomy first, OTT as fallback.** OTT leaves ranks unset (Primates is "no rank"; coelacanth ranks are all unset), which mis-binned pairs in S2, S5, the rank oracle and the depth profile. Families for the family cap, cross-fitting and the clade bootstrap use the same NCBI-first ranks.
+16. **S5 statistic.** The partial Spearman of distance vs MRCA age **controlling for the topological depth of the MRCA**, within rank bins and pooled. Within bins, age and depth correlate at up to |ρ| ≈ 0.99, so the raw correlation cannot separate time from topology. The raw pooled Spearman is still reported. The null permutes species within strata, because a species-level permutation "within rank bins" is not well defined for pairwise data.
+17. **Point estimate.** Both the cross-fitted TA_within and the full-sample TA_within at the modal cross-fitted layer, the estimand of the bootstrap CI, are reported. The "meaningful (≥ 0.40)" label uses the smaller of the two. Independent random streams are used per analysis component.
+18. **Data fixes, followed by re-freezing.**
+    - The QLever CSV is now decoded as UTF-8. Two names had been garbled, e.g. "GrÃ©vy's zebra".
+    - The unregistered rule that rejected titles equal to the genus name was removed. It had excluded e.g. *Hippopotamus*, *Dugong* and *Caracal*. The registered rule rejects only titles equal to the scientific name.
+    - The stage-1a reading rule now requires C2 in *all three* zoom strata.
+    - **Re-frozen 2026-11-20 ~09:20:** species.csv sha256 `4b6dfa9b…`, tree `1f268890…` (`data/FREEZE.json`). NCBI merged taxids are resolved via `merged.dmp`, after which every species has NCBI phylum, order and genus.
+    - The power simulation was re-run on the new tree **before** the new activations were extracted.
+19. **2026-11-20, ~11:50 — stage-3 causal test resolution and off-target baseline.** This entry was made after the first stage-3 run and before the rerun. All values from the first run are kept in `results/qwen35_2b/stage3/results.json` as `C_abl_v1` and `C_swap_v1`.
+    - **Problem 1: the tests could not reach significance.** The first run compared the probe subspace with only 20 random subspaces (C-abl) and 10 (C-swap). A rank p-value against n random subspaces cannot be smaller than 1/(n+1), i.e. 0.048 and 0.091. The registered Holm family of 2 needs p ≤ 0.025 for the smaller p-value, so neither hypothesis could have been supported whatever the data.
+    - **Fix 1.** Both tests now use the same **99** variance-matched random subspaces, so the floor is p = 0.01. The p-value floor was not considered when the code was written. The number 99 is fixed here, before the rerun.
+    - **Primary statistic (made explicit; the registration did not name one).** The primary statistic for each hypothesis is the **rank p-value of the probe subspace among the random subspaces**: (1 + number of random subspaces with an effect ≥ the probe's) / (n + 1). Holm correction is applied across C-abl and C-swap. The per-species Wilcoxon test (probe drop vs mean random drop) is secondary: it treats species, not subspaces, as the unit, and ignores the spread across random subspaces.
+    - **Problem 2: invalid off-target comparison.** The no-edit neutral-text loss was token-weighted over all 20 neutral sentences. The ablated losses were unweighted means over the first 10. The two numbers were not comparable.
+    - **Fix 2.** All three losses (no edit, probe ablated, random ablated) are now computed by one function on the same 20 sentences, with token weighting. The random-ablated loss is averaged over the first 10 random subspaces.
+    - **Other changes.**
+      - The base log-probabilities are computed once per species, which is faster and gives identical values.
+      - Random subspaces and swap pairs are drawn from their own seeded streams, so the causal tests no longer depend on the behavioural part of the run.
+      - The mean log P(correct class) without editing is reported, so the size of the drop can be interpreted.

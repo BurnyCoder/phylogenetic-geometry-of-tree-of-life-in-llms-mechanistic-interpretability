@@ -42,6 +42,11 @@ def names_and_templates(name_set: str) -> tuple[list[str], list[str]]:
         return DAYS, CALIB_TEMPLATES
     if name_set == "months":
         return MONTHS, CALIB_TEMPLATES
+    if name_set == "species_sci":  # stage-4 ablation: scientific binomials (no article before a binomial)
+        from phylogeo.prompts import SCI_TEMPLATES
+
+        df = pd.read_csv(DATA_REPO_DIR / "species.csv", keep_default_na=False)
+        return df["sci_name"].tolist(), SCI_TEMPLATES
     df = pd.read_csv(DATA_REPO_DIR / f"{name_set}.csv", keep_default_na=False)
     return df["common_name"].tolist(), TEMPLATES
 
@@ -69,12 +74,24 @@ def write_json(path: Path, obj) -> None:
     path.write_text(json.dumps(obj, indent=2, default=conv), encoding="utf-8")
 
 
+def check_names(run: str, name_set: str) -> None:
+    """Raise if stored activations were extracted for a different name list."""
+    stored = (act_dir(run, name_set) / "names.txt").read_text(encoding="utf-8").splitlines()
+    if stored != names_and_templates(name_set)[0]:
+        raise ValueError(f"activations of {run}/{name_set} do not match the current name list; re-extract")
+
+
 def layer_distances(run: str, name_set: str = "species", readout: str = "last", variant: str = "centered"):
     """[L, n, n] cosine distances for a run (variants: centered | raw | zscore)."""
     from phylogeo.extract import load_activations
     from phylogeo.geometry import cosine_distance, species_vectors, zscore_dims
 
     X = load_activations(act_dir(run, name_set), readout)
+    # Guard: stored activations must belong to the current frozen name list (review finding).
+    stored = (act_dir(run, name_set) / "names.txt").read_text(encoding="utf-8").splitlines()
+    expected = names_and_templates(name_set)[0]
+    if stored != expected:
+        raise ValueError(f"activations of {run}/{name_set} do not match the current name list; re-extract")
     V = species_vectors(X, center=(variant != "raw"))
     if variant == "zscore":
         V = zscore_dims(V)
@@ -133,7 +150,7 @@ def phase_pca(cfg: RunConfig) -> None:
     from phylogeo.geometry import species_vectors
     from phylogeo.simulate import brownian_tree
     from phylogeo.viz.pca import classify_h1a, h1a_checks, knn_purity, pca_top3
-    from phylogeo.viz.plots import circle_png, pca_2d_png, pca_3d_html, pca_layer_grid_png
+    from phylogeo.viz.plots import circle_png, pca_2d_png, pca_3d_html, pca_layer_grid_png, pca_spotlight_png
 
     rng = np.random.default_rng(cfg.seed)
     n_perm = int(cfg.extra.get("pca_n_perm", 1000))
@@ -141,6 +158,7 @@ def phase_pca(cfg: RunConfig) -> None:
     names = df["common_name"].tolist()
     strata = df["stratum"].to_numpy()
     od = out_dir(cfg.name, "stage1a")
+    check_names(cfg.name, "species")
     X = load_activations(act_dir(cfg.name, "species"), "last")
     V = species_vectors(X)  # [L, n, d]
     L = V.shape[0]
@@ -171,6 +189,7 @@ def phase_pca(cfg: RunConfig) -> None:
     ctrl_V = None
     ctrl = cfg.extra.get("random_init_run")
     if ctrl and (act_dir(ctrl, "species") / "last.npy").exists():
+        check_names(ctrl, "species")
         ctrl_V = species_vectors(load_activations(act_dir(ctrl, "species"), "last"))
     checks = []
     for l in range(L):
@@ -191,6 +210,10 @@ def phase_pca(cfg: RunConfig) -> None:
     # 2D panels for the layer with the strongest tree-overlay effect and the middle/last layers.
     best = int(np.argmin([c["C3_overlay_length"] / c["C3_null_mean"] for c in checks]))
     for l in sorted({best, L // 2, L - 1}):
+        pca_spotlight_png(coords[l], evrs[l], strata, od / f"spotlight_layer{l}_pc12.png",
+                          f"{title} — layer {l}, PC1–PC2, one stratum highlighted per panel")
+        pca_spotlight_png(coords[l], evrs[l], strata, od / f"spotlight_layer{l}_pc23.png",
+                          f"{title} — layer {l}, PC2–PC3, one stratum highlighted per panel", dims=(1, 2))
         pca_2d_png(coords[l], evrs[l], strata, tree, od / f"pca2d_layer{l}.png", f"{title} — layer {l}")
         pca_2d_png(coords[l], evrs[l], strata, None, od / f"pca2d_layer{l}_uncolored.png",
                    f"{title} — layer {l} (uncolored)", colored=False)
@@ -278,3 +301,102 @@ def phase_conflict(cfg: RunConfig) -> None:
     from phylogeo.analysis import run_conflict
 
     run_conflict(cfg, load_conflict, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_report(cfg: RunConfig) -> None:
+    """Regenerate results/RESULTS.md from all results JSON files."""
+    from phylogeo.report import write_results_md
+
+    runs = sorted(p.name for p in RESULTS_DIR.iterdir() if (p / "stage1a").exists() or (p / "stage1b").exists())
+    log.info("report written to %s", write_results_md(runs, cfg.name))
+
+
+def phase_stage2(cfg: RunConfig) -> None:
+    """Stage 2: geodesic vs angular, delta-hyperbolicity, NJ, flat-subspace probe."""
+    from phylogeo.stage2 import run_stage2
+
+    run_stage2(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_stage3(cfg: RunConfig) -> None:
+    """Stage 3: behavioral judgments and causal ablation / interchange of the probe subspace."""
+    from phylogeo.stage3 import run_stage3
+
+    run_stage3(cfg, load_species, load_conflict, act_dir, out_dir, write_json)
+
+
+def phase_stage3_causal(cfg: RunConfig) -> None:
+    """Stage 3, causal tests only (keeps stored behavioral results; deviation 19 rerun)."""
+    from phylogeo.stage3 import run_stage3
+
+    run_stage3(cfg, load_species, load_conflict, act_dir, out_dir, write_json, causal_only=True)
+
+
+def phase_stage6(cfg: RunConfig) -> None:
+    """Stage 6: sensitivity to triplet seeds, templates, species subsamples, split and probe seeds."""
+    from phylogeo.stage6 import run_stage6
+
+    run_stage6(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_examples(cfg: RunConfig) -> None:
+    """Nearest-neighbour output examples for rule-chosen query species, per representation."""
+    from phylogeo.examples import run_examples
+
+    run_examples(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_release(cfg: RunConfig) -> None:
+    """Train the all-species flat probe and write the Hugging Face release folder (DATA_DIR/release)."""
+    from phylogeo.release import build_release
+
+    build_release(cfg, load_species, layer_distances, act_dir)
+
+
+def phase_upload(cfg: RunConfig) -> None:
+    """Upload the probe and all activations to Hugging Face and add them to the collection."""
+    from phylogeo.release import upload_release
+
+    upload_release(cfg)
+
+
+def phase_site(cfg: RunConfig) -> None:
+    """Build the static GitHub Pages explorer in site/ from results/."""
+    from phylogeo.site import build_site
+
+    log.info("site written to %s", build_site(cfg.extra.get("site_run", "qwen35_2b")))
+
+
+def phase_stage4(cfg: RunConfig) -> None:
+    """Stage 4: ablations (readout, normalization, prompt format, binomials, polysemy, probe metric/dim, kNN K)."""
+    from phylogeo.stage4 import run_stage4
+
+    run_stage4(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_eco(cfg: RunConfig) -> None:
+    """Addendum A: habitat-gradient test on held-out mammals and birds."""
+    from phylogeo.eco import run_eco
+
+    run_eco(cfg, act_dir, out_dir, write_json)
+
+
+def phase_paper(cfg: RunConfig) -> None:
+    """Generate reports/paper.typ and paper.pdf from results JSON."""
+    from phylogeo.paper import build_paper
+
+    log.info("paper written to %s", build_paper())
+
+
+def phase_scale(cfg: RunConfig) -> None:
+    """Stage 5: light per-run analysis (TA_within by layer, max-T, cross-fit, Mantel)."""
+    from phylogeo.stage5 import run_scale
+
+    run_scale(cfg, load_species, layer_distances, out_dir, write_json)
+
+
+def phase_scale_summary(cfg: RunConfig) -> None:
+    """Stage 5: aggregate all runs into results/stage5/ (summary.json, scale.png, training_dynamics.png)."""
+    from phylogeo.stage5 import summarize
+
+    summarize(write_json)

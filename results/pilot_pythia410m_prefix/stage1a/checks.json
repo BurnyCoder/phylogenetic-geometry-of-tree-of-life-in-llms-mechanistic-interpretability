@@ -1,0 +1,2502 @@
+[
+  {
+    "explained_variance_ratio": [
+      0.06797484308481216,
+      0.04137519747018814,
+      0.026970839127898216
+    ],
+    "C1_purity": 0.3935,
+    "C1_purity_null": 0.12223618090452262,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.1389051228761673,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.33555555555555555,
+        "null": 0.18194304857621443,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.12857142857142856,
+        "null": 0.10671931083991387,
+        "p": 0.15,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.39111111111111113,
+        "null": 0.16422110552763822,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 60.20681190559854,
+    "C3_null_mean": 100.76629015028006,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 80.24065161794914,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.043765102663269016,
+        "stratum:arachnids": -0.13677102029638002,
+        "stratum:birds": 0.19583900468687915,
+        "stratum:cartilaginous fish": -0.2692679462084982,
+        "stratum:cnidarians": -0.10998405275228965,
+        "stratum:crustaceans": -0.1458321003910152,
+        "stratum:echinoderms": -0.06490862129643324,
+        "stratum:insects": 0.11632637227162602,
+        "stratum:mammals": 0.046720934872395335,
+        "stratum:molluscs": 0.09731649956565722,
+        "stratum:other": -0.130160420982055,
+        "stratum:ray-finned fish": 0.023847762916362803,
+        "stratum:reptiles": -0.04587346491440038,
+        "log_sitelinks": 0.189831916350346,
+        "n_name_tokens": 0.22444339944712927,
+        "name_length": -0.11474641222431085,
+        "n_words": -0.23449365551666548
+      },
+      "PC2": {
+        "stratum:amphibians": -0.034823310972703275,
+        "stratum:arachnids": -0.21564230866729253,
+        "stratum:birds": 0.10329061428632867,
+        "stratum:cartilaginous fish": -0.2473845829610774,
+        "stratum:cnidarians": 0.06851465581290174,
+        "stratum:crustaceans": -0.07710466269208426,
+        "stratum:echinoderms": -0.0015256299877366788,
+        "stratum:insects": 0.05931103104629886,
+        "stratum:mammals": -0.08068565445221657,
+        "stratum:molluscs": 0.10456928615911609,
+        "stratum:other": 0.10428790297598978,
+        "stratum:ray-finned fish": 0.21305372099704584,
+        "stratum:reptiles": -0.13087913287405986,
+        "log_sitelinks": 0.042552914258305305,
+        "n_name_tokens": 0.24929638760607326,
+        "name_length": -0.07361373103110498,
+        "n_words": -0.2679061134919055
+      },
+      "PC3": {
+        "stratum:amphibians": 0.028365350307294673,
+        "stratum:arachnids": 0.24812542598768278,
+        "stratum:birds": -0.08254700954137771,
+        "stratum:cartilaginous fish": -0.28043757953270254,
+        "stratum:cnidarians": 0.03730858788192423,
+        "stratum:crustaceans": 0.05465142019342852,
+        "stratum:echinoderms": 0.008182924479678548,
+        "stratum:insects": 0.01723480567087714,
+        "stratum:mammals": -0.03583148279336867,
+        "stratum:molluscs": -0.0944352555764749,
+        "stratum:other": 0.11055657473957387,
+        "stratum:ray-finned fish": -0.04008891179905816,
+        "stratum:reptiles": 0.13515407942522262,
+        "log_sitelinks": -0.1547091766668335,
+        "n_name_tokens": -0.07334744374609124,
+        "name_length": 0.08271285812990103,
+        "n_words": 0.10791974383185649
+      }
+    },
+    "layer": 0,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10352422297000885,
+      0.0401158444583416,
+      0.03422505035996437
+    ],
+    "C1_purity": 0.385,
+    "C1_purity_null": 0.12213316582914573,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.14959418773651123,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.38,
+        "null": 0.18441094360692348,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.13142857142857142,
+        "null": 0.10590093323761664,
+        "p": 0.12,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4177777777777778,
+        "null": 0.16661083193746515,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1092.4694736744605,
+    "C3_null_mean": 1831.649157447082,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1471.397134661258,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.02841130784452093,
+        "stratum:arachnids": -0.18467369125903021,
+        "stratum:birds": 0.20917529176547356,
+        "stratum:cartilaginous fish": -0.2943041084087908,
+        "stratum:cnidarians": -0.08764290488809191,
+        "stratum:crustaceans": -0.13316334972920504,
+        "stratum:echinoderms": -0.05020052463526784,
+        "stratum:insects": 0.11055554381728647,
+        "stratum:mammals": 0.026753437328667255,
+        "stratum:molluscs": 0.12059904798338603,
+        "stratum:other": -0.09487247637960053,
+        "stratum:ray-finned fish": 0.04936800081831726,
+        "stratum:reptiles": -0.06765039468396823,
+        "log_sitelinks": 0.18010707639869336,
+        "n_name_tokens": 0.25736499813766467,
+        "name_length": -0.12317651786586545,
+        "n_words": -0.2747048422176593
+      },
+      "PC2": {
+        "stratum:amphibians": 0.10808217809384185,
+        "stratum:arachnids": 0.23663987651920776,
+        "stratum:birds": -0.030598510399907193,
+        "stratum:cartilaginous fish": -0.26820705484611385,
+        "stratum:cnidarians": -0.1537911100014145,
+        "stratum:crustaceans": 0.07105464146868579,
+        "stratum:echinoderms": 0.023297481046201652,
+        "stratum:insects": 0.05443841311610418,
+        "stratum:mammals": 0.06709098430871206,
+        "stratum:molluscs": -0.09407520464601861,
+        "stratum:other": -0.05019979080506189,
+        "stratum:ray-finned fish": -0.17804684264593673,
+        "stratum:reptiles": 0.15954971577349011,
+        "log_sitelinks": -0.04063564179161786,
+        "n_name_tokens": -0.1327570720511781,
+        "name_length": 0.07299985631549634,
+        "n_words": 0.20272217293806383
+      },
+      "PC3": {
+        "stratum:amphibians": 0.005066352098148837,
+        "stratum:arachnids": 0.12108349087486552,
+        "stratum:birds": -0.03498600630454938,
+        "stratum:cartilaginous fish": -0.27994503090268913,
+        "stratum:cnidarians": 0.043266750514374494,
+        "stratum:crustaceans": 0.18011525395550584,
+        "stratum:echinoderms": -0.02066264688026218,
+        "stratum:insects": -0.03237526771222055,
+        "stratum:mammals": -0.07585325351131819,
+        "stratum:molluscs": -0.01976870720650233,
+        "stratum:other": 0.19960257342807244,
+        "stratum:ray-finned fish": 0.0823941998390375,
+        "stratum:reptiles": -0.04981304881954405,
+        "log_sitelinks": -0.15380976930899842,
+        "n_name_tokens": -0.0398662144276116,
+        "name_length": 0.13617648198231685,
+        "n_words": 0.13595833083788442
+      }
+    },
+    "layer": 1,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10530715435743332,
+      0.03803442046046257,
+      0.027389580383896828
+    ],
+    "C1_purity": 0.3725,
+    "C1_purity_null": 0.12152010050251255,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.1682942509651184,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3511111111111111,
+        "null": 0.18460078168620886,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.15714285714285714,
+        "null": 0.10575735821966976,
+        "p": 0.02,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.40444444444444444,
+        "null": 0.16649916247906202,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1235.0923173994022,
+    "C3_null_mean": 2044.1792511639576,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1646.9628561298548,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": -0.02185485218809302,
+        "stratum:arachnids": -0.2238762520693396,
+        "stratum:birds": 0.2540758992051884,
+        "stratum:cartilaginous fish": -0.28723853058832804,
+        "stratum:cnidarians": -0.08708820295842046,
+        "stratum:crustaceans": -0.11595524890840063,
+        "stratum:echinoderms": -0.037026353805570476,
+        "stratum:insects": 0.0532735886693153,
+        "stratum:mammals": 0.024161049990618105,
+        "stratum:molluscs": 0.10381054789344185,
+        "stratum:other": -0.06022835287281546,
+        "stratum:ray-finned fish": 0.08972574194529696,
+        "stratum:reptiles": -0.07488397273037069,
+        "log_sitelinks": 0.2210215511764522,
+        "n_name_tokens": 0.2656561142706614,
+        "name_length": -0.1152894101079097,
+        "n_words": -0.2901070973867232
+      },
+      "PC2": {
+        "stratum:amphibians": -0.09943957745582326,
+        "stratum:arachnids": -0.28655476499279936,
+        "stratum:birds": 0.02427367864126716,
+        "stratum:cartilaginous fish": 0.1340750371899099,
+        "stratum:cnidarians": 0.013035495347279494,
+        "stratum:crustaceans": 0.1611977391458798,
+        "stratum:echinoderms": -0.012758144382443761,
+        "stratum:insects": -0.16139670496536615,
+        "stratum:mammals": -0.055114154806924984,
+        "stratum:molluscs": 0.019073325545972096,
+        "stratum:other": 0.18182466794432747,
+        "stratum:ray-finned fish": 0.14365026192311195,
+        "stratum:reptiles": 0.0025481922663463125,
+        "log_sitelinks": 0.055238652189531286,
+        "n_name_tokens": 0.09263558340581296,
+        "name_length": 0.08180466828524138,
+        "n_words": -0.03189036236551739
+      },
+      "PC3": {
+        "stratum:amphibians": 0.03784863038028837,
+        "stratum:arachnids": 0.24199604035084887,
+        "stratum:birds": -0.04170970132724779,
+        "stratum:cartilaginous fish": -0.2805148355656296,
+        "stratum:cnidarians": -0.011094038593429358,
+        "stratum:crustaceans": 0.22045742409169633,
+        "stratum:echinoderms": -0.029815228719841394,
+        "stratum:insects": -0.004762076414813393,
+        "stratum:mammals": -0.15715052043253966,
+        "stratum:molluscs": -0.026921204286241864,
+        "stratum:other": 0.18832044110184967,
+        "stratum:ray-finned fish": 0.022782595797488536,
+        "stratum:reptiles": 0.035839091229902975,
+        "log_sitelinks": -0.21046171283447065,
+        "n_name_tokens": -0.024637897531225913,
+        "name_length": 0.13292853436706625,
+        "n_words": 0.1400284231424096
+      }
+    },
+    "layer": 2,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.1302621215581894,
+      0.03201484680175781,
+      0.023938467726111412
+    ],
+    "C1_purity": 0.3555,
+    "C1_purity_null": 0.12118592964824117,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.17309895157814026,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.35555555555555557,
+        "null": 0.18524846454494695,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14,
+        "null": 0.10463747307968412,
+        "p": 0.06,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.40444444444444444,
+        "null": 0.16632049134561697,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1474.3830834853306,
+    "C3_null_mean": 2351.877892774221,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1927.1961995792237,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.03953741441300466,
+        "stratum:arachnids": -0.23800740771026505,
+        "stratum:birds": 0.2412552942890262,
+        "stratum:cartilaginous fish": -0.26592783619435173,
+        "stratum:cnidarians": -0.0822345610737951,
+        "stratum:crustaceans": -0.1131062255936979,
+        "stratum:echinoderms": -0.04063191634843503,
+        "stratum:insects": -0.0011990839893415018,
+        "stratum:mammals": 0.006843902572449763,
+        "stratum:molluscs": 0.09516794725542327,
+        "stratum:other": -0.05510011090635057,
+        "stratum:ray-finned fish": 0.10925368120028713,
+        "stratum:reptiles": -0.04233287152155971,
+        "log_sitelinks": 0.22731104452187656,
+        "n_name_tokens": 0.26013978126973597,
+        "name_length": -0.11685884590417714,
+        "n_words": -0.29997094576210537
+      },
+      "PC2": {
+        "stratum:amphibians": -0.07311441459289303,
+        "stratum:arachnids": -0.297722936386434,
+        "stratum:birds": -0.06626828229998523,
+        "stratum:cartilaginous fish": 0.2626229691492966,
+        "stratum:cnidarians": 0.042989399549538766,
+        "stratum:crustaceans": 0.188662323899614,
+        "stratum:echinoderms": -0.06517747673639748,
+        "stratum:insects": -0.1875709954755635,
+        "stratum:mammals": -0.04578156038994804,
+        "stratum:molluscs": 0.05304768667473489,
+        "stratum:other": 0.16792143416857822,
+        "stratum:ray-finned fish": 0.14508916271032174,
+        "stratum:reptiles": 0.017015348359151184,
+        "log_sitelinks": 0.024383635240292634,
+        "n_name_tokens": 0.056858809473039035,
+        "name_length": 0.03016323130837688,
+        "n_words": -0.04555794926993685
+      },
+      "PC3": {
+        "stratum:amphibians": -0.07460451815117211,
+        "stratum:arachnids": -0.2538479773400122,
+        "stratum:birds": 0.037664088220369936,
+        "stratum:cartilaginous fish": 0.2743609452058718,
+        "stratum:cnidarians": -0.013867548241786697,
+        "stratum:crustaceans": -0.26820705484611385,
+        "stratum:echinoderms": 0.05990780840451854,
+        "stratum:insects": -0.03134748143564212,
+        "stratum:mammals": 0.30548692391571214,
+        "stratum:molluscs": -0.09020093539449302,
+        "stratum:other": -0.19572790172007676,
+        "stratum:ray-finned fish": -0.0853405204985623,
+        "stratum:reptiles": 0.030249508194046554,
+        "log_sitelinks": 0.31138444022911826,
+        "n_name_tokens": -0.09967773131620375,
+        "name_length": -0.149161695938935,
+        "n_words": -0.10413219880945769
+      }
+    },
+    "layer": 3,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.12631537020206451,
+      0.02889176644384861,
+      0.02298840880393982
+    ],
+    "C1_purity": 0.3635,
+    "C1_purity_null": 0.12048994974874373,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.159260094165802,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.38666666666666666,
+        "null": 0.1863651591289782,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.16,
+        "null": 0.1050538406317301,
+        "p": 0.01,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4311111111111111,
+        "null": 0.1620323841429369,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1510.579466862564,
+    "C3_null_mean": 2396.448948243273,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1967.637179459786,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.057517997349572095,
+        "stratum:arachnids": -0.242110001283437,
+        "stratum:birds": 0.27293643354852043,
+        "stratum:cartilaginous fish": -0.25236648521636673,
+        "stratum:cnidarians": -0.09083244098370287,
+        "stratum:crustaceans": -0.13646821677426021,
+        "stratum:echinoderms": -0.037026353805570476,
+        "stratum:insects": 0.016273282712491812,
+        "stratum:mammals": 0.0017109756431124407,
+        "stratum:molluscs": 0.05682261568904186,
+        "stratum:other": -0.05042771267023811,
+        "stratum:ray-finned fish": 0.10020916196639694,
+        "stratum:reptiles": -0.06354040715760322,
+        "log_sitelinks": 0.2422504546354166,
+        "n_name_tokens": 0.2381183715905203,
+        "name_length": -0.14800855287018994,
+        "n_words": -0.3353733151605734
+      },
+      "PC2": {
+        "stratum:amphibians": -0.11612873730854882,
+        "stratum:arachnids": -0.293506381880674,
+        "stratum:birds": -0.14324889226325266,
+        "stratum:cartilaginous fish": 0.2656999143291755,
+        "stratum:cnidarians": 0.08792025585292765,
+        "stratum:crustaceans": 0.19185323001208104,
+        "stratum:echinoderms": -0.003605562542864541,
+        "stratum:insects": -0.20312482779445043,
+        "stratum:mammals": -0.009488137657259898,
+        "stratum:molluscs": 0.12725484387703256,
+        "stratum:other": 0.18114090234879884,
+        "stratum:ray-finned fish": 0.11617410879591522,
+        "stratum:reptiles": 0.01783734586442419,
+        "log_sitelinks": -0.02635674895694895,
+        "n_name_tokens": 0.0759453916210056,
+        "name_length": 0.08620745007036444,
+        "n_words": 0.010958683666700376
+      },
+      "PC3": {
+        "stratum:amphibians": -0.08801545017568373,
+        "stratum:arachnids": -0.28085671836339393,
+        "stratum:birds": 0.0915106288682513,
+        "stratum:cartilaginous fish": 0.2625090082167084,
+        "stratum:cnidarians": -0.05311270976604305,
+        "stratum:crustaceans": -0.22866261123804013,
+        "stratum:echinoderms": 0.03231138740336301,
+        "stratum:insects": -0.08588867317940414,
+        "stratum:mammals": 0.3301146036271791,
+        "stratum:molluscs": -0.12745352435146975,
+        "stratum:other": -0.17350551986539553,
+        "stratum:ray-finned fish": -0.08444977239219434,
+        "stratum:reptiles": 0.042908269775250814,
+        "log_sitelinks": 0.38457416130179933,
+        "n_name_tokens": -0.17893070718688345,
+        "name_length": -0.21633693022143574,
+        "n_words": -0.14280267962521045
+      }
+    },
+    "layer": 4,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.1061386987566948,
+      0.03032226301729679,
+      0.023502659052610397
+    ],
+    "C1_purity": 0.38,
+    "C1_purity_null": 0.1214924623115578,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.11545228958129883,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.33555555555555555,
+        "null": 0.18328308207705193,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14857142857142858,
+        "null": 0.10651830581478823,
+        "p": 0.035,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.48,
+        "null": 0.1690675600223339,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1491.414483499726,
+    "C3_null_mean": 2324.176769648491,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1912.8321308112668,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.02851064808173954,
+        "stratum:arachnids": -0.2502012274971927,
+        "stratum:birds": 0.29607050286390646,
+        "stratum:cartilaginous fish": -0.2466684385869613,
+        "stratum:cnidarians": -0.09166449387821007,
+        "stratum:crustaceans": -0.12963056081897367,
+        "stratum:echinoderms": -0.05436078910780385,
+        "stratum:insects": -0.0005824122233944437,
+        "stratum:mammals": 0.005651404396947153,
+        "stratum:molluscs": 0.10599603311225117,
+        "stratum:other": -0.05236504852423596,
+        "stratum:ray-finned fish": 0.1328242464764858,
+        "stratum:reptiles": -0.12979340608260737,
+        "log_sitelinks": 0.2554247975676893,
+        "n_name_tokens": 0.192011397327818,
+        "name_length": -0.20411120857113457,
+        "n_words": -0.389804707957746
+      },
+      "PC2": {
+        "stratum:amphibians": -0.08155833475647442,
+        "stratum:arachnids": -0.24860577444095922,
+        "stratum:birds": -0.14438850158913374,
+        "stratum:cartilaginous fish": 0.16735162950563764,
+        "stratum:cnidarians": 0.026209666176976856,
+        "stratum:crustaceans": 0.2302580642942737,
+        "stratum:echinoderms": 0.01650238240772617,
+        "stratum:insects": -0.10788329949818255,
+        "stratum:mammals": -0.003681190020029797,
+        "stratum:molluscs": 0.11672477873186046,
+        "stratum:other": 0.18148278514656313,
+        "stratum:ray-finned fish": 0.010243603223231689,
+        "stratum:reptiles": 0.03846948324677659,
+        "log_sitelinks": -0.06073636861230596,
+        "n_name_tokens": 0.202755555848698,
+        "name_length": 0.22062903883277832,
+        "n_words": 0.1501700789547888
+      },
+      "PC3": {
+        "stratum:amphibians": -0.059902163042818604,
+        "stratum:arachnids": -0.2919109288244405,
+        "stratum:birds": 0.02854721361332124,
+        "stratum:cartilaginous fish": 0.2749307498688123,
+        "stratum:cnidarians": -0.05130992849461078,
+        "stratum:crustaceans": -0.23948889983391047,
+        "stratum:echinoderms": -0.033143440297870204,
+        "stratum:insects": -0.18722840005003735,
+        "stratum:mammals": 0.3687930227108725,
+        "stratum:molluscs": -0.08632666614296744,
+        "stratum:other": -0.16666786391010902,
+        "stratum:ray-finned fish": 0.05813844371178654,
+        "stratum:reptiles": 0.005260784033747226,
+        "log_sitelinks": 0.4110857028815184,
+        "n_name_tokens": -0.27872514361748457,
+        "name_length": -0.32592244412683197,
+        "n_words": -0.25274121107502534
+      }
+    },
+    "layer": 5,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.07432745397090912,
+      0.04294634237885475,
+      0.02866414189338684
+    ],
+    "C1_purity": 0.426,
+    "C1_purity_null": 0.12156030150753769,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.09983955323696136,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.38222222222222224,
+        "null": 0.1837632607481854,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.17142857142857143,
+        "null": 0.1056137832017229,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4577777777777778,
+        "null": 0.16428810720268003,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1471.6801830707818,
+    "C3_null_mean": 2230.068946324078,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1845.2410610696002,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": -0.014404334396697674,
+        "stratum:arachnids": -0.22034346315910822,
+        "stratum:birds": 0.312366916224006,
+        "stratum:cartilaginous fish": -0.2435914934070824,
+        "stratum:cnidarians": -0.06406807287705454,
+        "stratum:crustaceans": -0.16587013738199224,
+        "stratum:echinoderms": -0.030647281614348598,
+        "stratum:insects": 0.05950882541389111,
+        "stratum:mammals": -0.016591278963514578,
+        "stratum:molluscs": 0.038345331566381397,
+        "stratum:other": -0.09042800000866427,
+        "stratum:ray-finned fish": 0.17016714785883544,
+        "stratum:reptiles": -0.14401396292383034,
+        "log_sitelinks": 0.22903664005312194,
+        "n_name_tokens": 0.15907179177561084,
+        "name_length": -0.2250399942733503,
+        "n_words": -0.4209357599396846
+      },
+      "PC2": {
+        "stratum:amphibians": -0.024735719067432556,
+        "stratum:arachnids": 0.23652591558661964,
+        "stratum:birds": -0.025014424703089864,
+        "stratum:cartilaginous fish": 0.1363542558416721,
+        "stratum:cnidarians": 0.04132529376052436,
+        "stratum:crustaceans": -0.09715169503136269,
+        "stratum:echinoderms": 0.008875230874743486,
+        "stratum:insects": 0.1063073605407623,
+        "stratum:mammals": -0.035878640758600276,
+        "stratum:molluscs": -0.16063316358248372,
+        "stratum:other": -0.1338471153247337,
+        "stratum:ray-finned fish": 0.024290015669803565,
+        "stratum:reptiles": -0.04241507127208701,
+        "log_sitelinks": -0.06804078027480348,
+        "n_name_tokens": -0.30668267488563294,
+        "name_length": -0.22525410646608865,
+        "n_words": -0.10488432258189354
+      },
+      "PC3": {
+        "stratum:amphibians": -0.11930762489954418,
+        "stratum:arachnids": -0.297722936386434,
+        "stratum:birds": 0.012478722118397905,
+        "stratum:cartilaginous fish": 0.21829216637252227,
+        "stratum:cnidarians": -0.09887561896393915,
+        "stratum:crustaceans": -0.20051426088877733,
+        "stratum:echinoderms": -0.09679548672767115,
+        "stratum:insects": -0.2956255926865091,
+        "stratum:mammals": 0.5437273202824293,
+        "stratum:molluscs": -0.1752361784536186,
+        "stratum:other": -0.13772178703272941,
+        "stratum:ray-finned fish": 0.011545465840231034,
+        "stratum:reptiles": 0.1217378305309319,
+        "log_sitelinks": 0.5483127850937581,
+        "n_name_tokens": -0.2772328534910893,
+        "name_length": -0.32787096842581953,
+        "n_words": -0.2577170409651683
+      }
+    },
+    "layer": 6,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.06882710754871368,
+      0.045239124447107315,
+      0.030872264876961708
+    ],
+    "C1_purity": 0.422,
+    "C1_purity_null": 0.12246482412060301,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.07625621557235718,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.37777777777777777,
+        "null": 0.182925739810162,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.16,
+        "null": 0.10307250538406316,
+        "p": 0.01,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4888888888888889,
+        "null": 0.16739251814628703,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1526.9898020073738,
+    "C3_null_mean": 2276.7026406063173,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1868.6682306429846,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": -0.054239769521358144,
+        "stratum:arachnids": -0.1888902457647902,
+        "stratum:birds": 0.28758041338609236,
+        "stratum:cartilaginous fish": -0.24609863392402082,
+        "stratum:cnidarians": -0.04118661827810649,
+        "stratum:crustaceans": -0.19322076120313836,
+        "stratum:echinoderms": -0.023990858458290985,
+        "stratum:insects": 0.11309074996617992,
+        "stratum:mammals": -0.003992276500595695,
+        "stratum:molluscs": -0.02264957408584186,
+        "stratum:other": -0.10034260114382973,
+        "stratum:ray-finned fish": 0.18167835415651384,
+        "stratum:reptiles": -0.13439659211213617,
+        "log_sitelinks": 0.22092573163649387,
+        "n_name_tokens": 0.0359425515557231,
+        "name_length": -0.2739815883003593,
+        "n_words": -0.4409614764712857
+      },
+      "PC2": {
+        "stratum:amphibians": 0.04639189078108837,
+        "stratum:arachnids": -0.2631927738122371,
+        "stratum:birds": 0.2270101777155126,
+        "stratum:cartilaginous fish": -0.2163548305185244,
+        "stratum:cnidarians": -0.12439190772882668,
+        "stratum:crustaceans": -0.00404561310687786,
+        "stratum:echinoderms": -0.051032577529775046,
+        "stratum:insects": -0.1215871165192283,
+        "stratum:mammals": 0.08850410372099805,
+        "stratum:molluscs": 0.12944032909584186,
+        "stratum:other": 0.048148494018475936,
+        "stratum:ray-finned fish": -0.029154870712274805,
+        "stratum:reptiles": -0.014384956342277572,
+        "log_sitelinks": 0.2523362581495809,
+        "n_name_tokens": 0.33134875266929453,
+        "name_length": 0.1585057812681877,
+        "n_words": 0.009612766148573166
+      },
+      "PC3": {
+        "stratum:amphibians": -0.13013571075637212,
+        "stratum:arachnids": -0.28176840582409884,
+        "stratum:birds": -0.051453361063531086,
+        "stratum:cartilaginous fish": 0.18615518338267562,
+        "stratum:cnidarians": -0.08597879909907753,
+        "stratum:crustaceans": -0.14228022433625376,
+        "stratum:echinoderms": -0.13368316505082375,
+        "stratum:insects": -0.2993941423672967,
+        "stratum:mammals": 0.5623925091163832,
+        "stratum:molluscs": -0.16073250381970233,
+        "stratum:other": -0.10581272590805894,
+        "stratum:ray-finned fish": 0.04690131375452903,
+        "stratum:reptiles": 0.10431148341914423,
+        "log_sitelinks": 0.5247567419074891,
+        "n_name_tokens": -0.35108833928749467,
+        "name_length": -0.3907821851657046,
+        "n_words": -0.3361894446885017
+      }
+    },
+    "layer": 7,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.07606583088636398,
+      0.05114666745066643,
+      0.03468623384833336
+    ],
+    "C1_purity": 0.4625,
+    "C1_purity_null": 0.12260050251256281,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.04867752641439438,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3688888888888889,
+        "null": 0.18140703517587936,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.16857142857142857,
+        "null": 0.10321608040201005,
+        "p": 0.015,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4888888888888889,
+        "null": 0.1654494695700726,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1541.733441030396,
+    "C3_null_mean": 2300.6137932321612,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1854.0680500848223,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": -0.10728745619609302,
+        "stratum:arachnids": -0.1248442016502731,
+        "stratum:birds": 0.21971667802987363,
+        "stratum:cartilaginous fish": -0.21304996347346924,
+        "stratum:cnidarians": 0.02315880556378378,
+        "stratum:crustaceans": -0.22376229113675147,
+        "stratum:echinoderms": 0.0005547019296714678,
+        "stratum:insects": 0.1294668113063296,
+        "stratum:mammals": 0.007880857507669425,
+        "stratum:molluscs": -0.05930612161950698,
+        "stratum:other": -0.08769293762654966,
+        "stratum:ray-finned fish": 0.17455236930557005,
+        "stratum:reptiles": -0.10200989040437981,
+        "log_sitelinks": 0.17411648001353036,
+        "n_name_tokens": -0.057435532915127756,
+        "name_length": -0.30082791264751363,
+        "n_words": -0.4244589960525462
+      },
+      "PC2": {
+        "stratum:amphibians": 0.016192458666632558,
+        "stratum:arachnids": -0.2789193825093961,
+        "stratum:birds": 0.42758141907058395,
+        "stratum:cartilaginous fish": -0.26535803153141113,
+        "stratum:cnidarians": -0.1537911100014145,
+        "stratum:crustaceans": -0.024216698174973104,
+        "stratum:echinoderms": -0.10040104927053568,
+        "stratum:insects": -0.10562216968971001,
+        "stratum:mammals": 0.02307224730863746,
+        "stratum:molluscs": 0.08821413065012092,
+        "stratum:other": -0.015327745433100622,
+        "stratum:ray-finned fish": 0.06889594007330743,
+        "stratum:reptiles": -0.12395722379516902,
+        "log_sitelinks": 0.3558048600922012,
+        "n_name_tokens": 0.27241043491307126,
+        "name_length": 0.07594763348063772,
+        "n_words": -0.08892847377321943
+      },
+      "PC3": {
+        "stratum:amphibians": -0.15864635883811165,
+        "stratum:arachnids": -0.28108464022857016,
+        "stratum:birds": -0.05116845873206082,
+        "stratum:cartilaginous fish": 0.2072379559114757,
+        "stratum:cnidarians": -0.07446873405839456,
+        "stratum:crustaceans": -0.16210942660658464,
+        "stratum:echinoderms": -0.12772011930685548,
+        "stratum:insects": -0.33091292151570184,
+        "stratum:mammals": 0.5511933958160108,
+        "stratum:molluscs": -0.13629480546392558,
+        "stratum:other": -0.06672412603033766,
+        "stratum:ray-finned fish": 0.06176995522236366,
+        "stratum:reptiles": 0.10505128117388993,
+        "log_sitelinks": 0.5075221631655933,
+        "n_name_tokens": -0.25241003519991473,
+        "name_length": -0.3502324925831731,
+        "n_words": -0.33575308264316195
+      }
+    },
+    "layer": 8,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.0793067142367363,
+      0.0510660819709301,
+      0.039227887988090515
+    ],
+    "C1_purity": 0.463,
+    "C1_purity_null": 0.12192211055276383,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.03839459270238876,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.39555555555555555,
+        "null": 0.18065884980457847,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14,
+        "null": 0.105470208183776,
+        "p": 0.055,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.49777777777777776,
+        "null": 0.16279173646007816,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1520.8612111597981,
+    "C3_null_mean": 2268.8671215871577,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1810.7486935317272,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.10142638220019536,
+        "stratum:arachnids": 0.08723709389619723,
+        "stratum:birds": -0.16803539510116633,
+        "stratum:cartilaginous fish": 0.18262239447244422,
+        "stratum:cnidarians": -0.050755226564939304,
+        "stratum:crustaceans": 0.24758012604766622,
+        "stratum:echinoderms": 0.0008320528945072018,
+        "stratum:insects": -0.1476243688592152,
+        "stratum:mammals": -0.021413119412286002,
+        "stratum:molluscs": 0.09705541176257675,
+        "stratum:other": 0.10809194455982113,
+        "stratum:ray-finned fish": -0.15708000260373678,
+        "stratum:reptiles": 0.05606022985961888,
+        "log_sitelinks": -0.16117915449516632,
+        "n_name_tokens": 0.10436216383057119,
+        "name_length": 0.3268880628705636,
+        "n_words": 0.42833213029543327
+      },
+      "PC2": {
+        "stratum:amphibians": -0.03168953567273488,
+        "stratum:arachnids": -0.28587099939727073,
+        "stratum:birds": 0.474761245162061,
+        "stratum:cartilaginous fish": -0.2625090082167084,
+        "stratum:cnidarians": -0.18319031227400226,
+        "stratum:crustaceans": -0.05840497795140572,
+        "stratum:echinoderms": -0.13160303281455576,
+        "stratum:insects": -0.16523377373125897,
+        "stratum:mammals": 0.11800547162799743,
+        "stratum:molluscs": 0.03615984634757209,
+        "stratum:other": -0.055669915569291115,
+        "stratum:ray-finned fish": 0.12891865862548776,
+        "stratum:reptiles": -0.16768749107569283,
+        "log_sitelinks": 0.47353716625356757,
+        "n_name_tokens": 0.19625806419658987,
+        "name_length": -0.017487488858068494,
+        "n_words": -0.1905500748961855
+      },
+      "PC3": {
+        "stratum:amphibians": -0.14265258064591627,
+        "stratum:arachnids": -0.27173984375634525,
+        "stratum:birds": -0.2186340491702866,
+        "stratum:cartilaginous fish": 0.21020094015876656,
+        "stratum:cnidarians": -0.0163637069253083,
+        "stratum:crustaceans": -0.05646764209740787,
+        "stratum:echinoderms": -0.09915296992877488,
+        "stratum:insects": -0.32666473823917774,
+        "stratum:mammals": 0.5251139791952364,
+        "stratum:molluscs": -0.05066352098148837,
+        "stratum:other": -0.020114104601801193,
+        "stratum:ray-finned fish": 0.07396635237109436,
+        "stratum:reptiles": 0.11409325373189297,
+        "log_sitelinks": 0.35206489781339767,
+        "n_name_tokens": -0.3041609309857772,
+        "name_length": -0.3628706550084287,
+        "n_words": -0.3254313123890111
+      }
+    },
+    "layer": 9,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.07641831785440445,
+      0.05105053633451462,
+      0.039637789130210876
+    ],
+    "C1_purity": 0.442,
+    "C1_purity_null": 0.12211306532663316,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.04599577561020851,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3977777777777778,
+        "null": 0.18389726409826912,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.12,
+        "null": 0.10686288585786075,
+        "p": 0.225,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.48444444444444446,
+        "null": 0.16250139586823006,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1516.0591001536125,
+    "C3_null_mean": 2225.154975778912,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1778.479505647202,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.09079697681780466,
+        "stratum:arachnids": 0.13886139635861047,
+        "stratum:birds": -0.19880484689995567,
+        "stratum:cartilaginous fish": 0.20894736990029736,
+        "stratum:cnidarians": -0.03910648604183849,
+        "stratum:crustaceans": 0.24575675112625647,
+        "stratum:echinoderms": 0.003050860613193074,
+        "stratum:insects": -0.14289655198695442,
+        "stratum:mammals": -0.04904796843588997,
+        "stratum:molluscs": 0.10301582599569302,
+        "stratum:other": 0.11105492880711196,
+        "stratum:ray-finned fish": -0.14378730009332238,
+        "stratum:reptiles": 0.061238814142838806,
+        "log_sitelinks": -0.2026624523149281,
+        "n_name_tokens": 0.07645224747171069,
+        "name_length": 0.34077839173057833,
+        "n_words": 0.4644080199069604
+      },
+      "PC2": {
+        "stratum:amphibians": 0.04490178722280931,
+        "stratum:arachnids": 0.29441806934137893,
+        "stratum:birds": -0.3882079168613924,
+        "stratum:cartilaginous fish": 0.24780804791284242,
+        "stratum:cnidarians": 0.1804168026256449,
+        "stratum:crustaceans": 0.03994330687213211,
+        "stratum:echinoderms": 0.13673402566401682,
+        "stratum:insects": 0.25067707285747914,
+        "stratum:mammals": -0.21324978242792333,
+        "stratum:molluscs": -0.053246367149172094,
+        "stratum:other": 0.03618259609672452,
+        "stratum:ray-finned fish": -0.1459113917315845,
+        "stratum:reptiles": 0.14532915893226714,
+        "log_sitelinks": -0.4990971691727809,
+        "n_name_tokens": -0.11159642332394587,
+        "name_length": 0.06456051008938975,
+        "n_words": 0.2250768006431972
+      },
+      "PC3": {
+        "stratum:amphibians": 0.08672402709184186,
+        "stratum:arachnids": 0.23094182988980233,
+        "stratum:birds": 0.24797898931172457,
+        "stratum:cartilaginous fish": -0.22877657217062827,
+        "stratum:cnidarians": -0.007904502497818417,
+        "stratum:crustaceans": 0.09817734342465567,
+        "stratum:echinoderms": 0.057827676168250526,
+        "stratum:insects": 0.2952144781758778,
+        "stratum:mammals": -0.51687018746024,
+        "stratum:molluscs": 0.06854476368083721,
+        "stratum:other": 0.06831957908657119,
+        "stratum:ray-finned fish": -0.0030490992871826765,
+        "stratum:reptiles": -0.16850948858096584,
+        "log_sitelinks": -0.3319659523735894,
+        "n_name_tokens": 0.38915053169280184,
+        "name_length": 0.41938377853301245,
+        "n_words": 0.33847366412398844
+      }
+    },
+    "layer": 10,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.07871246337890625,
+      0.053918346762657166,
+      0.04246298968791962
+    ],
+    "C1_purity": 0.424,
+    "C1_purity_null": 0.12301758793969848,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.0503062829375267,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3933333333333333,
+        "null": 0.18175321049692905,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14285714285714285,
+        "null": 0.10436468054558506,
+        "p": 0.045,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.48444444444444446,
+        "null": 0.1655834729201563,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1538.298380962585,
+    "C3_null_mean": 2244.203225799423,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1813.9099212852464,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.08841281112455814,
+        "stratum:arachnids": 0.1600581298199987,
+        "stratum:birds": -0.22780790424362934,
+        "stratum:cartilaginous fish": 0.23230936108085962,
+        "stratum:cnidarians": -0.02828979841324486,
+        "stratum:crustaceans": 0.23800740771026505,
+        "stratum:echinoderms": -0.007904502497818417,
+        "stratum:insects": -0.13960763590190345,
+        "stratum:mammals": -0.05578817551481776,
+        "stratum:molluscs": 0.09606200939039071,
+        "stratum:other": 0.1208555690096893,
+        "stratum:ray-finned fish": -0.14049838400827142,
+        "stratum:reptiles": 0.08006255701359061,
+        "log_sitelinks": -0.2218200785950676,
+        "n_name_tokens": 0.060773726749344045,
+        "name_length": 0.3369305729654225,
+        "n_words": 0.46706616770348197
+      },
+      "PC2": {
+        "stratum:amphibians": 0.06804806249474418,
+        "stratum:arachnids": 0.2949878740043194,
+        "stratum:birds": -0.3358998488034505,
+        "stratum:cartilaginous fish": 0.22307852554122284,
+        "stratum:cnidarians": 0.18152620648498788,
+        "stratum:crustaceans": 0.03299168998425747,
+        "stratum:echinoderms": 0.13742740307610615,
+        "stratum:insects": 0.27369948545283596,
+        "stratum:mammals": -0.26597894088384305,
+        "stratum:molluscs": -0.061094245889441866,
+        "stratum:other": 0.0202280655343893,
+        "stratum:ray-finned fish": -0.1371409488381152,
+        "stratum:reptiles": 0.13554738861951837,
+        "log_sitelinks": -0.49913364060237364,
+        "n_name_tokens": -0.10110919096665177,
+        "name_length": 0.07953896857480826,
+        "n_words": 0.24013903927255745
+      },
+      "PC3": {
+        "stratum:amphibians": -0.08851215136177674,
+        "stratum:arachnids": -0.20644022938335896,
+        "stratum:birds": -0.31082844363406653,
+        "stratum:cartilaginous fish": 0.23379085320450504,
+        "stratum:cnidarians": 0.046594962092403304,
+        "stratum:crustaceans": -0.05555595463670301,
+        "stratum:echinoderms": -0.03369814222754167,
+        "stratum:insects": -0.2821958520058844,
+        "stratum:mammals": 0.4604598389842905,
+        "stratum:molluscs": -0.042418281292344186,
+        "stratum:other": -0.05350465785011704,
+        "stratum:ray-finned fish": 0.043886474009898965,
+        "stratum:reptiles": 0.163906302551437,
+        "log_sitelinks": 0.2362514201302964,
+        "n_name_tokens": -0.3889988441960704,
+        "name_length": -0.3904245172772646,
+        "n_words": -0.2970156765111399
+      }
+    },
+    "layer": 11,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.09774576127529144,
+      0.05456380173563957,
+      0.0456361249089241
+    ],
+    "C1_purity": 0.439,
+    "C1_purity_null": 0.12126633165829144,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.0316646583378315,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.4288888888888889,
+        "null": 0.18346175321049693,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14285714285714285,
+        "null": 0.10554199569274945,
+        "p": 0.035,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.49333333333333335,
+        "null": 0.16841987716359577,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1421.8406132190757,
+    "C3_null_mean": 2123.2585403380003,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1686.9169176264195,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.09556530820429768,
+        "stratum:arachnids": 0.12461627978509689,
+        "stratum:birds": -0.21515824072634926,
+        "stratum:cartilaginous fish": 0.21954573663099147,
+        "stratum:cnidarians": -0.05269668331878944,
+        "stratum:crustaceans": 0.23766552491250076,
+        "stratum:echinoderms": -0.012896819864861627,
+        "stratum:insects": -0.1636578347738387,
+        "stratum:mammals": -0.022138987866939765,
+        "stratum:molluscs": 0.10877755975437209,
+        "stratum:other": 0.11538544424546007,
+        "stratum:ray-finned fish": -0.12816494868933026,
+        "stratum:reptiles": 0.062471810400748305,
+        "log_sitelinks": -0.18126375513104734,
+        "n_name_tokens": 0.04774337236965669,
+        "name_length": 0.3169210886260608,
+        "n_words": 0.4362293176152105
+      },
+      "PC2": {
+        "stratum:amphibians": 0.09159169871555349,
+        "stratum:arachnids": 0.2968112489257292,
+        "stratum:birds": -0.34609935227008615,
+        "stratum:cartilaginous fish": 0.21669671331628876,
+        "stratum:cnidarians": 0.1935909734553423,
+        "stratum:crustaceans": 0.08780689855913777,
+        "stratum:echinoderms": 0.16433044666517235,
+        "stratum:insects": 0.3102201578139228,
+        "stratum:mammals": -0.3801995269982888,
+        "stratum:molluscs": 0.013609612498948839,
+        "stratum:other": 0.05521407183893868,
+        "stratum:ray-finned fish": -0.16119114771005044,
+        "stratum:reptiles": 0.15050774321548704,
+        "log_sitelinks": -0.6051223339486531,
+        "n_name_tokens": -0.005351721457387361,
+        "name_length": 0.18351256338900765,
+        "n_words": 0.32689940229656944
+      },
+      "PC3": {
+        "stratum:amphibians": -0.08215437617978605,
+        "stratum:arachnids": -0.15002956775224516,
+        "stratum:birds": -0.3733929956249382,
+        "stratum:cartilaginous fish": 0.2664976408572922,
+        "stratum:cnidarians": 0.07876767401334843,
+        "stratum:crustaceans": -0.03527090863601965,
+        "stratum:echinoderms": -0.00499231736704321,
+        "stratum:insects": -0.2688346304103647,
+        "stratum:mammals": 0.39850178160491573,
+        "stratum:molluscs": -0.025828461676837212,
+        "stratum:other": -0.020797870197329843,
+        "stratum:ray-finned fish": 0.0420364587120578,
+        "stratum:reptiles": 0.1810038506611155,
+        "log_sitelinks": 0.12834605471418545,
+        "n_name_tokens": -0.3481767361711839,
+        "name_length": -0.33540294494702627,
+        "n_words": -0.2406555769484614
+      }
+    },
+    "layer": 12,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10620682686567307,
+      0.05428813770413399,
+      0.04776005819439888
+    ],
+    "C1_purity": 0.4485,
+    "C1_purity_null": 0.12259798994974874,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.02937430329620838,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.38222222222222224,
+        "null": 0.1814852037967616,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14857142857142858,
+        "null": 0.10696338837042355,
+        "p": 0.04,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.5022222222222222,
+        "null": 0.16971524288107204,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1423.463297802491,
+    "C3_null_mean": 2132.2887565997403,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1684.1909636644218,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.10579735263781397,
+        "stratum:arachnids": 0.15481592692094573,
+        "stratum:birds": -0.23766552491250076,
+        "stratum:cartilaginous fish": 0.23139767362015476,
+        "stratum:cnidarians": -0.0449308563033889,
+        "stratum:crustaceans": 0.22433209579969202,
+        "stratum:echinoderms": -0.008043177980236283,
+        "stratum:insects": -0.17188012498646615,
+        "stratum:mammals": -0.014569216839836236,
+        "stratum:molluscs": 0.09973759816747908,
+        "stratum:other": 0.12404647512215634,
+        "stratum:ray-finned fish": -0.14728177343368903,
+        "stratum:reptiles": 0.0803091562651725,
+        "log_sitelinks": -0.19587285972670762,
+        "n_name_tokens": 0.04361020389690161,
+        "name_length": 0.3145550502487367,
+        "n_words": 0.440768111715219
+      },
+      "PC2": {
+        "stratum:amphibians": 0.1089762402288093,
+        "stratum:arachnids": 0.3099167561733617,
+        "stratum:birds": -0.21834914683881632,
+        "stratum:cartilaginous fish": 0.1511691770781262,
+        "stratum:cnidarians": 0.179307398766302,
+        "stratum:crustaceans": 0.08210885192973234,
+        "stratum:echinoderms": 0.18221958389707718,
+        "stratum:insects": 0.38086333455741367,
+        "stratum:mammals": -0.5063450948677605,
+        "stratum:molluscs": 0.025729121439618606,
+        "stratum:other": 0.049743947074709464,
+        "stratum:ray-finned fish": -0.16646711726315308,
+        "stratum:reptiles": 0.10710627493707245,
+        "log_sitelinks": -0.6221072380967044,
+        "n_name_tokens": 0.0999364065989064,
+        "name_length": 0.25545820605171043,
+        "n_words": 0.3441764646475666
+      },
+      "PC3": {
+        "stratum:amphibians": -0.06884278439249303,
+        "stratum:arachnids": 0.06079815753575601,
+        "stratum:birds": -0.4031937794967287,
+        "stratum:cartilaginous fish": 0.26809309391352576,
+        "stratum:cnidarians": 0.11232714075847224,
+        "stratum:crustaceans": -0.05225108759164786,
+        "stratum:echinoderms": 0.03979986345392782,
+        "stratum:insects": -0.2136082478155504,
+        "stratum:mammals": 0.3330699251925551,
+        "stratum:molluscs": -0.04291498247843721,
+        "stratum:other": -0.04609719723188998,
+        "stratum:ray-finned fish": -0.045736489307740144,
+        "stratum:reptiles": 0.20073179078766762,
+        "log_sitelinks": 0.015646805836617858,
+        "n_name_tokens": -0.3559754752728304,
+        "name_length": -0.31075317306420785,
+        "n_words": -0.18058606312799763
+      }
+    },
+    "layer": 13,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.1098337471485138,
+      0.056364964693784714,
+      0.05025750398635864
+    ],
+    "C1_purity": 0.45,
+    "C1_purity_null": 0.12183417085427134,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.03122110851109028,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.37777777777777777,
+        "null": 0.18511446119486324,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.15142857142857144,
+        "null": 0.10647523330940416,
+        "p": 0.015,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.5066666666666667,
+        "null": 0.16372975991066446,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1438.2641658212342,
+    "C3_null_mean": 2155.5144150971164,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1702.4862998987192,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.11642675802020466,
+        "stratum:arachnids": 0.14683866163977807,
+        "stratum:birds": -0.21504427979376117,
+        "stratum:cartilaginous fish": 0.22581358792333744,
+        "stratum:cnidarians": -0.05796635165066839,
+        "stratum:crustaceans": 0.20780776057441627,
+        "stratum:echinoderms": -0.009568608286832822,
+        "stratum:insects": -0.17743017087998966,
+        "stratum:mammals": 0.009954767378108747,
+        "stratum:molluscs": 0.08910819278508836,
+        "stratum:other": 0.11595524890840063,
+        "stratum:ray-finned fish": -0.1713319723056243,
+        "stratum:reptiles": 0.08047355576622711,
+        "log_sitelinks": -0.1635843937105192,
+        "n_name_tokens": 0.06139077710440105,
+        "name_length": 0.3167273635969136,
+        "n_words": 0.43834442710723825
+      },
+      "PC2": {
+        "stratum:amphibians": 0.1261621012676279,
+        "stratum:arachnids": 0.3096888343081855,
+        "stratum:birds": -0.19168228861319886,
+        "stratum:cartilaginous fish": 0.09487247637960053,
+        "stratum:cnidarians": 0.16391442021791874,
+        "stratum:crustaceans": 0.09715169503136269,
+        "stratum:echinoderms": 0.17944607424871986,
+        "stratum:insects": 0.3980616249188261,
+        "stratum:mammals": -0.5440902545097561,
+        "stratum:molluscs": 0.05175626359089302,
+        "stratum:other": 0.06307737618751817,
+        "stratum:ray-finned fish": -0.15598369724205308,
+        "stratum:reptiles": 0.09058412508108504,
+        "log_sitelinks": -0.635919315383964,
+        "n_name_tokens": 0.13295443099151208,
+        "name_length": 0.28207867444829754,
+        "n_words": 0.348914013461999
+      },
+      "PC3": {
+        "stratum:amphibians": -0.050166819795395355,
+        "stratum:arachnids": 0.1537902785276527,
+        "stratum:birds": -0.4111710447778963,
+        "stratum:cartilaginous fish": 0.27208172655410956,
+        "stratum:cnidarians": 0.12910687413103414,
+        "stratum:crustaceans": -0.047122845625182964,
+        "stratum:echinoderms": 0.05644092134407186,
+        "stratum:insects": -0.19620440019882232,
+        "stratum:mammals": 0.28915488368600245,
+        "stratum:molluscs": -0.04708727244161861,
+        "stratum:other": -0.039829345939544,
+        "stratum:ray-finned fish": -0.10438882615781589,
+        "stratum:reptiles": 0.22136392817002004,
+        "log_sitelinks": -0.04906288594975215,
+        "n_name_tokens": -0.32025457597850654,
+        "name_length": -0.25296655644064736,
+        "n_words": -0.1084163173770857
+      }
+    },
+    "layer": 14,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10799459367990494,
+      0.05879608169198036,
+      0.05411936715245247
+    ],
+    "C1_purity": 0.531,
+    "C1_purity_null": 0.12128894472361808,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.02073625847697258,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.33111111111111113,
+        "null": 0.1833612506979341,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.14857142857142858,
+        "null": 0.10193826274228283,
+        "p": 0.015,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.5066666666666667,
+        "null": 0.16031267448352876,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1322.6570157081155,
+    "C3_null_mean": 2197.6905388671485,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1609.2568695352363,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.09904221650694883,
+        "stratum:arachnids": 0.10227993699782757,
+        "stratum:birds": -0.2543608015366587,
+        "stratum:cartilaginous fish": 0.25339213360965973,
+        "stratum:cnidarians": 0.002496158683521605,
+        "stratum:crustaceans": 0.2239902130019277,
+        "stratum:echinoderms": -0.004437615437371743,
+        "stratum:insects": -0.22929911830464778,
+        "stratum:mammals": -0.03707113893410289,
+        "stratum:molluscs": 0.14036775518988837,
+        "stratum:other": 0.14661073977460187,
+        "stratum:ray-finned fish": -0.07170522256262182,
+        "stratum:reptiles": 0.06600639967342223,
+        "log_sitelinks": -0.21435909292892,
+        "n_name_tokens": 0.03193191859442107,
+        "name_length": 0.28830173869691544,
+        "n_words": 0.4057558405528576
+      },
+      "PC2": {
+        "stratum:amphibians": -0.1653021547317581,
+        "stratum:arachnids": -0.30285117835289893,
+        "stratum:birds": -0.0745304499126231,
+        "stratum:cartilaginous fish": 0.09886110902018432,
+        "stratum:cnidarians": -0.03508489705172034,
+        "stratum:crustaceans": -0.05122543919835487,
+        "stratum:echinoderms": -0.14033958820688136,
+        "stratum:insects": -0.3747651359830482,
+        "stratum:mammals": 0.5159369280185423,
+        "stratum:molluscs": -0.01688784032716279,
+        "stratum:other": -0.03002870573696665,
+        "stratum:ray-finned fish": 0.22320091973028244,
+        "stratum:reptiles": -0.06814359318713203,
+        "log_sitelinks": 0.4293969857299517,
+        "n_name_tokens": -0.21368191427756736,
+        "name_length": -0.35687795631338437,
+        "n_words": -0.3909426629159224
+      },
+      "PC3": {
+        "stratum:amphibians": 0.05801469853566512,
+        "stratum:arachnids": -0.0005128241966464893,
+        "stratum:birds": 0.35561509014119325,
+        "stratum:cartilaginous fish": -0.18114090234879884,
+        "stratum:cnidarians": -0.23089467822574852,
+        "stratum:crustaceans": -0.2535060945422479,
+        "stratum:echinoderms": -0.15254303065965366,
+        "stratum:insects": -0.023193710308119907,
+        "stratum:mammals": 0.45942288404907083,
+        "stratum:molluscs": -0.2855038417662698,
+        "stratum:other": -0.15823475489858896,
+        "stratum:ray-finned fish": -0.377094784876626,
+        "stratum:reptiles": 0.08236415002835501,
+        "log_sitelinks": 0.6154911895089369,
+        "n_name_tokens": 0.0031999162507129644,
+        "name_length": -0.05690292233444396,
+        "n_words": -0.049100499400245315
+      }
+    },
+    "layer": 15,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10657815635204315,
+      0.05968334525823593,
+      0.0558328777551651
+    ],
+    "C1_purity": 0.5495,
+    "C1_purity_null": 0.12124371859296483,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.008149571716785431,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.35333333333333333,
+        "null": 0.18336125069793408,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.15428571428571428,
+        "null": 0.10445082555635318,
+        "p": 0.015,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.5022222222222222,
+        "null": 0.16500279173646007,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1296.2508257860102,
+    "C3_null_mean": 2181.667513694899,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1572.817767423749,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.10281714552125581,
+        "stratum:arachnids": 0.0647867901763398,
+        "stratum:birds": -0.2569819029861852,
+        "stratum:cartilaginous fish": 0.2619392035537679,
+        "stratum:cnidarians": 0.00998463473408642,
+        "stratum:crustaceans": 0.22353436927157525,
+        "stratum:echinoderms": -0.0040215889901181415,
+        "stratum:insects": -0.2568437905169497,
+        "stratum:mammals": -0.029760606640804276,
+        "stratum:molluscs": 0.14851365464181393,
+        "stratum:other": 0.15139709894330244,
+        "stratum:ray-finned fish": -0.03874754262700682,
+        "stratum:reptiles": 0.05490943335223667,
+        "log_sitelinks": -0.2064088838190322,
+        "n_name_tokens": 0.03552101384859912,
+        "name_length": 0.28371011728590206,
+        "n_words": 0.3949029348189184
+      },
+      "PC2": {
+        "stratum:amphibians": 0.04460376651115349,
+        "stratum:arachnids": 0.2900875539030308,
+        "stratum:birds": -0.24028662636202727,
+        "stratum:cartilaginous fish": 0.05851893888399383,
+        "stratum:cnidarians": 0.20593309139053245,
+        "stratum:crustaceans": 0.18581330058491127,
+        "stratum:echinoderms": 0.19983137016414632,
+        "stratum:insects": 0.3850429987488326,
+        "stratum:mammals": -0.6381420671341793,
+        "stratum:molluscs": 0.20325012534926515,
+        "stratum:other": 0.10114032767194649,
+        "stratum:ray-finned fish": 0.0012676030744467306,
+        "stratum:reptiles": -0.009124172308530345,
+        "log_sitelinks": -0.7398206991234997,
+        "n_name_tokens": 0.11665934578050971,
+        "name_length": 0.2832996494622629,
+        "n_words": 0.32012871627345924
+      },
+      "PC3": {
+        "stratum:amphibians": 0.1169234592062977,
+        "stratum:arachnids": 0.2565830397221268,
+        "stratum:birds": 0.3380081260563305,
+        "stratum:cartilaginous fish": -0.20461685446194922,
+        "stratum:cnidarians": -0.2091226274861434,
+        "stratum:crustaceans": -0.18307823820279664,
+        "stratum:echinoderms": -0.09152581839579219,
+        "stratum:insects": 0.1989451636030315,
+        "stratum:mammals": 0.08705236681169054,
+        "stratum:molluscs": -0.23940997169683723,
+        "stratum:other": -0.12928867802120936,
+        "stratum:ray-finned fish": -0.3914837927487241,
+        "stratum:reptiles": 0.07274677921666085,
+        "log_sitelinks": 0.27160536137004365,
+        "n_name_tokens": 0.09043353961117567,
+        "name_length": 0.15253459713748616,
+        "n_words": 0.2036097194142258
+      }
+    },
+    "layer": 16,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10155344754457474,
+      0.06748364865779877,
+      0.06350670754909515
+    ],
+    "C1_purity": 0.5705,
+    "C1_purity_null": 0.12167336683417086,
+    "C1_p": 0.005,
+    "C1_silhouette": 0.0154983876273036,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.35777777777777775,
+        "null": 0.1814852037967616,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.18571428571428572,
+        "null": 0.10518305814788229,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.49777777777777776,
+        "null": 0.16645449469570076,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1364.7829226571503,
+    "C3_null_mean": 2360.1319826878685,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1654.7455814381449,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.1026184650468186,
+        "stratum:arachnids": 0.057265368625524636,
+        "stratum:birds": -0.34347825082055966,
+        "stratum:cartilaginous fish": 0.26923270323940685,
+        "stratum:cnidarians": 0.11357522010023303,
+        "stratum:crustaceans": 0.22695319724921853,
+        "stratum:echinoderms": 0.01317417082969736,
+        "stratum:insects": -0.23889179021937978,
+        "stratum:mammals": -0.15326193942546593,
+        "stratum:molluscs": 0.20583297151694885,
+        "stratum:other": 0.18000129302291773,
+        "stratum:ray-finned fish": 0.0874646121368244,
+        "stratum:reptiles": 0.060745615639675,
+        "log_sitelinks": -0.34660674679753334,
+        "n_name_tokens": 0.038479940354344946,
+        "name_length": 0.24910981241954147,
+        "n_words": 0.34353101713428486
+      },
+      "PC2": {
+        "stratum:amphibians": -0.10838019880549768,
+        "stratum:arachnids": -0.18034317582068204,
+        "stratum:birds": -0.41025935731719143,
+        "stratum:cartilaginous fish": 0.16142566101105602,
+        "stratum:cnidarians": 0.21342156744109725,
+        "stratum:crustaceans": 0.10182409326747514,
+        "stratum:echinoderms": 0.12078634518596212,
+        "stratum:insects": -0.14344470466779624,
+        "stratum:mammals": -0.02779039226388692,
+        "stratum:molluscs": 0.20781977626132095,
+        "stratum:other": 0.08586956270513992,
+        "stratum:ray-finned fish": 0.3719558534937339,
+        "stratum:reptiles": -0.0403600775089045,
+        "log_sitelinks": -0.27999754045191144,
+        "n_name_tokens": -0.1830208278947109,
+        "name_length": -0.23799467445961311,
+        "n_words": -0.26638364484044424
+      },
+      "PC3": {
+        "stratum:amphibians": 0.02900734926783256,
+        "stratum:arachnids": 0.2984067019819627,
+        "stratum:birds": -0.18547141778714696,
+        "stratum:cartilaginous fish": -0.016011511028629275,
+        "stratum:cnidarians": 0.2010794495059071,
+        "stratum:crustaceans": 0.14718054443754242,
+        "stratum:echinoderms": 0.18943070898280628,
+        "stratum:insects": 0.43787121336496393,
+        "stratum:mammals": -0.6105590658573365,
+        "stratum:molluscs": 0.17404409560699538,
+        "stratum:other": 0.0410829161980132,
+        "stratum:ray-finned fish": -0.031621557776063035,
+        "stratum:reptiles": 0.009206372059057647,
+        "log_sitelinks": -0.6832527617700457,
+        "n_name_tokens": 0.0973150600826831,
+        "name_length": 0.21990242904838248,
+        "n_words": 0.23737646103286394
+      }
+    },
+    "layer": 17,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10509894788265228,
+      0.06790851056575775,
+      0.06368183344602585
+    ],
+    "C1_purity": 0.5505,
+    "C1_purity_null": 0.12230653266331659,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.01725274883210659,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.4022222222222222,
+        "null": 0.18675600223338915,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.18571428571428572,
+        "null": 0.10571428571428572,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4311111111111111,
+        "null": 0.16482412060301507,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1483.2566396757352,
+    "C3_null_mean": 2532.8900567982337,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1796.3879013627352,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.09377718393436278,
+        "stratum:arachnids": 0.017606964084862797,
+        "stratum:birds": -0.3077514984541876,
+        "stratum:cartilaginous fish": 0.26535803153141113,
+        "stratum:cnidarians": 0.13035495347279497,
+        "stratum:crustaceans": 0.21487333839487902,
+        "stratum:echinoderms": 0.023020130081365917,
+        "stratum:insects": -0.23848067570874842,
+        "stratum:mammals": -0.21998998950685109,
+        "stratum:molluscs": 0.23136341248213027,
+        "stratum:other": 0.17749415250597933,
+        "stratum:ray-finned fish": 0.15091328494426617,
+        "stratum:reptiles": 0.050717246075344356,
+        "log_sitelinks": -0.36151849862899155,
+        "n_name_tokens": 0.08960270803074456,
+        "name_length": 0.2559176218579809,
+        "n_words": 0.3193283074574063
+      },
+      "PC2": {
+        "stratum:amphibians": -0.1367915066500186,
+        "stratum:arachnids": -0.1258698500435661,
+        "stratum:birds": -0.32233849782546553,
+        "stratum:cartilaginous fish": 0.11595524890840063,
+        "stratum:cnidarians": 0.19955401919931054,
+        "stratum:crustaceans": 0.12450231885250877,
+        "stratum:echinoderms": 0.12231177549255867,
+        "stratum:insects": -0.10733514681734072,
+        "stratum:mammals": -0.12018307699195872,
+        "stratum:molluscs": 0.2108993236150977,
+        "stratum:other": 0.062279649659401415,
+        "stratum:ray-finned fish": 0.37901331925957243,
+        "stratum:reptiles": -0.050059648071125944,
+        "log_sitelinks": -0.2979881747419715,
+        "n_name_tokens": -0.20622979228087965,
+        "name_length": -0.2308363373374937,
+        "n_words": -0.2515998873928758
+      },
+      "PC3": {
+        "stratum:amphibians": -0.05076286121870698,
+        "stratum:arachnids": -0.2909992413637356,
+        "stratum:birds": 0.026324975427853115,
+        "stratum:cartilaginous fish": 0.07310593825527174,
+        "stratum:cnidarians": -0.15961548026296485,
+        "stratum:crustaceans": -0.13715198236978887,
+        "stratum:echinoderms": -0.1797234252135556,
+        "stratum:insects": -0.4345137781948077,
+        "stratum:mammals": 0.6245579574828019,
+        "stratum:molluscs": -0.15069913986062325,
+        "stratum:other": -0.009857620668871405,
+        "stratum:ray-finned fish": 0.0778719402220924,
+        "stratum:reptiles": 0.030742706697210354,
+        "log_sitelinks": 0.5915600250121265,
+        "n_name_tokens": -0.14656588161107986,
+        "name_length": -0.3014045781319489,
+        "n_words": -0.30826407043954296
+      }
+    },
+    "layer": 18,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.10563964396715164,
+      0.07109369337558746,
+      0.06930437684059143
+    ],
+    "C1_purity": 0.5095,
+    "C1_purity_null": 0.12152512562814069,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.03188852220773697,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3977777777777778,
+        "null": 0.18684533780011167,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.18857142857142858,
+        "null": 0.1057430007178751,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4266666666666667,
+        "null": 0.16462311557788945,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1595.5812255218027,
+    "C3_null_mean": 2703.1082274480555,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 1924.5738844255416,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.08871083183621396,
+        "stratum:arachnids": 0.04564135350153755,
+        "stratum:birds": -0.29265167488626326,
+        "stratum:cartilaginous fish": 0.2484918135083711,
+        "stratum:cnidarians": 0.1402009127244635,
+        "stratum:crustaceans": 0.2252437832603969,
+        "stratum:echinoderms": 0.038690459594584885,
+        "stratum:insects": -0.1740042166247282,
+        "stratum:mammals": -0.32109309569076805,
+        "stratum:molluscs": 0.2453703859299535,
+        "stratum:other": 0.18364804286573722,
+        "stratum:ray-finned fish": 0.1670152699439949,
+        "stratum:reptiles": 0.050059648071125944,
+        "log_sitelinks": -0.4301963569605629,
+        "n_name_tokens": 0.10899208213246825,
+        "name_length": 0.2981868824368657,
+        "n_words": 0.3568718378132955
+      },
+      "PC2": {
+        "stratum:amphibians": -0.14871233511625118,
+        "stratum:arachnids": -0.2471242823173138,
+        "stratum:birds": -0.35151249656802136,
+        "stratum:cartilaginous fish": 0.12906075615603313,
+        "stratum:cnidarians": 0.10650277049692183,
+        "stratum:crustaceans": 0.010769308129576275,
+        "stratum:echinoderms": 0.0016641057890144037,
+        "stratum:insects": -0.2551993324744242,
+        "stratum:mammals": 0.36194912013842273,
+        "stratum:molluscs": 0.06576323703871628,
+        "stratum:other": 0.0189744952759201,
+        "stratum:ray-finned fish": 0.29802376066519215,
+        "stratum:reptiles": -0.04989524857007135,
+        "log_sitelinks": 0.08556628664144555,
+        "n_name_tokens": -0.3002112256737067,
+        "name_length": -0.38285157852875024,
+        "n_words": -0.38290354002607063
+      },
+      "PC3": {
+        "stratum:amphibians": 0.08811479041290232,
+        "stratum:arachnids": -0.14672470070718996,
+        "stratum:birds": 0.07230821172715499,
+        "stratum:cartilaginous fish": 0.06809165722139496,
+        "stratum:cnidarians": -0.1947003773146852,
+        "stratum:crustaceans": -0.15777891116823653,
+        "stratum:echinoderms": -0.17181892271573718,
+        "stratum:insects": -0.2986404324311392,
+        "stratum:mammals": 0.5732286881894286,
+        "stratum:molluscs": -0.2049389093819814,
+        "stratum:other": 0.009629698803695188,
+        "stratum:ray-finned fish": -0.25136226370853143,
+        "stratum:reptiles": 0.12420382304675093,
+        "log_sitelinks": 0.5336663652565095,
+        "n_name_tokens": 0.00806324478140481,
+        "name_length": -0.08243770380725576,
+        "n_words": -0.05612945426130746
+      }
+    },
+    "layer": 19,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.11369290947914124,
+      0.08333471417427063,
+      0.07165257632732391
+    ],
+    "C1_purity": 0.469,
+    "C1_purity_null": 0.12188693467336682,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.05073232203722,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.37555555555555553,
+        "null": 0.18461194863204913,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.18285714285714286,
+        "null": 0.10582914572864323,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4577777777777778,
+        "null": 0.16953657174762704,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 1868.5642987945016,
+    "C3_null_mean": 3095.7386274511823,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 2266.4751009775596,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.08364447973806512,
+        "stratum:arachnids": 0.05692348582776031,
+        "stratum:birds": -0.29937536990896163,
+        "stratum:cartilaginous fish": 0.23983078263167484,
+        "stratum:cnidarians": 0.16058620863988995,
+        "stratum:crustaceans": 0.21920385383322713,
+        "stratum:echinoderms": 0.05657959682648972,
+        "stratum:insects": -0.12768531509359363,
+        "stratum:mammals": -0.38175495940111825,
+        "stratum:molluscs": 0.26275492744320933,
+        "stratum:other": 0.19310680027055024,
+        "stratum:ray-finned fish": 0.1777727663055158,
+        "stratum:reptiles": 0.050224047572180554,
+        "log_sitelinks": -0.48564755601612697,
+        "n_name_tokens": 0.11852973715596438,
+        "name_length": 0.3153192400581853,
+        "n_words": 0.3656323167966271
+      },
+      "PC2": {
+        "stratum:amphibians": -0.04490178722280931,
+        "stratum:arachnids": -0.17373344173057176,
+        "stratum:birds": -0.19795013990554486,
+        "stratum:cartilaginous fish": 0.13965912288672724,
+        "stratum:cnidarians": -0.061571914193532924,
+        "stratum:crustaceans": -0.0883767032220783,
+        "stratum:echinoderms": -0.1175968090903512,
+        "stratum:insects": -0.3677761893023149,
+        "stratum:mammals": 0.5605778379797488,
+        "stratum:molluscs": -0.0853332637707814,
+        "stratum:other": 0.05851893888399383,
+        "stratum:ray-finned fish": -0.018397374350753903,
+        "stratum:reptiles": 0.1201760352709132,
+        "log_sitelinks": 0.3531155375049562,
+        "n_name_tokens": -0.08562657158535517,
+        "name_length": -0.2350562923007349,
+        "n_words": -0.22258057617899166
+      },
+      "PC3": {
+        "stratum:amphibians": -0.15705691504261396,
+        "stratum:arachnids": -0.23401877506968125,
+        "stratum:birds": -0.26923270323940685,
+        "stratum:cartilaginous fish": 0.07766437555879609,
+        "stratum:cnidarians": 0.13825945597061334,
+        "stratum:crustaceans": 0.08792085949172587,
+        "stratum:echinoderms": 0.046456286609985444,
+        "stratum:insects": -0.1789375907523047,
+        "stratum:mammals": 0.0823342218564411,
+        "stratum:molluscs": 0.14692421084631627,
+        "stratum:other": 0.027749487085204475,
+        "stratum:ray-finned fish": 0.3916208309189345,
+        "stratum:reptiles": -0.06904779044293234,
+        "log_sitelinks": -0.0826239142123733,
+        "n_name_tokens": -0.2509289200012094,
+        "name_length": -0.2848585628515155,
+        "n_words": -0.3067822810544932
+      }
+    },
+    "layer": 20,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.11521957069635391,
+      0.08483806997537613,
+      0.07145239412784576
+    ],
+    "C1_purity": 0.4205,
+    "C1_purity_null": 0.12236934673366835,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.07512561231851578,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3466666666666667,
+        "null": 0.18398659966499165,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.16857142857142857,
+        "null": 0.104551328068916,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4622222222222222,
+        "null": 0.16341708542713565,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 2041.546601358857,
+    "C3_null_mean": 3218.3930603720974,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 2459.667037663067,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.09129367800389768,
+        "stratum:arachnids": 0.03925954127660346,
+        "stratum:birds": -0.28302197608256807,
+        "stratum:cartilaginous fish": 0.23607007185626722,
+        "stratum:cnidarians": 0.15434581193108593,
+        "stratum:crustaceans": 0.21156847134982382,
+        "stratum:echinoderms": 0.05241933235395371,
+        "stratum:insects": -0.136181681646642,
+        "stratum:mammals": -0.37040030286046294,
+        "stratum:molluscs": 0.26027142151274424,
+        "stratum:other": 0.19675355011336973,
+        "stratum:ray-finned fish": 0.1700986287737302,
+        "stratum:reptiles": 0.04825125355952534,
+        "log_sitelinks": -0.46231849825670623,
+        "n_name_tokens": 0.12270391275467761,
+        "name_length": 0.31999908057801013,
+        "n_words": 0.37675314837724166
+      },
+      "PC2": {
+        "stratum:amphibians": 0.03784863038028837,
+        "stratum:arachnids": -0.04279233018683483,
+        "stratum:birds": -0.12763624449868177,
+        "stratum:cartilaginous fish": -0.00222223818546812,
+        "stratum:cnidarians": -0.09582475835074607,
+        "stratum:crustaceans": -0.12917471708862124,
+        "stratum:echinoderms": -0.09721151317492474,
+        "stratum:insects": -0.10939071937049759,
+        "stratum:mammals": 0.4367654187145213,
+        "stratum:molluscs": -0.11861224323901395,
+        "stratum:other": 0.03914558034401534,
+        "stratum:ray-finned fish": -0.1913395451563511,
+        "stratum:reptiles": 0.13110860209104414,
+        "log_sitelinks": 0.270221415940176,
+        "n_name_tokens": 0.06039203008876704,
+        "name_length": -0.12326407932423848,
+        "n_words": -0.12595636477959749
+      },
+      "PC3": {
+        "stratum:amphibians": -0.16927576422050233,
+        "stratum:arachnids": -0.23675383745179585,
+        "stratum:birds": -0.3323100794269251,
+        "stratum:cartilaginous fish": 0.13282146693144073,
+        "stratum:cnidarians": 0.07821297208367697,
+        "stratum:crustaceans": 0.021025792062506057,
+        "stratum:echinoderms": -0.024545560387962455,
+        "stratum:insects": -0.2923366766014582,
+        "stratum:mammals": 0.38274006658957693,
+        "stratum:molluscs": 0.03367634041710697,
+        "stratum:other": -5.698046629405436e-05,
+        "stratum:ray-finned fish": 0.32406101300517903,
+        "stratum:reptiles": -0.025235323411881228,
+        "log_sitelinks": 0.13871416021936192,
+        "n_name_tokens": -0.3117537598980747,
+        "name_length": -0.38039750894273994,
+        "n_words": -0.372752227204968
+      }
+    },
+    "layer": 21,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.12955333292484283,
+      0.10396384447813034,
+      0.07389745861291885
+    ],
+    "C1_purity": 0.4175,
+    "C1_purity_null": 0.12163567839195981,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.08224537968635559,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3422222222222222,
+        "null": 0.18128419877163596,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.18,
+        "null": 0.10235463029432879,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4311111111111111,
+        "null": 0.16808486878838638,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 2378.9947500357503,
+    "C3_null_mean": 3621.0669557586953,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 2854.2036674838273,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": -0.08106163357038139,
+        "stratum:arachnids": 0.03470110397307911,
+        "stratum:birds": 0.2108847057542952,
+        "stratum:cartilaginous fish": -0.23128371268756664,
+        "stratum:cnidarians": -0.05436078910780385,
+        "stratum:crustaceans": -0.07435950851374094,
+        "stratum:echinoderms": -0.031895360956109405,
+        "stratum:insects": 0.12090192566817602,
+        "stratum:mammals": 0.1379668541309759,
+        "stratum:molluscs": -0.18089857197507908,
+        "stratum:other": -0.17612662131492204,
+        "stratum:ray-finned fish": 0.011408427670020574,
+        "stratum:reptiles": -0.09132392283583075,
+        "log_sitelinks": 0.23849952280066872,
+        "n_name_tokens": -0.20486295286446515,
+        "name_length": -0.19792591224769474,
+        "n_words": -0.2531110969672922
+      },
+      "PC2": {
+        "stratum:amphibians": -0.04460376651115349,
+        "stratum:arachnids": -0.07037087587315714,
+        "stratum:birds": 0.2607995942278868,
+        "stratum:cartilaginous fish": -0.17134026214622147,
+        "stratum:cnidarians": -0.16613322793660462,
+        "stratum:crustaceans": -0.23196747828309533,
+        "stratum:echinoderms": -0.12397588128157307,
+        "stratum:insects": -0.015519572776334294,
+        "stratum:mammals": 0.45843777686061216,
+        "stratum:molluscs": -0.2585826374800279,
+        "stratum:other": -0.15675326277494356,
+        "stratum:ray-finned fish": -0.22662687398554385,
+        "stratum:reptiles": 0.06502000266709462,
+        "log_sitelinks": 0.5550382479703041,
+        "n_name_tokens": -0.005587075151867373,
+        "name_length": -0.27672239347752237,
+        "n_words": -0.32724413504983574
+      },
+      "PC3": {
+        "stratum:amphibians": -0.1689777435088465,
+        "stratum:arachnids": -0.26444634407070633,
+        "stratum:birds": -0.25293628987930733,
+        "stratum:cartilaginous fish": 0.1558415753142387,
+        "stratum:cnidarians": 0.010400661181340021,
+        "stratum:crustaceans": 0.03299168998425747,
+        "stratum:echinoderms": -0.07557813791773751,
+        "stratum:insects": -0.37140770081289204,
+        "stratum:mammals": 0.43987628352018027,
+        "stratum:molluscs": -0.004867671623711628,
+        "stratum:other": 0.036752400759665065,
+        "stratum:ray-finned fish": 0.29000702770788034,
+        "stratum:reptiles": -0.024331126156080924,
+        "log_sitelinks": 0.2419320562423653,
+        "n_name_tokens": -0.2584387629287481,
+        "name_length": -0.309442475740429,
+        "n_words": -0.30594571460112696
+      }
+    },
+    "layer": 22,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.13008685410022736,
+      0.08842150121927261,
+      0.07051229476928711
+    ],
+    "C1_purity": 0.45,
+    "C1_purity_null": 0.12122110552763818,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.06446167081594467,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3511111111111111,
+        "null": 0.18484645449469572,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.18571428571428572,
+        "null": 0.10715003589375446,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.4666666666666667,
+        "null": 0.16109436069235064,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 2409.4578375462934,
+    "C3_null_mean": 3669.5534306414165,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 2864.3410049426134,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.09934023721860465,
+        "stratum:arachnids": 0.003931652174289751,
+        "stratum:birds": -0.1990327687651319,
+        "stratum:cartilaginous fish": 0.23265124387862396,
+        "stratum:cnidarians": 0.059491781957264935,
+        "stratum:crustaceans": 0.06945918841245227,
+        "stratum:echinoderms": 0.03619430091106328,
+        "stratum:insects": -0.09137019998782245,
+        "stratum:mammals": -0.17788961913693285,
+        "stratum:molluscs": 0.1859649240732279,
+        "stratum:other": 0.19789315943925082,
+        "stratum:ray-finned fish": -0.0360752983079029,
+        "stratum:reptiles": 0.06575980042184032,
+        "log_sitelinks": -0.2821970770540857,
+        "n_name_tokens": 0.25062165807637626,
+        "name_length": 0.3038794106818008,
+        "n_words": 0.35598474050032997
+      },
+      "PC2": {
+        "stratum:amphibians": -0.04500112746002791,
+        "stratum:arachnids": -0.05430238437823381,
+        "stratum:birds": 0.34763782486002565,
+        "stratum:cartilaginous fish": -0.15333443479730027,
+        "stratum:cnidarians": -0.1598928312278006,
+        "stratum:crustaceans": -0.24552882926108027,
+        "stratum:echinoderms": -0.12993892702554133,
+        "stratum:insects": -0.0051046718403395365,
+        "stratum:mammals": 0.40498274995003863,
+        "stratum:molluscs": -0.24765521138598143,
+        "stratum:other": -0.14547113044872076,
+        "stratum:ray-finned fish": -0.2643123707934196,
+        "stratum:reptiles": 0.025399722912935827,
+        "log_sitelinks": 0.5601539988296833,
+        "n_name_tokens": 0.06484266368120264,
+        "name_length": -0.1876424202421848,
+        "n_words": -0.2500648721690481
+      },
+      "PC3": {
+        "stratum:amphibians": 0.15616285290764653,
+        "stratum:arachnids": 0.2540758992051884,
+        "stratum:birds": 0.2624520277504144,
+        "stratum:cartilaginous fish": -0.1662120201797566,
+        "stratum:cnidarians": 0.02634834165939472,
+        "stratum:crustaceans": -0.01646735475898171,
+        "stratum:echinoderms": 0.09818224155184982,
+        "stratum:insects": 0.398952373025194,
+        "stratum:mammals": -0.5245955017276266,
+        "stratum:molluscs": 0.033378319705451166,
+        "stratum:other": -0.04518550977118511,
+        "stratum:ray-finned fish": -0.20559151485823862,
+        "stratum:reptiles": -0.028441113682445944,
+        "log_sitelinks": -0.2965143164561156,
+        "n_name_tokens": 0.24712439157582483,
+        "name_length": 0.3294992169612945,
+        "n_words": 0.3184457017764052
+      }
+    },
+    "layer": 23,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  },
+  {
+    "explained_variance_ratio": [
+      0.12361697107553482,
+      0.07401462644338608,
+      0.0682825967669487
+    ],
+    "C1_purity": 0.4775,
+    "C1_purity_null": 0.12273869346733667,
+    "C1_p": 0.005,
+    "C1_silhouette": -0.055176783353090286,
+    "C2_within_stratum_order_purity": {
+      "mammals": {
+        "purity": 0.3511111111111111,
+        "null": 0.18531546621998884,
+        "p": 0.005,
+        "n": 90,
+        "n_orders": 13
+      },
+      "birds": {
+        "purity": 0.15714285714285714,
+        "null": 0.10647523330940416,
+        "p": 0.005,
+        "n": 70,
+        "n_orders": 20
+      },
+      "insects": {
+        "purity": 0.35555555555555557,
+        "null": 0.16502512562814073,
+        "p": 0.005,
+        "n": 45,
+        "n_orders": 11
+      }
+    },
+    "C3_overlay_length": 6136.709803357456,
+    "C3_null_mean": 9445.521454231623,
+    "C3_p": 0.005,
+    "C3b_within_stratum_null_mean": 7213.720177681188,
+    "C3b_p": 0.005,
+    "C4_pc_correlations": {
+      "PC1": {
+        "stratum:amphibians": 0.0748031986256093,
+        "stratum:arachnids": 0.05658160302999598,
+        "stratum:birds": -0.22444605673228013,
+        "stratum:cartilaginous fish": 0.20518665912488976,
+        "stratum:cnidarians": 0.042712048584703025,
+        "stratum:crustaceans": 0.14341983366213484,
+        "stratum:echinoderms": 0.04104794279568862,
+        "stratum:insects": -0.09911285660471329,
+        "stratum:mammals": -0.1755564705326886,
+        "stratum:molluscs": 0.19500488566012095,
+        "stratum:other": 0.20906133083288547,
+        "stratum:ray-finned fish": -0.005652824521181365,
+        "stratum:reptiles": 0.011836764075931257,
+        "log_sitelinks": -0.3166766415524912,
+        "n_name_tokens": 0.17826730517523398,
+        "name_length": 0.3777035848468302,
+        "n_words": 0.42973262114192773
+      },
+      "PC2": {
+        "stratum:amphibians": -0.09248576085052093,
+        "stratum:arachnids": -0.13555652931355536,
+        "stratum:birds": 0.3643900819504777,
+        "stratum:cartilaginous fish": -0.05578387650187922,
+        "stratum:cnidarians": -0.2073198462147111,
+        "stratum:crustaceans": -0.24906161817131162,
+        "stratum:echinoderms": -0.15337508355416088,
+        "stratum:insects": -0.13028904032759234,
+        "stratum:mammals": 0.5435717770421463,
+        "stratum:molluscs": -0.265834474796986,
+        "stratum:other": -0.0998867574134773,
+        "stratum:ray-finned fish": -0.30007933321834895,
+        "stratum:reptiles": 0.02885211243508244,
+        "log_sitelinks": 0.6824766422477611,
+        "n_name_tokens": 0.02843970510465118,
+        "name_length": -0.11117984646826111,
+        "n_words": -0.1399170306696929
+      },
+      "PC3": {
+        "stratum:amphibians": 0.21030328219178607,
+        "stratum:arachnids": 0.2841615854084491,
+        "stratum:birds": 0.27139796095858093,
+        "stratum:cartilaginous fish": -0.14079873221260833,
+        "stratum:cnidarians": -0.059075755510011325,
+        "stratum:crustaceans": -0.06945918841245227,
+        "stratum:echinoderms": 0.07322065471663376,
+        "stratum:insects": 0.3071367989841875,
+        "stratum:mammals": -0.35028337711720153,
+        "stratum:molluscs": -0.06526653585262325,
+        "stratum:other": -0.07481535224409337,
+        "stratum:ray-finned fish": -0.3137146311542895,
+        "stratum:reptiles": 0.04397686653210572,
+        "log_sitelinks": -0.15452269668849258,
+        "n_name_tokens": 0.2214290543652713,
+        "name_length": 0.2578265931806003,
+        "n_words": 0.28608484096261877
+      }
+    },
+    "layer": 24,
+    "reading": "tree-consistent (checks 1-3 pass)"
+  }
+]

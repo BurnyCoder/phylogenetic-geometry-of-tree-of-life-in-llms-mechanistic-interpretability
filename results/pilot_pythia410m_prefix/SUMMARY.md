@@ -1,0 +1,157 @@
+# Run `pilot_pythia410m_prefix` (auto-generated; do not edit)
+
+## Stage 1a
+
+| layer | PC1–3 var | C1 purity (null) p | C1 random-init | C2 mammals (null) p | C2 birds (null) p | C2 insects (null) p | C3 overlay/null p | C3b overlay/within-null p | reading |
+|---|---|---|---|---|---|---|---|---|---|
+| 0 | 13.6% | 0.39 (0.12) 0.005 | – | 0.34 (0.18) 0.005 | 0.13 (0.11) 0.150 | 0.39 (0.16) 0.005 | 0.60 0.005 | 0.75 0.005 | tree-consistent (checks 1-3 pass) |
+| 1 | 17.8% | 0.39 (0.12) 0.005 | – | 0.38 (0.18) 0.005 | 0.13 (0.11) 0.120 | 0.42 (0.17) 0.005 | 0.60 0.005 | 0.74 0.005 | tree-consistent (checks 1-3 pass) |
+| 2 | 17.1% | 0.37 (0.12) 0.005 | – | 0.35 (0.18) 0.005 | 0.16 (0.11) 0.020 | 0.40 (0.17) 0.005 | 0.60 0.005 | 0.75 0.005 | tree-consistent (checks 1-3 pass) |
+| 3 | 18.6% | 0.36 (0.12) 0.005 | – | 0.36 (0.19) 0.005 | 0.14 (0.10) 0.060 | 0.40 (0.17) 0.005 | 0.63 0.005 | 0.77 0.005 | tree-consistent (checks 1-3 pass) |
+| 4 | 17.8% | 0.36 (0.12) 0.005 | – | 0.39 (0.19) 0.005 | 0.16 (0.11) 0.010 | 0.43 (0.16) 0.005 | 0.63 0.005 | 0.77 0.005 | tree-consistent (checks 1-3 pass) |
+| 5 | 16.0% | 0.38 (0.12) 0.005 | – | 0.34 (0.18) 0.005 | 0.15 (0.11) 0.035 | 0.48 (0.17) 0.005 | 0.64 0.005 | 0.78 0.005 | tree-consistent (checks 1-3 pass) |
+| 6 | 14.6% | 0.43 (0.12) 0.005 | – | 0.38 (0.18) 0.005 | 0.17 (0.11) 0.005 | 0.46 (0.16) 0.005 | 0.66 0.005 | 0.80 0.005 | tree-consistent (checks 1-3 pass) |
+| 7 | 14.5% | 0.42 (0.12) 0.005 | – | 0.38 (0.18) 0.005 | 0.16 (0.10) 0.010 | 0.49 (0.17) 0.005 | 0.67 0.005 | 0.82 0.005 | tree-consistent (checks 1-3 pass) |
+| 8 | 16.2% | 0.46 (0.12) 0.005 | – | 0.37 (0.18) 0.005 | 0.17 (0.10) 0.015 | 0.49 (0.17) 0.005 | 0.67 0.005 | 0.83 0.005 | tree-consistent (checks 1-3 pass) |
+| 9 | 17.0% | 0.46 (0.12) 0.005 | – | 0.40 (0.18) 0.005 | 0.14 (0.11) 0.055 | 0.50 (0.16) 0.005 | 0.67 0.005 | 0.84 0.005 | tree-consistent (checks 1-3 pass) |
+| 10 | 16.7% | 0.44 (0.12) 0.005 | – | 0.40 (0.18) 0.005 | 0.12 (0.11) 0.225 | 0.48 (0.16) 0.005 | 0.68 0.005 | 0.85 0.005 | tree-consistent (checks 1-3 pass) |
+| 11 | 17.5% | 0.42 (0.12) 0.005 | – | 0.39 (0.18) 0.005 | 0.14 (0.10) 0.045 | 0.48 (0.17) 0.005 | 0.69 0.005 | 0.85 0.005 | tree-consistent (checks 1-3 pass) |
+| 12 | 19.8% | 0.44 (0.12) 0.005 | – | 0.43 (0.18) 0.005 | 0.14 (0.11) 0.035 | 0.49 (0.17) 0.005 | 0.67 0.005 | 0.84 0.005 | tree-consistent (checks 1-3 pass) |
+| 13 | 20.8% | 0.45 (0.12) 0.005 | – | 0.38 (0.18) 0.005 | 0.15 (0.11) 0.040 | 0.50 (0.17) 0.005 | 0.67 0.005 | 0.85 0.005 | tree-consistent (checks 1-3 pass) |
+| 14 | 21.6% | 0.45 (0.12) 0.005 | – | 0.38 (0.19) 0.005 | 0.15 (0.11) 0.015 | 0.51 (0.16) 0.005 | 0.67 0.005 | 0.84 0.005 | tree-consistent (checks 1-3 pass) |
+| 15 | 22.1% | 0.53 (0.12) 0.005 | – | 0.33 (0.18) 0.005 | 0.15 (0.10) 0.015 | 0.51 (0.16) 0.005 | 0.60 0.005 | 0.82 0.005 | tree-consistent (checks 1-3 pass) |
+| 16 | 22.2% | 0.55 (0.12) 0.005 | – | 0.35 (0.18) 0.005 | 0.15 (0.10) 0.015 | 0.50 (0.17) 0.005 | 0.59 0.005 | 0.82 0.005 | tree-consistent (checks 1-3 pass) |
+| 17 | 23.3% | 0.57 (0.12) 0.005 | – | 0.36 (0.18) 0.005 | 0.19 (0.11) 0.005 | 0.50 (0.17) 0.005 | 0.58 0.005 | 0.82 0.005 | tree-consistent (checks 1-3 pass) |
+| 18 | 23.7% | 0.55 (0.12) 0.005 | – | 0.40 (0.19) 0.005 | 0.19 (0.11) 0.005 | 0.43 (0.16) 0.005 | 0.59 0.005 | 0.83 0.005 | tree-consistent (checks 1-3 pass) |
+| 19 | 24.6% | 0.51 (0.12) 0.005 | – | 0.40 (0.19) 0.005 | 0.19 (0.11) 0.005 | 0.43 (0.16) 0.005 | 0.59 0.005 | 0.83 0.005 | tree-consistent (checks 1-3 pass) |
+| 20 | 26.9% | 0.47 (0.12) 0.005 | – | 0.38 (0.18) 0.005 | 0.18 (0.11) 0.005 | 0.46 (0.17) 0.005 | 0.60 0.005 | 0.82 0.005 | tree-consistent (checks 1-3 pass) |
+| 21 | 27.2% | 0.42 (0.12) 0.005 | – | 0.35 (0.18) 0.005 | 0.17 (0.10) 0.005 | 0.46 (0.16) 0.005 | 0.63 0.005 | 0.83 0.005 | tree-consistent (checks 1-3 pass) |
+| 22 | 30.7% | 0.42 (0.12) 0.005 | – | 0.34 (0.18) 0.005 | 0.18 (0.10) 0.005 | 0.43 (0.17) 0.005 | 0.66 0.005 | 0.83 0.005 | tree-consistent (checks 1-3 pass) |
+| 23 | 28.9% | 0.45 (0.12) 0.005 | – | 0.35 (0.18) 0.005 | 0.19 (0.11) 0.005 | 0.47 (0.16) 0.005 | 0.66 0.005 | 0.84 0.005 | tree-consistent (checks 1-3 pass) |
+| 24 | 26.6% | 0.48 (0.12) 0.005 | – | 0.35 (0.19) 0.005 | 0.16 (0.11) 0.005 | 0.36 (0.17) 0.005 | 0.65 0.005 | 0.85 0.005 | tree-consistent (checks 1-3 pass) |
+
+
+## Stage 1b
+
+**H1 (primary)** — n = 400 species, 17825 sampled triplets, 11122 within-stratum head-noun-disjoint.
+
+| quantity | value |
+|---|---|
+| cross-fitted TA_within | 0.406 |
+| TA_within at modal layer 8 [95% clade-bootstrap CI] | 0.396 [0.366, 0.476] |
+| max-T permutation p (all layers) | 0.010 |
+| difference vs char3 [95% CI] | [+0.053, +0.169] |
+| difference vs input_embedding [95% CI] | [+0.002, +0.121] |
+| criterion: maxT_p<0.05 | yes |
+| criterion: ci_lower>1/3 | yes |
+| criterion: beats_untrained_and_lexical | yes |
+| **H1 supported** | **yes** |
+| meaningful effect (≥ 0.40) | yes |
+
+**Secondary hypotheses (Holm-adjusted across S1–S5)**
+
+| id | statistic | value | p | Holm p |
+|---|---|---|---|---|
+| S1 | Mantel Spearman (cosine vs path length) at modal layer | 0.206 | 0.005 | 0.020 |
+| S2 | TA at modal layer (n = 4622 triplets) | 0.476 | 0.005 | 0.020 |
+| S3 | TA at modal layer (n = 3022 triplets) | 0.323 | 0.560 | 1.000 |
+| S4 | TA at modal layer (n = 6670 triplets) | 0.298 | 0.765 | 1.000 |
+
+**TA_within for every representation** (model and controls at their modal layer; chance = 0.333)
+
+| representation | TA_within | 95% CI | Mantel r (path length) |
+|---|---|---|---|
+| pilot_pythia410m | 0.396 | [0.366, 0.476] | 0.206 |
+| char3 | 0.315 | [0.280, 0.338] | 0.032 |
+| glove | 0.399 | [0.350, 0.455] | 0.140 |
+| class_oracle | 0.333 | [0.333, 0.333] | 0.512 |
+| rank_oracle | 0.637 | [0.605, 0.675] | 0.492 |
+| tree_oracle | 1.000 | [1.000, 1.000] | 0.444 |
+| input_embedding | 0.359 | [0.307, 0.417] | 0.033 |
+
+**Depth profile** (TA over all triplets by deepest rank shared by the three species)
+
+| representation | none (n=1490) | phylum (n=3010) | class (n=8703) | order (n=4574) | family (n=45) | genus (n=3) |
+|---|---|---|---|---|---|---|
+| pilot_pythia410m | 0.485 | 0.601 | 0.469 | 0.476 | 0.489 | 0.000 |
+| char3 | 0.435 | 0.481 | 0.441 | 0.470 | 0.344 | 0.000 |
+| glove | 0.469 | 0.569 | 0.472 | 0.556 | 0.378 | 0.333 |
+| class_oracle | 0.489 | 0.627 | 0.333 | 0.333 | 0.333 | 0.333 |
+| rank_oracle | 0.854 | 0.799 | 0.700 | 0.659 | 0.548 | 0.333 |
+| tree_oracle | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+| input_embedding | 0.411 | 0.507 | 0.435 | 0.457 | 0.452 | 0.222 |
+
+
+## Conflict triplets
+
+| representation | layer | chose tree-closer partner | accuracy | binomial p (vs 0.5) |
+|---|---|---|---|---|
+| pilot_pythia410m | 8 | 10/36 | 0.28 | 0.011 |
+| char3 | 0 | 9/36 | 0.25 | 0.004 |
+| glove | 0 | 14/36 | 0.39 | 0.243 |
+
+Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-closer partner):
+
+| anchor | tree-closer | other | type | pilot_pythia410m | char3 | glove |
+|---|---|---|---|---|---|---|
+| blue whale | hippopotamus | whale shark | ecology+lexical | ✗ | ✗ | ✗ |
+| Nile crocodile | house sparrow | green iguana | folk reptile | ✗ | ✗ | ✗ |
+| Atlantic bluefin tuna | human | great white shark | folk fish | ✗ | ✗ | ✗ |
+| common starfish | human | common octopus | folk sea creature+lexical | ✗ | ✗ | ✗ |
+| Atlantic horseshoe crab | goliath birdeater | blue crab | lexical crab | ✗ | ✗ | ✗ |
+| little brown bat | cattle | house mouse | folk flying mouse | ✗ | ✓ | ✗ |
+| rock hyrax | African bush elephant | guinea pig | folk rodent-like | ✓ | ✗ | ✓ |
+| thylacine | red kangaroo | gray wolf | convergence | ✓ | ✗ | ✓ |
+| European eel | human | sea lamprey | folk eel-like | ✗ | ✓ | ✗ |
+| western honey bee | American lobster | goliath birdeater | folk bugs | ✓ | ✓ | ✓ |
+| sugar glider | red kangaroo | southern flying squirrel | convergence | ✓ | ✓ | ✗ |
+| aardvark | African bush elephant | giant anteater | convergence | ✗ | ✗ | ✗ |
+| Chinese pangolin | cat | giant anteater | convergence | ✗ | ✗ | ✗ |
+| European hedgehog | common shrew | North American porcupine | convergence spines | ✗ | ✗ | ✗ |
+| West Indian manatee | African bush elephant | walrus | ecology | ✓ | ✓ | ✓ |
+| coelacanth | human | Atlantic bluefin tuna | folk fish | ✓ | ✗ | ✗ |
+| Australian lungfish | human | Atlantic salmon | folk fish | ✗ | ✓ | ✓ |
+| Komodo dragon | king cobra | Nile crocodile | folk lizard-like | ✗ | ✗ | ✓ |
+| acorn barnacle | edible crab | common limpet | folk shell | ✗ | ✓ | ✓ |
+| common woodlouse | American lobster | seven-spot ladybird | folk bug | ✗ | ✗ | ✗ |
+| elephant shrew | African bush elephant | common shrew | lexical shrew | ✗ | ✓ | ✗ |
+| red panda | raccoon | giant panda | lexical panda | ✗ | ✗ | ✗ |
+| koala | red kangaroo | brown bear | folk koala bear | ✓ | ✗ | ✓ |
+| killer whale | bottlenose dolphin | blue whale | lexical whale | ✗ | ✗ | ✗ |
+| Indian flying fox | little brown bat | red fox | lexical fox | ✗ | ✗ | ✗ |
+| California sea lion | harbor seal | lion | lexical lion | ✗ | ✗ | ✗ |
+| common starfish | purple sea urchin | Atlantic cod | lexical fish | ✓ | ✗ | ✓ |
+| moon jellyfish | sea anemone | Atlantic cod | lexical fish | ✓ | ✗ | ✓ |
+| silverfish | western honey bee | goldfish | lexical fish | ✗ | ✗ | ✗ |
+| guinea pig | house mouse | pig | lexical pig | ✗ | ✗ | ✗ |
+| seahorse | Atlantic cod | horse | lexical horse | ✗ | ✗ | ✓ |
+| electric eel | channel catfish | European eel | lexical eel | ✗ | ✗ | ✗ |
+| spotted hyena | cat | dog | folk dog-like | ✗ | ✗ | ✗ |
+| fossa | meerkat | cat | folk cat-like | ✓ | ✗ | ✓ |
+| pronghorn | giraffe | impala | folk antelope | ✗ | ✗ | ✓ |
+| bottlenose dolphin | cattle | great white shark | ecology | ✗ | ✓ | ✓ |
+
+
+## Stage 2
+
+*(no stage-2 results for pilot_pythia410m_prefix)*
+
+
+## Stage 3
+
+*(no stage-3 results for pilot_pythia410m_prefix)*
+
+
+## Stage 4
+
+*(no stage-4 results for pilot_pythia410m_prefix)*
+
+
+## Addendum A (habitat gradient)
+
+*(no habitat-addendum results for pilot_pythia410m_prefix)*
+
+
+## Stage 6
+
+*(no stage-6 results for pilot_pythia410m_prefix)*

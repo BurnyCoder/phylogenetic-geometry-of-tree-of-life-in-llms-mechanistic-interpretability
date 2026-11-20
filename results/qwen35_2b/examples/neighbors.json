@@ -1,0 +1,556 @@
+{
+  "layer": 6,
+  "queries": [
+    {
+      "name": "axolotl",
+      "stratum": "amphibians",
+      "neighbors": {
+        "qwen35_2b": [
+          "budgerigar",
+          "fire salamander",
+          "Indonesian coelacanth"
+        ],
+        "qwen35_2b_random": [
+          "capybara",
+          "Christmas Island red crab",
+          "western capercaillie"
+        ],
+        "pythia410m_step0": [
+          "little owl",
+          "snowy owl",
+          "thylacine"
+        ],
+        "pythia410m": [
+          "budgerigar",
+          "quokka",
+          "meerkat"
+        ],
+        "char3": [
+          "hylotrupes",
+          "colossal squid",
+          "Colorado potato beetle"
+        ],
+        "glove": [
+          "aardwolf",
+          "cockchafer",
+          "olm"
+        ],
+        "tree": [
+          "fire salamander",
+          "smooth newt",
+          "alpine newt"
+        ]
+      }
+    },
+    {
+      "name": "diving bell spider",
+      "stratum": "arachnids",
+      "neighbors": {
+        "qwen35_2b": [
+          "great raft spider",
+          "raft spider",
+          "Darwin's bark spider"
+        ],
+        "qwen35_2b_random": [
+          "Mediterranean recluse spider",
+          "great raft spider",
+          "Redback spider"
+        ],
+        "pythia410m_step0": [
+          "raft spider",
+          "zebra spider",
+          "great raft spider"
+        ],
+        "pythia410m": [
+          "great raft spider",
+          "raft spider",
+          "Darwin's bark spider"
+        ],
+        "char3": [
+          "great diving beetle",
+          "raft spider",
+          "zebra spider"
+        ],
+        "glove": [
+          "great diving beetle",
+          "Sydney funnel-web spider",
+          "great raft spider"
+        ],
+        "tree": [
+          "Redback spider",
+          "Darwin's bark spider",
+          "giant house spider"
+        ]
+      }
+    },
+    {
+      "name": "common ostrich",
+      "stratum": "birds",
+      "neighbors": {
+        "qwen35_2b": [
+          "northern giraffe",
+          "common moorhen",
+          "greater flamingo"
+        ],
+        "qwen35_2b_random": [
+          "North American beaver",
+          "goliath birdeater",
+          "European hare"
+        ],
+        "pythia410m_step0": [
+          "Indian peafowl",
+          "Eurasian eagle-owl",
+          "mahi-mahi"
+        ],
+        "pythia410m": [
+          "common quail",
+          "common moorhen",
+          "osprey"
+        ],
+        "char3": [
+          "common roach",
+          "common kestrel",
+          "common octopus"
+        ],
+        "glove": [
+          "common quail",
+          "common kestrel",
+          "common raven"
+        ],
+        "tree": [
+          "greylag goose",
+          "western capercaillie",
+          "greater flamingo"
+        ]
+      }
+    },
+    {
+      "name": "great white shark",
+      "stratum": "cartilaginous fish",
+      "neighbors": {
+        "qwen35_2b": [
+          "tiger shark",
+          "blue shark",
+          "frilled shark"
+        ],
+        "qwen35_2b_random": [
+          "tiger shark",
+          "goblin shark",
+          "blue shark"
+        ],
+        "pythia410m_step0": [
+          "blue shark",
+          "tiger shark",
+          "zebra shark"
+        ],
+        "pythia410m": [
+          "blue shark",
+          "frilled shark",
+          "Greenland shark"
+        ],
+        "char3": [
+          "great white pelican",
+          "white stork",
+          "whale shark"
+        ],
+        "glove": [
+          "great white pelican",
+          "blue shark",
+          "bull shark"
+        ],
+        "tree": [
+          "Shortfin mako shark",
+          "porbeagle",
+          "basking shark"
+        ]
+      }
+    },
+    {
+      "name": "Portuguese man o' war",
+      "stratum": "cnidarians",
+      "neighbors": {
+        "qwen35_2b": [
+          "lion's mane jellyfish",
+          "blue jellyfish",
+          "Nomura's jellyfish"
+        ],
+        "qwen35_2b_random": [
+          "Mediterranean mussel",
+          "osprey",
+          "deathstalker"
+        ],
+        "pythia410m_step0": [
+          "common warthog",
+          "European seabass",
+          "common redshank"
+        ],
+        "pythia410m": [
+          "ruffe",
+          "Eurasian hobby",
+          "orange knobby star"
+        ],
+        "char3": [
+          "European mantis",
+          "Hermann's tortoise",
+          "Chinese mitten crab"
+        ],
+        "glove": [
+          "Spanish slug",
+          "African bush elephant",
+          "house cricket"
+        ],
+        "tree": [
+          "Nomura's jellyfish",
+          "lion's mane jellyfish",
+          "blue jellyfish"
+        ]
+      }
+    },
+    {
+      "name": "coconut crab",
+      "stratum": "crustaceans",
+      "neighbors": {
+        "qwen35_2b": [
+          "Japanese spider crab",
+          "red king crab",
+          "Christmas Island red crab"
+        ],
+        "qwen35_2b_random": [
+          "velvet crab",
+          "pea crab",
+          "Chinese alligator"
+        ],
+        "pythia410m_step0": [
+          "velvet crab",
+          "red king crab",
+          "pea crab"
+        ],
+        "pythia410m": [
+          "pea crab",
+          "velvet crab",
+          "red king crab"
+        ],
+        "char3": [
+          "velvet crab",
+          "pea crab",
+          "crab louse"
+        ],
+        "glove": [
+          "pea crab",
+          "mangrove horseshoe crab",
+          "crab louse"
+        ],
+        "tree": [
+          "red king crab",
+          "Japanese spider crab",
+          "heikegani"
+        ]
+      }
+    },
+    {
+      "name": "crown-of-thorns starfish",
+      "stratum": "echinoderms",
+      "neighbors": {
+        "qwen35_2b": [
+          "common starfish",
+          "sunflower sea star",
+          "lion's mane jellyfish"
+        ],
+        "qwen35_2b_random": [
+          "western capercaillie",
+          "sand lizard",
+          "great diving beetle"
+        ],
+        "pythia410m_step0": [
+          "common starfish",
+          "goldfish",
+          "garfish"
+        ],
+        "pythia410m": [
+          "common starfish",
+          "lion's mane jellyfish",
+          "blue jellyfish"
+        ],
+        "char3": [
+          "common starfish",
+          "garfish",
+          "silverfish"
+        ],
+        "glove": [
+          "common starfish",
+          "orange knobby star",
+          "red king crab"
+        ],
+        "tree": [
+          "orange knobby star",
+          "common sunstar",
+          "leather star"
+        ]
+      }
+    },
+    {
+      "name": "housefly",
+      "stratum": "insects",
+      "neighbors": {
+        "qwen35_2b": [
+          "stable fly",
+          "oriental cockroach",
+          "German cockroach"
+        ],
+        "qwen35_2b_random": [
+          "Atlantic cod",
+          "desert locust",
+          "mugger crocodile"
+        ],
+        "pythia410m_step0": [
+          "emperor dragonfly",
+          "black mamba",
+          "house cricket"
+        ],
+        "pythia410m": [
+          "stable fly",
+          "emperor dragonfly",
+          "mealworm"
+        ],
+        "char3": [
+          "house mouse",
+          "house sparrow",
+          "house cricket"
+        ],
+        "glove": [
+          "silverfish",
+          "ruffe",
+          "cockchafer"
+        ],
+        "tree": [
+          "stable fly",
+          "six-spot burnet",
+          "codling moth"
+        ]
+      }
+    },
+    {
+      "name": "lion",
+      "stratum": "mammals",
+      "neighbors": {
+        "qwen35_2b": [
+          "wolf",
+          "cheetah",
+          "polar bear"
+        ],
+        "qwen35_2b_random": [
+          "bonobo",
+          "Eurasian woodcock",
+          "American cockroach"
+        ],
+        "pythia410m_step0": [
+          "mountain zebra",
+          "European sea sturgeon",
+          "sterlet"
+        ],
+        "pythia410m": [
+          "wolf",
+          "Asian elephant",
+          "golden eagle"
+        ],
+        "char3": [
+          "lion's mane jellyfish",
+          "emperor scorpion",
+          "grey heron"
+        ],
+        "glove": [
+          "lion's mane jellyfish",
+          "leopard seal",
+          "golden eagle"
+        ],
+        "tree": [
+          "snow leopard",
+          "cheetah",
+          "meerkat"
+        ]
+      }
+    },
+    {
+      "name": "common octopus",
+      "stratum": "molluscs",
+      "neighbors": {
+        "qwen35_2b": [
+          "giant Pacific octopus",
+          "mimic octopus",
+          "European squid"
+        ],
+        "qwen35_2b_random": [
+          "mimic octopus",
+          "loggerhead sea turtle",
+          "great crested grebe"
+        ],
+        "pythia410m_step0": [
+          "mimic octopus",
+          "giant Pacific octopus",
+          "mallard"
+        ],
+        "pythia410m": [
+          "mimic octopus",
+          "giant Pacific octopus",
+          "platypus"
+        ],
+        "char3": [
+          "mimic octopus",
+          "common ostrich",
+          "common toad"
+        ],
+        "glove": [
+          "common cuttlefish",
+          "mimic octopus",
+          "common starfish"
+        ],
+        "tree": [
+          "giant Pacific octopus",
+          "mimic octopus",
+          "vampire squid"
+        ]
+      }
+    },
+    {
+      "name": "sea lamprey",
+      "stratum": "other",
+      "neighbors": {
+        "qwen35_2b": [
+          "European river lamprey",
+          "brook lamprey",
+          "pouched lamprey"
+        ],
+        "qwen35_2b_random": [
+          "Mediterranean mussel",
+          "European river lamprey",
+          "northern krill"
+        ],
+        "pythia410m_step0": [
+          "European river lamprey",
+          "pouched lamprey",
+          "brook lamprey"
+        ],
+        "pythia410m": [
+          "European river lamprey",
+          "brook lamprey",
+          "pouched lamprey"
+        ],
+        "char3": [
+          "brook lamprey",
+          "pouched lamprey",
+          "European river lamprey"
+        ],
+        "glove": [
+          "loggerhead sea turtle",
+          "brook lamprey",
+          "hawksbill sea turtle"
+        ],
+        "tree": [
+          "pouched lamprey",
+          "brook lamprey",
+          "European river lamprey"
+        ]
+      }
+    },
+    {
+      "name": "goldfish",
+      "stratum": "ray-finned fish",
+      "neighbors": {
+        "qwen35_2b": [
+          "zebrafish",
+          "siamese fighting fish",
+          "garfish"
+        ],
+        "qwen35_2b_random": [
+          "garfish",
+          "milkfish",
+          "ocean sunfish"
+        ],
+        "pythia410m_step0": [
+          "milkfish",
+          "garfish",
+          "silverfish"
+        ],
+        "pythia410m": [
+          "silverfish",
+          "milkfish",
+          "marbled crayfish"
+        ],
+        "char3": [
+          "garfish",
+          "European goldfinch",
+          "milkfish"
+        ],
+        "glove": [
+          "Crucian carp",
+          "milkfish",
+          "chimpanzee"
+        ],
+        "tree": [
+          "Crucian carp",
+          "common carp",
+          "grass carp"
+        ]
+      }
+    },
+    {
+      "name": "Komodo dragon",
+      "stratum": "reptiles",
+      "neighbors": {
+        "qwen35_2b": [
+          "Gila monster",
+          "frilled lizard",
+          "marine iguana"
+        ],
+        "qwen35_2b_random": [
+          "greylag goose",
+          "Antarctic krill",
+          "chimpanzee"
+        ],
+        "pythia410m_step0": [
+          "merlangius",
+          "great white pelican",
+          "Hercules beetle"
+        ],
+        "pythia410m": [
+          "Gila monster",
+          "aesculapian snake",
+          "lion"
+        ],
+        "char3": [
+          "emperor dragonfly",
+          "lion",
+          "koala"
+        ],
+        "glove": [
+          "lion",
+          "viviparous lizard",
+          "frilled lizard"
+        ],
+        "tree": [
+          "Asian water monitor",
+          "common slow worm",
+          "Gila monster"
+        ]
+      }
+    }
+  ],
+  "representations": [
+    "qwen35_2b",
+    "qwen35_2b_random",
+    "pythia410m_step0",
+    "pythia410m",
+    "char3",
+    "glove",
+    "tree"
+  ],
+  "same_order_rate_5nn": {
+    "qwen35_2b": 0.4415,
+    "qwen35_2b_random": 0.1235,
+    "pythia410m_step0": 0.225,
+    "pythia410m": 0.3385,
+    "char3": 0.1935,
+    "glove": 0.27399999999999997,
+    "tree": 0.6705
+  }
+}

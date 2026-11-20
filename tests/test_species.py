@@ -30,9 +30,9 @@ def test_common_name_rules():
     assert common_name("Lion's mane jellyfish", "Cyanea capillata", proper) == "lion's mane jellyfish"
     assert common_name("Red fox", "Vulpes vulpes", proper) == "red fox"
     assert common_name("Jaguar (animal)", "Panthera onca", proper) == "jaguar"
-    # Title equal to scientific name or genus is not a common name.
+    # Title equal to the scientific name is not a common name.
     assert common_name("Epinephelus ongus", "Epinephelus ongus", proper) is None
-    assert common_name("Tyrannosaurus", "Tyrannosaurus rex", proper) is None
+    assert common_name("Hippopotamus", "Hippopotamus amphibius", proper) == "hippopotamus"  # genus-equal title kept
     assert common_name("Species 8472", "Foo bar", proper) is None
 
 

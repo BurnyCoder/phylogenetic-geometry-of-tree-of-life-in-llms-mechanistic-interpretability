@@ -181,7 +181,7 @@ The full matrix goes in `reports/planned-runs.md` and the README.
 - Geometry: geodesic vs angular (minus the class-blob null gap).
 - Tree-likeness: δ_rel (Fournier algorithm, checked against brute force) vs a matched-spectrum Gaussian and vs non-hierarchical concept sets (colors, numbers). Neighbor-joining tree from the representations vs the reference by triplet distance and RF, against a random-tree null.
 
-*Stage order changed by the user on 2026-11-20: causal/behavioral moved from 6 to 3; ablations, sensitivity and more models shift to 4, 5, 6.*
+*Stage order changed by the user on 2026-11-20 (twice). Final order: 3 causal/behavioral, 4 ablations, 5 more models, 6 sensitivity.*
 
 **Stage 3: causal and behavioral.**
 - Mean-ablation of the probe subspace vs a variance-matched random in-span subspace, on held-out species.
@@ -201,14 +201,14 @@ The full matrix goes in `reports/planned-runs.md` and the README.
 - Including vs excluding polysemous names.
 - Dated tree: H_rank vs H_time.
 
-**Stage 5: sensitivity.** Probe seeds (5), template-subset resampling, species subsampling, and kNN/dimension sweeps.
-
-**Stage 6: more models.** All fit on the GPU in bf16.
+**Stage 5: more models.** All fit on the GPU in bf16.
 - Qwen3.5-0.8B (post-trained): scale within the family.
 - Qwen3-1.7B (post-trained): standard full-attention Qwen architecture, checking whether the hybrid linear attention matters.
 - Optional extra families if time allows: gemma-4-E2B, SmolLM3-3B.
 - Pythia 70m→2.8B for scaling.
 - Pythia-1.4B at about 12 log-spaced checkpoints for training dynamics, paired with infini-gram Pile frequency and co-occurrence counts (H_cooc).
+
+**Stage 6: sensitivity.** Probe seeds (5), template-subset resampling, species subsampling, and kNN/dimension sweeps.
 
 Deferred or cut: structural probe (redundant with the flat probe), models that do not fit on the GPU (Qwen3.5-4B/9B, Llama-3.1-8B), pageview weighting.
 
@@ -293,7 +293,7 @@ Partial Mantel is the one hand-written method, since no maintained Python packag
 4. Write tests first (TDD), then the core src; push.
 5. Build and freeze the species list and tree (hash). Run initial tests and a Pythia-410m pilot through the whole pipeline; inspect logs and fix.
 6. Fact-check and red-team review → `reports/reviews/`.
-7. Run stages in order: **1a (simple top-3-PCA plots and observations) first**, then 1b, 2, 3 (causal/behavioral), 4 (ablations), 5 (sensitivity), 6 (more models), moving from simple to complex. After each stage, update the results, paper, README and site, then push to GitHub and HF.
+7. Run stages in order: **1a (simple top-3-PCA plots and observations) first**, then 1b, 2, 3 (causal/behavioral), 4 (ablations), 5 (more models), 6 (sensitivity), moving from simple to complex. After each stage, update the results, paper, README and site, then push to GitHub and HF.
 8. Final triple-check, fact-check and red-team review; final paper and site.
 
 Waiting on long runs follows the CLAUDE.md cadence: check every 5, 15 or 30 minutes depending on run length. Compute is light (extraction takes minutes to about an hour per model), so most time goes to engineering and analysis. Estimated total: about 3–5 days of wall-clock work.

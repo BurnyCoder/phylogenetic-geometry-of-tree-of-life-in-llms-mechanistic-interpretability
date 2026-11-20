@@ -1,0 +1,11 @@
+# Stage 5 (more models): standard full-attention Qwen architecture (post-trained, chat template).
+name: qwen3_17b
+model_id: Qwen/Qwen3-1.7B
+revision: 70d244cc86ccca08cf5af4e1e306ecf908b1ad5e
+chat_template: true
+name_sets: [species, conflict]
+controls: [qwen35_2b_random, pythia410m_step0, pythia410m]
+random_init_run: qwen35_2b_random
+n_perm: 1000
+n_boot: 1000
+n_splits: 20

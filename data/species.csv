@@ -1,401 +1,401 @@
-common_name,sci_name,wikidata,ncbi,ott_id,sitelinks,stratum,phylum,class,order,family,genus,n_words,head_noun,polysemous
-lion,Panthera leo,Q140,9689,563151,274,mammals,Chordata,Mammalia,Carnivora,Felidae,Panthera,1,lion,False
-wolf,Canis lupus,Q18498,9612,247341,226,mammals,Chordata,Mammalia,Carnivora,Canidae,Canis,1,wolf,False
-wild boar,Sus scrofa,Q58697,9823,730013,163,mammals,Chordata,Mammalia,Artiodactyla,Suidae,Sus,2,boar,False
-polar bear,Ursus maritimus,Q33609,29073,10732,159,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ursus,2,bear,False
-red fox,Vulpes vulpes,Q8332,9627,821964,158,mammals,Chordata,Mammalia,Carnivora,Canidae,Vulpes,2,fox,False
-cheetah,Acinonyx jubatus,Q23907,32536,752759,151,mammals,Chordata,Mammalia,Carnivora,Felidae,Acinonyx,1,cheetah,False
-giant panda,Ailuropoda melanoleuca,Q33602,9646,872573,146,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ailuropoda,2,panda,False
-northern giraffe,Giraffa camelopardalis,Q15083,9894,768674,140,mammals,Chordata,Mammalia,Artiodactyla,Giraffidae,Giraffa,2,giraffe,False
-brown bear,Ursus arctos,Q36341,9644,872567,138,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ursus,2,bear,False
-water buffalo,Bubalus bubalis,Q42710,89462,641187,132,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Bubalus,2,buffalo,False
-snow leopard,Panthera uncia,Q30197,29064,532117,132,mammals,Chordata,Mammalia,Carnivora,Felidae,Panthera,2,leopard,False
-moose,Alces alces,Q35517,9852,460509,130,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Alces,1,moose,False
-koala,Phascolarctos cinereus,Q36101,38626,327624,129,mammals,Chordata,Mammalia,Diprotodontia,Phascolarctidae,Phascolarctos,1,koala,False
-European badger,Meles meles,Q27066,9662,923113,123,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Meles,2,badger,False
-least weasel,Mustela nivalis,Q25311,36239,354525,123,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,2,weasel,False
-Eurasian otter,Lutra lutra,Q29995,9657,348036,122,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Lutra,2,otter,False
-house mouse,Mus musculus,Q83310,10090,542509,121,mammals,Chordata,Mammalia,Rodentia,Muridae,Mus,2,mouse,False
-reindeer,Rangifer tarandus,Q39624,9870,410153,121,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Rangifer,1,reindeer,False
-platypus,Ornithorhynchus anatinus,Q15343,9258,962377,119,mammals,Chordata,Mammalia,Monotremata,Ornithorhynchidae,Ornithorhynchus,1,platypus,False
-walrus,Odobenus rosmarus,Q40994,9707,749644,118,mammals,Chordata,Mammalia,Carnivora,Odobenidae,Odobenus,1,walrus,False
-orca,Orcinus orca,Q26843,9733,124215,116,mammals,Chordata,Mammalia,Artiodactyla,Delphinidae,Orcinus,1,orca,False
-red panda,Ailurus fulgens,Q41960,9649,872562,113,mammals,Chordata,Mammalia,Carnivora,Ailuridae,Ailurus,2,panda,False
-blue whale,Balaenoptera musculus,Q42196,9771,226190,111,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,2,whale,False
-red squirrel,Sciurus vulgaris,Q4388,55149,286193,111,mammals,Chordata,Mammalia,Rodentia,Sciuridae,Sciurus,2,squirrel,False
-red deer,Cervus elaphus,Q79794,9860,936014,110,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Cervus,2,deer,False
-coyote,Canis latrans,Q44299,9614,247331,109,mammals,Chordata,Mammalia,Carnivora,Canidae,Canis,1,coyote,False
-guinea pig,Cavia porcellus,Q79803,10141,744000,108,mammals,Chordata,Mammalia,Rodentia,Caviidae,Cavia,2,pig,False
-aardvark,Orycteropus afer,Q46212,9818,561087,107,mammals,Chordata,Mammalia,Tubulidentata,Orycteropodidae,Orycteropus,1,aardvark,False
-African buffalo,Syncerus caffer,Q160042,9970,644255,107,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Syncerus,2,buffalo,False
-capybara,Hydrochoerus hydrochaeris,Q131538,10149,744018,105,mammals,Chordata,Mammalia,Rodentia,Hydrochaeridae,Hydrochoerus,1,capybara,False
-llama,Lama glama,Q42569,9844,986973,105,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Lama,1,llama,False
-dromedary,Camelus dromedarius,Q71516,9838,510752,102,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,1,dromedary,False
-European rabbit,Oryctolagus cuniculus,Q25851,9986,864596,100,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Oryctolagus,2,rabbit,False
-Bactrian camel,Camelus bactrianus,Q132922,9837,510768,99,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,2,camel,False
-bonobo,Pan paniscus,Q19537,9597,158484,99,mammals,Chordata,Mammalia,,Hominidae,Pan,1,bonobo,False
-chimpanzee,Pan troglodytes,Q4126704,9598,417950,99,mammals,Chordata,Mammalia,,Hominidae,Pan,1,chimpanzee,False
-okapi,Okapia johnstoni,Q82037,86973,207426,98,mammals,Chordata,Mammalia,Artiodactyla,Giraffidae,Okapia,1,okapi,False
-American bison,Bison bison,Q82728,9901,907693,97,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Bison,2,bison,False
-thylacine,Thylacinus cynocephalus,Q123102,9275,408120,96,mammals,Chordata,Mammalia,Dasyuromorphia,Thylacinidae,Thylacinus,1,thylacine,False
-Asian elephant,Elephas maximus,Q133006,9783,541928,95,mammals,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,2,elephant,False
-meerkat,Suricata suricatta,Q134015,37032,803645,92,mammals,Chordata,Mammalia,Carnivora,Herpestidae,Suricata,1,meerkat,False
-African bush elephant,Loxodonta africana,Q36557,9785,541936,90,mammals,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,3,elephant,False
-European hare,Lepus europaeus,Q26838,9983,864607,89,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,2,hare,False
-narwhal,Monodon monoceros,Q159426,40151,306757,87,mammals,Chordata,Mammalia,Artiodactyla,Monodontidae,Monodon,1,narwhal,False
-white rhinoceros,Ceratotherium simum,Q159918,9807,1034198,86,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Ceratotherium,2,rhinoceros,False
-humpback whale,Megaptera novaeangliae,Q132905,9773,226198,86,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Megaptera,2,whale,False
-beluga whale,Delphinapterus leucas,Q132072,9749,851318,85,mammals,Chordata,Mammalia,Artiodactyla,Monodontidae,Delphinapterus,2,whale,False
-black rhinoceros,Diceros bicornis,Q95036,9805,1034204,85,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Diceros,2,rhinoceros,False
-Eurasian beaver,Castor fiber,Q181191,10185,1048188,83,mammals,Chordata,Mammalia,Rodentia,Castoridae,Castor,2,beaver,False
-European hedgehog,Erinaceus europaeus,Q6145,9365,796660,83,mammals,Chordata,Mammalia,Eulipotyphla,Erinaceidae,Erinaceus,2,hedgehog,False
-brown rat,Rattus norvegicus,Q184224,10116,271555,82,mammals,Chordata,Mammalia,Rodentia,Muridae,Rattus,2,rat,False
-European mole,Talpa europaea,Q209067,9375,222362,78,mammals,Chordata,Mammalia,Eulipotyphla,Talpidae,Talpa,2,mole,False
-spotted hyena,Crocuta crocuta,Q178089,9678,397157,77,mammals,Chordata,Mammalia,Carnivora,Hyaenidae,Crocuta,2,hyena,False
-rhesus macaque,Macaca mulatta,Q156606,9544,689650,77,mammals,Chordata,Mammalia,,Cercopithecidae,Macaca,2,macaque,False
-Indian rhinoceros,Rhinoceros unicornis,Q47910,9809,1087496,77,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Rhinoceros,2,rhinoceros,False
-nutria,Myocastor coypus,Q187704,10157,169715,76,mammals,Chordata,Mammalia,Rodentia,Myocastoridae,Myocastor,1,nutria,False
-striped hyena,Hyaena hyaena,Q188657,95912,383901,74,mammals,Chordata,Mammalia,Carnivora,Hyaenidae,Hyaena,2,hyena,False
-mountain hare,Lepus timidus,Q180035,62621,167565,74,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,2,hare,False
-harbor seal,Phoca vitulina,Q26913,9720,698422,73,mammals,Chordata,Mammalia,Carnivora,Phocidae,Phoca,2,seal,False
-common bottlenose dolphin,Tursiops truncatus,Q174199,9739,124230,73,mammals,Chordata,Mammalia,Artiodactyla,Delphinidae,Tursiops,3,dolphin,False
-aye-aye,Daubentonia madagascariensis,Q186778,31869,50727,72,mammals,Chordata,Mammalia,,Daubentoniidae,Daubentonia,1,aye,False
-ring-tailed lemur,Lemur catta,Q185385,9447,913930,72,mammals,Chordata,Mammalia,,Lemuridae,Lemur,2,lemur,False
-aardwolf,Proteles cristata,Q185295,9680,563161,72,mammals,Chordata,Mammalia,Carnivora,Hyaenidae,Proteles,1,aardwolf,False
-fin whale,Balaenoptera physalus,Q179020,9770,226193,71,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,2,whale,False
-African forest elephant,Loxodonta cyclotis,Q189514,99490,418570,71,mammals,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,3,elephant,False
-European edible dormouse,Glis glis,Q147128,41261,185345,70,mammals,Chordata,Mammalia,Rodentia,Gliridae,Glis,3,dormouse,False
-black rat,Rattus rattus,Q106133,10117,271571,70,mammals,Chordata,Mammalia,Rodentia,Muridae,Rattus,2,rat,False
-binturong,Arctictis binturong,Q213141,94180,768502,69,mammals,Chordata,Mammalia,Carnivora,Viverridae,Arctictis,1,binturong,False
-bowhead whale,Balaena mysticetus,Q174652,27602,397231,68,mammals,Chordata,Mammalia,Artiodactyla,Balaenidae,Balaena,2,whale,False
-Asian palm civet,Paradoxurus hermaphroditus,Q18764,71117,1088400,68,mammals,Chordata,Mammalia,Carnivora,Viverridae,Paradoxurus,3,civet,False
-common warthog,Phacochoerus africanus,Q183255,41426,1036755,68,mammals,Chordata,Mammalia,Artiodactyla,Suidae,Phacochoerus,2,warthog,False
-Barbary macaque,Macaca sylvanus,Q199962,9546,689645,67,mammals,Chordata,Mammalia,,Cercopithecidae,Macaca,2,macaque,False
-mandrill,Mandrillus sphinx,Q189868,9561,741047,67,mammals,Chordata,Mammalia,,Cercopithecidae,Mandrillus,1,mandrill,False
-baiji,Lipotes vexillifer,Q188130,118797,5269,66,mammals,Chordata,Mammalia,Artiodactyla,Lipotidae,Lipotes,1,baiji,False
-Ganges river dolphin,Platanista gangetica,Q210872,118798,5256,66,mammals,Chordata,Mammalia,Artiodactyla,Platanistidae,Platanista,3,dolphin,False
-quokka,Setonix brachyurus,Q726151,30670,733444,66,mammals,Chordata,Mammalia,Diprotodontia,Macropodidae,Setonix,1,quokka,False
-pronghorn,Antilocapra americana,Q187943,9891,768683,65,mammals,Chordata,Mammalia,Artiodactyla,Antilocapridae,Antilocapra,1,pronghorn,False
-North American beaver,Castor canadensis,Q81056,51338,886085,65,mammals,Chordata,Mammalia,Rodentia,Castoridae,Castor,3,beaver,False
-wild horse,Equus ferus,Q27742,1114792,520756,65,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,2,horse,False
-grey seal,Halichoerus grypus,Q27370,9711,1040694,65,mammals,Chordata,Mammalia,Carnivora,Phocidae,Halichoerus,2,seal,False
-African civet,Civettictis civetta,Q241256,94186,768511,64,mammals,Chordata,Mammalia,Carnivora,Viverridae,Civettictis,2,civet,False
-common dolphin,Delphinus delphis,Q207114,9728,698438,64,mammals,Chordata,Mammalia,Artiodactyla,Delphinidae,Delphinus,2,dolphin,False
-leopard seal,Hydrurga leptonyx,Q186663,29086,180388,64,mammals,Chordata,Mammalia,Carnivora,Phocidae,Hydrurga,2,seal,False
-GrÃ©vy's zebra,Equus grevyi,Q219565,9792,1068209,63,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,2,zebra,False
-gray whale,Eschrichtius robustus,Q179154,9764,800320,63,mammals,Chordata,Mammalia,Artiodactyla,Eschrichtiidae,Eschrichtius,2,whale,False
-giant anteater,Myrmecophaga tridactyla,Q203033,71006,490538,63,mammals,Chordata,Mammalia,Pilosa,Myrmecophagidae,Myrmecophaga,2,anteater,False
-mountain zebra,Equus zebra,Q243213,9791,1068212,62,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,2,zebra,False
-hazel dormouse,Muscardinus avellanarius,Q207148,39082,664079,62,mammals,Chordata,Mammalia,Rodentia,Gliridae,Muscardinus,2,dormouse,False
-harbour porpoise,Phocoena phocoena,Q27027,9742,851312,61,mammals,Chordata,Mammalia,Artiodactyla,Phocoenidae,Phocoena,2,porpoise,False
-siamang,Symphalangus syndactylus,Q213889,9590,417961,61,mammals,Chordata,Mammalia,,Hylobatidae,Symphalangus,1,siamang,False
-common ostrich,Struthio camelus,Q17592,8801,647692,149,birds,Chordata,Aves,Struthioniformes,Struthionidae,Struthio,2,ostrich,False
-house sparrow,Passer domesticus,Q14683,48849,745175,142,birds,Chordata,Aves,Passeriformes,Passeridae,Passer,2,sparrow,False
-common raven,Corvus corax,Q25357,56781,140425,137,birds,Chordata,Aves,Passeriformes,Corvidae,Corvus,2,raven,False
-mallard,Anas platyrhynchos,Q25348,8839,765167,134,birds,Chordata,Aves,Anseriformes,Anatidae,Anas,1,mallard,False
-Eurasian magpie,Pica pica,Q25307,34924,776471,134,birds,Chordata,Aves,Passeriformes,Corvidae,Pica,2,magpie,False
-common hoopoe,Upupa epops,Q25247,57439,412129,133,birds,Chordata,Aves,Upupiformes,Upupidae,Upupa,2,hoopoe,False
-common blackbird,Turdus merula,Q25234,9187,568572,128,birds,Chordata,Aves,Passeriformes,Turdidae,Turdus,2,blackbird,False
-common quail,Coturnix coturnix,Q28358,9091,1098760,124,birds,Chordata,Aves,Galliformes,Phasianidae,Coturnix,2,quail,False
-European robin,Erithacus rubecula,Q25334,37610,507122,122,birds,Chordata,Aves,Passeriformes,Turdidae,Erithacus,2,robin,False
-common cuckoo,Cuculus canorus,Q18845,55661,792628,119,birds,Chordata,Aves,Cuculiformes,Cuculidae,Cuculus,2,cuckoo,False
-rock dove,Columba livia,Q42326,8932,938416,117,birds,Chordata,Aves,Columbiformes,Columbidae,Columba,2,dove,False
-Eurasian golden oriole,Oriolus oriolus,Q25388,181099,299687,116,birds,Chordata,Aves,Passeriformes,Corvidae,Oriolus,3,oriole,False
-white wagtail,Motacilla alba,Q25399,45807,695336,114,birds,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,2,wagtail,False
-common starling,Sturnus vulgaris,Q25469,9172,565813,114,birds,Chordata,Aves,Passeriformes,Sturnidae,Sturnus,2,starling,False
-grey heron,Ardea cinerea,Q25273,30390,119222,113,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,2,heron,False
-great tit,Parus major,Q25485,9157,515143,113,birds,Chordata,Aves,Passeriformes,Paridae,Parus,2,tit,False
-barn swallow,Hirundo rustica,Q25429,43150,1040135,111,birds,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,2,swallow,False
-golden eagle,Aquila chrysaetos,Q41181,8962,263127,110,birds,Chordata,Aves,Accipitriformes,Accipitridae,Aquila,2,eagle,False
-peregrine falcon,Falco peregrinus,Q30535,8954,786435,109,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,2,falcon,False
-Eurasian eagle-owl,Bubo bubo,Q130933,30461,402453,108,birds,Chordata,Aves,Strigiformes,Strigidae,Bubo,2,owl,False
-white stork,Ciconia ciconia,Q25352,8928,363031,108,birds,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,2,stork,False
-great cormorant,Phalacrocorax carbo,Q25440,9209,969841,108,birds,Chordata,Aves,Pelecaniformes,Phalacrocoracidae,Phalacrocorax,2,cormorant,False
-Eurasian sparrowhawk,Accipiter nisus,Q25380,211598,238460,107,birds,Chordata,Aves,Accipitriformes,Accipitridae,Accipiter,2,sparrowhawk,False
-common kestrel,Falco tinnunculus,Q26490,100819,534514,107,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,2,kestrel,False
-osprey,Pandion haliaetus,Q25332,56262,509837,107,birds,Chordata,Aves,Accipitriformes,Pandionidae,Pandion,1,osprey,False
-greylag goose,Anser anser,Q25882,8843,190887,106,birds,Chordata,Aves,Anseriformes,Anatidae,Anser,2,goose,False
-European goldfinch,Carduelis carduelis,Q25418,37600,1083719,106,birds,Chordata,Aves,Passeriformes,Fringillidae,Carduelis,2,goldfinch,False
-Eurasian coot,Fulica atra,Q25376,9121,1041538,104,birds,Chordata,Aves,Gruiformes,Rallidae,Fulica,2,coot,False
-common crane,Grus grus,Q4764,40816,589064,104,birds,Chordata,Aves,Gruiformes,Gruidae,Grus,2,crane,False
-northern pintail,Anas acuta,Q25450,28680,855474,103,birds,Chordata,Aves,Anseriformes,Anatidae,Anas,2,pintail,False
-northern lapwing,Vanellus vanellus,Q25392,100859,413796,103,birds,Chordata,Aves,Charadriiformes,Charadriidae,Vanellus,2,lapwing,False
-black kite,Milvus migrans,Q80362,52810,548448,102,birds,Chordata,Aves,Accipitriformes,Accipitridae,Milvus,2,kite,False
-Eurasian tree sparrow,Passer montanus,Q25968,9160,44870,102,birds,Chordata,Aves,Passeriformes,Passeridae,Passer,3,sparrow,False
-Indian peafowl,Pavo cristatus,Q61865,9049,453575,102,birds,Chordata,Aves,Galliformes,Phasianidae,Pavo,2,peafowl,False
-common kingfisher,Alcedo atthis,Q79915,36245,549519,101,birds,Chordata,Aves,Coraciiformes,Alcedinidae,Alcedo,2,kingfisher,False
-common nightingale,Luscinia megarhynchos,Q25393,383689,961118,101,birds,Chordata,Aves,Passeriformes,Turdidae,Luscinia,2,nightingale,False
-Eurasian bullfinch,Pyrrhula pyrrhula,Q25382,37607,1083726,101,birds,Chordata,Aves,Passeriformes,Fringillidae,Pyrrhula,2,bullfinch,False
-little grebe,Tachybaptus ruficollis,Q25421,100828,1010578,100,birds,Chordata,Aves,Podicipediformes,Podicipedidae,Tachybaptus,2,grebe,False
-black stork,Ciconia nigra,Q25398,36241,549527,99,birds,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,2,stork,False
-Eurasian blue tit,Cyanistes caeruleus,Q25404,156563,746120,99,birds,Chordata,Aves,Passeriformes,Paridae,Cyanistes,3,tit,False
-common moorhen,Gallinula chloropus,Q18847,9123,1041541,99,birds,Chordata,Aves,Gruiformes,Rallidae,Gallinula,2,moorhen,False
-western capercaillie,Tetrao urogallus,Q129059,100830,484331,98,birds,Chordata,Aves,Galliformes,Phasianidae,Tetrao,2,capercaillie,False
-Eurasian chaffinch,Fringilla coelebs,Q25383,37598,828694,97,birds,Chordata,Aves,Passeriformes,Fringillidae,Fringilla,2,chaffinch,False
-great crested grebe,Podiceps cristatus,Q25422,345573,92263,97,birds,Chordata,Aves,Podicipediformes,Podicipedidae,Podiceps,3,grebe,False
-little owl,Athene noctua,Q129958,126797,427150,96,birds,Chordata,Aves,Strigiformes,Strigidae,Athene,2,owl,False
-Eurasian skylark,Alauda arvensis,Q25961,88112,312548,95,birds,Chordata,Aves,Passeriformes,Alaudidae,Alauda,2,skylark,False
-great egret,Ardea alba,Q130730,110620,625779,93,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,2,egret,False
-common swift,Apus apus,Q25377,8895,609788,92,birds,Chordata,Aves,Apodiformes,Apodidae,Apus,2,swift,False
-snowy owl,Bubo scandiacus,Q170177,371907,514178,92,birds,Chordata,Aves,Strigiformes,Strigidae,Bubo,2,owl,False
-common wood pigeon,Columba palumbus,Q26026,8934,938408,92,birds,Chordata,Aves,Columbiformes,Columbidae,Columba,3,pigeon,False
-western yellow wagtail,Motacilla flava,Q25984,180448,645461,92,birds,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,3,wagtail,False
-black-crowned night heron,Nycticorax nycticorax,Q126216,8901,313126,92,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Nycticorax,3,heron,False
-European bee-eater,Merops apiaster,Q170718,265611,755107,90,birds,Chordata,Aves,Coraciiformes,Meropidae,Merops,2,eater,False
-Eurasian collared dove,Streptopelia decaocto,Q54696,177147,277818,90,birds,Chordata,Aves,Columbiformes,Columbidae,Streptopelia,3,dove,False
-Eurasian hobby,Falco subbuteo,Q25876,344233,137527,89,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,2,hobby,False
-budgerigar,Melopsittacus undulatus,Q121221,13146,734818,89,birds,Chordata,Aves,Psittaciformes,Psittaculidae,Melopsittacus,1,budgerigar,False
-great white pelican,Pelecanus onocrotalus,Q199427,36301,427899,89,birds,Chordata,Aves,Pelecaniformes,Pelecanidae,Pelecanus,3,pelican,False
-Eurasian woodcock,Scolopax rusticola,Q26114,100826,1010551,89,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Scolopax,2,woodcock,False
-corn crake,Crex crex,Q26017,185586,897460,88,birds,Chordata,Aves,Gruiformes,Rallidae,Crex,2,crake,False
-greater flamingo,Phoenicopterus roseus,Q179863,435638,595567,87,birds,Chordata,Aves,Phoenicopteriformes,Phoenicopteridae,Phoenicopterus,2,flamingo,False
-sand martin,Riparia riparia,Q25909,88110,922718,87,birds,Chordata,Aves,Passeriformes,Hirundinidae,Riparia,2,martin,False
-secretarybird,Sagittarius serpentarius,Q168748,56258,1036186,87,birds,Chordata,Aves,Accipitriformes,Sagittariidae,Sagittarius,1,secretarybird,False
-great spotted woodpecker,Dendrocopos major,Q26209,137523,348848,86,birds,Chordata,Aves,Piciformes,Picidae,Dendrocopos,3,woodpecker,False
-common snipe,Gallinago gallinago,Q25692,107377,615378,86,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Gallinago,2,snipe,False
-common redshank,Tringa totanus,Q18859,171271,917056,86,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Tringa,2,redshank,False
-Eurasian wren,Troglodytes troglodytes,Q25740,36278,259813,86,birds,Chordata,Aves,Passeriformes,Certhiidae,Troglodytes,2,wren,False
-glossy ibis,Plegadis falcinellus,Q178811,52788,848593,85,birds,Chordata,Aves,Pelecaniformes,Threskiornithidae,Plegadis,2,ibis,False
-kÄkÄpÅ,Strigops habroptila,Q179959,2489341,6520246,85,birds,Chordata,Aves,Psittaciformes,Psittacidae,Strigops,1,käkäpå,False
-black-headed gull,Chroicocephalus ridibundus,Q25634,1192867,938670,84,birds,Chordata,Aves,Charadriiformes,Laridae,Chroicocephalus,2,gull,False
-Andean condor,Vultur gryphus,Q170598,8924,363015,84,birds,Chordata,Aves,Accipitriformes,Cathartidae,Vultur,2,condor,False
-Komodo dragon,Varanus komodoensis,Q4504,61221,1091028,102,reptiles,Chordata,,Squamata,Varanidae,Varanus,2,dragon,False
-Nile crocodile,Crocodylus niloticus,Q168745,8501,35864,83,reptiles,Chordata,,Crocodylia,Crocodylidae,Crocodylus,2,crocodile,False
-saltwater crocodile,Crocodylus porosus,Q182599,8502,35872,83,reptiles,Chordata,,Crocodylia,Crocodylidae,Crocodylus,2,crocodile,False
-king cobra,Ophiophagus hannah,Q48186,8665,6136,82,reptiles,Chordata,,Squamata,Elapidae,Ophiophagus,2,cobra,False
-gharial,Gavialis gangeticus,Q17134,94835,881015,79,reptiles,Chordata,,Crocodylia,Gavialidae,Gavialis,1,gharial,False
-grass snake,Natrix natrix,Q170713,100823,1010557,77,reptiles,Chordata,,Squamata,Colubridae,Natrix,2,snake,False
-common slow worm,Anguis fragilis,Q183660,102178,449663,76,reptiles,Chordata,,Squamata,Anguidae,Anguis,3,worm,False
-green sea turtle,Chelonia mydas,Q199458,8469,559133,75,reptiles,Chordata,,Testudines,Cheloniidae,Chelonia,3,turtle,False
-leatherback sea turtle,Dermochelys coriacea,Q120043,27794,243403,74,reptiles,Chordata,,Testudines,Dermochelyidae,Dermochelys,3,turtle,False
-loggerhead sea turtle,Caretta caretta,Q192095,8467,392505,70,reptiles,Chordata,,Testudines,Cheloniidae,Caretta,3,turtle,False
-black mamba,Dendroaspis polylepis,Q188690,8624,109051,70,reptiles,Chordata,,Squamata,Elapidae,Dendroaspis,2,mamba,False
-green anaconda,Eunectes murinus,Q207347,51876,1072290,68,reptiles,Chordata,,Squamata,Boidae,Eunectes,2,anaconda,False
-American alligator,Alligator mississippiensis,Q193327,8496,335590,62,reptiles,Chordata,,Crocodylia,Alligatoridae,Alligator,2,alligator,False
-hawksbill sea turtle,Eretmochelys imbricata,Q203538,27787,430337,62,reptiles,Chordata,,Testudines,Cheloniidae,Eretmochelys,3,turtle,False
-Indian cobra,Naja naja,Q192754,35670,217478,62,reptiles,Chordata,,Squamata,Elapidae,Naja,2,cobra,False
-Gila monster,Heloderma suspectum,Q207058,8554,713774,61,reptiles,Chordata,,Squamata,Helodermatidae,Heloderma,2,monster,False
-mugger crocodile,Crocodylus palustris,Q81207,184238,458957,60,reptiles,Chordata,,Crocodylia,Crocodylidae,Crocodylus,2,crocodile,False
-smooth snake,Coronella austriaca,Q208648,201445,859562,59,reptiles,Chordata,,Squamata,Colubridae,Coronella,2,snake,False
-Chinese alligator,Alligator sinensis,Q194422,38654,953151,58,reptiles,Chordata,,Crocodylia,Alligatoridae,Alligator,2,alligator,False
-marine iguana,Amblyrhynchus cristatus,Q208796,51208,240153,55,reptiles,Chordata,,Squamata,Iguanidae,Amblyrhynchus,2,iguana,False
-ball python,Python regius,Q464424,51751,737820,55,reptiles,Chordata,,Squamata,Pythonidae,Python,2,python,False
-viviparous lizard,Zootoca vivipara,Q204061,8524,87626,55,reptiles,Chordata,,Squamata,Lacertidae,Zootoca,2,lizard,False
-Indian python,Python molurus,Q245183,51750,737826,54,reptiles,Chordata,,Squamata,Pythonidae,Python,2,python,False
-sand lizard,Lacerta agilis,Q148595,80427,862848,53,reptiles,Chordata,,Squamata,Lacertidae,Lacerta,2,lizard,False
-Asian water monitor,Varanus salvator,Q655616,62051,872963,52,reptiles,Chordata,,Squamata,Varanidae,Varanus,3,monitor,False
-aesculapian snake,Zamenis longissimus,Q256791,201439,284753,52,reptiles,Chordata,,Squamata,Colubridae,Zamenis,2,snake,False
-Gaboon viper,Bitis gabonica,Q371183,8694,785606,51,reptiles,Chordata,,Squamata,Viperidae,Bitis,2,viper,False
-puff adder,Bitis arietans,Q369667,8692,785619,50,reptiles,Chordata,,Squamata,Viperidae,Bitis,2,adder,False
-Hermann's tortoise,Testudo hermanni,Q262555,86976,207422,50,reptiles,Chordata,,Testudines,Testudinidae,Testudo,2,tortoise,False
-frilled lizard,Chlamydosaurus kingii,Q501566,103699,913427,49,reptiles,Chordata,,Squamata,Agamidae,Chlamydosaurus,2,lizard,False
-axolotl,Ambystoma mexicanum,Q22718,8296,984726,81,amphibians,Chordata,Amphibia,Caudata,Ambystomatidae,Ambystoma,1,axolotl,False
-fire salamander,Salamandra salamandra,Q26395,57571,689975,72,amphibians,Chordata,Amphibia,Caudata,Salamandridae,Salamandra,2,salamander,False
-common toad,Bufo bufo,Q146375,8384,889350,71,amphibians,Chordata,Amphibia,Anura,Bufonidae,Bufo,2,toad,False
-common frog,Rana temporaria,Q27465,8407,14718,61,amphibians,Chordata,Amphibia,Anura,Ranidae,Rana,2,frog,False
-olm,Proteus anguinus,Q15856,221568,842080,57,amphibians,Chordata,Amphibia,Caudata,Proteidae,Proteus,1,olm,False
-marsh frog,Pelophylax ridibundus,Q319393,8406,14708,56,amphibians,Chordata,Amphibia,Anura,Ranidae,Pelophylax,2,frog,False
-European tree frog,Hyla arborea,Q2142057,121869,677266,54,amphibians,Chordata,Amphibia,Anura,Hylidae,Hyla,3,frog,False
-cane toad,Rhinella marina,Q321087,8386,889340,53,amphibians,Chordata,Amphibia,Anura,Bufonidae,Rhinella,2,toad,False
-smooth newt,Lissotriton vulgaris,Q215247,8324,1041774,51,amphibians,Chordata,Amphibia,Caudata,Salamandridae,Lissotriton,2,newt,False
-goliath frog,Conraua goliath,Q739887,143458,532111,49,amphibians,Chordata,Amphibia,Anura,Petropedetidae,Conraua,2,frog,False
-edible frog,Pelophylax esculentus,Q31694,8401,4133614,47,amphibians,Chordata,Amphibia,Anura,Ranidae,Pelophylax,2,frog,False
-European fire-bellied toad,Bombina bombina,Q372267,8345,991559,44,amphibians,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,3,toad,False
-alpine newt,Ichthyosaura alpestris,Q282715,54263,159060,44,amphibians,Chordata,Amphibia,Caudata,Salamandridae,Ichthyosaura,2,newt,False
-Japanese giant salamander,Andrias japonicus,Q112045,166789,954050,43,amphibians,Chordata,Amphibia,Caudata,Cryptobranchidae,Andrias,3,salamander,False
-Chinese giant salamander,Andrias davidianus,Q61312,141262,424193,42,amphibians,Chordata,Amphibia,Caudata,Cryptobranchidae,Andrias,3,salamander,False
-natterjack toad,Epidalea calamita,Q622886,30326,436364,42,amphibians,Chordata,Amphibia,Anura,Bufonidae,Epidalea,2,toad,False
-golden poison frog,Phyllobates terribilis,Q963997,111132,451900,42,amphibians,Chordata,Amphibia,Anura,Dendrobatidae,Phyllobates,3,frog,False
-African clawed frog,Xenopus laevis,Q654718,8355,465096,40,amphibians,Chordata,Amphibia,Anura,Pipidae,Xenopus,3,frog,False
-yellow-bellied toad,Bombina variegata,Q606431,8348,991539,38,amphibians,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,2,toad,False
-strawberry poison dart frog,Oophaga pumilio,Q786955,51950,891119,38,amphibians,Chordata,Amphibia,Anura,Dendrobatidae,Oophaga,4,frog,False
-goldfish,Carassius auratus,Q123141,7957,1005907,110,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Carassius,1,goldfish,False
-common carp,Cyprinus carpio,Q81110,7962,429083,102,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Cyprinus,2,carp,False
-northern pike,Esox lucius,Q165278,8010,739941,95,ray-finned fish,Chordata,Actinopteri,Esociformes,Esocidae,Esox,2,pike,False
-Wels catfish,Silurus glanis,Q159323,94993,272344,83,ray-finned fish,Chordata,Actinopteri,Siluriformes,Siluridae,Silurus,2,catfish,False
-European eel,Anguilla anguilla,Q26387,7936,854201,81,ray-finned fish,Chordata,Actinopteri,Anguilliformes,Anguillidae,Anguilla,2,eel,False
-guppy,Poecilia reticulata,Q178202,8081,312452,80,ray-finned fish,Chordata,Actinopteri,Cyprinodontiformes,Poeciliidae,Poecilia,1,guppy,False
-brown trout,Salmo trutta,Q2857311,8032,688332,79,ray-finned fish,Chordata,Actinopteri,Salmoniformes,Salmonidae,Salmo,2,trout,False
-tench,Tinca tinca,Q76280,27717,753550,79,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Tinca,1,tench,False
-European perch,Perca fluviatilis,Q166812,8168,186488,78,ray-finned fish,Chordata,Actinopteri,Perciformes,Percidae,Perca,2,perch,False
-Atlantic salmon,Salmo salar,Q188879,8030,688328,77,ray-finned fish,Chordata,Actinopteri,Salmoniformes,Salmonidae,Salmo,2,salmon,False
-Atlantic mackerel,Scomber scombrus,Q30153,13677,70561,76,ray-finned fish,Chordata,Actinopteri,Scombriformes,Scombridae,Scomber,2,mackerel,False
-Atlantic cod,Gadus morhua,Q199788,8049,114170,74,ray-finned fish,Chordata,Actinopteri,Gadiformes,Gadidae,Gadus,2,cod,False
-burbot,Lota lota,Q144700,69944,440414,74,ray-finned fish,Chordata,Actinopteri,Gadiformes,Lotidae,Lota,1,burbot,False
-flathead grey mullet,Mugil cephalus,Q234014,48193,418648,73,ray-finned fish,Chordata,Actinopteri,Mugiliformes,Mugilidae,Mugil,3,mullet,False
-rainbow trout,Oncorhynchus mykiss,Q187986,8022,165368,73,ray-finned fish,Chordata,Actinopteri,Salmoniformes,Salmonidae,Oncorhynchus,2,trout,False
-ocean sunfish,Mola mola,Q192285,94237,457786,69,ray-finned fish,Chordata,Actinopteri,Tetraodontiformes,Molidae,Mola,2,sunfish,False
-European pilchard,Sardina pilchardus,Q208600,27697,1027727,69,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Clupeidae,Sardina,2,pilchard,False
-Atlantic herring,Clupea harengus,Q2396858,7950,1005932,68,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Clupeidae,Clupea,2,herring,False
-European seabass,Dicentrarchus labrax,Q217129,13489,3549,66,ray-finned fish,Chordata,Actinopteri,Perciformes,Moronidae,Dicentrarchus,2,seabass,False
-siamese fighting fish,Betta splendens,Q549,158456,1033356,65,ray-finned fish,Chordata,Actinopteri,Anabantiformes,Osphronemidae,Betta,3,fish,False
-European anchovy,Engraulis encrasicolus,Q188387,184585,222963,63,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Engraulidae,Engraulis,2,anchovy,False
-skipjack tuna,Katsuwonus pelamis,Q633957,8226,308754,60,ray-finned fish,Chordata,Actinopteri,Scombriformes,Scombridae,Katsuwonus,2,tuna,False
-three-spined stickleback,Gasterosteus aculeatus,Q203572,69293,401066,59,ray-finned fish,Chordata,Actinopteri,Perciformes,Gasterosteidae,Gasterosteus,2,stickleback,False
-ruffe,Gymnocephalus cernua,Q187981,57865,104323,59,ray-finned fish,Chordata,Actinopteri,Perciformes,Percidae,Gymnocephalus,1,ruffe,False
-garfish,Belone belone,Q643373,129037,6991,58,ray-finned fish,Chordata,Actinopteri,Beloniformes,Belonidae,Belone,1,garfish,False
-zander,Sander lucioperca,Q146641,283035,557682,58,ray-finned fish,Chordata,Actinopteri,Perciformes,Percidae,Sander,1,zander,False
-yellowfin tuna,Thunnus albacares,Q269781,8236,833188,58,ray-finned fish,Chordata,Actinopteri,Scombriformes,Scombridae,Thunnus,2,tuna,False
-sterlet,Acipenser ruthenus,Q211316,7906,378930,56,ray-finned fish,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,1,sterlet,False
-European sea sturgeon,Acipenser sturio,Q300955,61674,754422,56,ray-finned fish,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,3,sturgeon,False
-European conger,Conger conger,Q212552,82655,142596,54,ray-finned fish,Chordata,Actinopteri,Anguilliformes,Congridae,Conger,2,conger,False
-European plaice,Pleuronectes platessa,Q27098,8262,408337,54,ray-finned fish,Chordata,Actinopteri,Pleuronectiformes,Pleuronectidae,Pleuronectes,2,plaice,False
-milkfish,Chanos chanos,Q465261,29144,575844,53,ray-finned fish,Chordata,Actinopteri,Gonorynchiformes,Chanidae,Chanos,1,milkfish,False
-mahi-mahi,Coryphaena hippurus,Q14443,34814,223663,53,ray-finned fish,Chordata,Actinopteri,Carangiformes,Coryphaenidae,Coryphaena,1,mahi,False
-john Dory,Zeus faber,Q7045,64108,918920,53,ray-finned fish,Chordata,Actinopteri,Zeiformes,Zeidae,Zeus,2,dory,False
-neon tetra,Paracheirodon innesi,Q131431,42492,783059,52,ray-finned fish,Chordata,Actinopteri,Characiformes,Characidae,Paracheirodon,2,tetra,False
-European flounder,Platichthys flesus,Q214034,8260,408331,52,ray-finned fish,Chordata,Actinopteri,Pleuronectiformes,Pleuronectidae,Platichthys,2,flounder,False
-gilt-head bream,Sparus aurata,Q237046,8175,760723,52,ray-finned fish,Chordata,Actinopteri,Spariformes,Sparidae,Sparus,2,bream,False
-Nile perch,Lates niloticus,Q654130,29147,460866,51,ray-finned fish,Chordata,Actinopteri,Acanthomorphata,Centropomidae,Lates,2,perch,False
-bowfin,Amia calva,Q491934,7924,329623,50,ray-finned fish,Chordata,Actinopteri,Amiiformes,Amiidae,Amia,1,bowfin,False
-European sprat,Sprattus sprattus,Q506823,196075,25768,49,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Clupeidae,Sprattus,2,sprat,False
-leafy seadragon,Phycodurus eques,Q501644,693459,435643,48,ray-finned fish,Chordata,Actinopteri,Syngnathiformes,Syngnathidae,Phycodurus,2,seadragon,False
-green swordtail,Xiphophorus hellerii,Q272188,8084,312435,48,ray-finned fish,Chordata,Actinopteri,Cyprinodontiformes,Poeciliidae,Xiphophorus,2,swordtail,False
-mosquitofish,Gambusia affinis,Q723904,33528,617445,47,ray-finned fish,Chordata,Actinopteri,Cyprinodontiformes,Poeciliidae,Gambusia,1,mosquitofish,False
-capelin,Mallotus villosus,Q143359,30960,399346,47,ray-finned fish,Chordata,Actinopteri,Osmeriformes,Salangidae,Mallotus,1,capelin,False
-red lionfish,Pterois volitans,Q824672,185886,1075153,47,ray-finned fish,Chordata,Actinopteri,Perciformes,Scorpaenidae,Pterois,2,lionfish,False
-great white shark,Carcharodon carcharias,Q129026,13397,554297,107,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Carcharodon,3,shark,False
-whale shark,Rhincodon typus,Q80378,259920,214509,95,cartilaginous fish,Chordata,Chondrichthyes,Orectolobiformes,Rhincodontidae,Rhincodon,2,shark,False
-blue shark,Prionace glauca,Q26337,7815,361523,70,cartilaginous fish,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Prionace,2,shark,False
-tiger shark,Galeocerdo cuvier,Q188212,7819,976355,67,cartilaginous fish,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Galeocerdo,2,shark,False
-basking shark,Cetorhinus maximus,Q185260,57982,73671,63,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Cetorhinus,2,shark,False
-bull shark,Carcharhinus leucas,Q190469,46612,343172,59,cartilaginous fish,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Carcharhinus,2,shark,False
-Greenland shark,Somniosus microcephalus,Q370444,191813,442057,56,cartilaginous fish,Chordata,Chondrichthyes,Squaliformes,Somniosidae,Somniosus,2,shark,False
-goblin shark,Mitsukurina owstoni,Q499461,57987,73664,53,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Mitsukurinidae,Mitsukurina,2,shark,False
-frilled shark,Chlamydoselachus anguineus,Q194312,27585,1093624,51,cartilaginous fish,Chordata,Chondrichthyes,Hexanchiformes,Chlamydoselachidae,Chlamydoselachus,2,shark,False
-common thresher,Alopias vulpinus,Q618595,7852,1077204,47,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Alopias,2,thresher,False
-spiny dogfish,Squalus acanthias,Q212694,7797,1019126,47,cartilaginous fish,Chordata,Chondrichthyes,Squaliformes,Squalidae,Squalus,2,dogfish,False
-zebra shark,Stegostoma fasciatum,Q169468,378071,122336,47,cartilaginous fish,Chordata,Chondrichthyes,Orectolobiformes,Stegostomatidae,Stegostoma,2,shark,False
-Bluntnose sixgill shark,Hexanchus griseus,Q312293,94987,435193,45,cartilaginous fish,Chordata,Chondrichthyes,Hexanchiformes,Hexanchidae,Hexanchus,3,shark,False
-Megamouth shark,Megachasma pelagios,Q106728,57985,73662,45,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Megachasmidae,Megachasma,2,shark,False
-sand tiger shark,Carcharias taurus,Q625161,30501,331725,42,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Odontaspididae,Carcharias,3,shark,False
-housefly,Musca domestica,Q166111,7370,1011010,97,insects,Arthropoda,Insecta,Diptera,Muscidae,Musca,1,housefly,False
-Colorado potato beetle,Leptinotarsa decemlineata,Q156954,7539,185597,82,insects,Arthropoda,Insecta,Coleoptera,Chrysomelidae,Leptinotarsa,3,beetle,False
-silverfish,Lepisma saccharina,Q26842,50586,845486,71,insects,Arthropoda,Insecta,Zygentoma,Lepismatidae,Lepisma,1,silverfish,False
-European mantis,Mantis religiosa,Q268319,7507,656298,66,insects,Arthropoda,Insecta,Mantodea,Mantidae,Mantis,2,mantis,False
-European hornet,Vespa crabro,Q30258,7445,573512,65,insects,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,2,hornet,False
-monarch butterfly,Danaus plexippus,Q212398,13037,190091,64,insects,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Danaus,2,butterfly,False
-cockchafer,Melolontha melolontha,Q28175,7061,1093496,60,insects,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Melolontha,1,cockchafer,False
-crab louse,Pthirus pubis,Q381271,121228,1033989,55,insects,Arthropoda,Insecta,Phthiraptera,Pthiridae,Pthirus,2,louse,False
-scarce swallowtail,Iphiclides podalirius,Q31080,110791,377279,54,insects,Arthropoda,Insecta,Lepidoptera,Papilionidae,Iphiclides,2,swallowtail,False
-hummingbird hawk-moth,Macroglossum stellatarum,Q369034,524428,3093456,50,insects,Arthropoda,Insecta,Lepidoptera,Sphingidae,Macroglossum,2,moth,False
-common blue,Polyommatus icarus,Q161533,265386,854609,50,insects,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Polyommatus,2,blue,False
-mealworm,Tenebrio molitor,Q225965,7067,1093470,50,insects,Arthropoda,Insecta,Coleoptera,Tenebrionidae,Tenebrio,1,mealworm,False
-Phylloxera,Daktulosphaira vitifoliae,Q367315,58002,1078851,49,insects,Arthropoda,Insecta,Hemiptera,Phylloxeridae,Daktulosphaira,1,phylloxera,False
-Hercules beetle,Dynastes hercules,Q503799,1247135,3337730,48,insects,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Dynastes,2,beetle,False
-emperor dragonfly,Anax imperator,Q527496,39274,485521,47,insects,Arthropoda,Insecta,Odonata,Aeshnidae,Anax,2,dragonfly,False
-German cockroach,Blattella germanica,Q466194,6973,48282,47,insects,Arthropoda,Insecta,Blattodea,Ectobiidae,Blattella,2,cockroach,False
-green-veined white,Pieris napi,Q683592,78633,731676,46,insects,Arthropoda,Insecta,Lepidoptera,Pieridae,Pieris,2,white,False
-silver-washed fritillary,Argynnis paphia,Q503978,171802,969449,45,insects,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Argynnis,2,fritillary,False
-European rhinoceros beetle,Oryctes nasicornis,Q729353,465150,492988,45,insects,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Oryctes,3,beetle,False
-house cricket,Acheta domesticus,Q27711,6997,1077640,44,insects,Arthropoda,Insecta,Orthoptera,Gryllidae,Acheta,2,cricket,False
-Asian hornet,Vespa velutina,Q136668,202808,829558,44,insects,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,2,hornet,False
-meadow brown,Maniola jurtina,Q754668,191418,283881,43,insects,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Maniola,2,brown,False
-large blue,Phengaris arion,Q161528,203779,906244,43,insects,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Phengaris,2,blue,False
-desert locust,Schistocerca gregaria,Q281634,7010,330338,43,insects,Arthropoda,Insecta,Orthoptera,Acrididae,Schistocerca,2,locust,False
-holly blue,Celastrina argiolus,Q792871,203782,532307,41,insects,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Celastrina,2,blue,False
-Asian giant hornet,Vespa mandarinia,Q121791,7446,573518,41,insects,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,3,hornet,False
-peppered moth,Biston betularia,Q865651,82595,968114,40,insects,Arthropoda,Insecta,Lepidoptera,Geometridae,Biston,2,moth,False
-beautiful demoiselle,Calopteryx virgo,Q248379,52613,435829,40,insects,Arthropoda,Insecta,Odonata,Calopterygidae,Calopteryx,2,demoiselle,False
-titan beetle,Titanus giganteus,Q858284,294803,696705,40,insects,Arthropoda,Insecta,Coleoptera,Cerambycidae,Titanus,2,beetle,False
-oriental cockroach,Blatta orientalis,Q20869,6976,48274,39,insects,Arthropoda,Insecta,Blattodea,Blattidae,Blatta,2,cockroach,False
-banded demoiselle,Calopteryx splendens,Q909597,52612,1090367,39,insects,Arthropoda,Insecta,Odonata,Calopterygidae,Calopteryx,2,demoiselle,False
-black garden ant,Lasius niger,Q839823,67767,915691,39,insects,Arthropoda,Insecta,Hymenoptera,Formicidae,Lasius,3,ant,False
-migratory locust,Locusta migratoria,Q1059580,7004,178934,39,insects,Arthropoda,Insecta,Orthoptera,Acrididae,Locusta,2,locust,False
-queen Alexandra's birdwing,Ornithoptera alexandrae,Q932602,129448,8935,39,insects,Arthropoda,Insecta,Lepidoptera,Papilionidae,Ornithoptera,3,birdwing,False
-stable fly,Stomoxys calcitrans,Q598609,35570,42520,39,insects,Arthropoda,Insecta,Diptera,Muscidae,Stomoxys,2,fly,False
-six-spot burnet,Zygaena filipendulae,Q161497,287375,919818,39,insects,Arthropoda,Insecta,Lepidoptera,Zygaenidae,Zygaena,2,burnet,False
-southern hawker,Aeshna cyanea,Q505187,12921,135916,38,insects,Arthropoda,Insecta,Odonata,Aeshnidae,Aeshna,2,hawker,False
-musk beetle,Aromia moschata,Q389732,1265417,3367513,38,insects,Arthropoda,Insecta,Coleoptera,Cerambycidae,Aromia,2,beetle,False
-lackey moth,Malacosoma neustria,Q30685,7098,440279,38,insects,Arthropoda,Insecta,Lepidoptera,Lasiocampidae,Malacosoma,2,moth,False
-Rosalia longicorn,Rosalia alpina,Q839571,1400418,3366585,38,insects,Arthropoda,Insecta,Coleoptera,Cerambycidae,Rosalia,2,longicorn,False
-codling moth,Cydia pomonella,Q45262,82600,819146,37,insects,Arthropoda,Insecta,Lepidoptera,Tortricidae,Cydia,2,moth,False
-four-spotted chaser,Libellula quadrimaculata,Q525748,70395,117550,37,insects,Arthropoda,Insecta,Odonata,Libellulidae,Libellula,2,chaser,False
-garden tiger moth,Arctia caja,Q674760,289281,353234,36,insects,Arthropoda,Insecta,Lepidoptera,Erebidae,Arctia,3,moth,False
-great diving beetle,Dytiscus marginalis,Q20851,398601,551469,36,insects,Arthropoda,Insecta,Coleoptera,Dytiscidae,Dytiscus,3,beetle,False
-American cockroach,Periplaneta americana,Q267996,6978,48288,36,insects,Arthropoda,Insecta,Blattodea,Blattidae,Periplaneta,2,cockroach,False
-diving bell spider,Argyroneta aquatica,Q119195,375087,29042,48,arachnids,Arthropoda,Arachnida,Araneae,Dictynidae,Argyroneta,3,spider,False
-goliath birdeater,Theraphosa blondi,Q617000,260533,95320,40,arachnids,Arthropoda,Arachnida,Araneae,Theraphosidae,Theraphosa,2,birdeater,False
-Sydney funnel-web spider,Atrax robustus,Q4661821,6903,1048351,35,arachnids,Arthropoda,Arachnida,Araneae,Hexathelidae,Atrax,3,spider,False
-emperor scorpion,Pandinus imperator,Q1142349,55084,990944,35,arachnids,Arthropoda,Arachnida,Scorpiones,Scorpionidae,Pandinus,2,scorpion,False
-Redback spider,Latrodectus hasselti,Q82544,256736,3563772,34,arachnids,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,2,spider,False
-zebra spider,Salticus scenicus,Q169513,243486,329751,34,arachnids,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,2,spider,False
-deathstalker,Leiurus quinquestriatus,Q773744,6883,93213,33,arachnids,Arthropoda,Arachnida,Scorpiones,Buthidae,Leiurus,1,deathstalker,False
-brown recluse spider,Loxosceles reclusa,Q284352,6921,673746,29,arachnids,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,3,spider,False
-raft spider,Dolomedes fimbriatus,Q847066,1432569,3556085,28,arachnids,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,2,spider,False
-giant house spider,Eratigena atrica,Q1071758,1698855,3555267,27,arachnids,Arthropoda,Arachnida,Araneae,Agelenidae,Eratigena,3,spider,False
-Mediterranean recluse spider,Loxosceles rufescens,Q2301444,571528,541799,26,arachnids,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,3,spider,False
-Chilean rose tarantula,Grammostola rosea,Q137107,432528,124289,24,arachnids,Arthropoda,Arachnida,Araneae,Theraphosidae,Grammostola,3,tarantula,False
-giant huntsman spider,Heteropoda maxima,Q114516,679132,395339,24,arachnids,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,3,spider,False
-Darwin's bark spider,Caerostris darwini,Q285304,1538125,5757620,23,arachnids,Arthropoda,Arachnida,Araneae,Araneidae,Caerostris,3,spider,False
-great raft spider,Dolomedes plantarius,Q2090659,257759,73033,23,arachnids,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,3,spider,False
-coconut crab,Birgus latro,Q206070,177283,644678,56,crustaceans,Arthropoda,Malacostraca,Decapoda,Coenobitidae,Birgus,2,crab,False
-Japanese spider crab,Macrocheira kaempferi,Q273655,1124764,2979896,46,crustaceans,Arthropoda,Malacostraca,Decapoda,Inachidae,Macrocheira,3,crab,False
-Antarctic krill,Euphausia superba,Q571443,6819,411348,42,crustaceans,Arthropoda,Malacostraca,Euphausiacea,Euphausiidae,Euphausia,2,krill,False
-Chinese mitten crab,Eriocheir sinensis,Q823941,95602,566723,41,crustaceans,Arthropoda,Malacostraca,Decapoda,Varunidae,Eriocheir,3,crab,False
-signal crayfish,Pacifastacus leniusculus,Q693000,6720,79855,38,crustaceans,Arthropoda,Malacostraca,Decapoda,Astacidae,Pacifastacus,2,crayfish,False
-American lobster,Homarus americanus,Q37668,6706,28247,36,crustaceans,Arthropoda,Malacostraca,Decapoda,Nephropidae,Homarus,2,lobster,False
-red king crab,Paralithodes camtschaticus,Q721171,6741,131917,36,crustaceans,Arthropoda,Malacostraca,Decapoda,Lithodidae,Paralithodes,3,crab,False
-Christmas Island red crab,Gecarcoidea natalis,Q1934004,45628,386590,25,crustaceans,Arthropoda,Malacostraca,Decapoda,Gecarcinidae,Gecarcoidea,4,crab,False
-northern krill,Meganyctiphanes norvegica,Q134974,48144,151806,25,crustaceans,Arthropoda,Malacostraca,Euphausiacea,Euphausiidae,Meganyctiphanes,2,krill,False
-velvet crab,Necora puber,Q853487,338210,613653,22,crustaceans,Arthropoda,Malacostraca,Decapoda,Polybiidae,Necora,2,crab,False
-heikegani,Heikeopsis japonica,Q1594629,255320,858605,21,crustaceans,Arthropoda,Malacostraca,Decapoda,Dorippidae,Heikeopsis,1,heikegani,False
-marbled crayfish,Procambarus virginalis,Q61642001,2065263,7116938,20,crustaceans,Arthropoda,Malacostraca,Decapoda,Cambaridae,Procambarus,2,crayfish,False
-pea crab,Pinnotheres pisum,Q2234799,364894,938335,19,crustaceans,Arthropoda,Malacostraca,Decapoda,Pinnotheridae,Pinnotheres,2,crab,False
-Japanese spiny lobster,Panulirus japonicus,Q1147579,6736,653853,18,crustaceans,Arthropoda,Malacostraca,Decapoda,Palinuridae,Panulirus,3,lobster,False
-Caribbean hermit crab,Coenobita clypeatus,Q1183820,474045,2974729,17,crustaceans,Arthropoda,Malacostraca,Decapoda,Coenobitidae,Coenobita,3,crab,False
-common octopus,Octopus vulgaris,Q651361,6645,110468,51,molluscs,Mollusca,Cephalopoda,Octopoda,Octopodidae,Octopus,2,octopus,False
-blue mussel,Mytilus edulis,Q27855,6550,499751,46,molluscs,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,2,mussel,False
-colossal squid,Mesonychoteuthis hamiltoni,Q378330,559557,942389,43,molluscs,Mollusca,Cephalopoda,Oegopsida,Cranchiidae,Mesonychoteuthis,2,squid,False
-vampire squid,Vampyroteuthis infernalis,Q2509902,55288,537559,41,molluscs,Mollusca,Cephalopoda,Vampyromorpha,Vampyroteuthidae,Vampyroteuthis,2,squid,False
-common periwinkle,Littorina littorea,Q27935,31216,622242,40,molluscs,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Littorina,2,periwinkle,False
-giant clam,Tridacna gigas,Q751784,80829,78499,40,molluscs,Mollusca,Bivalvia,Cardiida,Cardiidae,Tridacna,2,clam,False
-white-lipped snail,Cepaea hortensis,Q427854,97200,983300,37,molluscs,Mollusca,Gastropoda,Stylommatophora,Helicidae,Cepaea,2,snail,False
-common cuttlefish,Sepia officinalis,Q756724,6610,528817,37,molluscs,Mollusca,Cephalopoda,Sepiida,Sepiidae,Sepia,2,cuttlefish,False
-zebra mussel,Dreissena polymorpha,Q752130,45954,201843,36,molluscs,Mollusca,Bivalvia,Myida,Dreissenidae,,2,mussel,False
-European squid,Loligo vulgaris,Q1232698,6622,1054848,36,molluscs,Mollusca,Cephalopoda,Myopsida,Loliginidae,Loligo,2,squid,False
-giant squid,Architeuthis dux,Q13537131,256136,251385,34,molluscs,Mollusca,Cephalopoda,Oegopsida,Architeuthidae,Architeuthis,2,squid,False
-giant Pacific octopus,Enteroctopus dofleini,Q912404,267067,123064,34,molluscs,Mollusca,Cephalopoda,Octopoda,Enteroctopodidae,Enteroctopus,3,octopus,False
-Mediterranean mussel,Mytilus galloprovincialis,Q943341,29158,423885,34,molluscs,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,2,mussel,False
-Spanish slug,Arion vulgaris,Q932364,1028688,629322,33,molluscs,Mollusca,Gastropoda,Stylommatophora,Arionidae,Arion,2,slug,False
-common cockle,Cerastoderma edule,Q21124,55710,439669,32,molluscs,Mollusca,Bivalvia,Cardiida,Cardiidae,Cerastoderma,2,cockle,False
-Pacific oyster,Crassostrea gigas,Q20857,29159,987409,32,molluscs,Mollusca,Bivalvia,Ostreida,Ostreidae,Magallana,2,oyster,False
-Humboldt squid,Dosidicus gigas,Q925444,346249,125334,31,molluscs,Mollusca,Cephalopoda,Oegopsida,Ommastrephidae,Dosidicus,2,squid,False
-freshwater pearl mussel,Margaritifera margaritifera,Q772012,47531,778849,31,molluscs,Mollusca,Bivalvia,Unionida,Margaritiferidae,Margaritifera,3,mussel,False
-mimic octopus,Thaumoctopus mimicus,Q132999,703449,960090,30,molluscs,Mollusca,Cephalopoda,Octopoda,Octopodidae,Thaumoctopus,2,octopus,False
-geoduck,Panopea generosa,Q1068209,1049056,875210,29,molluscs,Mollusca,Bivalvia,Adapedonta,Hiatellidae,Panopea,1,geoduck,False
-Portuguese man o' war,Physalia physalis,Q202526,168775,702294,52,cnidarians,Cnidaria,Hydrozoa,Siphonophorae,Physaliidae,Physalia,4,war,False
-lion's mane jellyfish,Cyanea capillata,Q522939,27804,178412,45,cnidarians,Cnidaria,Scyphozoa,Semaeostomeae,Cyaneidae,Cyanea,3,jellyfish,False
-precious coral,Corallium rubrum,Q531601,142104,757563,44,cnidarians,Cnidaria,Anthozoa,Alcyonacea,Coralliidae,Corallium,2,coral,False
-Beadlet anemone,Actinia equina,Q580826,6106,1084476,31,cnidarians,Cnidaria,Anthozoa,Actiniaria,Actiniidae,Actinia,2,anemone,False
-Nomura's jellyfish,Nemopilema nomurai,Q133389,321803,3524,26,cnidarians,Cnidaria,Scyphozoa,Rhizostomeae,Rhizostomatidae,Nemopilema,2,jellyfish,False
-blue coral,Heliopora coerulea,Q1056942,86515,82502,21,cnidarians,Cnidaria,Anthozoa,Helioporacea,Helioporidae,Heliopora,2,coral,False
-Snakelocks anemone,Anemonia viridis,Q1192992,51769,214124,18,cnidarians,Cnidaria,Anthozoa,Actiniaria,Actiniidae,Anemonia,2,anemone,False
-blue jellyfish,Cyanea lamarckii,Q774838,1307430,3680294,18,cnidarians,Cnidaria,Scyphozoa,Semaeostomeae,Cyaneidae,Cyanea,2,jellyfish,False
-organ pipe coral,Tubipora musica,Q737745,86527,552152,18,cnidarians,Cnidaria,Anthozoa,Alcyonacea,Tubiporidae,Tubipora,3,coral,False
-Elkhorn coral,Acropora palmata,Q163614,6131,507954,17,cnidarians,Cnidaria,Anthozoa,Scleractinia,Acroporidae,Acropora,2,coral,False
-crown-of-thorns starfish,Acanthaster planci,Q26634,133434,926817,42,echinoderms,,Asteroidea,Valvatida,Acanthasteridae,Acanthaster,2,starfish,False
-common starfish,Asterias rubens,Q21120,7604,721252,32,echinoderms,,Asteroidea,Forcipulatida,Asteriidae,Asterias,2,starfish,False
-sunflower sea star,Pycnopodia helianthoides,Q1857023,7614,197638,24,echinoderms,,Asteroidea,Forcipulatida,Asteriidae,Pycnopodia,3,star,False
-common sunstar,Crossaster papposus,Q901244,60567,912244,15,echinoderms,,Asteroidea,Velatida,Solasteridae,Crossaster,2,sunstar,False
-leather star,Dermasterias imbricata,Q2618140,7590,977099,13,echinoderms,,Asteroidea,Valvatida,Poraniidae,Dermasterias,2,star,False
-elegant feather star,Tropiometra carinata,Q1960836,707740,1063692,11,echinoderms,,Crinoidea,Comatulida,Tropiometridae,Tropiometra,3,star,False
-orange knobby star,Echinaster echinophorus,Q2687141,559820,3656046,9,echinoderms,,Asteroidea,Spinulosida,Echinasteridae,Echinaster,3,star,False
-orange-footed sea cucumber,Cucumaria frondosa,Q2491419,36326,478655,8,echinoderms,,Holothuroidea,Dendrochirotida,Cucumariidae,Cucumaria,3,cucumber,False
-California sea cucumber,Apostichopus californicus,Q27157894,2032702,924454,6,echinoderms,,Holothuroidea,Aspidochirotida,Stichopodidae,Apostichopus,3,cucumber,False
-red sea urchin,Mesocentrotus franciscanus,Q28912671,1328066,564712,6,echinoderms,,Echinoidea,Echinoida,Strongylocentrotidae,Mesocentrotus,3,urchin,False
-sea lamprey,Petromyzon marinus,Q385764,7757,227494,47,other,Chordata,,Petromyzontiformes,Petromyzontidae,Petromyzon,2,lamprey,False
-West Indian Ocean coelacanth,Latimeria chalumnae,Q668921,7897,773491,45,other,Chordata,,,,,4,coelacanth,False
-brook lamprey,Lampetra planeri,Q798246,7750,227498,42,other,Chordata,,Petromyzontiformes,Petromyzontidae,Lampetra,2,lamprey,False
-European river lamprey,Lampetra fluviatilis,Q301019,7748,801627,39,other,Chordata,,Petromyzontiformes,Petromyzontidae,Lampetra,3,lamprey,False
-South American lungfish,Lepidosiren paradoxa,Q1410142,7883,199346,37,other,Chordata,Dipnoi,Lepidosireniformes,Lepidosirenidae,Lepidosiren,3,lungfish,False
-Atlantic horseshoe crab,Limulus polyphemus,Q1133152,6850,511973,35,other,Arthropoda,Merostomata,Xiphosura,Limulidae,Limulus,3,crab,False
-Australian lungfish,Neoceratodus forsteri,Q782345,7892,773500,35,other,Chordata,Dipnoi,Ceratodontiformes,Neoceratodontidae,Neoceratodus,2,lungfish,False
-blow lugworm,Arenicola marina,Q21155,6344,941625,32,other,Annelida,Polychaeta,Capitellida,Arenicolidae,Arenicola,2,lugworm,False
-Indonesian coelacanth,Latimeria menadoensis,Q1156533,106881,898631,32,other,Chordata,,,,,2,coelacanth,False
-marbled lungfish,Protopterus aethiopicus,Q257796,7886,199355,30,other,Chordata,Dipnoi,Lepidosireniformes,Protopteridae,Protopterus,2,lungfish,False
-West African lungfish,Protopterus annectens,Q512042,7888,199334,27,other,Chordata,Dipnoi,Lepidosireniformes,Protopteridae,Protopterus,3,lungfish,False
-Venus' flower basket,Euplectella aspergillum,Q1523518,936045,164229,22,other,Porifera,Hexactinellida,Lyssacinosida,Euplectellidae,Euplectella,3,basket,False
-mangrove horseshoe crab,Carcinoscorpius rotundicauda,Q2673503,6848,1089003,20,other,Arthropoda,Merostomata,Xiphosura,Limulidae,Carcinoscorpius,3,crab,False
-Pacific hagfish,Eptatretus stoutii,Q683492,7765,852671,19,other,Chordata,Hyperotreti,Myxiniformes,Myxinidae,Eptatretus,2,hagfish,False
-Venus girdle,Cestum veneris,Q2469009,12997,811889,17,other,Ctenophora,Tentaculata,Cestida,Cestidae,Cestum,2,girdle,False
+common_name,sci_name,wikidata,ncbi,ott_id,sitelinks,stratum,phylum,class,order,family,genus,ott_phylum,ott_class,ott_order,ott_family,ott_genus,n_words,head_noun,polysemous
+lion,Panthera leo,Q140,9689,563151,274,mammals,Chordata,Mammalia,Carnivora,Felidae,Panthera,Chordata,Mammalia,Carnivora,Felidae,Panthera,1,lion,False
+wolf,Canis lupus,Q18498,9612,247341,226,mammals,Chordata,Mammalia,Carnivora,Canidae,Canis,Chordata,Mammalia,Carnivora,Canidae,Canis,1,wolf,False
+wild boar,Sus scrofa,Q58697,9823,730013,163,mammals,Chordata,Mammalia,Artiodactyla,Suidae,Sus,Chordata,Mammalia,Artiodactyla,Suidae,Sus,2,boar,False
+polar bear,Ursus maritimus,Q33609,29073,10732,159,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Chordata,Mammalia,Carnivora,Ursidae,Ursus,2,bear,False
+red fox,Vulpes vulpes,Q8332,9627,821964,158,mammals,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Chordata,Mammalia,Carnivora,Canidae,Vulpes,2,fox,False
+cheetah,Acinonyx jubatus,Q23907,32536,752759,151,mammals,Chordata,Mammalia,Carnivora,Felidae,Acinonyx,Chordata,Mammalia,Carnivora,Felidae,Acinonyx,1,cheetah,False
+hippopotamus,Hippopotamus amphibius,Q34505,9833,510762,149,mammals,Chordata,Mammalia,Artiodactyla,Hippopotamidae,Hippopotamus,Chordata,Mammalia,Artiodactyla,Hippopotamidae,Hippopotamus,1,hippopotamus,False
+giant panda,Ailuropoda melanoleuca,Q33602,9646,872573,146,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ailuropoda,Chordata,Mammalia,Carnivora,Ursidae,Ailuropoda,2,panda,False
+northern giraffe,Giraffa camelopardalis,Q15083,9894,768674,140,mammals,Chordata,Mammalia,Artiodactyla,Giraffidae,Giraffa,Chordata,Mammalia,Artiodactyla,Giraffidae,Giraffa,2,giraffe,False
+brown bear,Ursus arctos,Q36341,9644,872567,138,mammals,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Chordata,Mammalia,Carnivora,Ursidae,Ursus,2,bear,False
+water buffalo,Bubalus bubalis,Q42710,89462,641187,132,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Bubalus,Chordata,Mammalia,Artiodactyla,Bovidae,Bubalus,2,buffalo,False
+snow leopard,Panthera uncia,Q30197,29064,532117,132,mammals,Chordata,Mammalia,Carnivora,Felidae,Panthera,Chordata,Mammalia,Carnivora,Felidae,Panthera,2,leopard,False
+moose,Alces alces,Q35517,9852,460509,130,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Alces,Chordata,Mammalia,Artiodactyla,Cervidae,Alces,1,moose,False
+koala,Phascolarctos cinereus,Q36101,38626,327624,129,mammals,Chordata,Mammalia,Diprotodontia,Phascolarctidae,Phascolarctos,Chordata,Mammalia,Diprotodontia,Phascolarctidae,Phascolarctos,1,koala,False
+European badger,Meles meles,Q27066,9662,923113,123,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Meles,Chordata,Mammalia,Carnivora,Mustelidae,Meles,2,badger,False
+least weasel,Mustela nivalis,Q25311,36239,354525,123,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,2,weasel,False
+Eurasian otter,Lutra lutra,Q29995,9657,348036,122,mammals,Chordata,Mammalia,Carnivora,Mustelidae,Lutra,Chordata,Mammalia,Carnivora,Mustelidae,Lutra,2,otter,False
+house mouse,Mus musculus,Q83310,10090,542509,121,mammals,Chordata,Mammalia,Rodentia,Muridae,Mus,Chordata,Mammalia,Rodentia,Muridae,Mus,2,mouse,False
+reindeer,Rangifer tarandus,Q39624,9870,410153,121,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Rangifer,Chordata,Mammalia,Artiodactyla,Cervidae,Rangifer,1,reindeer,False
+platypus,Ornithorhynchus anatinus,Q15343,9258,962377,119,mammals,Chordata,Mammalia,Monotremata,Ornithorhynchidae,Ornithorhynchus,Chordata,Mammalia,Monotremata,Ornithorhynchidae,Ornithorhynchus,1,platypus,False
+walrus,Odobenus rosmarus,Q40994,9707,749644,118,mammals,Chordata,Mammalia,Carnivora,Odobenidae,Odobenus,Chordata,Mammalia,Carnivora,Odobenidae,Odobenus,1,walrus,False
+orca,Orcinus orca,Q26843,9733,124215,116,mammals,Chordata,Mammalia,Artiodactyla,Delphinidae,Orcinus,Chordata,Mammalia,Artiodactyla,Delphinidae,Orcinus,1,orca,False
+red panda,Ailurus fulgens,Q41960,9649,872562,113,mammals,Chordata,Mammalia,Carnivora,Ailuridae,Ailurus,Chordata,Mammalia,Carnivora,Ailuridae,Ailurus,2,panda,False
+blue whale,Balaenoptera musculus,Q42196,9771,226190,111,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,2,whale,False
+red squirrel,Sciurus vulgaris,Q4388,55149,286193,111,mammals,Chordata,Mammalia,Rodentia,Sciuridae,Sciurus,Chordata,Mammalia,Rodentia,Sciuridae,Sciurus,2,squirrel,False
+red deer,Cervus elaphus,Q79794,9860,936014,110,mammals,Chordata,Mammalia,Artiodactyla,Cervidae,Cervus,Chordata,Mammalia,Artiodactyla,Cervidae,Cervus,2,deer,False
+coyote,Canis latrans,Q44299,9614,247331,109,mammals,Chordata,Mammalia,Carnivora,Canidae,Canis,Chordata,Mammalia,Carnivora,Canidae,Canis,1,coyote,False
+guinea pig,Cavia porcellus,Q79803,10141,744000,108,mammals,Chordata,Mammalia,Rodentia,Caviidae,Cavia,Chordata,Mammalia,Rodentia,Caviidae,Cavia,2,pig,False
+aardvark,Orycteropus afer,Q46212,9818,561087,107,mammals,Chordata,Mammalia,Tubulidentata,Orycteropodidae,Orycteropus,Chordata,Mammalia,Tubulidentata,Orycteropodidae,Orycteropus,1,aardvark,False
+African buffalo,Syncerus caffer,Q160042,9970,644255,107,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Syncerus,Chordata,Mammalia,Artiodactyla,Bovidae,Syncerus,2,buffalo,False
+capybara,Hydrochoerus hydrochaeris,Q131538,10149,744018,105,mammals,Chordata,Mammalia,Rodentia,Hydrochaeridae,Hydrochoerus,Chordata,Mammalia,Rodentia,Hydrochaeridae,Hydrochoerus,1,capybara,False
+llama,Lama glama,Q42569,9844,986973,105,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Lama,Chordata,Mammalia,Artiodactyla,Camelidae,Lama,1,llama,False
+dromedary,Camelus dromedarius,Q71516,9838,510752,102,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,1,dromedary,False
+European rabbit,Oryctolagus cuniculus,Q25851,9986,864596,100,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Oryctolagus,Chordata,Mammalia,Lagomorpha,Leporidae,Oryctolagus,2,rabbit,False
+Bactrian camel,Camelus bactrianus,Q132922,9837,510768,99,mammals,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,2,camel,False
+bonobo,Pan paniscus,Q19537,9597,158484,99,mammals,Chordata,Mammalia,Primates,Hominidae,Pan,Chordata,Mammalia,,Hominidae,Pan,1,bonobo,False
+chimpanzee,Pan troglodytes,Q4126704,9598,417950,99,mammals,Chordata,Mammalia,Primates,Hominidae,Pan,Chordata,Mammalia,,Hominidae,Pan,1,chimpanzee,False
+okapi,Okapia johnstoni,Q82037,86973,207426,98,mammals,Chordata,Mammalia,Artiodactyla,Giraffidae,Okapia,Chordata,Mammalia,Artiodactyla,Giraffidae,Okapia,1,okapi,False
+American bison,Bison bison,Q82728,9901,907693,97,mammals,Chordata,Mammalia,Artiodactyla,Bovidae,Bison,Chordata,Mammalia,Artiodactyla,Bovidae,Bison,2,bison,False
+thylacine,Thylacinus cynocephalus,Q123102,9275,408120,96,mammals,Chordata,Mammalia,Dasyuromorphia,Thylacinidae,Thylacinus,Chordata,Mammalia,Dasyuromorphia,Thylacinidae,Thylacinus,1,thylacine,False
+Asian elephant,Elephas maximus,Q133006,9783,541928,95,mammals,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,2,elephant,False
+meerkat,Suricata suricatta,Q134015,37032,803645,92,mammals,Chordata,Mammalia,Carnivora,Herpestidae,Suricata,Chordata,Mammalia,Carnivora,Herpestidae,Suricata,1,meerkat,False
+African bush elephant,Loxodonta africana,Q36557,9785,541936,90,mammals,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,3,elephant,False
+European hare,Lepus europaeus,Q26838,9983,864607,89,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,2,hare,False
+narwhal,Monodon monoceros,Q159426,40151,306757,87,mammals,Chordata,Mammalia,Artiodactyla,Monodontidae,Monodon,Chordata,Mammalia,Artiodactyla,Monodontidae,Monodon,1,narwhal,False
+white rhinoceros,Ceratotherium simum,Q159918,9807,1034198,86,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Ceratotherium,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Ceratotherium,2,rhinoceros,False
+humpback whale,Megaptera novaeangliae,Q132905,9773,226198,86,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Megaptera,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Megaptera,2,whale,False
+beluga whale,Delphinapterus leucas,Q132072,9749,851318,85,mammals,Chordata,Mammalia,Artiodactyla,Monodontidae,Delphinapterus,Chordata,Mammalia,Artiodactyla,Monodontidae,Delphinapterus,2,whale,False
+black rhinoceros,Diceros bicornis,Q95036,9805,1034204,85,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Diceros,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Diceros,2,rhinoceros,False
+Eurasian beaver,Castor fiber,Q181191,10185,1048188,83,mammals,Chordata,Mammalia,Rodentia,Castoridae,Castor,Chordata,Mammalia,Rodentia,Castoridae,Castor,2,beaver,False
+European hedgehog,Erinaceus europaeus,Q6145,9365,796660,83,mammals,Chordata,Mammalia,Eulipotyphla,Erinaceidae,Erinaceus,Chordata,Mammalia,Eulipotyphla,Erinaceidae,Erinaceus,2,hedgehog,False
+dugong,Dugong dugon,Q129544,29137,835324,82,mammals,Chordata,Mammalia,Sirenia,Dugongidae,Dugong,Chordata,Mammalia,Sirenia,Dugongidae,Dugong,1,dugong,False
+brown rat,Rattus norvegicus,Q184224,10116,271555,82,mammals,Chordata,Mammalia,Rodentia,Muridae,Rattus,Chordata,Mammalia,Rodentia,Muridae,Rattus,2,rat,False
+European mole,Talpa europaea,Q209067,9375,222362,78,mammals,Chordata,Mammalia,Eulipotyphla,Talpidae,Talpa,Chordata,Mammalia,Eulipotyphla,Talpidae,Talpa,2,mole,False
+spotted hyena,Crocuta crocuta,Q178089,9678,397157,77,mammals,Chordata,Mammalia,Carnivora,Hyaenidae,Crocuta,Chordata,Mammalia,Carnivora,Hyaenidae,Crocuta,2,hyena,False
+rhesus macaque,Macaca mulatta,Q156606,9544,689650,77,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Macaca,Chordata,Mammalia,,Cercopithecidae,Macaca,2,macaque,False
+Indian rhinoceros,Rhinoceros unicornis,Q47910,9809,1087496,77,mammals,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Rhinoceros,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Rhinoceros,2,rhinoceros,False
+nutria,Myocastor coypus,Q187704,10157,169715,76,mammals,Chordata,Mammalia,Rodentia,Myocastoridae,Myocastor,Chordata,Mammalia,Rodentia,Myocastoridae,Myocastor,1,nutria,False
+striped hyena,Hyaena hyaena,Q188657,95912,383901,74,mammals,Chordata,Mammalia,Carnivora,Hyaenidae,Hyaena,Chordata,Mammalia,Carnivora,Hyaenidae,Hyaena,2,hyena,False
+mountain hare,Lepus timidus,Q180035,62621,167565,74,mammals,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,2,hare,False
+harbor seal,Phoca vitulina,Q26913,9720,698422,73,mammals,Chordata,Mammalia,Carnivora,Phocidae,Phoca,Chordata,Mammalia,Carnivora,Phocidae,Phoca,2,seal,False
+common bottlenose dolphin,Tursiops truncatus,Q174199,9739,124230,73,mammals,Chordata,Mammalia,Artiodactyla,Delphinidae,Tursiops,Chordata,Mammalia,Artiodactyla,Delphinidae,Tursiops,3,dolphin,False
+aye-aye,Daubentonia madagascariensis,Q186778,31869,50727,72,mammals,Chordata,Mammalia,Primates,Daubentoniidae,Daubentonia,Chordata,Mammalia,,Daubentoniidae,Daubentonia,1,aye,False
+ring-tailed lemur,Lemur catta,Q185385,9447,913930,72,mammals,Chordata,Mammalia,Primates,Lemuridae,Lemur,Chordata,Mammalia,,Lemuridae,Lemur,2,lemur,False
+aardwolf,Proteles cristata,Q185295,9680,563161,72,mammals,Chordata,Mammalia,Carnivora,Hyaenidae,Proteles,Chordata,Mammalia,Carnivora,Hyaenidae,Proteles,1,aardwolf,False
+fin whale,Balaenoptera physalus,Q179020,9770,226193,71,mammals,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,Chordata,Mammalia,Artiodactyla,Balaenopteridae,Balaenoptera,2,whale,False
+African forest elephant,Loxodonta cyclotis,Q189514,99490,418570,71,mammals,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,3,elephant,False
+European edible dormouse,Glis glis,Q147128,41261,185345,70,mammals,Chordata,Mammalia,Rodentia,Gliridae,Glis,Chordata,Mammalia,Rodentia,Gliridae,Glis,3,dormouse,False
+black rat,Rattus rattus,Q106133,10117,271571,70,mammals,Chordata,Mammalia,Rodentia,Muridae,Rattus,Chordata,Mammalia,Rodentia,Muridae,Rattus,2,rat,False
+binturong,Arctictis binturong,Q213141,94180,768502,69,mammals,Chordata,Mammalia,Carnivora,Viverridae,Arctictis,Chordata,Mammalia,Carnivora,Viverridae,Arctictis,1,binturong,False
+bowhead whale,Balaena mysticetus,Q174652,27602,397231,68,mammals,Chordata,Mammalia,Artiodactyla,Balaenidae,Balaena,Chordata,Mammalia,Artiodactyla,Balaenidae,Balaena,2,whale,False
+Asian palm civet,Paradoxurus hermaphroditus,Q18764,71117,1088400,68,mammals,Chordata,Mammalia,Carnivora,Viverridae,Paradoxurus,Chordata,Mammalia,Carnivora,Viverridae,Paradoxurus,3,civet,False
+common warthog,Phacochoerus africanus,Q183255,41426,1036755,68,mammals,Chordata,Mammalia,Artiodactyla,Suidae,Phacochoerus,Chordata,Mammalia,Artiodactyla,Suidae,Phacochoerus,2,warthog,False
+Barbary macaque,Macaca sylvanus,Q199962,9546,689645,67,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Macaca,Chordata,Mammalia,,Cercopithecidae,Macaca,2,macaque,False
+mandrill,Mandrillus sphinx,Q189868,9561,741047,67,mammals,Chordata,Mammalia,Primates,Cercopithecidae,Mandrillus,Chordata,Mammalia,,Cercopithecidae,Mandrillus,1,mandrill,False
+baiji,Lipotes vexillifer,Q188130,118797,5269,66,mammals,Chordata,Mammalia,Artiodactyla,Lipotidae,Lipotes,Chordata,Mammalia,Artiodactyla,Lipotidae,Lipotes,1,baiji,False
+Ganges river dolphin,Platanista gangetica,Q210872,118798,5256,66,mammals,Chordata,Mammalia,Artiodactyla,Platanistidae,Platanista,Chordata,Mammalia,Artiodactyla,Platanistidae,Platanista,3,dolphin,False
+quokka,Setonix brachyurus,Q726151,30670,733444,66,mammals,Chordata,Mammalia,Diprotodontia,Macropodidae,Setonix,Chordata,Mammalia,Diprotodontia,Macropodidae,Setonix,1,quokka,False
+pronghorn,Antilocapra americana,Q187943,9891,768683,65,mammals,Chordata,Mammalia,Artiodactyla,Antilocapridae,Antilocapra,Chordata,Mammalia,Artiodactyla,Antilocapridae,Antilocapra,1,pronghorn,False
+North American beaver,Castor canadensis,Q81056,51338,886085,65,mammals,Chordata,Mammalia,Rodentia,Castoridae,Castor,Chordata,Mammalia,Rodentia,Castoridae,Castor,3,beaver,False
+wild horse,Equus ferus,Q27742,1114792,520756,65,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Chordata,Mammalia,Perissodactyla,Equidae,Equus,2,horse,False
+grey seal,Halichoerus grypus,Q27370,9711,1040694,65,mammals,Chordata,Mammalia,Carnivora,Phocidae,Halichoerus,Chordata,Mammalia,Carnivora,Phocidae,Halichoerus,2,seal,False
+African civet,Civettictis civetta,Q241256,94186,768511,64,mammals,Chordata,Mammalia,Carnivora,Viverridae,Civettictis,Chordata,Mammalia,Carnivora,Viverridae,Civettictis,2,civet,False
+common dolphin,Delphinus delphis,Q207114,9728,698438,64,mammals,Chordata,Mammalia,Artiodactyla,Delphinidae,Delphinus,Chordata,Mammalia,Artiodactyla,Delphinidae,Delphinus,2,dolphin,False
+leopard seal,Hydrurga leptonyx,Q186663,29086,180388,64,mammals,Chordata,Mammalia,Carnivora,Phocidae,Hydrurga,Chordata,Mammalia,Carnivora,Phocidae,Hydrurga,2,seal,False
+Grévy's zebra,Equus grevyi,Q219565,9792,1068209,63,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Chordata,Mammalia,Perissodactyla,Equidae,Equus,2,zebra,False
+gray whale,Eschrichtius robustus,Q179154,9764,800320,63,mammals,Chordata,Mammalia,Artiodactyla,Eschrichtiidae,Eschrichtius,Chordata,Mammalia,Artiodactyla,Eschrichtiidae,Eschrichtius,2,whale,False
+giant anteater,Myrmecophaga tridactyla,Q203033,71006,490538,63,mammals,Chordata,Mammalia,Pilosa,Myrmecophagidae,Myrmecophaga,Chordata,Mammalia,Pilosa,Myrmecophagidae,Myrmecophaga,2,anteater,False
+mountain zebra,Equus zebra,Q243213,9791,1068212,62,mammals,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Chordata,Mammalia,Perissodactyla,Equidae,Equus,2,zebra,False
+hazel dormouse,Muscardinus avellanarius,Q207148,39082,664079,62,mammals,Chordata,Mammalia,Rodentia,Gliridae,Muscardinus,Chordata,Mammalia,Rodentia,Gliridae,Muscardinus,2,dormouse,False
+common ostrich,Struthio camelus,Q17592,8801,647692,149,birds,Chordata,Aves,Struthioniformes,Struthionidae,Struthio,Chordata,Aves,Struthioniformes,Struthionidae,Struthio,2,ostrich,False
+house sparrow,Passer domesticus,Q14683,48849,745175,142,birds,Chordata,Aves,Passeriformes,Passeridae,Passer,Chordata,Aves,Passeriformes,Passeridae,Passer,2,sparrow,False
+common raven,Corvus corax,Q25357,56781,140425,137,birds,Chordata,Aves,Passeriformes,Corvidae,Corvus,Chordata,Aves,Passeriformes,Corvidae,Corvus,2,raven,False
+mallard,Anas platyrhynchos,Q25348,8839,765167,134,birds,Chordata,Aves,Anseriformes,Anatidae,Anas,Chordata,Aves,Anseriformes,Anatidae,Anas,1,mallard,False
+Eurasian magpie,Pica pica,Q25307,34924,776471,134,birds,Chordata,Aves,Passeriformes,Corvidae,Pica,Chordata,Aves,Passeriformes,Corvidae,Pica,2,magpie,False
+common hoopoe,Upupa epops,Q25247,57439,412129,133,birds,Chordata,Aves,Bucerotiformes,Upupidae,Upupa,Chordata,Aves,Upupiformes,Upupidae,Upupa,2,hoopoe,False
+common blackbird,Turdus merula,Q25234,9187,568572,128,birds,Chordata,Aves,Passeriformes,Turdidae,Turdus,Chordata,Aves,Passeriformes,Turdidae,Turdus,2,blackbird,False
+common quail,Coturnix coturnix,Q28358,9091,1098760,124,birds,Chordata,Aves,Galliformes,Phasianidae,Coturnix,Chordata,Aves,Galliformes,Phasianidae,Coturnix,2,quail,False
+European robin,Erithacus rubecula,Q25334,37610,507122,122,birds,Chordata,Aves,Passeriformes,Muscicapidae,Erithacus,Chordata,Aves,Passeriformes,Turdidae,Erithacus,2,robin,False
+common cuckoo,Cuculus canorus,Q18845,55661,792628,119,birds,Chordata,Aves,Cuculiformes,Cuculidae,Cuculus,Chordata,Aves,Cuculiformes,Cuculidae,Cuculus,2,cuckoo,False
+rock dove,Columba livia,Q42326,8932,938416,117,birds,Chordata,Aves,Columbiformes,Columbidae,Columba,Chordata,Aves,Columbiformes,Columbidae,Columba,2,dove,False
+Eurasian golden oriole,Oriolus oriolus,Q25388,181099,299687,116,birds,Chordata,Aves,Passeriformes,Corvidae,Oriolus,Chordata,Aves,Passeriformes,Corvidae,Oriolus,3,oriole,False
+white wagtail,Motacilla alba,Q25399,45807,695336,114,birds,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,2,wagtail,False
+common starling,Sturnus vulgaris,Q25469,9172,565813,114,birds,Chordata,Aves,Passeriformes,Sturnidae,Sturnus,Chordata,Aves,Passeriformes,Sturnidae,Sturnus,2,starling,False
+grey heron,Ardea cinerea,Q25273,30390,119222,113,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,2,heron,False
+great tit,Parus major,Q25485,9157,515143,113,birds,Chordata,Aves,Passeriformes,Paridae,Parus,Chordata,Aves,Passeriformes,Paridae,Parus,2,tit,False
+barn swallow,Hirundo rustica,Q25429,43150,1040135,111,birds,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,2,swallow,False
+golden eagle,Aquila chrysaetos,Q41181,8962,263127,110,birds,Chordata,Aves,Accipitriformes,Accipitridae,Aquila,Chordata,Aves,Accipitriformes,Accipitridae,Aquila,2,eagle,False
+peregrine falcon,Falco peregrinus,Q30535,8954,786435,109,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,Chordata,Aves,Falconiformes,Falconidae,Falco,2,falcon,False
+Eurasian eagle-owl,Bubo bubo,Q130933,30461,402453,108,birds,Chordata,Aves,Strigiformes,Strigidae,Bubo,Chordata,Aves,Strigiformes,Strigidae,Bubo,2,owl,False
+white stork,Ciconia ciconia,Q25352,8928,363031,108,birds,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,2,stork,False
+great cormorant,Phalacrocorax carbo,Q25440,9209,969841,108,birds,Chordata,Aves,Suliformes,Phalacrocoracidae,Phalacrocorax,Chordata,Aves,Pelecaniformes,Phalacrocoracidae,Phalacrocorax,2,cormorant,False
+Eurasian sparrowhawk,Accipiter nisus,Q25380,211598,238460,107,birds,Chordata,Aves,Accipitriformes,Accipitridae,Accipiter,Chordata,Aves,Accipitriformes,Accipitridae,Accipiter,2,sparrowhawk,False
+common kestrel,Falco tinnunculus,Q26490,100819,534514,107,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,Chordata,Aves,Falconiformes,Falconidae,Falco,2,kestrel,False
+osprey,Pandion haliaetus,Q25332,56262,509837,107,birds,Chordata,Aves,Accipitriformes,Pandionidae,Pandion,Chordata,Aves,Accipitriformes,Pandionidae,Pandion,1,osprey,False
+greylag goose,Anser anser,Q25882,8843,190887,106,birds,Chordata,Aves,Anseriformes,Anatidae,Anser,Chordata,Aves,Anseriformes,Anatidae,Anser,2,goose,False
+European goldfinch,Carduelis carduelis,Q25418,37600,1083719,106,birds,Chordata,Aves,Passeriformes,Fringillidae,Carduelis,Chordata,Aves,Passeriformes,Fringillidae,Carduelis,2,goldfinch,False
+Eurasian coot,Fulica atra,Q25376,9121,1041538,104,birds,Chordata,Aves,Gruiformes,Rallidae,Fulica,Chordata,Aves,Gruiformes,Rallidae,Fulica,2,coot,False
+common crane,Grus grus,Q4764,40816,589064,104,birds,Chordata,Aves,Gruiformes,Gruidae,Grus,Chordata,Aves,Gruiformes,Gruidae,Grus,2,crane,False
+northern pintail,Anas acuta,Q25450,28680,855474,103,birds,Chordata,Aves,Anseriformes,Anatidae,Anas,Chordata,Aves,Anseriformes,Anatidae,Anas,2,pintail,False
+northern lapwing,Vanellus vanellus,Q25392,100859,413796,103,birds,Chordata,Aves,Charadriiformes,Charadriidae,Vanellus,Chordata,Aves,Charadriiformes,Charadriidae,Vanellus,2,lapwing,False
+black kite,Milvus migrans,Q80362,52810,548448,102,birds,Chordata,Aves,Accipitriformes,Accipitridae,Milvus,Chordata,Aves,Accipitriformes,Accipitridae,Milvus,2,kite,False
+Eurasian tree sparrow,Passer montanus,Q25968,9160,44870,102,birds,Chordata,Aves,Passeriformes,Passeridae,Passer,Chordata,Aves,Passeriformes,Passeridae,Passer,3,sparrow,False
+Indian peafowl,Pavo cristatus,Q61865,9049,453575,102,birds,Chordata,Aves,Galliformes,Phasianidae,Pavo,Chordata,Aves,Galliformes,Phasianidae,Pavo,2,peafowl,False
+common kingfisher,Alcedo atthis,Q79915,36245,549519,101,birds,Chordata,Aves,Coraciiformes,Alcedinidae,Alcedo,Chordata,Aves,Coraciiformes,Alcedinidae,Alcedo,2,kingfisher,False
+common nightingale,Luscinia megarhynchos,Q25393,383689,961118,101,birds,Chordata,Aves,Passeriformes,Muscicapidae,Luscinia,Chordata,Aves,Passeriformes,Turdidae,Luscinia,2,nightingale,False
+Eurasian bullfinch,Pyrrhula pyrrhula,Q25382,37607,1083726,101,birds,Chordata,Aves,Passeriformes,Fringillidae,Pyrrhula,Chordata,Aves,Passeriformes,Fringillidae,Pyrrhula,2,bullfinch,False
+little grebe,Tachybaptus ruficollis,Q25421,100828,1010578,100,birds,Chordata,Aves,Podicipediformes,Podicipedidae,Tachybaptus,Chordata,Aves,Podicipediformes,Podicipedidae,Tachybaptus,2,grebe,False
+black stork,Ciconia nigra,Q25398,36241,549527,99,birds,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,Chordata,Aves,Ciconiiformes,Ciconiidae,Ciconia,2,stork,False
+Eurasian blue tit,Cyanistes caeruleus,Q25404,156563,746120,99,birds,Chordata,Aves,Passeriformes,Paridae,Cyanistes,Chordata,Aves,Passeriformes,Paridae,Cyanistes,3,tit,False
+common moorhen,Gallinula chloropus,Q18847,9123,1041541,99,birds,Chordata,Aves,Gruiformes,Rallidae,Gallinula,Chordata,Aves,Gruiformes,Rallidae,Gallinula,2,moorhen,False
+western capercaillie,Tetrao urogallus,Q129059,100830,484331,98,birds,Chordata,Aves,Galliformes,Phasianidae,Tetrao,Chordata,Aves,Galliformes,Phasianidae,Tetrao,2,capercaillie,False
+Eurasian chaffinch,Fringilla coelebs,Q25383,37598,828694,97,birds,Chordata,Aves,Passeriformes,Fringillidae,Fringilla,Chordata,Aves,Passeriformes,Fringillidae,Fringilla,2,chaffinch,False
+great crested grebe,Podiceps cristatus,Q25422,345573,92263,97,birds,Chordata,Aves,Podicipediformes,Podicipedidae,Podiceps,Chordata,Aves,Podicipediformes,Podicipedidae,Podiceps,3,grebe,False
+little owl,Athene noctua,Q129958,126797,427150,96,birds,Chordata,Aves,Strigiformes,Strigidae,Athene,Chordata,Aves,Strigiformes,Strigidae,Athene,2,owl,False
+Eurasian skylark,Alauda arvensis,Q25961,88112,312548,95,birds,Chordata,Aves,Passeriformes,Alaudidae,Alauda,Chordata,Aves,Passeriformes,Alaudidae,Alauda,2,skylark,False
+great egret,Ardea alba,Q130730,110620,625779,93,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,2,egret,False
+common swift,Apus apus,Q25377,8895,609788,92,birds,Chordata,Aves,Apodiformes,Apodidae,Apus,Chordata,Aves,Apodiformes,Apodidae,Apus,2,swift,False
+snowy owl,Bubo scandiacus,Q170177,371907,514178,92,birds,Chordata,Aves,Strigiformes,Strigidae,Bubo,Chordata,Aves,Strigiformes,Strigidae,Bubo,2,owl,False
+common wood pigeon,Columba palumbus,Q26026,8934,938408,92,birds,Chordata,Aves,Columbiformes,Columbidae,Columba,Chordata,Aves,Columbiformes,Columbidae,Columba,3,pigeon,False
+western yellow wagtail,Motacilla flava,Q25984,180448,645461,92,birds,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,Chordata,Aves,Passeriformes,Motacillidae,Motacilla,3,wagtail,False
+black-crowned night heron,Nycticorax nycticorax,Q126216,8901,313126,92,birds,Chordata,Aves,Pelecaniformes,Ardeidae,Nycticorax,Chordata,Aves,Pelecaniformes,Ardeidae,Nycticorax,3,heron,False
+European bee-eater,Merops apiaster,Q170718,265611,755107,90,birds,Chordata,Aves,Coraciiformes,Meropidae,Merops,Chordata,Aves,Coraciiformes,Meropidae,Merops,2,eater,False
+Eurasian collared dove,Streptopelia decaocto,Q54696,177147,277818,90,birds,Chordata,Aves,Columbiformes,Columbidae,Streptopelia,Chordata,Aves,Columbiformes,Columbidae,Streptopelia,3,dove,False
+Eurasian hobby,Falco subbuteo,Q25876,344233,137527,89,birds,Chordata,Aves,Falconiformes,Falconidae,Falco,Chordata,Aves,Falconiformes,Falconidae,Falco,2,hobby,False
+budgerigar,Melopsittacus undulatus,Q121221,13146,734818,89,birds,Chordata,Aves,Psittaciformes,Psittaculidae,Melopsittacus,Chordata,Aves,Psittaciformes,Psittaculidae,Melopsittacus,1,budgerigar,False
+great white pelican,Pelecanus onocrotalus,Q199427,36301,427899,89,birds,Chordata,Aves,Pelecaniformes,Pelecanidae,Pelecanus,Chordata,Aves,Pelecaniformes,Pelecanidae,Pelecanus,3,pelican,False
+Eurasian woodcock,Scolopax rusticola,Q26114,100826,1010551,89,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Scolopax,Chordata,Aves,Charadriiformes,Scolopacidae,Scolopax,2,woodcock,False
+corn crake,Crex crex,Q26017,185586,897460,88,birds,Chordata,Aves,Gruiformes,Rallidae,Crex,Chordata,Aves,Gruiformes,Rallidae,Crex,2,crake,False
+greater flamingo,Phoenicopterus roseus,Q179863,435638,595567,87,birds,Chordata,Aves,Phoenicopteriformes,Phoenicopteridae,Phoenicopterus,Chordata,Aves,Phoenicopteriformes,Phoenicopteridae,Phoenicopterus,2,flamingo,False
+sand martin,Riparia riparia,Q25909,88110,922718,87,birds,Chordata,Aves,Passeriformes,Hirundinidae,Riparia,Chordata,Aves,Passeriformes,Hirundinidae,Riparia,2,martin,False
+secretarybird,Sagittarius serpentarius,Q168748,56258,1036186,87,birds,Chordata,Aves,Accipitriformes,Sagittariidae,Sagittarius,Chordata,Aves,Accipitriformes,Sagittariidae,Sagittarius,1,secretarybird,False
+great spotted woodpecker,Dendrocopos major,Q26209,137523,348848,86,birds,Chordata,Aves,Piciformes,Picidae,Dendrocopos,Chordata,Aves,Piciformes,Picidae,Dendrocopos,3,woodpecker,False
+common snipe,Gallinago gallinago,Q25692,107377,615378,86,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Gallinago,Chordata,Aves,Charadriiformes,Scolopacidae,Gallinago,2,snipe,False
+common redshank,Tringa totanus,Q18859,171271,917056,86,birds,Chordata,Aves,Charadriiformes,Scolopacidae,Tringa,Chordata,Aves,Charadriiformes,Scolopacidae,Tringa,2,redshank,False
+Eurasian wren,Troglodytes troglodytes,Q25740,36278,259813,86,birds,Chordata,Aves,Passeriformes,Certhiidae,Troglodytes,Chordata,Aves,Passeriformes,Certhiidae,Troglodytes,2,wren,False
+glossy ibis,Plegadis falcinellus,Q178811,52788,848593,85,birds,Chordata,Aves,Pelecaniformes,Threskiornithidae,Plegadis,Chordata,Aves,Pelecaniformes,Threskiornithidae,Plegadis,2,ibis,False
+kākāpō,Strigops habroptila,Q179959,2489341,6520246,85,birds,Chordata,Aves,Psittaciformes,Psittacidae,Strigops,Chordata,Aves,Psittaciformes,Psittacidae,Strigops,1,kākāpō,False
+black-headed gull,Chroicocephalus ridibundus,Q25634,1192867,938670,84,birds,Chordata,Aves,Charadriiformes,Laridae,Chroicocephalus,Chordata,Aves,Charadriiformes,Laridae,Chroicocephalus,2,gull,False
+Andean condor,Vultur gryphus,Q170598,8924,363015,84,birds,Chordata,Aves,Accipitriformes,Cathartidae,Vultur,Chordata,Aves,Accipitriformes,Cathartidae,Vultur,2,condor,False
+Komodo dragon,Varanus komodoensis,Q4504,61221,1091028,102,reptiles,Chordata,Lepidosauria,Squamata,Varanidae,Varanus,Chordata,,Squamata,Varanidae,Varanus,2,dragon,False
+Nile crocodile,Crocodylus niloticus,Q168745,8501,35864,83,reptiles,Chordata,,Crocodylia,Crocodylidae,Crocodylus,Chordata,,Crocodylia,Crocodylidae,Crocodylus,2,crocodile,False
+saltwater crocodile,Crocodylus porosus,Q182599,8502,35872,83,reptiles,Chordata,,Crocodylia,Crocodylidae,Crocodylus,Chordata,,Crocodylia,Crocodylidae,Crocodylus,2,crocodile,False
+king cobra,Ophiophagus hannah,Q48186,8665,6136,82,reptiles,Chordata,Lepidosauria,Squamata,Elapidae,Ophiophagus,Chordata,,Squamata,Elapidae,Ophiophagus,2,cobra,False
+gharial,Gavialis gangeticus,Q17134,94835,881015,79,reptiles,Chordata,,Crocodylia,Gavialidae,Gavialis,Chordata,,Crocodylia,Gavialidae,Gavialis,1,gharial,False
+grass snake,Natrix natrix,Q170713,100823,1010557,77,reptiles,Chordata,Lepidosauria,Squamata,Natricidae,Natrix,Chordata,,Squamata,Colubridae,Natrix,2,snake,False
+common slow worm,Anguis fragilis,Q183660,102178,449663,76,reptiles,Chordata,Lepidosauria,Squamata,Anguidae,Anguis,Chordata,,Squamata,Anguidae,Anguis,3,worm,False
+green sea turtle,Chelonia mydas,Q199458,8469,559133,75,reptiles,Chordata,,Testudines,Cheloniidae,Chelonia,Chordata,,Testudines,Cheloniidae,Chelonia,3,turtle,False
+leatherback sea turtle,Dermochelys coriacea,Q120043,27794,243403,74,reptiles,Chordata,,Testudines,Dermochelyidae,Dermochelys,Chordata,,Testudines,Dermochelyidae,Dermochelys,3,turtle,False
+loggerhead sea turtle,Caretta caretta,Q192095,8467,392505,70,reptiles,Chordata,,Testudines,Cheloniidae,Caretta,Chordata,,Testudines,Cheloniidae,Caretta,3,turtle,False
+black mamba,Dendroaspis polylepis,Q188690,8624,109051,70,reptiles,Chordata,Lepidosauria,Squamata,Elapidae,Dendroaspis,Chordata,,Squamata,Elapidae,Dendroaspis,2,mamba,False
+green anaconda,Eunectes murinus,Q207347,51876,1072290,68,reptiles,Chordata,Lepidosauria,Squamata,Boidae,Eunectes,Chordata,,Squamata,Boidae,Eunectes,2,anaconda,False
+American alligator,Alligator mississippiensis,Q193327,8496,335590,62,reptiles,Chordata,,Crocodylia,Alligatoridae,Alligator,Chordata,,Crocodylia,Alligatoridae,Alligator,2,alligator,False
+hawksbill sea turtle,Eretmochelys imbricata,Q203538,27787,430337,62,reptiles,Chordata,,Testudines,Cheloniidae,Eretmochelys,Chordata,,Testudines,Cheloniidae,Eretmochelys,3,turtle,False
+Indian cobra,Naja naja,Q192754,35670,217478,62,reptiles,Chordata,Lepidosauria,Squamata,Elapidae,Naja,Chordata,,Squamata,Elapidae,Naja,2,cobra,False
+Gila monster,Heloderma suspectum,Q207058,8554,713774,61,reptiles,Chordata,Lepidosauria,Squamata,Helodermatidae,Heloderma,Chordata,,Squamata,Helodermatidae,Heloderma,2,monster,False
+mugger crocodile,Crocodylus palustris,Q81207,184238,458957,60,reptiles,Chordata,,Crocodylia,Crocodylidae,Crocodylus,Chordata,,Crocodylia,Crocodylidae,Crocodylus,2,crocodile,False
+smooth snake,Coronella austriaca,Q208648,201445,859562,59,reptiles,Chordata,Lepidosauria,Squamata,Colubridae,Coronella,Chordata,,Squamata,Colubridae,Coronella,2,snake,False
+Chinese alligator,Alligator sinensis,Q194422,38654,953151,58,reptiles,Chordata,,Crocodylia,Alligatoridae,Alligator,Chordata,,Crocodylia,Alligatoridae,Alligator,2,alligator,False
+marine iguana,Amblyrhynchus cristatus,Q208796,51208,240153,55,reptiles,Chordata,Lepidosauria,Squamata,Iguanidae,Amblyrhynchus,Chordata,,Squamata,Iguanidae,Amblyrhynchus,2,iguana,False
+ball python,Python regius,Q464424,51751,737820,55,reptiles,Chordata,Lepidosauria,Squamata,Pythonidae,Python,Chordata,,Squamata,Pythonidae,Python,2,python,False
+viviparous lizard,Zootoca vivipara,Q204061,8524,87626,55,reptiles,Chordata,Lepidosauria,Squamata,Lacertidae,Zootoca,Chordata,,Squamata,Lacertidae,Zootoca,2,lizard,False
+Indian python,Python molurus,Q245183,51750,737826,54,reptiles,Chordata,Lepidosauria,Squamata,Pythonidae,Python,Chordata,,Squamata,Pythonidae,Python,2,python,False
+sand lizard,Lacerta agilis,Q148595,80427,862848,53,reptiles,Chordata,Lepidosauria,Squamata,Lacertidae,Lacerta,Chordata,,Squamata,Lacertidae,Lacerta,2,lizard,False
+Asian water monitor,Varanus salvator,Q655616,62051,872963,52,reptiles,Chordata,Lepidosauria,Squamata,Varanidae,Varanus,Chordata,,Squamata,Varanidae,Varanus,3,monitor,False
+aesculapian snake,Zamenis longissimus,Q256791,201439,284753,52,reptiles,Chordata,Lepidosauria,Squamata,Colubridae,Zamenis,Chordata,,Squamata,Colubridae,Zamenis,2,snake,False
+Gaboon viper,Bitis gabonica,Q371183,8694,785606,51,reptiles,Chordata,Lepidosauria,Squamata,Viperidae,Bitis,Chordata,,Squamata,Viperidae,Bitis,2,viper,False
+puff adder,Bitis arietans,Q369667,8692,785619,50,reptiles,Chordata,Lepidosauria,Squamata,Viperidae,Bitis,Chordata,,Squamata,Viperidae,Bitis,2,adder,False
+Hermann's tortoise,Testudo hermanni,Q262555,86976,207422,50,reptiles,Chordata,,Testudines,Testudinidae,Testudo,Chordata,,Testudines,Testudinidae,Testudo,2,tortoise,False
+frilled lizard,Chlamydosaurus kingii,Q501566,103699,913427,49,reptiles,Chordata,Lepidosauria,Squamata,Agamidae,Chlamydosaurus,Chordata,,Squamata,Agamidae,Chlamydosaurus,2,lizard,False
+axolotl,Ambystoma mexicanum,Q22718,8296,984726,81,amphibians,Chordata,Amphibia,Caudata,Ambystomatidae,Ambystoma,Chordata,Amphibia,Caudata,Ambystomatidae,Ambystoma,1,axolotl,False
+fire salamander,Salamandra salamandra,Q26395,57571,689975,72,amphibians,Chordata,Amphibia,Caudata,Salamandridae,Salamandra,Chordata,Amphibia,Caudata,Salamandridae,Salamandra,2,salamander,False
+common toad,Bufo bufo,Q146375,8384,889350,71,amphibians,Chordata,Amphibia,Anura,Bufonidae,Bufo,Chordata,Amphibia,Anura,Bufonidae,Bufo,2,toad,False
+common frog,Rana temporaria,Q27465,8407,14718,61,amphibians,Chordata,Amphibia,Anura,Ranidae,Rana,Chordata,Amphibia,Anura,Ranidae,Rana,2,frog,False
+olm,Proteus anguinus,Q15856,221568,842080,57,amphibians,Chordata,Amphibia,Caudata,Proteidae,Proteus,Chordata,Amphibia,Caudata,Proteidae,Proteus,1,olm,False
+marsh frog,Pelophylax ridibundus,Q319393,8406,14708,56,amphibians,Chordata,Amphibia,Anura,Ranidae,Pelophylax,Chordata,Amphibia,Anura,Ranidae,Pelophylax,2,frog,False
+European tree frog,Hyla arborea,Q2142057,121869,677266,54,amphibians,Chordata,Amphibia,Anura,Hylidae,Hyla,Chordata,Amphibia,Anura,Hylidae,Hyla,3,frog,False
+cane toad,Rhinella marina,Q321087,8386,889340,53,amphibians,Chordata,Amphibia,Anura,Bufonidae,Rhinella,Chordata,Amphibia,Anura,Bufonidae,Rhinella,2,toad,False
+smooth newt,Lissotriton vulgaris,Q215247,8324,1041774,51,amphibians,Chordata,Amphibia,Caudata,Salamandridae,Lissotriton,Chordata,Amphibia,Caudata,Salamandridae,Lissotriton,2,newt,False
+goliath frog,Conraua goliath,Q739887,143458,532111,49,amphibians,Chordata,Amphibia,Anura,Petropedetidae,Conraua,Chordata,Amphibia,Anura,Petropedetidae,Conraua,2,frog,False
+edible frog,Pelophylax esculentus,Q31694,8401,4133614,47,amphibians,Chordata,Amphibia,Anura,Ranidae,Pelophylax,Chordata,Amphibia,Anura,Ranidae,Pelophylax,2,frog,False
+European fire-bellied toad,Bombina bombina,Q372267,8345,991559,44,amphibians,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,3,toad,False
+alpine newt,Ichthyosaura alpestris,Q282715,54263,159060,44,amphibians,Chordata,Amphibia,Caudata,Salamandridae,Ichthyosaura,Chordata,Amphibia,Caudata,Salamandridae,Ichthyosaura,2,newt,False
+Japanese giant salamander,Andrias japonicus,Q112045,166789,954050,43,amphibians,Chordata,Amphibia,Caudata,Cryptobranchidae,Andrias,Chordata,Amphibia,Caudata,Cryptobranchidae,Andrias,3,salamander,False
+Chinese giant salamander,Andrias davidianus,Q61312,141262,424193,42,amphibians,Chordata,Amphibia,Caudata,Cryptobranchidae,Andrias,Chordata,Amphibia,Caudata,Cryptobranchidae,Andrias,3,salamander,False
+natterjack toad,Epidalea calamita,Q622886,30326,436364,42,amphibians,Chordata,Amphibia,Anura,Bufonidae,Epidalea,Chordata,Amphibia,Anura,Bufonidae,Epidalea,2,toad,False
+golden poison frog,Phyllobates terribilis,Q963997,111132,451900,42,amphibians,Chordata,Amphibia,Anura,Dendrobatidae,Phyllobates,Chordata,Amphibia,Anura,Dendrobatidae,Phyllobates,3,frog,False
+African clawed frog,Xenopus laevis,Q654718,8355,465096,40,amphibians,Chordata,Amphibia,Anura,Pipidae,Xenopus,Chordata,Amphibia,Anura,Pipidae,Xenopus,3,frog,False
+yellow-bellied toad,Bombina variegata,Q606431,8348,991539,38,amphibians,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,2,toad,False
+strawberry poison dart frog,Oophaga pumilio,Q786955,51950,891119,38,amphibians,Chordata,Amphibia,Anura,Dendrobatidae,Oophaga,Chordata,Amphibia,Anura,Dendrobatidae,Oophaga,4,frog,False
+goldfish,Carassius auratus,Q123141,7957,1005907,110,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Carassius,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Carassius,1,goldfish,False
+common carp,Cyprinus carpio,Q81110,7962,429083,102,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Cyprinus,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Cyprinus,2,carp,False
+northern pike,Esox lucius,Q165278,8010,739941,95,ray-finned fish,Chordata,Actinopteri,Esociformes,Esocidae,Esox,Chordata,Actinopteri,Esociformes,Esocidae,Esox,2,pike,False
+Wels catfish,Silurus glanis,Q159323,94993,272344,83,ray-finned fish,Chordata,Actinopteri,Siluriformes,Siluridae,Silurus,Chordata,Actinopteri,Siluriformes,Siluridae,Silurus,2,catfish,False
+European eel,Anguilla anguilla,Q26387,7936,854201,81,ray-finned fish,Chordata,Actinopteri,Anguilliformes,Anguillidae,Anguilla,Chordata,Actinopteri,Anguilliformes,Anguillidae,Anguilla,2,eel,False
+guppy,Poecilia reticulata,Q178202,8081,312452,80,ray-finned fish,Chordata,Actinopteri,Cyprinodontiformes,Poeciliidae,Poecilia,Chordata,Actinopteri,Cyprinodontiformes,Poeciliidae,Poecilia,1,guppy,False
+brown trout,Salmo trutta,Q2857311,8032,688332,79,ray-finned fish,Chordata,Actinopteri,Salmoniformes,Salmonidae,Salmo,Chordata,Actinopteri,Salmoniformes,Salmonidae,Salmo,2,trout,False
+tench,Tinca tinca,Q76280,27717,753550,79,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Tincidae,Tinca,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Tinca,1,tench,False
+common bream,Abramis brama,Q144534,38527,103921,78,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Leuciscidae,Abramis,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Abramis,2,bream,False
+European perch,Perca fluviatilis,Q166812,8168,186488,78,ray-finned fish,Chordata,Actinopteri,Perciformes,Percidae,Perca,Chordata,Actinopteri,Perciformes,Percidae,Perca,2,perch,False
+Atlantic salmon,Salmo salar,Q188879,8030,688328,77,ray-finned fish,Chordata,Actinopteri,Salmoniformes,Salmonidae,Salmo,Chordata,Actinopteri,Salmoniformes,Salmonidae,Salmo,2,salmon,False
+Atlantic mackerel,Scomber scombrus,Q30153,13677,70561,76,ray-finned fish,Chordata,Actinopteri,Scombriformes,Scombridae,Scomber,Chordata,Actinopteri,Scombriformes,Scombridae,Scomber,2,mackerel,False
+Atlantic cod,Gadus morhua,Q199788,8049,114170,74,ray-finned fish,Chordata,Actinopteri,Gadiformes,Gadidae,Gadus,Chordata,Actinopteri,Gadiformes,Gadidae,Gadus,2,cod,False
+burbot,Lota lota,Q144700,69944,440414,74,ray-finned fish,Chordata,Actinopteri,Gadiformes,Lotidae,Lota,Chordata,Actinopteri,Gadiformes,Lotidae,Lota,1,burbot,False
+common roach,Rutilus rutilus,Q182976,48668,421037,74,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Leuciscidae,Rutilus,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Rutilus,2,roach,False
+flathead grey mullet,Mugil cephalus,Q234014,48193,418648,73,ray-finned fish,Chordata,Actinopteri,Mugiliformes,Mugilidae,Mugil,Chordata,Actinopteri,Mugiliformes,Mugilidae,Mugil,3,mullet,False
+rainbow trout,Oncorhynchus mykiss,Q187986,8022,165368,73,ray-finned fish,Chordata,Actinopteri,Salmoniformes,Salmonidae,Oncorhynchus,Chordata,Actinopteri,Salmoniformes,Salmonidae,Oncorhynchus,2,trout,False
+ocean sunfish,Mola mola,Q192285,94237,457786,69,ray-finned fish,Chordata,Actinopteri,Tetraodontiformes,Molidae,Mola,Chordata,Actinopteri,Tetraodontiformes,Molidae,Mola,2,sunfish,False
+European pilchard,Sardina pilchardus,Q208600,27697,1027727,69,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Clupeidae,Sardina,Chordata,Actinopteri,Clupeiformes,Clupeidae,Sardina,2,pilchard,False
+Atlantic herring,Clupea harengus,Q2396858,7950,1005932,68,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Clupeidae,Clupea,Chordata,Actinopteri,Clupeiformes,Clupeidae,Clupea,2,herring,False
+grass carp,Ctenopharyngodon idella,Q76098,7959,1005936,66,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Xenocyprididae,Ctenopharyngodon,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Ctenopharyngodon,2,carp,False
+European seabass,Dicentrarchus labrax,Q217129,13489,3549,66,ray-finned fish,Chordata,Actinopteri,Perciformes,Moronidae,Dicentrarchus,Chordata,Actinopteri,Perciformes,Moronidae,Dicentrarchus,2,seabass,False
+siamese fighting fish,Betta splendens,Q549,158456,1033356,65,ray-finned fish,Chordata,Actinopteri,Anabantiformes,Osphronemidae,Betta,Chordata,Actinopteri,Anabantiformes,Osphronemidae,Betta,3,fish,False
+European anchovy,Engraulis encrasicolus,Q188387,184585,222963,63,ray-finned fish,Chordata,Actinopteri,Clupeiformes,Engraulidae,Engraulis,Chordata,Actinopteri,Clupeiformes,Engraulidae,Engraulis,2,anchovy,False
+common rudd,Scardinius erythrophthalmus,Q200594,58319,221709,62,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Leuciscidae,Scardinius,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Scardinius,2,rudd,False
+Crucian carp,Carassius carassius,Q194031,217509,1010092,60,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Carassius,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Carassius,2,carp,False
+skipjack tuna,Katsuwonus pelamis,Q633957,8226,308754,60,ray-finned fish,Chordata,Actinopteri,Scombriformes,Scombridae,Katsuwonus,Chordata,Actinopteri,Scombriformes,Scombridae,Katsuwonus,2,tuna,False
+three-spined stickleback,Gasterosteus aculeatus,Q203572,69293,401066,59,ray-finned fish,Chordata,Actinopteri,Perciformes,Gasterosteidae,Gasterosteus,Chordata,Actinopteri,Perciformes,Gasterosteidae,Gasterosteus,2,stickleback,False
+ruffe,Gymnocephalus cernua,Q187981,57865,104323,59,ray-finned fish,Chordata,Actinopteri,Perciformes,Percidae,Gymnocephalus,Chordata,Actinopteri,Perciformes,Percidae,Gymnocephalus,1,ruffe,False
+garfish,Belone belone,Q643373,129037,6991,58,ray-finned fish,Chordata,Actinopteri,Beloniformes,Belonidae,Belone,Chordata,Actinopteri,Beloniformes,Belonidae,Belone,1,garfish,False
+zander,Sander lucioperca,Q146641,283035,557682,58,ray-finned fish,Chordata,Actinopteri,Perciformes,Percidae,Sander,Chordata,Actinopteri,Perciformes,Percidae,Sander,1,zander,False
+yellowfin tuna,Thunnus albacares,Q269781,8236,833188,58,ray-finned fish,Chordata,Actinopteri,Scombriformes,Scombridae,Thunnus,Chordata,Actinopteri,Scombriformes,Scombridae,Thunnus,2,tuna,False
+sterlet,Acipenser ruthenus,Q211316,7906,378930,56,ray-finned fish,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,1,sterlet,False
+European sea sturgeon,Acipenser sturio,Q300955,61674,754422,56,ray-finned fish,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,Chordata,Actinopteri,Acipenseriformes,Acipenseridae,Acipenser,3,sturgeon,False
+European conger,Conger conger,Q212552,82655,142596,54,ray-finned fish,Chordata,Actinopteri,Anguilliformes,Congridae,Conger,Chordata,Actinopteri,Anguilliformes,Congridae,Conger,2,conger,False
+merlangius,Merlangius merlangus,Q273083,8058,635911,54,ray-finned fish,Chordata,Actinopteri,Gadiformes,Gadidae,Merlangius,Chordata,Actinopteri,Gadiformes,Gadidae,Merlangius,1,merlangius,False
+European plaice,Pleuronectes platessa,Q27098,8262,408337,54,ray-finned fish,Chordata,Actinopteri,Pleuronectiformes,Pleuronectidae,Pleuronectes,Chordata,Actinopteri,Pleuronectiformes,Pleuronectidae,Pleuronectes,2,plaice,False
+milkfish,Chanos chanos,Q465261,29144,575844,53,ray-finned fish,Chordata,Actinopteri,Gonorynchiformes,Chanidae,Chanos,Chordata,Actinopteri,Gonorynchiformes,Chanidae,Chanos,1,milkfish,False
+mahi-mahi,Coryphaena hippurus,Q14443,34814,223663,53,ray-finned fish,Chordata,Actinopteri,Carangiformes,Coryphaenidae,Coryphaena,Chordata,Actinopteri,Carangiformes,Coryphaenidae,Coryphaena,1,mahi,False
+john Dory,Zeus faber,Q7045,64108,918920,53,ray-finned fish,Chordata,Actinopteri,Zeiformes,Zeidae,Zeus,Chordata,Actinopteri,Zeiformes,Zeidae,Zeus,2,dory,False
+zebrafish,Danio rerio,Q169444,7955,1005914,52,ray-finned fish,Chordata,Actinopteri,Cypriniformes,Danionidae,Danio,Chordata,Actinopteri,Cypriniformes,Cyprinidae,Danio,1,zebrafish,False
+neon tetra,Paracheirodon innesi,Q131431,42492,783059,52,ray-finned fish,Chordata,Actinopteri,Characiformes,Acestrorhamphidae,Paracheirodon,Chordata,Actinopteri,Characiformes,Characidae,Paracheirodon,2,tetra,False
+European flounder,Platichthys flesus,Q214034,8260,408331,52,ray-finned fish,Chordata,Actinopteri,Pleuronectiformes,Pleuronectidae,Platichthys,Chordata,Actinopteri,Pleuronectiformes,Pleuronectidae,Platichthys,2,flounder,False
+gilt-head bream,Sparus aurata,Q237046,8175,760723,52,ray-finned fish,Chordata,Actinopteri,Spariformes,Sparidae,Sparus,Chordata,Actinopteri,Spariformes,Sparidae,Sparus,2,bream,False
+Nile perch,Lates niloticus,Q654130,29147,460866,51,ray-finned fish,Chordata,Actinopteri,Acanthomorphata,Centropomidae,Lates,Chordata,Actinopteri,Acanthomorphata,Centropomidae,Lates,2,perch,False
+great white shark,Carcharodon carcharias,Q129026,13397,554297,107,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Lamnidae,Carcharodon,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Carcharodon,3,shark,False
+whale shark,Rhincodon typus,Q80378,259920,214509,95,cartilaginous fish,Chordata,Chondrichthyes,Orectolobiformes,Rhincodontidae,Rhincodon,Chordata,Chondrichthyes,Orectolobiformes,Rhincodontidae,Rhincodon,2,shark,False
+blue shark,Prionace glauca,Q26337,7815,361523,70,cartilaginous fish,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Prionace,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Prionace,2,shark,False
+tiger shark,Galeocerdo cuvier,Q188212,7819,976355,67,cartilaginous fish,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Galeocerdo,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Galeocerdo,2,shark,False
+basking shark,Cetorhinus maximus,Q185260,57982,73671,63,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Cetorhinidae,Cetorhinus,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Cetorhinus,2,shark,False
+bull shark,Carcharhinus leucas,Q190469,46612,343172,59,cartilaginous fish,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Carcharhinus,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Carcharhinus,2,shark,False
+Greenland shark,Somniosus microcephalus,Q370444,191813,442057,56,cartilaginous fish,Chordata,Chondrichthyes,Squaliformes,Somniosidae,Somniosus,Chordata,Chondrichthyes,Squaliformes,Somniosidae,Somniosus,2,shark,False
+goblin shark,Mitsukurina owstoni,Q499461,57987,73664,53,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Mitsukurinidae,Mitsukurina,Chordata,Chondrichthyes,Lamniformes,Mitsukurinidae,Mitsukurina,2,shark,False
+frilled shark,Chlamydoselachus anguineus,Q194312,27585,1093624,51,cartilaginous fish,Chordata,Chondrichthyes,Hexanchiformes,Chlamydoselachidae,Chlamydoselachus,Chordata,Chondrichthyes,Hexanchiformes,Chlamydoselachidae,Chlamydoselachus,2,shark,False
+common thresher,Alopias vulpinus,Q618595,7852,1077204,47,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Alopias,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Alopias,2,thresher,False
+porbeagle,Lamna nasus,Q136842,7849,500593,47,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Lamnidae,Lamna,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Lamna,1,porbeagle,False
+spiny dogfish,Squalus acanthias,Q212694,7797,1019126,47,cartilaginous fish,Chordata,Chondrichthyes,Squaliformes,Squalidae,Squalus,Chordata,Chondrichthyes,Squaliformes,Squalidae,Squalus,2,dogfish,False
+zebra shark,Stegostoma fasciatum,Q169468,378071,122336,47,cartilaginous fish,Chordata,Chondrichthyes,Orectolobiformes,Stegostomatidae,Stegostoma,Chordata,Chondrichthyes,Orectolobiformes,Stegostomatidae,Stegostoma,2,shark,False
+Bluntnose sixgill shark,Hexanchus griseus,Q312293,94987,435193,45,cartilaginous fish,Chordata,Chondrichthyes,Hexanchiformes,Hexanchidae,Hexanchus,Chordata,Chondrichthyes,Hexanchiformes,Hexanchidae,Hexanchus,3,shark,False
+Shortfin mako shark,Isurus oxyrinchus,Q192158,57983,73672,45,cartilaginous fish,Chordata,Chondrichthyes,Lamniformes,Lamnidae,Isurus,Chordata,Chondrichthyes,Lamniformes,Alopiidae,Isurus,3,shark,False
+housefly,Musca domestica,Q166111,7370,1011010,97,insects,Arthropoda,Insecta,Diptera,Muscidae,Musca,Arthropoda,Insecta,Diptera,Muscidae,Musca,1,housefly,False
+Colorado potato beetle,Leptinotarsa decemlineata,Q156954,7539,185597,82,insects,Arthropoda,Insecta,Coleoptera,Chrysomelidae,Leptinotarsa,Arthropoda,Insecta,Coleoptera,Chrysomelidae,Leptinotarsa,3,beetle,False
+silverfish,Lepisma saccharina,Q26842,50586,845486,71,insects,Arthropoda,Insecta,Zygentoma,Lepismatidae,Lepisma,Arthropoda,Insecta,Zygentoma,Lepismatidae,Lepisma,1,silverfish,False
+European mantis,Mantis religiosa,Q268319,7507,656298,66,insects,Arthropoda,Insecta,Mantodea,Mantidae,Mantis,Arthropoda,Insecta,Mantodea,Mantidae,Mantis,2,mantis,False
+European hornet,Vespa crabro,Q30258,7445,573512,65,insects,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,2,hornet,False
+monarch butterfly,Danaus plexippus,Q212398,13037,190091,64,insects,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Danaus,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Danaus,2,butterfly,False
+cockchafer,Melolontha melolontha,Q28175,7061,1093496,60,insects,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Melolontha,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Melolontha,1,cockchafer,False
+crab louse,Pthirus pubis,Q381271,121228,1033989,55,insects,Arthropoda,Insecta,Psocodea,Pthiridae,Pthirus,Arthropoda,Insecta,Phthiraptera,Pthiridae,Pthirus,2,louse,False
+scarce swallowtail,Iphiclides podalirius,Q31080,110791,377279,54,insects,Arthropoda,Insecta,Lepidoptera,Papilionidae,Iphiclides,Arthropoda,Insecta,Lepidoptera,Papilionidae,Iphiclides,2,swallowtail,False
+hummingbird hawk-moth,Macroglossum stellatarum,Q369034,524428,3093456,50,insects,Arthropoda,Insecta,Lepidoptera,Sphingidae,Macroglossum,Arthropoda,Insecta,Lepidoptera,Sphingidae,Macroglossum,2,moth,False
+common blue,Polyommatus icarus,Q161533,265386,854609,50,insects,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Polyommatus,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Polyommatus,2,blue,False
+mealworm,Tenebrio molitor,Q225965,7067,1093470,50,insects,Arthropoda,Insecta,Coleoptera,Tenebrionidae,Tenebrio,Arthropoda,Insecta,Coleoptera,Tenebrionidae,Tenebrio,1,mealworm,False
+Phylloxera,Daktulosphaira vitifoliae,Q367315,58002,1078851,49,insects,Arthropoda,Insecta,Hemiptera,Phylloxeridae,Daktulosphaira,Arthropoda,Insecta,Hemiptera,Phylloxeridae,Daktulosphaira,1,phylloxera,False
+Hercules beetle,Dynastes hercules,Q503799,1247135,3337730,48,insects,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Dynastes,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Dynastes,2,beetle,False
+emperor dragonfly,Anax imperator,Q527496,39274,485521,47,insects,Arthropoda,Insecta,Odonata,Aeshnidae,Anax,Arthropoda,Insecta,Odonata,Aeshnidae,Anax,2,dragonfly,False
+German cockroach,Blattella germanica,Q466194,6973,48282,47,insects,Arthropoda,Insecta,Blattodea,Blattellidae,Blattella,Arthropoda,Insecta,Blattodea,Ectobiidae,Blattella,2,cockroach,False
+green-veined white,Pieris napi,Q683592,78633,731676,46,insects,Arthropoda,Insecta,Lepidoptera,Pieridae,Pieris,Arthropoda,Insecta,Lepidoptera,Pieridae,Pieris,2,white,False
+silver-washed fritillary,Argynnis paphia,Q503978,171802,969449,45,insects,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Argynnis,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Argynnis,2,fritillary,False
+European rhinoceros beetle,Oryctes nasicornis,Q729353,465150,492988,45,insects,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Oryctes,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Oryctes,3,beetle,False
+house cricket,Acheta domesticus,Q27711,6997,1077640,44,insects,Arthropoda,Insecta,Orthoptera,Gryllidae,Acheta,Arthropoda,Insecta,Orthoptera,Gryllidae,Acheta,2,cricket,False
+Asian hornet,Vespa velutina,Q136668,202808,829558,44,insects,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,2,hornet,False
+meadow brown,Maniola jurtina,Q754668,191418,283881,43,insects,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Maniola,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Maniola,2,brown,False
+large blue,Phengaris arion,Q161528,203779,906244,43,insects,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Phengaris,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Phengaris,2,blue,False
+desert locust,Schistocerca gregaria,Q281634,7010,330338,43,insects,Arthropoda,Insecta,Orthoptera,Acrididae,Schistocerca,Arthropoda,Insecta,Orthoptera,Acrididae,Schistocerca,2,locust,False
+holly blue,Celastrina argiolus,Q792871,203782,532307,41,insects,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Celastrina,Arthropoda,Insecta,Lepidoptera,Lycaenidae,Celastrina,2,blue,False
+Asian giant hornet,Vespa mandarinia,Q121791,7446,573518,41,insects,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,3,hornet,False
+peppered moth,Biston betularia,Q865651,82595,968114,40,insects,Arthropoda,Insecta,Lepidoptera,Geometridae,Biston,Arthropoda,Insecta,Lepidoptera,Geometridae,Biston,2,moth,False
+beautiful demoiselle,Calopteryx virgo,Q248379,52613,435829,40,insects,Arthropoda,Insecta,Odonata,Calopterygidae,Calopteryx,Arthropoda,Insecta,Odonata,Calopterygidae,Calopteryx,2,demoiselle,False
+titan beetle,Titanus giganteus,Q858284,294803,696705,40,insects,Arthropoda,Insecta,Coleoptera,Cerambycidae,Titanus,Arthropoda,Insecta,Coleoptera,Cerambycidae,Titanus,2,beetle,False
+oriental cockroach,Blatta orientalis,Q20869,6976,48274,39,insects,Arthropoda,Insecta,Blattodea,Blattidae,Blatta,Arthropoda,Insecta,Blattodea,Blattidae,Blatta,2,cockroach,False
+banded demoiselle,Calopteryx splendens,Q909597,52612,1090367,39,insects,Arthropoda,Insecta,Odonata,Calopterygidae,Calopteryx,Arthropoda,Insecta,Odonata,Calopterygidae,Calopteryx,2,demoiselle,False
+hylotrupes,Hylotrupes bajulus,Q21121,390985,34887,39,insects,Arthropoda,Insecta,Coleoptera,Cerambycidae,Hylotrupes,Arthropoda,Insecta,Coleoptera,Cerambycidae,Hylotrupes,1,hylotrupes,False
+black garden ant,Lasius niger,Q839823,67767,915691,39,insects,Arthropoda,Insecta,Hymenoptera,Formicidae,Lasius,Arthropoda,Insecta,Hymenoptera,Formicidae,Lasius,3,ant,False
+migratory locust,Locusta migratoria,Q1059580,7004,178934,39,insects,Arthropoda,Insecta,Orthoptera,Acrididae,Locusta,Arthropoda,Insecta,Orthoptera,Acrididae,Locusta,2,locust,False
+queen Alexandra's birdwing,Ornithoptera alexandrae,Q932602,129448,8935,39,insects,Arthropoda,Insecta,Lepidoptera,Papilionidae,Ornithoptera,Arthropoda,Insecta,Lepidoptera,Papilionidae,Ornithoptera,3,birdwing,False
+stable fly,Stomoxys calcitrans,Q598609,35570,42520,39,insects,Arthropoda,Insecta,Diptera,Muscidae,Stomoxys,Arthropoda,Insecta,Diptera,Muscidae,Stomoxys,2,fly,False
+six-spot burnet,Zygaena filipendulae,Q161497,287375,919818,39,insects,Arthropoda,Insecta,Lepidoptera,Zygaenidae,Zygaena,Arthropoda,Insecta,Lepidoptera,Zygaenidae,Zygaena,2,burnet,False
+southern hawker,Aeshna cyanea,Q505187,12921,135916,38,insects,Arthropoda,Insecta,Odonata,Aeshnidae,Aeshna,Arthropoda,Insecta,Odonata,Aeshnidae,Aeshna,2,hawker,False
+musk beetle,Aromia moschata,Q389732,1265417,3367513,38,insects,Arthropoda,Insecta,Coleoptera,Cerambycidae,Aromia,Arthropoda,Insecta,Coleoptera,Cerambycidae,Aromia,2,beetle,False
+lackey moth,Malacosoma neustria,Q30685,7098,440279,38,insects,Arthropoda,Insecta,Lepidoptera,Lasiocampidae,Malacosoma,Arthropoda,Insecta,Lepidoptera,Lasiocampidae,Malacosoma,2,moth,False
+codling moth,Cydia pomonella,Q45262,82600,819146,37,insects,Arthropoda,Insecta,Lepidoptera,Tortricidae,Cydia,Arthropoda,Insecta,Lepidoptera,Tortricidae,Cydia,2,moth,False
+four-spotted chaser,Libellula quadrimaculata,Q525748,70395,117550,37,insects,Arthropoda,Insecta,Odonata,Libellulidae,Libellula,Arthropoda,Insecta,Odonata,Libellulidae,Libellula,2,chaser,False
+garden tiger moth,Arctia caja,Q674760,289281,353234,36,insects,Arthropoda,Insecta,Lepidoptera,Erebidae,Arctia,Arthropoda,Insecta,Lepidoptera,Erebidae,Arctia,3,moth,False
+great diving beetle,Dytiscus marginalis,Q20851,398601,551469,36,insects,Arthropoda,Insecta,Coleoptera,Dytiscidae,Dytiscus,Arthropoda,Insecta,Coleoptera,Dytiscidae,Dytiscus,3,beetle,False
+American cockroach,Periplaneta americana,Q267996,6978,48288,36,insects,Arthropoda,Insecta,Blattodea,Blattidae,Periplaneta,Arthropoda,Insecta,Blattodea,Blattidae,Periplaneta,2,cockroach,False
+diving bell spider,Argyroneta aquatica,Q119195,375087,29042,48,arachnids,Arthropoda,Arachnida,Araneae,Dictynidae,Argyroneta,Arthropoda,Arachnida,Araneae,Dictynidae,Argyroneta,3,spider,False
+goliath birdeater,Theraphosa blondi,Q617000,260533,95320,40,arachnids,Arthropoda,Arachnida,Araneae,Theraphosidae,Theraphosa,Arthropoda,Arachnida,Araneae,Theraphosidae,Theraphosa,2,birdeater,False
+Sydney funnel-web spider,Atrax robustus,Q4661821,6903,1048351,35,arachnids,Arthropoda,Arachnida,Araneae,Hexathelidae,Atrax,Arthropoda,Arachnida,Araneae,Hexathelidae,Atrax,3,spider,False
+emperor scorpion,Pandinus imperator,Q1142349,55084,990944,35,arachnids,Arthropoda,Arachnida,Scorpiones,Scorpionidae,Pandinus,Arthropoda,Arachnida,Scorpiones,Scorpionidae,Pandinus,2,scorpion,False
+Redback spider,Latrodectus hasselti,Q82544,256736,3563772,34,arachnids,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,2,spider,False
+zebra spider,Salticus scenicus,Q169513,243486,329751,34,arachnids,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,Arthropoda,Arachnida,Araneae,Salticidae,Salticus,2,spider,False
+deathstalker,Leiurus quinquestriatus,Q773744,6883,93213,33,arachnids,Arthropoda,Arachnida,Scorpiones,Buthidae,Leiurus,Arthropoda,Arachnida,Scorpiones,Buthidae,Leiurus,1,deathstalker,False
+brown recluse spider,Loxosceles reclusa,Q284352,6921,673746,29,arachnids,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,3,spider,False
+raft spider,Dolomedes fimbriatus,Q847066,1432569,3556085,28,arachnids,Arthropoda,Arachnida,Araneae,Dolomedidae,Dolomedes,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,2,spider,False
+giant house spider,Eratigena atrica,Q1071758,1698855,3555267,27,arachnids,Arthropoda,Arachnida,Araneae,Agelenidae,Eratigena,Arthropoda,Arachnida,Araneae,Agelenidae,Eratigena,3,spider,False
+Mediterranean recluse spider,Loxosceles rufescens,Q2301444,571528,541799,26,arachnids,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,Arthropoda,Arachnida,Araneae,Sicariidae,Loxosceles,3,spider,False
+Chilean rose tarantula,Grammostola rosea,Q137107,432528,124289,24,arachnids,Arthropoda,Arachnida,Araneae,Theraphosidae,Grammostola,Arthropoda,Arachnida,Araneae,Theraphosidae,Grammostola,3,tarantula,False
+giant huntsman spider,Heteropoda maxima,Q114516,679132,395339,24,arachnids,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,Arthropoda,Arachnida,Araneae,Sparassidae,Heteropoda,3,spider,False
+Darwin's bark spider,Caerostris darwini,Q285304,1538125,5757620,23,arachnids,Arthropoda,Arachnida,Araneae,Araneidae,Caerostris,Arthropoda,Arachnida,Araneae,Araneidae,Caerostris,3,spider,False
+great raft spider,Dolomedes plantarius,Q2090659,257759,73033,23,arachnids,Arthropoda,Arachnida,Araneae,Dolomedidae,Dolomedes,Arthropoda,Arachnida,Araneae,Pisauridae,Dolomedes,3,spider,False
+coconut crab,Birgus latro,Q206070,177283,644678,56,crustaceans,Arthropoda,Malacostraca,Decapoda,Coenobitidae,Birgus,Arthropoda,Malacostraca,Decapoda,Coenobitidae,Birgus,2,crab,False
+Japanese spider crab,Macrocheira kaempferi,Q273655,1124764,2979896,46,crustaceans,Arthropoda,Malacostraca,Decapoda,Inachidae,Macrocheira,Arthropoda,Malacostraca,Decapoda,Inachidae,Macrocheira,3,crab,False
+Antarctic krill,Euphausia superba,Q571443,6819,411348,42,crustaceans,Arthropoda,Malacostraca,Euphausiacea,Euphausiidae,Euphausia,Arthropoda,Malacostraca,Euphausiacea,Euphausiidae,Euphausia,2,krill,False
+Chinese mitten crab,Eriocheir sinensis,Q823941,95602,566723,41,crustaceans,Arthropoda,Malacostraca,Decapoda,Varunidae,Eriocheir,Arthropoda,Malacostraca,Decapoda,Varunidae,Eriocheir,3,crab,False
+signal crayfish,Pacifastacus leniusculus,Q693000,6720,79855,38,crustaceans,Arthropoda,Malacostraca,Decapoda,Astacidae,Pacifastacus,Arthropoda,Malacostraca,Decapoda,Astacidae,Pacifastacus,2,crayfish,False
+American lobster,Homarus americanus,Q37668,6706,28247,36,crustaceans,Arthropoda,Malacostraca,Decapoda,Nephropidae,Homarus,Arthropoda,Malacostraca,Decapoda,Nephropidae,Homarus,2,lobster,False
+red king crab,Paralithodes camtschaticus,Q721171,6741,131917,36,crustaceans,Arthropoda,Malacostraca,Decapoda,Lithodidae,Paralithodes,Arthropoda,Malacostraca,Decapoda,Lithodidae,Paralithodes,3,crab,False
+Christmas Island red crab,Gecarcoidea natalis,Q1934004,45628,386590,25,crustaceans,Arthropoda,Malacostraca,Decapoda,Gecarcinidae,Gecarcoidea,Arthropoda,Malacostraca,Decapoda,Gecarcinidae,Gecarcoidea,4,crab,False
+northern krill,Meganyctiphanes norvegica,Q134974,48144,151806,25,crustaceans,Arthropoda,Malacostraca,Euphausiacea,Euphausiidae,Meganyctiphanes,Arthropoda,Malacostraca,Euphausiacea,Euphausiidae,Meganyctiphanes,2,krill,False
+velvet crab,Necora puber,Q853487,338210,613653,22,crustaceans,Arthropoda,Malacostraca,Decapoda,Polybiidae,Necora,Arthropoda,Malacostraca,Decapoda,Polybiidae,Necora,2,crab,False
+heikegani,Heikeopsis japonica,Q1594629,255320,858605,21,crustaceans,Arthropoda,Malacostraca,Decapoda,Dorippidae,Heikeopsis,Arthropoda,Malacostraca,Decapoda,Dorippidae,Heikeopsis,1,heikegani,False
+marbled crayfish,Procambarus virginalis,Q61642001,2065263,7116938,20,crustaceans,Arthropoda,Malacostraca,Decapoda,Cambaridae,Procambarus,Arthropoda,Malacostraca,Decapoda,Cambaridae,Procambarus,2,crayfish,False
+pea crab,Pinnotheres pisum,Q2234799,364894,938335,19,crustaceans,Arthropoda,Malacostraca,Decapoda,Pinnotheridae,Pinnotheres,Arthropoda,Malacostraca,Decapoda,Pinnotheridae,Pinnotheres,2,crab,False
+alicella,Alicella gigantea,Q2836751,1315966,4671940,18,crustaceans,Arthropoda,Malacostraca,Amphipoda,Alicellidae,Alicella,Arthropoda,Malacostraca,Amphipoda,Alicellidae,Alicella,1,alicella,False
+Japanese spiny lobster,Panulirus japonicus,Q1147579,6736,653853,18,crustaceans,Arthropoda,Malacostraca,Decapoda,Palinuridae,Panulirus,Arthropoda,Malacostraca,Decapoda,Palinuridae,Panulirus,3,lobster,False
+common octopus,Octopus vulgaris,Q651361,6645,110468,51,molluscs,Mollusca,Cephalopoda,Octopoda,Octopodidae,Octopus,Mollusca,Cephalopoda,Octopoda,Octopodidae,Octopus,2,octopus,False
+blue mussel,Mytilus edulis,Q27855,6550,499751,46,molluscs,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,2,mussel,False
+colossal squid,Mesonychoteuthis hamiltoni,Q378330,559557,942389,43,molluscs,Mollusca,Cephalopoda,Oegopsida,Cranchiidae,Mesonychoteuthis,Mollusca,Cephalopoda,Oegopsida,Cranchiidae,Mesonychoteuthis,2,squid,False
+vampire squid,Vampyroteuthis infernalis,Q2509902,55288,537559,41,molluscs,Mollusca,Cephalopoda,Vampyromorpha,Vampyroteuthidae,Vampyroteuthis,Mollusca,Cephalopoda,Vampyromorpha,Vampyroteuthidae,Vampyroteuthis,2,squid,False
+common periwinkle,Littorina littorea,Q27935,31216,622242,40,molluscs,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Littorina,Mollusca,Gastropoda,Littorinimorpha,Littorinidae,Littorina,2,periwinkle,False
+giant clam,Tridacna gigas,Q751784,80829,78499,40,molluscs,Mollusca,Bivalvia,Cardiida,Cardiidae,Tridacna,Mollusca,Bivalvia,Cardiida,Cardiidae,Tridacna,2,clam,False
+white-lipped snail,Cepaea hortensis,Q427854,97200,983300,37,molluscs,Mollusca,Gastropoda,Stylommatophora,Helicidae,Cepaea,Mollusca,Gastropoda,Stylommatophora,Helicidae,Cepaea,2,snail,False
+common cuttlefish,Sepia officinalis,Q756724,6610,528817,37,molluscs,Mollusca,Cephalopoda,Sepiida,Sepiidae,Sepia,Mollusca,Cephalopoda,Sepiida,Sepiidae,Sepia,2,cuttlefish,False
+zebra mussel,Dreissena polymorpha,Q752130,45954,201843,36,molluscs,Mollusca,Bivalvia,Myida,Dreissenidae,Dreissena,Mollusca,Bivalvia,Myida,Dreissenidae,,2,mussel,False
+European squid,Loligo vulgaris,Q1232698,6622,1054848,36,molluscs,Mollusca,Cephalopoda,Myopsida,Loliginidae,Loligo,Mollusca,Cephalopoda,Myopsida,Loliginidae,Loligo,2,squid,False
+giant squid,Architeuthis dux,Q13537131,256136,251385,34,molluscs,Mollusca,Cephalopoda,Oegopsida,Architeuthidae,Architeuthis,Mollusca,Cephalopoda,Oegopsida,Architeuthidae,Architeuthis,2,squid,False
+giant Pacific octopus,Enteroctopus dofleini,Q912404,267067,123064,34,molluscs,Mollusca,Cephalopoda,Octopoda,Octopodidae,Enteroctopus,Mollusca,Cephalopoda,Octopoda,Enteroctopodidae,Enteroctopus,3,octopus,False
+Mediterranean mussel,Mytilus galloprovincialis,Q943341,29158,423885,34,molluscs,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,Mollusca,Bivalvia,Mytilida,Mytilidae,Mytilus,2,mussel,False
+Spanish slug,Arion vulgaris,Q932364,1028688,629322,33,molluscs,Mollusca,Gastropoda,Stylommatophora,Arionidae,Arion,Mollusca,Gastropoda,Stylommatophora,Arionidae,Arion,2,slug,False
+common cockle,Cerastoderma edule,Q21124,55710,439669,32,molluscs,Mollusca,Bivalvia,Cardiida,Cardiidae,Cerastoderma,Mollusca,Bivalvia,Cardiida,Cardiidae,Cerastoderma,2,cockle,False
+Pacific oyster,Crassostrea gigas,Q20857,29159,987409,32,molluscs,Mollusca,Bivalvia,Ostreida,Ostreidae,Magallana,Mollusca,Bivalvia,Ostreida,Ostreidae,Magallana,2,oyster,False
+Humboldt squid,Dosidicus gigas,Q925444,346249,125334,31,molluscs,Mollusca,Cephalopoda,Oegopsida,Ommastrephidae,Dosidicus,Mollusca,Cephalopoda,Oegopsida,Ommastrephidae,Dosidicus,2,squid,False
+freshwater pearl mussel,Margaritifera margaritifera,Q772012,47531,778849,31,molluscs,Mollusca,Bivalvia,Pterioida,Pteriidae,Pinctada,Mollusca,Bivalvia,Unionida,Margaritiferidae,Margaritifera,3,mussel,False
+spirula,Spirula spirula,Q1509955,34541,43354,30,molluscs,Mollusca,Cephalopoda,Spirulida,Spirulidae,Spirula,Mollusca,Cephalopoda,Spirulida,Spirulidae,Spirula,1,spirula,False
+mimic octopus,Thaumoctopus mimicus,Q132999,703449,960090,30,molluscs,Mollusca,Cephalopoda,Octopoda,Octopodidae,Thaumoctopus,Mollusca,Cephalopoda,Octopoda,Octopodidae,Thaumoctopus,2,octopus,False
+Portuguese man o' war,Physalia physalis,Q202526,168775,702294,52,cnidarians,Cnidaria,Hydrozoa,Siphonophorae,Physaliidae,Physalia,Cnidaria,Hydrozoa,Siphonophorae,Physaliidae,Physalia,4,war,False
+lion's mane jellyfish,Cyanea capillata,Q522939,27804,178412,45,cnidarians,Cnidaria,Scyphozoa,Semaeostomeae,Cyaneidae,Cyanea,Cnidaria,Scyphozoa,Semaeostomeae,Cyaneidae,Cyanea,3,jellyfish,False
+precious coral,Corallium rubrum,Q531601,142104,757563,44,cnidarians,Cnidaria,Anthozoa,Scleralcyonacea,Coralliidae,Corallium,Cnidaria,Anthozoa,Alcyonacea,Coralliidae,Corallium,2,coral,False
+Beadlet anemone,Actinia equina,Q580826,6106,1084476,31,cnidarians,Cnidaria,Anthozoa,Actiniaria,Actiniidae,Actinia,Cnidaria,Anthozoa,Actiniaria,Actiniidae,Actinia,2,anemone,False
+Nomura's jellyfish,Nemopilema nomurai,Q133389,321803,3524,26,cnidarians,Cnidaria,Scyphozoa,Rhizostomeae,Rhizostomatidae,Nemopilema,Cnidaria,Scyphozoa,Rhizostomeae,Rhizostomatidae,Nemopilema,2,jellyfish,False
+blue coral,Heliopora coerulea,Q1056942,86515,82502,21,cnidarians,Cnidaria,Anthozoa,Scleralcyonacea,Helioporidae,Heliopora,Cnidaria,Anthozoa,Helioporacea,Helioporidae,Heliopora,2,coral,False
+Snakelocks anemone,Anemonia viridis,Q1192992,51769,214124,18,cnidarians,Cnidaria,Anthozoa,Actiniaria,Actiniidae,Anemonia,Cnidaria,Anthozoa,Actiniaria,Actiniidae,Anemonia,2,anemone,False
+blue jellyfish,Cyanea lamarckii,Q774838,1307430,3680294,18,cnidarians,Cnidaria,Scyphozoa,Semaeostomeae,Cyaneidae,Cyanea,Cnidaria,Scyphozoa,Semaeostomeae,Cyaneidae,Cyanea,2,jellyfish,False
+organ pipe coral,Tubipora musica,Q737745,86527,552152,18,cnidarians,Cnidaria,Anthozoa,Malacalcyonacea,Tubiporidae,Tubipora,Cnidaria,Anthozoa,Alcyonacea,Tubiporidae,Tubipora,3,coral,False
+Elkhorn coral,Acropora palmata,Q163614,6131,507954,17,cnidarians,Cnidaria,Anthozoa,Scleractinia,Acroporidae,Acropora,Cnidaria,Anthozoa,Scleractinia,Acroporidae,Acropora,2,coral,False
+crown-of-thorns starfish,Acanthaster planci,Q26634,133434,926817,42,echinoderms,Echinodermata,Asteroidea,Valvatida,Acanthasteridae,Acanthaster,,Asteroidea,Valvatida,Acanthasteridae,Acanthaster,2,starfish,False
+common starfish,Asterias rubens,Q21120,7604,721252,32,echinoderms,Echinodermata,Asteroidea,Forcipulatida,Asteriidae,Asterias,,Asteroidea,Forcipulatida,Asteriidae,Asterias,2,starfish,False
+sunflower sea star,Pycnopodia helianthoides,Q1857023,7614,197638,24,echinoderms,Echinodermata,Asteroidea,Forcipulatida,Asteriidae,Pycnopodia,,Asteroidea,Forcipulatida,Asteriidae,Pycnopodia,3,star,False
+common sunstar,Crossaster papposus,Q901244,60567,912244,15,echinoderms,Echinodermata,Asteroidea,Velatida,Solasteridae,Crossaster,,Asteroidea,Velatida,Solasteridae,Crossaster,2,sunstar,False
+leather star,Dermasterias imbricata,Q2618140,7590,977099,13,echinoderms,Echinodermata,Asteroidea,Valvatida,Poraniidae,Dermasterias,,Asteroidea,Valvatida,Poraniidae,Dermasterias,2,star,False
+elegant feather star,Tropiometra carinata,Q1960836,707740,1063692,11,echinoderms,Echinodermata,Crinoidea,Comatulida,Tropiometridae,Tropiometra,,Crinoidea,Comatulida,Tropiometridae,Tropiometra,3,star,False
+orange knobby star,Echinaster echinophorus,Q2687141,559820,3656046,9,echinoderms,Echinodermata,Asteroidea,Spinulosida,Echinasteridae,Echinaster,,Asteroidea,Spinulosida,Echinasteridae,Echinaster,3,star,False
+loxechinus,Loxechinus albus,Q950324,240836,555689,9,echinoderms,Echinodermata,Echinoidea,Camarodonta,Echinidae,Loxechinus,,Echinoidea,Echinoida,Echinidae,Loxechinus,1,loxechinus,False
+orange-footed sea cucumber,Cucumaria frondosa,Q2491419,36326,478655,8,echinoderms,Echinodermata,Holothuroidea,Dendrochirotida,Cucumariidae,Cucumaria,,Holothuroidea,Dendrochirotida,Cucumariidae,Cucumaria,3,cucumber,False
+California sea cucumber,Apostichopus californicus,Q27157894,2032702,924454,6,echinoderms,Echinodermata,Holothuroidea,Aspidochirotida,Stichopodidae,Apostichopus,,Holothuroidea,Aspidochirotida,Stichopodidae,Apostichopus,3,cucumber,False
+sea lamprey,Petromyzon marinus,Q385764,7757,227494,47,other,Chordata,Hyperoartia,Petromyzontiformes,Petromyzontidae,Petromyzon,Chordata,,Petromyzontiformes,Petromyzontidae,Petromyzon,2,lamprey,False
+West Indian Ocean coelacanth,Latimeria chalumnae,Q668921,7897,773491,45,other,Chordata,,Coelacanthiformes,Coelacanthidae,Latimeria,Chordata,,,,,4,coelacanth,False
+brook lamprey,Lampetra planeri,Q798246,7750,227498,42,other,Chordata,Hyperoartia,Petromyzontiformes,Petromyzontidae,Lampetra,Chordata,,Petromyzontiformes,Petromyzontidae,Lampetra,2,lamprey,False
+European river lamprey,Lampetra fluviatilis,Q301019,7748,801627,39,other,Chordata,Hyperoartia,Petromyzontiformes,Petromyzontidae,Lampetra,Chordata,,Petromyzontiformes,Petromyzontidae,Lampetra,3,lamprey,False
+South American lungfish,Lepidosiren paradoxa,Q1410142,7883,199346,37,other,Chordata,Dipnoi,Ceratodontiformes,Lepidosirenidae,Lepidosiren,Chordata,Dipnoi,Lepidosireniformes,Lepidosirenidae,Lepidosiren,3,lungfish,False
+Atlantic horseshoe crab,Limulus polyphemus,Q1133152,6850,511973,35,other,Arthropoda,Merostomata,Xiphosura,Limulidae,Limulus,Arthropoda,Merostomata,Xiphosura,Limulidae,Limulus,3,crab,False
+Australian lungfish,Neoceratodus forsteri,Q782345,7892,773500,35,other,Chordata,Dipnoi,Ceratodontiformes,Ceratodontidae,Neoceratodus,Chordata,Dipnoi,Ceratodontiformes,Neoceratodontidae,Neoceratodus,2,lungfish,False
+blow lugworm,Arenicola marina,Q21155,6344,941625,32,other,Annelida,Polychaeta,Capitellida,Arenicolidae,Arenicola,Annelida,Polychaeta,Capitellida,Arenicolidae,Arenicola,2,lugworm,False
+Indonesian coelacanth,Latimeria menadoensis,Q1156533,106881,898631,32,other,Chordata,,Coelacanthiformes,Coelacanthidae,Latimeria,Chordata,,,,,2,coelacanth,False
+marbled lungfish,Protopterus aethiopicus,Q257796,7886,199355,30,other,Chordata,Dipnoi,Ceratodontiformes,Protopteridae,Protopterus,Chordata,Dipnoi,Lepidosireniformes,Protopteridae,Protopterus,2,lungfish,False
+West African lungfish,Protopterus annectens,Q512042,7888,199334,27,other,Chordata,Dipnoi,Ceratodontiformes,Protopteridae,Protopterus,Chordata,Dipnoi,Lepidosireniformes,Protopteridae,Protopterus,3,lungfish,False
+pouched lamprey,Geotria australis,Q311740,71168,703422,26,other,Chordata,Hyperoartia,Petromyzontiformes,Geotriidae,Geotria,Chordata,,Petromyzontiformes,Petromyzontidae,Geotria,2,lamprey,False
+Venus' flower basket,Euplectella aspergillum,Q1523518,936045,164229,22,other,Porifera,Hexactinellida,Lyssacinosida,Euplectellidae,Euplectella,Porifera,Hexactinellida,Lyssacinosida,Euplectellidae,Euplectella,3,basket,False
+mangrove horseshoe crab,Carcinoscorpius rotundicauda,Q2673503,6848,1089003,20,other,Arthropoda,Merostomata,Xiphosura,Limulidae,Carcinoscorpius,Arthropoda,Merostomata,Xiphosura,Limulidae,Carcinoscorpius,3,crab,False
+Pacific hagfish,Eptatretus stoutii,Q683492,7765,852671,19,other,Chordata,Myxini,Myxiniformes,Myxinidae,Eptatretus,Chordata,Hyperotreti,Myxiniformes,Myxinidae,Eptatretus,2,hagfish,False

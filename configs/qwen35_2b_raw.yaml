@@ -1,0 +1,6 @@
+# Stage 4 ablation: Qwen3.5-2B with raw text prompts (no chat template).
+name: qwen35_2b_raw
+model_id: Qwen/Qwen3.5-2B
+revision: 15852e8c16360a2fea060d615a32b45270f8a8fc
+chat_template: false
+name_sets: [species]

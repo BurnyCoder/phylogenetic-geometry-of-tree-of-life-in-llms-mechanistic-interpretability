@@ -1,17 +1,17 @@
 {
   "species": {
     "csv": "species.csv",
-    "csv_sha256": "f1b24cf416493b09f8653e46b95208f6a959d5bdf37f5f6d4cc4ee2ff8e59f86",
+    "csv_sha256": "4b6dfa9bba02028a44fe29beb8ab65a6d427222edb75f09d3ad40bf7f880a03e",
     "tree": "species_tree.nwk",
-    "tree_sha256": "a7eed0777fccd724ed04692beb4a592656d7fc314a2c79c282c1f6e5d7a3dec3",
+    "tree_sha256": "1f2688909651a7c3fede436b540cadc58dc770a6e8ebc526ae19e9a30a7d966c",
     "n": 400
   },
   "species_polysemous": {
     "csv": "species_polysemous.csv",
-    "csv_sha256": "2ca11e89499ed7ba892dfea4c3ba1754a2b8e28714772405a4d1b91dceba9c30",
+    "csv_sha256": "7c38fad631baa5cf47909ce81523754985fb545fe3a2caae4999d865588c8e53",
     "tree": "species_polysemous_tree.nwk",
-    "tree_sha256": "81431fdd8204bd53fb63b81984652ad05bfbe69bfa666c79912fd9eecf26c1de",
-    "n": 15
+    "tree_sha256": "ca93d594a77d574d72cc1393cb2da90cb3543d2c3102bc0c58eaa82a1599031d",
+    "n": 14
   },
   "conflict": {
     "csv": "conflict.csv",
@@ -19,5 +19,12 @@
     "tree": "conflict_tree.nwk",
     "tree_sha256": "fc133434af1a22a3d4703a593586cb5d69590a2e9cf13eb175c9ef44c60a3cd4",
     "n": 79
+  },
+  "heldout_eco": {
+    "csv": "heldout_eco.csv",
+    "csv_sha256": "fa8c4e783108a669841bee56f25903213353759cde47dc5b53e5491fbf2c16d5",
+    "tree": "heldout_eco_tree.nwk",
+    "tree_sha256": "1620f2c4e4621f0b70331e74c0fcb79501b1a55ae13c9d1b8e05b930d3662e5b",
+    "n": 159
   }
 }

@@ -20,13 +20,21 @@ from sklearn.metrics import silhouette_score
 
 from phylogeo.data.tree import RefTree
 
-# Fixed colors per stratum (colorblind-aware Tableau-like palette).
-STRATUM_COLORS = {
-    "mammals": "#4e79a7", "birds": "#f28e2b", "reptiles": "#59a14f", "amphibians": "#76b7b2",
-    "ray-finned fish": "#1f77b4", "cartilaginous fish": "#17becf", "insects": "#e15759",
-    "arachnids": "#b07aa1", "crustaceans": "#ff9da7", "molluscs": "#9c755f",
-    "cnidarians": "#edc948", "echinoderms": "#8c564b", "other": "#bab0ac",
+# Composite encoding for 13 strata in scatter plots (dataviz rule: only 3 categorical
+# hues stay distinguishable across all pairs in a scatter; validated with the skill's
+# validate_palette.js --pairs all: CVD dE >= 9.2, normal-vision dE >= 24.0).
+# Color = super-group, marker = stratum within the group; "other" is neutral gray.
+VERT, ARTH, INV, OTHER = "#2a78d6", "#eb6834", "#1baf7a", "#8a8984"
+# stratum -> (color, matplotlib marker, plotly 3D symbol)
+STRATUM_STYLE = {
+    "mammals": (VERT, "o", "circle"), "birds": (VERT, "^", "diamond"), "reptiles": (VERT, "s", "square"),
+    "amphibians": (VERT, "D", "cross"), "ray-finned fish": (VERT, "v", "x"),
+    "cartilaginous fish": (VERT, "P", "circle-open"),
+    "insects": (ARTH, "o", "circle"), "arachnids": (ARTH, "^", "diamond"), "crustaceans": (ARTH, "s", "square"),
+    "molluscs": (INV, "o", "circle"), "cnidarians": (INV, "^", "diamond"), "echinoderms": (INV, "s", "square"),
+    "other": (OTHER, "x", "x"),
 }
+STRATUM_COLORS = {k: v[0] for k, v in STRATUM_STYLE.items()}
 
 
 def pca_top3(V: np.ndarray, seed: int = 0) -> tuple[np.ndarray, np.ndarray, PCA]:
@@ -128,7 +136,9 @@ def h1a_checks(V: np.ndarray, tree: RefTree, strata: np.ndarray, orders: np.ndar
 def classify_h1a(checks: dict, alpha: float = 0.05) -> str:
     """Preregistered reading of one layer's checks (shape judgment is added by eye)."""
     c1 = checks["C1_p"] < alpha
-    c2 = any(v["p"] < alpha for v in checks["C2_within_stratum_order_purity"].values())
+    # C2 must hold in every zoom stratum (mammals, birds, insects): stricter reading of
+    # "C2 beats its null" (review finding: "any stratum" was looser than registered).
+    c2 = all(v["p"] < alpha for v in checks["C2_within_stratum_order_purity"].values())
     c3 = checks["C3_p"] < alpha
     if not c1:
         return "no structure"
