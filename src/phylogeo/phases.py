@@ -344,3 +344,10 @@ def phase_eco(cfg: RunConfig) -> None:
     from phylogeo.eco import run_eco
 
     run_eco(cfg, act_dir, out_dir, write_json)
+
+
+def phase_paper(cfg: RunConfig) -> None:
+    """Generate reports/paper.typ and paper.pdf from results JSON."""
+    from phylogeo.paper import build_paper
+
+    log.info("paper written to %s", build_paper())
