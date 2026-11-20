@@ -278,3 +278,18 @@ def phase_conflict(cfg: RunConfig) -> None:
     from phylogeo.analysis import run_conflict
 
     run_conflict(cfg, load_conflict, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_report(cfg: RunConfig) -> None:
+    """Regenerate results/RESULTS.md from all results JSON files."""
+    from phylogeo.report import write_results_md
+
+    runs = sorted(p.name for p in RESULTS_DIR.iterdir() if (p / "stage1a").exists() or (p / "stage1b").exists())
+    log.info("report written to %s", write_results_md(runs))
+
+
+def phase_stage2(cfg: RunConfig) -> None:
+    """Stage 2: geodesic vs angular, delta-hyperbolicity, NJ, flat-subspace probe."""
+    from phylogeo.stage2 import run_stage2
+
+    run_stage2(cfg, load_species, layer_distances, act_dir, out_dir, write_json)

@@ -65,8 +65,12 @@ def s5_rank_vs_time(D: np.ndarray, ages: np.ndarray, tree: RefTree, lvl: np.ndar
 
     iu = np.triu_indices(len(groups), 1)
     age = ages[tree.lca][iu]
-    lv = lvl[iu]
-    bins = [b for b in np.unique(lv) if (lv == b).sum() >= 30 and np.unique(age[lv == b]).size > 1]
+    lv = lvl[iu].copy()
+    # Pairs whose MRCA has no TimeTree estimate (age 0 after dating) are excluded
+    # (marked with an impossible bin) rather than treated as 0 Mya.
+    n_undated = int((age <= 0).sum())
+    lv[age <= 0] = -99
+    bins = [b for b in np.unique(lv) if b != -99 and (lv == b).sum() >= 30 and np.unique(age[lv == b]).size > 1]
     ranked_age = {b: rankdata(age[lv == b]) for b in bins}
 
     def pooled(d):
@@ -83,6 +87,7 @@ def s5_rank_vs_time(D: np.ndarray, ages: np.ndarray, tree: RefTree, lvl: np.ndar
     null = np.array([pooled(D[np.ix_(p, p)][iu])[0] for p in (_group_perm(groups, rng) for _ in range(n_perm))])
     pval = (1 + np.sum(np.abs(null) >= abs(obs))) / (n_perm + 1)
     return {"pooled_spearman": float(obs), "p_two_sided": float(pval), "maxT_p": float(pval),
+            "n_pairs_undated_excluded": n_undated,
             "per_bin": {(RANK_ORDER[b] if b >= 0 else "none"): v for b, v in per.items()}}
 
 
