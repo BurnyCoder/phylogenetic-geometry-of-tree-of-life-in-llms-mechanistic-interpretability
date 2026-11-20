@@ -147,14 +147,14 @@ def stage1b_tables(run: str) -> str:
             stat, val = f"TA at modal layer (n = {v['n_triplets']} triplets)", v["ta_modal"]
         out.append(f"| {k} | {stat} | {val:.3f} | {p_fmt(v['maxT_p'])} | {p_fmt(v['holm_p'])} |")
     mm0 = r.get("baselines_mantel_pathlen", {})
-    if mm0:
+    if "class_oracle" in mm0 and "log_popularity" in mm0:
         out.append(f"\nContext for S1: the class oracle alone reaches Mantel r = {mm0['class_oracle']:.3f} and log "
                    f"popularity alone {mm0['log_popularity']:.3f}, so S1 does not separate phylogeny from coarse "
                    "classes or popularity.\n")
     ex = r.get("exploratory", {})
     if "posthoc_vs_untrained" in ex:
         ph = ex["posthoc_vs_untrained"]
-        ctl = [k for k in next(iter(ph.values())) if k not in ("n_triplets",) and not k.startswith(("diff_", run))]
+        ctl = [k for k in next(iter(ph.values())) if k not in ("n_triplets", run, f"{run}_ci95") and not k.startswith("diff_")]
         out += ["\n**Post hoc (final review): model vs the untrained controls on the same subsets** (paired family-block "
                 "bootstrap CIs of the difference)\n",
                 "| subset | triplets | " + run + " | " + " | ".join(f"{c} (diff CI)" for c in ctl) + " |",
@@ -484,7 +484,7 @@ def key_results_md(run: str = "qwen35_2b") -> str:
         v = phv.get(key)
         if not v:
             return ""
-        ctl = [k for k in v if k not in ("n_triplets",) and not k.startswith(("diff_", run))]
+        ctl = [k for k in v if k not in ("n_triplets", run, f"{run}_ci95") and not k.startswith("diff_")]
         return "; untrained: " + ", ".join(f"{k} {v[k]:.3f}" for k in ctl)
 
     rows += [f"| Order within taxonomic orders (S2) | TA = {sec['S2']['ta_modal']:.3f}, Holm p {p_fmt(sec['S2']['holm_p'])}"
@@ -497,7 +497,7 @@ def key_results_md(run: str = "qwen35_2b") -> str:
              f"{verdict(sec['S4']['holm_p'] < 0.05)} |"]
     tie = phv.get("char3_tie_lexically_neutral")
     if tie:
-        ctl = [k for k in tie if k not in ("n_triplets",) and not k.startswith(("diff_", run))]
+        ctl = [k for k in tie if k not in ("n_triplets", run, f"{run}_ci95") and not k.startswith("diff_")]
         rows.append(f"| Lexically neutral triplets: spelling has no preference (post hoc) | TA = {tie[run]:.3f} (n = "
                     f"{tie['n_triplets']}); " + ", ".join(f"{k} {tie[k]:.3f}, diff CI [{tie[f'diff_ci95_vs_{k}'][0]:+.3f}, "
                                                          f"{tie[f'diff_ci95_vs_{k}'][1]:+.3f}]" for k in ctl)

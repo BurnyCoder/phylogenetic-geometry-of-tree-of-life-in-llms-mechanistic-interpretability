@@ -72,12 +72,12 @@ def f3(x) -> str:
 
 def fpv(p) -> str:
     """p-value as a bare number (tables)."""
-    return "< 0.001" if p < 0.001 else f"{p:.3f}"
+    return f"{p:.1e}" if p < 0.0005 else f"{p:.3f}"  # floors print as their value (e.g. 0.001)
 
 
 def fp(p) -> str:
     """Inline p-value ("p = x"). The "=" is escaped so a wrapped line can never start a Typst heading."""
-    return "< 0.001" if p < 0.001 else f"\\= {p:.3f}"
+    return f"\\= {p:.1e}" if p < 0.0005 else f"\\= {p:.3f}"  # floors print as their value
 
 
 def esc(s: str) -> str:
@@ -275,7 +275,7 @@ def build_paper() -> Path:
                 lines.append(f"{ECO_LABELS.get(k, esc(k))}: {stat}, one-sided p {fp(v['p'])}, Holm p {fp(v['holm_p'])}")
             else:
                 lines.append(f"{ECO_LABELS.get(k, esc(k))}: not evaluable (n = {v['n']} < 5)")
-        eco_txt = ("\n== Habitat axis on held-out species (Addendum A, confirmatory)\nThe stage-1a observation that the dominant "
+        eco_txt = ("\n== Habitat axis on held-out species (Addendum A, confirmatory)\nThe stage-1a observation that the top "
                    "late-layer axis orders strata from aquatic to terrestrial groups was registered as a directional hypothesis "
                    "before any held-out species was selected. On "
                    f"{eco['n_mammals']} held-out mammals and {eco['n_birds']} held-out birds (EltonTraits foraging strata "
@@ -338,11 +338,11 @@ def build_paper() -> Path:
     posthoc_tab, stratum_tab = "", ""
     if "posthoc_vs_untrained" in exb:
         ph = exb["posthoc_vs_untrained"]
-        ctl = [k for k in next(iter(ph.values())) if k != "n_triplets" and not k.startswith(("diff_", RUN))]
+        ctl = [k for k in next(iter(ph.values())) if k not in ("n_triplets", RUN, f"{RUN}_ci95") and not k.startswith("diff_")]
         labels_ph = {"S2_within_order": "S2: within orders", "S3_lexical_discordant": "S3: spelling-discordant",
                      "S4_cooccurrence_discordant": "S4: GloVe-discordant",
                      "char3_tie_lexically_neutral": "spelling has no preference (lexically neutral)"}
-        posthoc_tab = _table(["subset", "triplets", "Qwen3.5-2B"] + [f"{esc(c)} (diff. CI)" for c in ctl], [
+        posthoc_tab = _table(["subset", "triplets", "Qwen3.5-2B"] + [f"{c} (diff. CI)" for c in ctl], [
             [labels_ph.get(k, esc(k)), str(v["n_triplets"]), f3(v[RUN])]
             + [f"{f3(v[c])} ({v[f'diff_ci95_vs_{c}'][0]:+.3f}, {v[f'diff_ci95_vs_{c}'][1]:+.3f})" for c in ctl]
             for k, v in ph.items()], "Post hoc: the model vs the untrained controls on the same triplet subsets (paired "
