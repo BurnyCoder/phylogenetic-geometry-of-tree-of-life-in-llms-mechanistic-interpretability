@@ -109,6 +109,10 @@ def h1a_checks(V: np.ndarray, tree: RefTree, strata: np.ndarray, orders: np.ndar
     out["C2_within_stratum_order_purity"] = c2
     c3, c3null, c3p = overlay_length_test(tree, coords, n_perm, rng)
     out["C3_overlay_length"], out["C3_null_mean"], out["C3_p"] = c3, c3null, c3p
+    # C3b (exploratory, added after the pilot): shuffle leaves only *within* strata, so
+    # class clustering alone cannot shorten the overlay -> tests branching beyond classes.
+    _, c3bnull, c3bp = overlay_length_test(tree, coords, n_perm, rng, groups=strata)
+    out["C3b_within_stratum_null_mean"], out["C3b_p"] = c3bnull, c3bp
     c4 = {}
     for pc in range(3):
         row = {}
