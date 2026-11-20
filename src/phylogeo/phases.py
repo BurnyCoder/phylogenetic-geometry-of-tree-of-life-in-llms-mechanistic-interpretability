@@ -309,3 +309,10 @@ def phase_stage3(cfg: RunConfig) -> None:
     from phylogeo.stage3 import run_stage3
 
     run_stage3(cfg, load_species, load_conflict, act_dir, out_dir, write_json)
+
+
+def phase_site(cfg: RunConfig) -> None:
+    """Build the static GitHub Pages explorer in site/ from results/."""
+    from phylogeo.site import build_site
+
+    log.info("site written to %s", build_site(cfg.extra.get("site_run", "qwen35_2b")))
