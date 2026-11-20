@@ -738,12 +738,221 @@ def fig_neighbor_examples(run, n_show: int = 5) -> dict | None:
 
 # ======================================================================================
 
+# ======================================================================================
+# Animated 3-D top-3 PCA (stage 1a look, every layer)
+# ======================================================================================
+
+def _scatter3d_fig(coords: np.ndarray, names, strata, tree, title: str, eye=(1.6, 1.0, 0.7), show_tree=True,
+                   lim: float = 2.6) -> go.Figure:
+    """Static 3-D snapshot (PNG / GIF frames): species coloured by super-group, stratum markers, and the reference
+    tree drawn with internal nodes at the centroid of their descendant leaves (as in stage 1a)."""
+    from phylogeo.viz.pca import STRATUM_STYLE, overlay_positions
+
+    fig = go.Figure()
+    if show_tree:
+        pos = overlay_positions(tree, coords)
+        seg = [v for v in range(tree.N) if v != tree.root]
+        xs, ys, zs = ([c for v in seg for c in (pos[tree.parent[v], k], pos[v, k], None)] for k in range(3))
+        fig.add_scatter3d(x=xs, y=ys, z=zs, mode="lines", line={"color": "#b9b8b2", "width": 1.5}, opacity=0.5,
+                          name="reference tree (centroids)", hoverinfo="skip")
+    strata, names = np.asarray(strata), np.asarray(names)
+    for s, (color, _, sym) in STRATUM_STYLE.items():
+        m = strata == s
+        if m.any():
+            fig.add_scatter3d(x=coords[m, 0], y=coords[m, 1], z=coords[m, 2], mode="markers", name=s, text=names[m],
+                              marker={"color": color, "symbol": sym, "size": 3.5, "line": {"color": SURFACE, "width": 0.5}},
+                              hovertemplate="<b>%{text}</b><br>" + s + "<extra></extra>")
+    ax = {"range": [-lim, lim], "showticklabels": False, "backgroundcolor": SURFACE, "gridcolor": GRID,
+          "zerolinecolor": AXIS, "title": {"font": {"size": 12, "color": INK2}}}
+    fig.update_layout(scene={"xaxis": {**ax, "title": {"text": "axis 1"}}, "yaxis": {**ax, "title": {"text": "axis 2"}},
+                             "zaxis": {**ax, "title": {"text": "axis 3"}}, "aspectmode": "cube",
+                             "camera": {"eye": dict(zip("xyz", eye))}},
+                      title={"text": title, "x": 0.02, "font": {"size": 15}})
+    return _style(fig, 640).update_layout(margin={"l": 0, "r": 0, "t": 50, "b": 0},
+                                          legend={"itemsizing": "constant", "font": {"size": 11}})
+
+
+def _lim(coords) -> float:
+    """Axis half-range for a 3-D view: 99.5th percentile of |coordinate| over all layers, plus 8% room
+    (a few outlier names would otherwise shrink the cloud to a dot)."""
+    return round(1.08 * float(np.quantile(np.abs(np.asarray(coords)), 0.995)), 2)
+
+
+def _player_html(d: dict, run: str) -> str:
+    """Self-contained animated 3-D player (vanilla JS + Plotly.js, loaded once in the page head).
+    It interpolates linearly between consecutive layers, recomputes the tree overlay (internal node =
+    mean of its descendant leaves) for every frame, and can auto-rotate the camera."""
+    from phylogeo.viz.pca import STRATUM_STYLE
+
+    reps = {k: {"coords": np.round(np.array(v["coords"]), 2).tolist(), "evr": v["evr"], "lim": _lim(v["coords"])}
+            for k, v in d["reps"].items()}
+    style = {s: [c, sym] for s, (c, _, sym) in STRATUM_STYLE.items()}
+    data = {"names": d["names"], "strata": d["strata"], "modal": d["modal_layer"], "reps": reps, "tree": d["tree"],
+            "style": style}
+    labels = {run: "Qwen3.5-2B (this model)", "expected": "Expected: Brownian motion on the reference tree"}
+    opts = "".join(f'<option value="{k}">{labels.get(k, "Untrained Qwen3.5-2B (random weights)")}</option>'
+                   for k in reps)
+    return f"""<div class="p3c" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0">
+<button id="p3-play" style="font:inherit;padding:3px 12px">▶ Play</button>
+<input type="range" id="p3-layer" min="0" max="{len(reps[run]['coords']) - 1}" step="0.01" value="{d['modal_layer']}"
+ style="flex:1;min-width:220px" aria-label="layer">
+<b id="p3-label" style="min-width:300px"></b>
+<label>view <select id="p3-rep">{opts}</select></label>
+<label>speed <select id="p3-speed"><option value="0.6">slow</option><option value="1.2" selected>normal</option>
+<option value="2.5">fast</option></select></label>
+<label><input type="checkbox" id="p3-tree" checked> tree overlay</label>
+<label><input type="checkbox" id="p3-rot" checked> auto-rotate</label></div>
+<div id="p3-plot" style="height:700px"></div>
+<script>
+(function () {{
+  const D = {json.dumps(data, separators=(",", ":"))};
+  const T = D.tree, N = T.parent.length, n = T.n, root = T.parent.indexOf(-1);
+  const groups = Object.keys(D.style).map(s => ({{s, idx: D.strata.map((x, i) => x === s ? i : -1).filter(i => i >= 0)}}))
+    .filter(g => g.idx.length);
+  let rep = '{run}', t = D.modal, playing = false, rotating = true, theta = 0.6, last = null, lastDraw = 0, dirty = true;
+  const el = id => document.getElementById(id), plot = el('p3-plot');
+  function coordsAt(r, tt) {{
+    const C = D.reps[r].coords;
+    if (C.length === 1) return C[0];
+    const k = Math.min(Math.floor(tt), C.length - 2), f = tt - k, A = C[k], B = C[k + 1];
+    return A.map((p, i) => [p[0] + (B[i][0] - p[0]) * f, p[1] + (B[i][1] - p[1]) * f, p[2] + (B[i][2] - p[2]) * f]);
+  }}
+  function treeLines(P) {{  // internal node = mean of descendant leaves (postorder: children before parents)
+    const s = Array.from({{length: N}}, () => [0, 0, 0]), c = new Array(N).fill(0);
+    for (let v = 0; v < n; v++) {{ s[v] = P[v].slice(); c[v] = 1; }}
+    for (const v of T.postorder) if (v !== root) {{ const p = T.parent[v];
+      s[p][0] += s[v][0]; s[p][1] += s[v][1]; s[p][2] += s[v][2]; c[p] += c[v]; }}
+    const x = [], y = [], z = [];
+    for (let v = 0; v < N; v++) if (v !== root) {{ const p = T.parent[v];
+      x.push(s[p][0] / c[p], s[v][0] / c[v], null); y.push(s[p][1] / c[p], s[v][1] / c[v], null);
+      z.push(s[p][2] / c[p], s[v][2] / c[v], null); }}
+    return [x, y, z];
+  }}
+  function label() {{
+    const E = D.reps[rep].evr, k = Math.round(Math.min(t, E.length - 1)), e = E[k];
+    const tot = (100 * (e[0] + e[1] + e[2])).toFixed(1);
+    el('p3-label').textContent = (E.length === 1 ? 'expected shape' : 'layer ' + k + ' of ' + (E.length - 1)) +
+      ' · top-3 PCs explain ' + tot + '% (' + e.map(v => (100 * v).toFixed(1)).join(' / ') + ')';
+  }}
+  function traces(P) {{
+    const [x, y, z] = treeLines(P);
+    const out = [{{type: 'scatter3d', mode: 'lines', x, y, z, name: 'reference tree (centroids)', hoverinfo: 'skip',
+      line: {{color: '#b9b8b2', width: 1.5}}, opacity: 0.5, visible: el('p3-tree').checked}}];
+    for (const g of groups) out.push({{type: 'scatter3d', mode: 'markers', name: g.s, text: g.idx.map(i => D.names[i]),
+      x: g.idx.map(i => P[i][0]), y: g.idx.map(i => P[i][1]), z: g.idx.map(i => P[i][2]),
+      hovertemplate: '<b>%{{text}}</b><br>' + g.s + '<extra></extra>',
+      marker: {{color: D.style[g.s][0], symbol: D.style[g.s][1], size: 3.5, line: {{color: '#fcfcfb', width: 0.5}}}}}});
+    return out;
+  }}
+  const ax = t => ({{range: [-D.reps[rep].lim, D.reps[rep].lim], showticklabels: false, title: {{text: t, font: {{size: 12, color: '#52514e'}}}},
+    backgroundcolor: '#fcfcfb', gridcolor: '#e1e0d9', zerolinecolor: '#c3c2b7'}});
+  const eye = () => ({{x: 1.55 * Math.cos(theta), y: 1.55 * Math.sin(theta), z: 0.6}});
+  const layout = {{paper_bgcolor: '#fcfcfb', margin: {{l: 0, r: 0, t: 10, b: 0}}, uirevision: 'keep',
+    font: {{family: 'system-ui, -apple-system, Segoe UI, sans-serif', color: '#0b0b0b'}},
+    legend: {{itemsizing: 'constant', font: {{size: 11}}, title: {{text: 'stratum (colour = super-group)'}}}},
+    scene: {{xaxis: ax('axis 1'), yaxis: ax('axis 2'), zaxis: ax('axis 3'), aspectmode: 'cube', camera: {{eye: eye()}}}}}};
+  Plotly.newPlot(plot, traces(coordsAt(rep, t)), layout, {{responsive: true, displaylogo: false}});
+  label();
+  plot.on('plotly_relayouting', () => {{ if (rotating) {{ rotating = false; el('p3-rot').checked = false; }} }});
+  function draw() {{
+    const P = coordsAt(rep, t), tr = traces(P);
+    const upd = {{x: tr.map(a => a.x), y: tr.map(a => a.y), z: tr.map(a => a.z), visible: tr.map(a => a.visible ?? true)}};
+    Plotly.update(plot, upd, rotating ? {{'scene.camera.eye': eye()}} : {{}});
+    label(); dirty = false;
+  }}
+  let visible = true;
+  new IntersectionObserver(e => {{ visible = e[0].isIntersecting; }}).observe(plot);
+  function tick(ts) {{
+    const dt = last === null ? 0 : Math.min((ts - last) / 1000, 1.0); last = ts;  // wall-clock speed, even at low frame rates
+    const L = D.reps[rep].coords.length - 1;
+    if (playing && L > 0) {{ t += dt * parseFloat(el('p3-speed').value); if (t > L) t = 0; el('p3-layer').value = t; dirty = true; }}
+    if (rotating) {{ theta += dt * 0.35; dirty = true; }}
+    if (dirty && visible && ts - lastDraw > 40) {{ lastDraw = ts; draw(); }}
+    requestAnimationFrame(tick);
+  }}
+  el('p3-play').onclick = () => {{ playing = !playing; el('p3-play').textContent = playing ? '❚❚ Pause' : '▶ Play'; }};
+  el('p3-layer').oninput = e => {{ t = parseFloat(e.target.value); dirty = true; }};
+  el('p3-rep').onchange = e => {{ rep = e.target.value; const L = D.reps[rep].coords.length - 1;
+    el('p3-layer').disabled = L === 0; t = Math.min(t, L); dirty = true;
+    const r = [-D.reps[rep].lim, D.reps[rep].lim];
+    Plotly.relayout(plot, {{'scene.xaxis.range': r, 'scene.yaxis.range': r, 'scene.zaxis.range': r}}); }};
+  el('p3-tree').onchange = () => {{ dirty = true; }};
+  el('p3-rot').onchange = e => {{ rotating = e.target.checked; dirty = true; }};
+  requestAnimationFrame(tick);
+}})();
+</script>"""
+
+
+def fig_pca3d(run: str, tree) -> dict | None:
+    """Animated, interactive 3-D view of the top-3 principal components at every layer (custom player for the
+    site); a static snapshot at the confirmatory layer for the PNG, and an animated GIF for the README."""
+    d = _load(RESULTS_DIR / run / "viz" / "pca3d.json")
+    checks = _load(RESULTS_DIR / run / "stage1a" / "checks.json")
+    if not d:
+        return None
+    L = d["modal_layer"]
+    snap = _scatter3d_fig(np.array(d["reps"][run]["coords"][L]), d["names"], d["strata"], tree,
+                          f"Qwen3.5-2B, layer {L}: top-3 principal components", eye=(1.3, 0.8, 0.6),
+                          lim=_lim(d["reps"][run]["coords"]))
+    k = sum("tree-consistent" in c["reading"] for c in checks) if checks else 0
+    r = rec("pca3d", "Top-3 principal components in 3-D, animated through all layers", "mixed",
+            f"H1a checks tree-consistent in {k}/{len(checks or [])} layers; by eye: class arms, no nested branching",
+            "Each point is one species at the last token of its name (mean over 8 prompts), projected on that layer's top "
+            "three principal components; consecutive layers are rotated onto each other (orthogonal Procrustes, display "
+            "only) so the cloud moves smoothly instead of flipping axes, and every layer is scaled to the same radius. Gray "
+            "lines draw the reference tree with each internal node at the mean of its descendant species. Press Play to "
+            "move through the layers, drag to rotate, scroll to zoom, hover for names, click legend entries to isolate "
+            "strata, and switch the view to the untrained network or to the expected shape of a true tree code (Brownian "
+            "motion on the reference tree). The registered checks find class separation and some order-level clustering; "
+            "the nested branching of the expected tree is not visible in three components.", snap, (1100, 700))
+    r["html"] = _player_html(d, run)
+    r["pca3d"] = d
+    return r
+
+
+def export_pca3d_gif(r: dict, tree, path: Path, steps: int = 2, size=(760, 560)) -> Path:
+    """README animation: sweep layers 0 -> last (``steps`` interpolated frames per layer) while the camera turns,
+    rendered with kaleido in one batch and assembled with Pillow (https://pillow.readthedocs.io/)."""
+    import tempfile
+
+    import plotly.io as pio
+    from PIL import Image
+
+    d, run = r["pca3d"], "qwen35_2b"
+    C = np.array(d["reps"][run]["coords"])
+    ts = np.linspace(0, len(C) - 1, steps * (len(C) - 1) + 1)
+    figs = []
+    for j, tt in enumerate(ts):
+        k = min(int(tt), len(C) - 2)
+        P = C[k] + (C[k + 1] - C[k]) * (tt - k)
+        th = 0.6 + 2 * np.pi * j / len(ts)
+        e = d["reps"][run]["evr"][int(round(tt))]
+        f = _scatter3d_fig(P, d["names"], d["strata"], tree,
+                           f"Qwen3.5-2B · layer {int(round(tt))} of {len(C) - 1} · top-3 PCs explain {100 * sum(e):.1f}%",
+                           eye=(1.55 * np.cos(th), 1.55 * np.sin(th), 0.6), lim=_lim(C))
+        f.add_annotation(text=f"<span style='color:{BLUE}'>■ vertebrates</span>   <span style='color:{ORANGE}'>■ "
+                              f"arthropods</span>   <span style='color:{AQUA}'>■ other invertebrates</span>   <span "
+                              f"style='color:{GRAY}'>■ other</span>   gray lines: reference tree",
+                         x=0.01, y=1.0, xref="paper", yref="paper", xanchor="left", yanchor="bottom", showarrow=False,
+                         font={"size": 11, "color": INK2})
+        figs.append(f.update_layout(showlegend=False, margin={"l": 0, "r": 0, "t": 58, "b": 0},
+                                    title={"y": 0.985, "yanchor": "top"}))
+    with tempfile.TemporaryDirectory() as tmp:
+        files = [Path(tmp) / f"f{j:03d}.png" for j in range(len(figs))]
+        pio.write_images(figs, files, width=size[0], height=size[1], scale=1)
+        frames = [Image.open(f).convert("RGB").quantize(colors=128, method=Image.Quantize.MEDIANCUT) for f in files]
+        frames[0].save(path, save_all=True, append_images=frames[1:], duration=180, loop=0, optimize=True)
+    log.info("animated GIF (%d frames) written to %s", len(figs), path)
+    return path
+
+
 def build_figures(run: str = "qwen35_2b") -> list[dict]:
     """All figure records whose inputs exist, in reading order (ground truth first)."""
     from phylogeo.phases import load_species
 
-    df, _ = load_species()
-    builders = [lambda: fig_taxonomy(df), lambda: fig_distance_heatmaps(run, df), lambda: fig_expected_pca(run),
+    df, tree = load_species()
+    builders = [lambda: fig_pca3d(run, tree), lambda: fig_taxonomy(df), lambda: fig_distance_heatmaps(run, df),
+                lambda: fig_expected_pca(run),
                 lambda: fig_h1_forest(run), lambda: fig_layer_profile(run), lambda: fig_per_stratum(run),
                 lambda: fig_depth_profile(run), lambda: fig_neighbor_levels(run), lambda: fig_neighbor_examples(run),
                 lambda: fig_secondary(run), lambda: fig_conflict(run), lambda: fig_probe(run), lambda: fig_treeness(run),
@@ -763,14 +972,18 @@ KIND_LABEL = {"positive": "✅ positive", "negative": "❌ negative", "mixed": "
 
 def readme_gallery_md(figs: list[dict], png_dir: str = "reports/figures/viz", per_row: int = 2) -> str:
     """HTML table for the README: static PNGs (GitHub renders no JavaScript), each linking to its interactive
-    version on the site, with the kind label and computed verdict under the title."""
+    version on the site, with the kind label and computed verdict under the title. The animated 3-D record is shown
+    first, full width, as a GIF."""
+    hero = "".join(f'<p align="center"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/{r["key"]}.gif" '
+                   f'alt="{r["title"]}" width="760"></a><br><b>{r["title"]}</b> (animated here; interactive 3-D player '
+                   f'on the site)<br>{KIND_LABEL[r["kind"]]}: {r["verdict"]}</p>\n\n' for r in figs if "pca3d" in r)
     cells = [f'<td width="50%" valign="top"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/{r["key"]}.png" '
              f'alt="{r["title"]}"></a><br><b>{r["title"]}</b><br>{KIND_LABEL[r["kind"]]}: {r["verdict"]}</td>'
-             for r in figs]
+             for r in figs if "pca3d" not in r]
     rows = ["<tr>" + "".join(cells[i:i + per_row]) + "</tr>" for i in range(0, len(cells), per_row)]
     return ("*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; click a figure for the "
             f"interactive version on the [project site]({SITE_URL}) (hover, zoom, toggle series).*\n\n"
-            "<table>\n" + "\n".join(rows) + "\n</table>\n")
+            + hero + "<table>\n" + "\n".join(rows) + "\n</table>\n")
 
 
 def export_pngs(figs: list[dict], out: Path) -> dict[str, Path]:
@@ -782,5 +995,9 @@ def export_pngs(figs: list[dict], out: Path) -> dict[str, Path]:
         p = out / f"{r['key']}.png"
         r["fig"].write_image(p, width=w, height=h, scale=1.6)
         paths[r["key"]] = p
-    log.info("exported %d figure PNGs to %s", len(paths), out)
+        if "pca3d" in r:  # the animated record also gets a GIF for the README
+            from phylogeo.phases import load_species
+
+            paths[r["key"] + "_gif"] = export_pca3d_gif(r, load_species()[1], out / f"{r['key']}.gif")
+    log.info("exported %d figure files (PNG, GIF) to %s", len(paths), out)
     return paths

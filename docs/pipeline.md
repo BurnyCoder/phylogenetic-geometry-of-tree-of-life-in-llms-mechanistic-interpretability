@@ -40,7 +40,7 @@ Phases run in the given order. Each logs to `logs/<timestamp>_<run>.log` and to 
 | `scale`, `scale_summary` | `stage5.py` | activations of each stage-5 run | `results/<run>/stage5/scale.json`, `results/stage5/` |
 | `stage6` | `stage6.py` | main and control activations | `results/<run>/stage6/` |
 | `report` | `report.py` | results JSON | `results/RESULTS.md`, `results/<run>/SUMMARY.md`, README and summary blocks |
-| `viz_data` | `viz/viz_data.py` | activations (CPU) | `results/<run>/viz/` (tree-ordered distance percentiles, 2-D PCA incl. the Brownian-tree expectation, nearest neighbours) |
+| `viz_data` | `viz/viz_data.py` | activations (CPU) | `results/<run>/viz/` (tree-ordered distance percentiles, 2-D PCA incl. the Brownian-tree expectation, nearest neighbours, layer-aligned 3-D PCA for the animated view) |
 | `site` | `site.py`, `viz/figures.py` | results, `results/<run>/viz/` | `site/` (deployed by `.github/workflows/pages.yml`), `reports/figures/viz/*.png`, README *Visual summary* gallery |
 | `paper` | `paper.py` | results, `typst` | `reports/paper.typ`, `reports/paper.pdf` |
 
