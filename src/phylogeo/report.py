@@ -539,7 +539,8 @@ def key_results_md(run: str = "qwen35_2b") -> str:
                  f"{p_fmt(a['p_rank_vs_random'])}, Holm {p_fmt(hp['C_abl'])} | {verdict(hp['C_abl'] < 0.05)} |",
                  f"| Swapping the subspace switches the class answer (C-swap) | switch rate {w['switch_rate_probe']:.3f} "
                  f"vs random mean {np.mean(w['switch_rate_random']):.3f}; rank p {p_fmt(w['p_rank_vs_random'])}, "
-                 f"Holm {p_fmt(hp['C_swap'])} | {verdict(hp['C_swap'] < 0.05)} |"]
+                 f"Holm {p_fmt(hp['C_swap'])}; no edit {w['switch_rate_no_edit']:.3f} ({w['n_pairs']} pairs) | "
+                 f"{verdict(hp['C_swap'] < 0.05)} (small effect) |"]
         if "class_control" in s3:
             cc = s3["class_control"]
             rows.append(f"| Causal role specific to phylogeny, beyond class (vs class-only subspace) | ablation drop "

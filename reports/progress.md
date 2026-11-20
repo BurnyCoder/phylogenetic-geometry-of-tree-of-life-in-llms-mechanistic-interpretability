@@ -1,5 +1,30 @@
 # Progress
 
+## 2026-11-20 16:55: all stages complete; stage-3 causal rerun finished
+
+**Done since 12:20**
+- **Stage 5 (more models).** The effect grows with scale (Pythia 70M → 2.8B, Qwen3.5 0.8B → 2B), is not specific to the hybrid architecture (Qwen3-1.7B is similar), and is learned during training (Pythia-1.4B checkpoints: chance until step 512, then a jump by step 1000). See [experiment 07](experiments/07-more-models-stage5/experiment.md).
+- **Final review round 1.** All must-fix findings were addressed ([response](reviews/2026-11-20-final-review-round1-response.md)).
+- **Stage 3 causal rerun (deviations 19–20).**
+  - The run used 99 random subspaces and a class-only subspace control.
+  - C-swap is supported after Holm correction, with a small effect. C-abl is not supported.
+  - The class-only subspace does as well as the phylogeny probe on both tests, so no phylogeny-specific causal role is shown. See [experiment 04](experiments/04-causal-behavior-stage3/experiment.md).
+  - The numbers are in the generated `results/RESULTS.md`.
+- **Release.**
+  - Activations of all 24 runs and the probe (with the class-only caveat on its card) are on Hugging Face, in the project collection.
+  - The site is deployed by GitHub Pages.
+  - The paper, README and summary are regenerated with the causal results.
+
+**Now**
+- Final fact-check of the causal write-up, then merge to main (which redeploys the site).
+
+**Not done (listed in the README to-do as possible extensions)**
+- R3-steer (geodesic steering) and R3-sae (no SAE for post-trained Qwen3.5-2B).
+- EltonTraits ecology/body-size baseline, S5 within-stratum bins, power simulation with ≥ 200 simulations per cell.
+- A within-class causal readout.
+
+**Overall:** the planned stages 1a–6 are done; about 95% of the plan is complete. What remains is the final fact-check and red-team pass and the merge. No GPU job is running.
+
 ## 2026-11-20 12:20: stages 1–4 and 6 complete; stage 3 causal rerun and stage 5 running
 
 **Done since 09:30**

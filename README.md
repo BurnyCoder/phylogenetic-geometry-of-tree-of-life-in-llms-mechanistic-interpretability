@@ -41,7 +41,10 @@ This project asks the same questions of a *text* LLM. Text carries phylogeny onl
 - **No visible tree.** The top-3 PCA plots show class "arms" plus a habitat gradient, not a nested tree.
 - **No hyperbolic or geodesic advantage.** A hyperbolic (Poincaré) probe is never better than the best flat (Euclidean) probe, and kNN-geodesic distances do not order triplets better than plain angles.
 - **Latin binomials carry much weaker structure,** and only in late layers. The tree order is tied to vernacular names.
-- **Causal tests: pending.** The first run could not reach significance by design. The corrected rerun adds 99 random subspaces and a class-only subspace control (deviations 19–20).
+- **No phylogeny-specific causal role.** These are interventions on the 10-d probe subspace at one layer, on held-out species.
+  - Swapping the subspace between species switches the class answer more often than swapping any of 99 random subspaces (C-swap supported), but only in a small share of pairs.
+  - Ablating it does not beat the random subspaces (C-abl not supported).
+  - A probe trained only on class membership does as well on both tests. The subspace is used for coarse class answers; nothing shows that within-group tree structure is used.
 
 The headline numbers below are generated from `results/` by the report script.
 
@@ -61,13 +64,16 @@ The headline numbers below are generated from `results/` by the report script.
 | Phylogeny-vs-folk conflict triplets (whale: hippo or whale shark?) | tree-closer partner chosen in 11/36 (binomial p 0.029); untrained: qwen35_2b_random 13/36 (McNemar p 0.804); pythia410m_step0 13/36 (McNemar p 0.774); char3 9/36 (McNemar p 0.804) | geometry does not follow the tree here; no evidence the trained model differs from untrained networks |
 | Learned 10-d flat subspace (Goodfire-style probe; exploratory) | held-out r = 0.749, within-stratum 0.326; shuffled tree -0.015; class-only (class-blob) input 0.833, within-stratum 0.008; raw distances without a probe, within-stratum 0.290 | all-pairs r reflects coarse groups; within strata the probe adds little over raw distances |
 | Tree-like (hyperbolic) metric (exploratory) | Gromov δ_rel = 0.322 vs matched Gaussian 0.460, class-blob 0.188, exact tree 0 | does not separate trees from clusters |
+| Ablating the probe subspace hurts class answers more than random subspaces (C-abl) | drop 0.083 vs 0.027 nats; rank p 0.120, Holm 0.120 | not supported |
+| Swapping the subspace switches the class answer (C-swap) | switch rate 0.055 vs random mean 0.025; rank p 0.010, Holm 0.020; no edit 0.020 (200 pairs) | supported (small effect) |
+| Causal role specific to phylogeny, beyond class (vs class-only subspace) | ablation drop 0.083 vs 0.146 (p 0.966); switches 0.055 vs 0.060 (p 0.773) | no |
 | The model *says* which species are related (exploratory) | chooses the tree-closer animal in 0.567 of 300 within-group triplets (binomial p 0.024, triplets not independent); agreement with the representation 0.633 vs 0.515 expected if independent | weak |
 | Latin binomials carry the same structure (exploratory) | head-noun-disjoint genus-split triplets: binomials 0.320 (best layer 0.380) vs common names 0.476 | much weaker |
 | Late-layer top PC orders aquatic → terrestrial (Addendum A, held-out species) | marine vs ground mammals (n = 6) Holm p 3.6e-07; waterbird ρ = -0.385 (Holm p 4.2e-04); aerial birds ρ = -0.157 | aquatic end supported (name cues not controlled), aerial end not |
 | Robust to seeds, template subsets, species subsamples (stage 6) | lowest TA_within over 20 repetitions of each perturbation 0.437; smallest margin over the best control 0.044 | robust |
 | Other models (stage 5; cross-fitted TA_within) | pythia70m 0.379; pythia160m 0.373; pythia410m 0.416; qwen35_08b 0.432; pythia1b 0.419; pythia14b 0.446; qwen3_17b 0.465; qwen35_2b 0.480; pythia28b 0.470 | descriptive |
 
-Exploratory p-values are corrected with BH-FDR over the 176 registered exploratory tests; q-values are in `results/RESULTS.md`.
+Exploratory p-values are corrected with BH-FDR over the 178 registered exploratory tests; q-values are in `results/RESULTS.md`.
 <!-- KEY-RESULTS:END -->
 
 | Top-3 PCA, layer 21 (one panel per group, highlighted against all species) | Within-group triplet accuracy by layer, vs controls |
@@ -282,12 +288,12 @@ logs/             timestamped run logs (prompts and outputs)
 - [x] Tests and core implementation; species set frozen; power simulation
 - [x] Stage 1a (PCA look), stage 1b (confirmatory tests), stage 2 (geometry and probes)
 - [x] Stage 4 (ablations) and Addendum A (habitat axis on held-out species)
-- [ ] Stage 3: corrected causal rerun with 99 random subspaces (deviation 19)
-- [ ] Stage 5: Qwen3.5-0.8B, Qwen3-1.7B, Pythia scale series and Pythia-1.4B training checkpoints
+- [x] Stage 3: behaviour and corrected causal rerun with 99 random subspaces and a class-only control (deviations 19–20)
+- [x] Stage 5: Qwen3.5-0.8B, Qwen3-1.7B, Pythia scale series and Pythia-1.4B training checkpoints
 - [x] Stage 6: sensitivity
 - [x] Independent final review (round 1) and fixes ([review](reports/reviews/2026-11-20-final-review-round1.md))
-- [ ] Paper, website (GitHub Pages), Hugging Face activations and probe weights
-- [ ] Final fact-check and red-team review
+- [x] Paper, website (GitHub Pages), Hugging Face activations and probe weights
+- [x] Final fact-check and red-team review ([round 1](reports/reviews/2026-11-20-final-review-round1.md), [stage-3 causal](reports/reviews/2026-11-20-stage3-causal-review.md))
 - Possible extensions:
   - an ecology and body-size baseline (EltonTraits trait distance) for mammals and birds, to separate ecology from phylogeny (final review S6);
   - S5 within-stratum rank bins with their own null, and a family-block bootstrap for the behavioural accuracy (final review S4, S8);

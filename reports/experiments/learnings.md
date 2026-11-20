@@ -50,6 +50,10 @@ Running log of what was learned from the literature, from errors, and from the e
   - The registered Holm family of 2 needs p ≤ 0.025, so the test could never succeed whatever the data.
   - *Lesson:* before running a rank test, compute its p-value floor against the corrected threshold.
   - Fixed before the rerun, with 99 subspaces (deviation 19).
+- **Variance-match random controls on the set they are drawn from.**
+  - *What went wrong.* The first causal run measured the probe's captured variance on all species but matched the random subspaces on the training species, so the random controls were under-matched.
+  - *Effect.* Matching both on the training species raised the random ablation drops. C-abl then stopped being significant: about one random subspace in nine matched the probe ([experiment 04](04-causal-behavior-stage3/learnings.md)).
+- **A causal test inherits its probe's confounds.** The probe was trained on path length, which the coarse groups dominate, and the readout was the class word. A class-only subspace switched answers as often and ablated more, so the positive C-swap shows class use, not phylogeny use. *Lesson:* pair a causal test with a subspace that carries only the confound.
 - **Compare like with like in off-target checks.**
   - The no-edit loss was token-weighted over 20 sentences, while the edited losses were unweighted means over the first 10. That apparent effect was an artifact.
   - *Lesson:* compute baseline and intervention with the same function, and pass the edit as an argument (a unit test now checks that an identity edit reproduces the baseline exactly).

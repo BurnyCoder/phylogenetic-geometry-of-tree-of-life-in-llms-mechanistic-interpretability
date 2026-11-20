@@ -47,7 +47,7 @@ We give a language model short sentences that mention an animal ("Here is a fact
 | 01 | Top-3 PCA shape ("do they look like a tree?"), H1a | 1a | done | [01-pca-shape](01-pca-shape/experiment.md) |
 | 02 | Triplet accuracy, Mantel, S1–S5, controls, conflict triplets | 1b | done | [02-triplets-stage1b](02-triplets-stage1b/experiment.md) |
 | 03 | Geodesic vs angular, δ-hyperbolicity, NJ tree, flat-subspace probe | 2 | done | [03-geometry-probes-stage2](03-geometry-probes-stage2/experiment.md) |
-| 04 | Behavioral judgments; causal ablation and interchange of the probe subspace | 3 | behavior done; causal rerun queued (deviation 19) | [04-causal-behavior-stage3](04-causal-behavior-stage3/experiment.md) |
+| 04 | Behavioral judgments; causal ablation and interchange of the probe subspace | 3 | done 2026-11-20: behaviour weakly above chance; C-swap supported (small effect), C-abl not; a class-only subspace does as well, so no phylogeny-specific causal role (deviations 19–20) | [04-causal-behavior-stage3](04-causal-behavior-stage3/experiment.md) |
 | 05 | Ablations (readout, normalization, format, names, probe variants) | 4 | done | [05-ablations-stage4](05-ablations-stage4/experiment.md) |
 | 06 | Habitat axis on held-out species (Addendum A) | addendum | done | [06-habitat-addendum](06-habitat-addendum/experiment.md) |
 | 07 | More models: scale, architecture, training dynamics | 5 | done | [07-more-models-stage5](07-more-models-stage5/experiment.md) |
