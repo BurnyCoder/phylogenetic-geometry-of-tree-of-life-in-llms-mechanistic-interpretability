@@ -320,6 +320,27 @@ The result is the smallest detectable TA_within at 80% power, which is reported 
 
 ---
 
+## Addendum A (registered 2026-11-20 09:45, before the held-out species were selected or extracted): the habitat-gradient hypothesis
+
+**Origin (post-hoc).** Stage 1a showed that in late layers the top PCA axis orders strata from aquatic groups (sharks, marine invertebrates, fish) through tetrapods to flyers (insects, birds). This suggests an ecological water → land → air axis rather than phylogeny. That observation was made on the 400 primary species, so it is **hypothesis-generating only**. This addendum fixes a test on new species.
+
+**H_eco (directional).** Define the *habitat axis* as PC1 of the layer-21 species vectors of the 400 primary species (Qwen3.5-2B). Orient it so that the mean of birds is positive and the mean of ray-finned fish negative. Then, on **held-out species not in the primary set**:
+- **H_eco-M (mammals):** marine-foraging mammals (EltonTraits `ForStrat-Value` = M) have lower axis scores than ground-foraging mammals (G). Aerial mammals (A, bats) have higher scores than G.
+- **H_eco-B (birds):** Spearman(axis score, % of foraging below or around the water surface) < 0, and Spearman(axis score, % aerial foraging) > 0.
+
+**Data.**
+- Held-out species are mammals and birds from the same Wikidata candidate pool, obtained by the same rules as the primary set: common-name title, OTT match, leaf of the synthetic tree, not polysemous. They must not be in the primary or polysemous sets and must match EltonTraits 1.0 by scientific name ([Wilman et al. 2014, Ecology 95:2027](https://esapubs.org/archive/ecol/E095/178/); files verified by the published MD5).
+- The top 80 mammals and the top 80 birds by sitelinks are taken, with no family cap, so that rare habitats are represented.
+
+**Analysis.**
+- Held-out activations are extracted with the same templates and model. They are centred with the **primary set's** per-template means, so they share the primary PCA frame, then projected onto the fixed axis.
+- Mammals: one-sided Mann–Whitney tests (M < G, A > G).
+- Birds: one-sided Spearman tests.
+- Holm across the 4 tests; α = 0.05.
+- Subgroups with fewer than 5 species (e.g. if fewer than 5 marine or aerial mammals are held out) are reported descriptively only.
+
+**Reading.** If H_eco holds, the dominant top-PC axis encodes habitat or locomotion across clades, i.e. the geometry mixes ecology with taxonomy. If it fails, the stage-1a ordering is not supported as ecological.
+
 ## Deviations
 All deviations below were made **before any activation was extracted** (species set frozen 2026-11-20 07:51, `data/FREEZE.json`, species.csv sha256 `f1b24cf4…`).
 
