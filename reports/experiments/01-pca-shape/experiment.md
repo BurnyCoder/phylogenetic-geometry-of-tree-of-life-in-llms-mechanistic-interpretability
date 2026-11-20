@@ -33,8 +33,24 @@
 - **Layers 15–24.** More structured. In PC1–2, layers 20–23 form a curved V/U-shaped band (an arch at layer 21), i.e. a continuous gradient bent between two extremes, plus 1–2 tiny tight clusters. In PC2–3 these layers show a central mass with one arm hanging downward (a "T/Y" shape).
 - **Overall impression before seeing labels.** Not an obvious tree. It is a diffuse cloud with a few protruding arms, a handful of isolated micro-clusters, and in late layers a curved band. Labels are needed to tell whether the arms are clades (tree-like), coarse classes (clusters) or a gradient.
 
-## Description 2 (colored, tree overlay, zoom-ins)
-*(pending)*
+## Description 2 (colored, pre-fix species set)
+*From `results/qwen35_2b_prefix/stage1a/grid_colored_pc12.png` and `grid_colored_pc23.png`, viewed 2026-11-20 08:37, before the implementation review led to re-freezing the species set.*
+
+- **Caveat.** That palette used two near-identical blues for mammals and ray-finned fish. Fish were told apart from mammals mainly by position, which is a weakness fixed in the re-run.
+- **Layers 4–5: the "arms" are coarse classes.** Each class sits on its own lobe or arm radiating from the centre:
+  - birds on one arm;
+  - fish (ray-finned and cartilaginous) on another;
+  - mammals in a central lobe;
+  - insects on a third arm, with arachnids as a tight cluster at its tip;
+  - molluscs, echinoderms and cnidarians on the opposite side.
+- **Layers 6–19.** The classes occupy overlapping regions. Arachnids, and in layers 16–18 cartilaginous fish, form tight satellite clusters at the edges.
+- **Layers 20–23: the curved band is a class gradient.** In PC1–PC2 it runs birds → mammals → reptiles/amphibians (with molluscs and echinoderms) → ray-finned and cartilaginous fish. Insects hang below the middle, and arachnids sit in a tight cluster at the bottom.
+  - This ordering is **not** the phylogenetic one: birds are closer to reptiles than to mammals.
+  - It looks more like an ecological air → land → water gradient. That is an **exploratory, post-hoc hypothesis** to be tested later with the conflict triplets (whales, bats, penguins) and habitat covariates. No claim is made here.
+- **No visible sub-branching inside classes in the top 3 PCs.** Birds, for example, form one spread cloud without sub-arms. Any within-class tree must live in other dimensions, which stage 1b tests.
+
+## Re-run on the re-frozen species set
+After the review fixes (deviations 11–18), the species set changed: names were fixed, and *Hippopotamus*, *Dugong* and others were added. The pre-fix plots had already been seen, so the anti-bias step cannot be repeated blind for the re-run. The re-run is compared against descriptions 1–2 above.
 
 ## Checks and reading
 *(pending)*
