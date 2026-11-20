@@ -129,6 +129,67 @@ def conflict_table(run: str) -> str:
     return "\n".join(out) + "\n"
 
 
+def stage2_table(run: str) -> str:
+    """Flat-probe CV correlations (5 seeds, family holdout), delta_rel, NJ RF, geodesic vs angular."""
+    r = _load(RESULTS_DIR / run / "stage2" / "results.json")
+    if not r:
+        return f"*(no stage-2 results for {run})*\n"
+    out = [f"Layer {r['layer']} (the stage-1b modal layer).\n",
+           "**Flat-subspace probe** (k = 10, PCA-100 fit in-fold, 5-fold family holdout, mean ± sd over seeds)\n",
+           "| input / target | held-out-family Pearson r | Spearman | train–test r | train–train r |",
+           "|---|---|---|---|---|"]
+    for k, v in r["probe"].items():
+        if k == "selectivity_test_test":
+            continue
+        out.append(f"| {k} | {v['test_test_pearson'][0]:.3f} ± {v['test_test_pearson'][1]:.3f} | "
+                   f"{v['test_test_spearman'][0]:.3f} | {v['train_test_pearson'][0]:.3f} | {v['train_train_pearson'][0]:.3f} |")
+    out.append(f"\nSelectivity (model − shuffled-tree, held-out families): **{r['probe']['selectivity_test_test']:.3f}**\n")
+    d = r["delta_rel"]
+    out += ["**Gromov δ_rel** (lower = more tree-like; 0 for a tree metric)\n", "| representation | δ_rel |", "|---|---|",
+            f"| model | {d['model']:.3f} |",
+            f"| spectrum-matched Gaussian (10 draws) | {d['matched_gaussian_mean']:.3f} ± {d['matched_gaussian_sd']:.3f} |",
+            f"| class-blob simulation (10 draws) | {d['class_blob_mean']:.3f} ± {d['class_blob_sd']:.3f} |",
+            f"| tree oracle (path length) | {d['tree_oracle']:.3f} |"]
+    nj = r["nj_rf"]
+    out += ["\n**Neighbor-joining tree vs reference** (normalized Robinson–Foulds; 0 = identical)\n",
+            "| | RF |", "|---|---|", f"| model | {nj['model']:.3f} |",
+            f"| label-permuted (20) | {nj['perm_null_mean']:.3f} ± {nj['perm_null_sd']:.4f} (p = {nj['perm_p']:.3f}) |"]
+    g = r["geodesic_vs_angular"]
+    lay = r["layer"]
+    out += ["\n**kNN geodesic vs angular distance** (at the probe layer; gain on the class-blob null for reference)\n",
+            "| metric | angular | geodesic | gain | class-blob null gain |", "|---|---|---|---|---|",
+            f"| Mantel Spearman vs path length | {g['angular_mantel'][lay]:.3f} | {g['geodesic_mantel'][lay]:.3f} | "
+            f"{g['geodesic_mantel'][lay] - g['angular_mantel'][lay]:+.3f} | {g['blob_gain_mantel'][lay]:+.3f} |",
+            f"| TA_within | {g['angular_ta'][lay]:.3f} | {g['geodesic_ta'][lay]:.3f} | "
+            f"{g['geodesic_ta'][lay] - g['angular_ta'][lay]:+.3f} | {g['blob_gain_ta'][lay]:+.3f} |"]
+    return "\n".join(out) + "\n"
+
+
+def probe_bar_png(run: str) -> None:
+    """Bar chart of held-out-family probe correlation: model vs controls (error bars = seed sd)."""
+    r = _load(RESULTS_DIR / run / "stage2" / "results.json")
+    if not r:
+        return
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    keys = [k for k in r["probe"] if k != "selectivity_test_test"]
+    m = [r["probe"][k]["test_test_pearson"][0] for k in keys]
+    sd = [r["probe"][k]["test_test_pearson"][1] for k in keys]
+    fig, ax = plt.subplots(figsize=(6, 3.6))
+    ax.bar(keys, m, yerr=sd, color=["#2a78d6" if k == "model" else "#b8b7b2" for k in keys], capsize=4)
+    ax.axhline(0, color="0.3", lw=0.8)
+    ax.set_ylabel("Pearson r, held-out families")
+    ax.set_title(f"Flat-subspace probe (k=10), layer {r['layer']}: predicted vs tree distance", fontsize=9)
+    for i, v in enumerate(m):
+        ax.text(i, v + 0.02 if v >= 0 else v - 0.06, f"{v:.2f}", ha="center", fontsize=8)
+    fig.tight_layout()
+    fig.savefig(RESULTS_DIR / run / "stage2" / "probe_heldout_r.png", dpi=150)
+    plt.close(fig)
+
+
 def power_table() -> str:
     s = _load(RESULTS_DIR / "power" / "summary.json")
     if not s:
@@ -147,12 +208,16 @@ def write_results_md(runs: list[str]) -> Path:
     for run in runs:
         parts += [f"\n## Run `{run}`\n", "### Stage 1a — top-3 PCA checks per layer\n", stage1a_table(run),
                   "\n### Stage 1b — triplet accuracy and secondary hypotheses\n", stage1b_tables(run),
-                  "\n### Conflict triplets (phylogeny vs folk/lexical)\n", conflict_table(run)]
+                  "\n### Conflict triplets (phylogeny vs folk/lexical)\n", conflict_table(run),
+                  "\n### Stage 2 — geometry and flat-subspace probe\n", stage2_table(run)]
     path = RESULTS_DIR / "RESULTS.md"
     path.write_text("\n".join(parts), encoding="utf-8")
+    for run in runs:
+        probe_bar_png(run)
     for run in runs:  # per-run summary next to the run's results (linked from experiment notes)
         (RESULTS_DIR / run / "SUMMARY.md").write_text(
             "\n".join([f"# Run `{run}` (auto-generated; do not edit)\n", "## Stage 1a\n", stage1a_table(run),
-                       "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run)]),
+                       "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run),
+                       "\n## Stage 2\n", stage2_table(run)]),
             encoding="utf-8")
     return path

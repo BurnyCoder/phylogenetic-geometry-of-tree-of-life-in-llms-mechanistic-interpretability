@@ -65,7 +65,7 @@ def train_probe(X: np.ndarray, D: np.ndarray, k: int = 10, steps: int = 2000, lr
         loss.backward()
         opt.step()
         if tracker is not None and (step % 50 == 0 or step == steps - 1):
-            tracker.log({f"{tag}/loss": float(loss), f"{tag}/dist_mse": float(l_d), f"{tag}/recon": float(l_r)},
+            tracker.log({f"{tag}/loss": loss.item(), f"{tag}/dist_mse": l_d.item(), f"{tag}/recon": l_r.item()},
                         step=step)
     return m
 

@@ -149,6 +149,11 @@ Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-
 | bottlenose dolphin | cattle | great white shark | ecology | ✗ | ✓ | ✓ |
 
 
+### Stage 2 — geometry and flat-subspace probe
+
+*(no stage-2 results for pilot_pythia410m_prefix)*
+
+
 ## Run `qwen35_2b`
 
 ### Stage 1a — top-3 PCA checks per layer
@@ -302,6 +307,45 @@ Per triplet (qwen35_2b, layer 6; ✓ = representation closer to the tree-closer 
 | bottlenose dolphin | cattle | great white shark | ecology | ✗ | ✗ | ✗ | ✗ | ✓ | ✓ |
 
 
+### Stage 2 — geometry and flat-subspace probe
+
+Layer 6 (the stage-1b modal layer).
+
+**Flat-subspace probe** (k = 10, PCA-100 fit in-fold, 5-fold family holdout, mean ± sd over seeds)
+
+| input / target | held-out-family Pearson r | Spearman | train–test r | train–train r |
+|---|---|---|---|---|
+| model | 0.749 ± 0.010 | 0.749 | 0.848 | 0.959 |
+| shuffled_tree | -0.015 ± 0.013 | -0.014 | 0.170 | 0.562 |
+| random_init | 0.016 ± 0.013 | 0.012 | 0.162 | 0.519 |
+| glove | 0.405 ± 0.005 | 0.411 | 0.588 | 0.845 |
+
+Selectivity (model − shuffled-tree, held-out families): **0.763**
+
+**Gromov δ_rel** (lower = more tree-like; 0 for a tree metric)
+
+| representation | δ_rel |
+|---|---|
+| model | 0.322 |
+| spectrum-matched Gaussian (10 draws) | 0.460 ± 0.010 |
+| class-blob simulation (10 draws) | 0.188 ± 0.007 |
+| tree oracle (path length) | 0.000 |
+
+**Neighbor-joining tree vs reference** (normalized Robinson–Foulds; 0 = identical)
+
+| | RF |
+|---|---|
+| model | 0.812 |
+| label-permuted (20) | 0.988 ± 0.0009 (p = 0.048) |
+
+**kNN geodesic vs angular distance** (at the probe layer; gain on the class-blob null for reference)
+
+| metric | angular | geodesic | gain | class-blob null gain |
+|---|---|---|---|---|
+| Mantel Spearman vs path length | 0.362 | 0.251 | -0.110 | +0.066 |
+| TA_within | 0.471 | 0.444 | -0.027 | +0.002 |
+
+
 ## Run `qwen35_2b_prefix`
 
 ### Stage 1a — top-3 PCA checks per layer
@@ -343,3 +387,8 @@ Per triplet (qwen35_2b, layer 6; ✓ = representation closer to the tree-closer 
 ### Conflict triplets (phylogeny vs folk/lexical)
 
 *(no conflict results for qwen35_2b_prefix)*
+
+
+### Stage 2 — geometry and flat-subspace probe
+
+*(no stage-2 results for qwen35_2b_prefix)*

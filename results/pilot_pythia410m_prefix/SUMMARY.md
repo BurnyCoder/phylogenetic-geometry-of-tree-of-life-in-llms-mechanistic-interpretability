@@ -130,3 +130,8 @@ Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-
 | fossa | meerkat | cat | folk cat-like | ✓ | ✗ | ✓ |
 | pronghorn | giraffe | impala | folk antelope | ✗ | ✗ | ✓ |
 | bottlenose dolphin | cattle | great white shark | ecology | ✗ | ✓ | ✓ |
+
+
+## Stage 2
+
+*(no stage-2 results for pilot_pythia410m_prefix)*
