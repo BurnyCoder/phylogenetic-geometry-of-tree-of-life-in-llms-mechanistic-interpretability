@@ -5,7 +5,7 @@
 This review collects prior work this project builds on.
 
 - **Scope:** what each source did, what it found (numbers only where the source states them), and what this project takes from it.
-- **Status of claims:** everything was checked against the primary source in a fact-check pass (see the end of the document). Claims that rest only on an abstract or a search summary are marked *(abstract only)*.
+- **Status of claims:** every link and number was checked against its primary source in an independent fact-check pass on 2026-11-20 (log at the end). Claims that rest only on an abstract are marked *(abstract only)*.
 - **Companion document:** [state-of-the-art-review.md](state-of-the-art-review.md) covers the methods and tools: statistics, data sources, libraries.
 
 ---
@@ -30,9 +30,9 @@ Source: https://www.goodfire.com/research/phylogeny-manifold. The post is the on
 - GTDB tree branch-length distance, i.e. patristic distance.
 
 **Geometry analysis** (following Modell et al. 2025, §2.4)
-- Angular distance arccos(cos) vs phylogenetic distance:
+- **Cosine similarity** of the raw embeddings vs phylogenetic distance:
   - mostly monotonic;
-  - the figure annotations give Spearman −0.80 and Chatterjee ξ 0.47;
+  - the figure annotations give Spearman −0.80 and Chatterjee ξ 0.47 (negative because similarity falls as distance grows);
   - the relation flattens at large distances.
 - kNN-graph geodesic distance:
   - K=27, the smallest K that gives a connected graph; edges weighted by angular distance;
@@ -41,16 +41,17 @@ Source: https://www.goodfire.com/research/phylogeny-manifold. The post is the on
 - A learned 10-d "flat subspace":
   - model: z = W_enc(x − b), predicted distance d̂ = β·arccos cos(z₁, z₂), plus a small reconstruction loss;
   - cross-validation by holding out ~20 whole clades (~20% of species);
-  - r ≈ 0.98 on train-train pairs and 0.89 on held-out-clade pairs (figure annotation); the text summarizes this as ~70% of variance captured.
+  - distance correlation (figure annotations): r ≈ 0.98 train–train, 0.92 train–test, 0.89 test–test; the text gives the held-out result as "about 0.9";
+  - separately, the subspace reconstructs ~70% of embedding variance (29% unexplained on train, 37% on test).
 
 **What the post does not report**
 - No permutation tests or p-values, no random-init model, no shuffled-tree null.
 - No baseline from k-mer composition alone run through the same geometry pipeline.
 - No causal or steering experiments.
 
-**Confound the authors flag**
-- An XGBoost regressor on genome-wide 1–4-mer frequencies predicts the flat-subspace coordinates at r ≈ 0.9 (preliminary).
-- So part of the "phylogeny" signal may be genome-composition style, which is itself phylogenetically conserved.
+**Nucleotide statistics**
+- An XGBoost regressor on genome-wide 1–4-mer frequencies predicts the flat-subspace coordinates at r ≈ 0.9. The subspace's first component correlates with TTT, AAT and GTG frequencies (r = 0.74, 0.70, −0.69).
+- Goodfire frames this as preliminary evidence that species are encoded as genomic "styles". Reading it as a potential *confound* for phylogeny is our interpretation: genome composition is itself phylogenetically conserved.
 
 **Independent reproduction**
 - An ARENA 6.0 capstone (Green & Yukich; [write-up](https://website-co6.pages.dev/writings/evo2), [code](https://github.com/jake-yukich/evo2-mech-interp)) on Evo 2 7B with 2,458 GTDB r220 species.
@@ -70,10 +71,10 @@ Source: https://www.goodfire.com/research/phylogeny-manifold. The post is the on
 ## 2. Neural geometry of concepts in LLMs
 
 ### 2.1 Goodfire neural-geometry series
-Index: https://www.goodfire.com/research/neural-geometry. The index page itself has no methods, so each post is listed separately.
+Index: https://www.goodfire.com/research/neural-geometry. The index gives short summaries of six posts; the methods are in the individual posts and papers.
 
 - **"Steering Along Manifolds"** (Wurgaft et al.; [post](https://www.goodfire.com/research/manifold-steering), [arXiv 2605.05115](https://arxiv.org/abs/2605.05115), [code](https://github.com/goodfire-ai/causalab/tree/manifold_steering))
-  - Model and readout: Llama-3.1-8B, layer 28, residual stream at the answer position.
+  - Model and readout: Llama-3.1-8B, layer 28, residual stream at the last-token position.
   - Tasks: prompts such as "What day is k days after z?", with weekdays, months, letters and ages.
   - Manifold fitting:
     - PCA to 64 dimensions;
@@ -82,12 +83,12 @@ Index: https://www.goodfire.com/research/neural-geometry. The index page itself 
   - Intervention: steer along the spline, keeping the base prompt's off-subspace component, compared with a straight chord between centroids.
   - Results:
     - isometry (Pearson between distance matrices) of geodesic vs behavior: 0.99 for weekdays, 0.89 for months, vs 0.89 and 0.53 for linear distance;
-    - manifold steering is about 2.8× closer to the behavior manifold than linear steering.
+    - manifold steering lowers a cumulative Bhattacharyya-energy proxy for distance from the model's natural output distribution by about 2.8× on average vs linear steering (p < 0.001).
   - Controls: no random or shuffled control.
 - **"A Geometric Calculator"** (Feucht et al.; [post](https://www.goodfire.com/research/a-geometric-calculator), [arXiv 2605.01148](https://arxiv.org/abs/2605.01148)): Llama-3.1-8B adds numbers using circular representations at several moduli *(post only)*.
-- **"Can SAEs Capture Neural Geometry?"** (Bhalla et al.; [post](https://www.goodfire.com/research/can-saes-capture-neural-geometry), [arXiv 2604.28119](https://arxiv.org/abs/2604.28119)): SAE features fragment manifolds *(post only)*.
+- **"Can SAEs Capture Neural Geometry?"** (Bhalla et al.; [post](https://www.goodfire.com/research/can-saes-capture-neural-geometry); paper "Do Sparse Autoencoders Capture Concept Manifolds?", [arXiv 2604.28119](https://arxiv.org/abs/2604.28119)): SAE features fragment manifolds, a "dilution" regime.
 
-### 2.2 Engels et al. 2024, "Not All Language Model Features Are (One-Dimensionally) Linear"
+### 2.2 Engels et al. 2024, "Not All Language Model Features Are One-Dimensionally Linear"
 Sources: [arXiv 2405.14860](https://arxiv.org/abs/2405.14860), [code](https://github.com/JoshEngels/MultiDimensionalFeatures).
 
 - **Discovery:** cluster SAE decoder directions in GPT-2-small and Mistral-7B. Days of the week and months appear as circles in PCA of the cluster's reconstructions. PC1 often encodes radius; PCs 2–3 show the circle.
@@ -137,23 +138,23 @@ Sources: [arXiv 2310.02207](https://arxiv.org/abs/2310.02207), [code](https://gi
 
 ### 2.7 SAE feature geometry
 - **Li, Michaud, Baek, Engels et al. 2024, "The Geometry of Concepts"** ([arXiv 2410.19750](https://arxiv.org/abs/2410.19750), [code](https://github.com/ejmichaud/feature-geometry)): Gemma-2-2B with Gemma Scope SAEs ([Lieberum et al. 2024](https://arxiv.org/abs/2408.05147)). Finds "crystals" (after LDA removes distractors such as word length), functional "lobes", and power-law PCA spectra.
-- **Kissane et al. 2024** ([LessWrong](https://www.lesswrong.com/posts/fmwk6qxrpW8d4jvbd/saes-usually-transfer-between-base-and-chat-models)): SAEs trained on base models usually transfer to chat models. This is relevant because the cached Qwen3.5 SAE was trained on the Base model.
+- **Kissane et al. 2024** ([LessWrong](https://www.lesswrong.com/posts/fmwk6qxrpW8d4jvbd/saes-usually-transfer-between-base-and-chat-models)): SAEs trained on base models usually transfer to chat models. This was tested on Mistral-7B and Qwen1.5-0.5B, and transfer **failed** for Gemma v1 2B. It matters here because the cached Qwen3.5 SAE was trained on the Base model; whether it transfers to the hybrid Qwen3.5 architecture is an extrapolation that must be checked.
 
 ### 2.8 Tree-structured representations
 - **Baek, Li, Tegmark 2024** ([arXiv 2410.08255](https://arxiv.org/abs/2410.08255)): an in-context family tree is recovered with a "cone probe" on 10-d PCA of residuals, with subspace patching as the causal test.
 - **Hewitt & Manning 2019, structural probe** ([NAACL](https://aclanthology.org/N19-1419/)): a linear map B with ‖B(hᵢ−hⱼ)‖² ≈ tree distance, applied to syntax trees. Goodfire's flat subspace is the angular analogue.
 - **Hewitt & Liang 2019, control tasks** ([EMNLP](https://aclanthology.org/D19-1275/)): selectivity is probe accuracy minus control-task accuracy. Basis of our shuffled-tree probe control.
-- **Chen et al. 2021, Poincaré probe** ([arXiv 2104.03869](https://arxiv.org/abs/2104.03869), [code](https://github.com/FranxYao/PoincareProbe)): hyperbolic probes recover syntax trees in BERT better than Euclidean ones at low dimension.
+- **Chen et al. 2021, Poincaré probe** ([arXiv 2104.03869](https://arxiv.org/abs/2104.03869), [code](https://github.com/FranxYao/PoincareProbe)): hyperbolic probes recover syntax trees in BERT better than Euclidean probes.
 
 ---
 
 ## 3. Hyperbolic / tree-like geometry
-- **Nickel & Kiela 2017, Poincaré embeddings** ([arXiv 1705.08039](https://arxiv.org/abs/1705.08039), [code](https://github.com/facebookresearch/poincare-embeddings)): embeds the WordNet mammal closure in hyperbolic space with low distortion.
-- **Sala et al. 2018, representation tradeoffs for hyperbolic embeddings** ([arXiv 1804.03329](https://arxiv.org/abs/1804.03329), [code](https://github.com/HazyResearch/hyperbolics)): combinatorial construction and h-MDS, with distortion and MAP metrics.
+- **Nickel & Kiela 2017, Poincaré embeddings** ([arXiv 1705.08039](https://arxiv.org/abs/1705.08039), [code](https://github.com/facebookresearch/poincare-embeddings)): embeds the WordNet noun hierarchy in hyperbolic space with low distortion; the mammal subtree is shown in a 2-D visualization.
+- **Sala, De Sa, Gu & Ré 2018 (ICML), representation tradeoffs for hyperbolic embeddings** ([arXiv 1804.03329](https://arxiv.org/abs/1804.03329), [code](https://github.com/HazyResearch/hyperbolics)): combinatorial construction and h-MDS, with distortion and MAP metrics.
 - **Hyperbolicity Atlas** ([arXiv 2609.07053](https://arxiv.org/abs/2609.07053)):
   - four-point δ_rel = δ/diam over sampled quadruples of hidden states;
-  - middle layers sit near δ_rel ≈ 1, while final layers are more tree-like;
-  - the only control is one random-init model.
+  - middle layers sit near δ_rel ≈ 1 (median ≈ 0.995 for Qwen2.5-7B-Base), while final layers are more tree-like;
+  - controls are one random-init model and a prompt-length-quartile analysis.
 - **HypLoRA** ([arXiv 2410.04010](https://arxiv.org/abs/2410.04010)): frequent tokens sit nearer the origin. Token frequency therefore confounds norm-based hierarchy *(abstract only)*.
 - **Chourasia et al.** ([arXiv 2512.20926](https://arxiv.org/abs/2512.20926)): a toolkit combining δ-hyperbolicity, ultrametricity and neighbor-joining metrics for protein LMs *(abstract only)*.
 
@@ -175,7 +176,7 @@ Closest work:
    - Main lessons: popularity and head-noun leakage are the key confounds.
 2. **llm_internal_representations** ([repo](https://github.com/alexgarciaduran/llm_internal_representations)): 87 organisms in mBERT, GPT-2 and Qwen2.5-0.5B, all layers, Mantel test against taxonomic rank depth. ρ ≈ 0.36–0.39. Rank-based ground truth only, with no dated tree and no confound controls.
 3. **Taxonomy question answering:**
-   - LLMs label IUCN species at class-to-family level with high accuracy, with drops when distractors are phylogenetically close ([arXiv 2510.02830](https://arxiv.org/abs/2510.02830)) *(abstract only)*;
+   - LLMs classify IUCN species from kingdom to family in a multiple-choice format at 94.9% accuracy overall: 91.8% with phylogenetically close distractors vs 98.0% with random ones (Uryu 2025, [arXiv 2510.02830](https://arxiv.org/abs/2510.02830));
    - the BAGEL animal-knowledge benchmark ([arXiv 2604.16241](https://arxiv.org/abs/2604.16241)) *(abstract only)*.
    - These test labels, not geometry.
 4. **Grand et al. 2022** ([Nature Human Behaviour](https://doi.org/10.1038/s41562-022-01316-8)): projecting GloVe vectors onto semantic axes recovers animal size and dangerousness. Folk-ecological dimensions like these are confounds for phylogeny.
@@ -204,5 +205,14 @@ Closest work:
 ---
 
 ## Fact-check log
-- 2026-11-20: first draft, compiled from three literature-search passes, each reading primary sources. Items marked *(abstract only)* were not read in full.
-- Pending: verification pass on every link and every number (see `reports/reviews/`).
+- 2026-11-20: first draft, compiled from three literature-search passes, each reading primary sources.
+- 2026-11-20: independent fact-check of every link and number. All DOIs, arXiv ids and ACL ids resolve to the stated works. Corrections applied:
+  - Goodfire's −0.80 is for cosine *similarity*, not angular distance.
+  - The ~70% is reconstructed embedding variance, not the distance correlation.
+  - Goodfire frames the composition result as "genomic style"; the confound reading is ours.
+  - Engels et al. title.
+  - Manifold steering: readout position and the meaning of 2.8×.
+  - Chen et al. claim narrowed; Nickel & Kiela scope corrected.
+  - Hyperbolicity Atlas controls; Kissane et al. scope.
+  - arXiv 2510.02830 details.
+- Full report: [reviews/2026-11-20-fact-check-literature.md](reviews/2026-11-20-fact-check-literature.md).

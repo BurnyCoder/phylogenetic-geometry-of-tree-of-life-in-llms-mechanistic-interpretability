@@ -9,10 +9,10 @@ This is the companion to [literature-review.md](literature-review.md). It covers
 | Practice | Source | Adopted? |
 |---|---|---|
 | Residual stream at the **last token of the entity name**, every layer | [Gurnee & Tegmark 2023](https://arxiv.org/abs/2310.02207) | Yes, primary readout |
-| Mean over several prompt templates to average out context | Gurnee & Tegmark; Goodfire pools over many windows | Yes, 8 templates |
+| Mean over several prompt templates to average out context | Analogous to Goodfire pooling over many genome windows; Gurnee & Tegmark instead *test sensitivity* to prepended prompts (§3.3) | Yes, 8 templates; split-half template reliability reported |
 | Mean over the entity's tokens | Goodfire Evo 2 pools over 2 kb of tokens | Secondary readout |
 | Whitened unembeddings ("causal inner product") | [Park et al. 2024](https://arxiv.org/abs/2406.01506) | No. Whitening can manufacture orthogonality ([critique](https://d2jud02ci9yv69.cloudfront.net/2025-04-28-feature-geometry-65/blog/feature-geometry/)) |
-| Subtract the mean over entities before cosine (removes the shared anisotropic direction) | Standard practice; outlier dimensions in LLMs | Yes, per template |
+| Subtract the mean over entities before cosine (removes the shared anisotropic direction) | Anisotropy of contextual representations ([Ethayarajh 2019](https://aclanthology.org/D19-1006/)); mean removal ([Mu & Viswanath 2018](https://arxiv.org/abs/1702.01417)); rogue dimensions dominate cosine ([Timkey & van Schijndel 2021](https://arxiv.org/abs/2109.04404)) | Yes, per template (z-scoring as sensitivity analysis) |
 
 **Libraries.**
 - Plain Hugging Face `transformers` (`output_hidden_states=True`) is the simplest exact route for residual-stream reads.
@@ -31,9 +31,9 @@ This is the companion to [literature-review.md](literature-review.md). It covers
 
 | Source | What it gives | License | Use here |
 |---|---|---|---|
-| [Open Tree of Life](https://tree.opentreeoflife.org/) synthetic tree, API v3 (`tnrs/match_names`, `tree_of_life/induced_subtree`; [docs](https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3)) | Topology only, no branch lengths | CC0 ([data rights](https://tree.opentreeoflife.org/about/licenses)) | **Primary topology** |
+| [Open Tree of Life](https://tree.opentreeoflife.org/) synthetic tree, API v3 (`tree_of_life/induced_subtree`: [synthetic-tree docs](https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3); `tnrs/match_names`: [TNRS docs](https://github.com/OpenTreeOfLife/germinator/wiki/TNRS-API-v3)) | Topology only, no branch lengths | CC0 ([data rights](https://tree.opentreeoflife.org/about/licenses)) | **Primary topology** |
 | Open Tree Taxonomy (OTT) `taxonomy/taxon_info` with lineage | Linnaean ranks (phylum, class, order, family, genus) | CC0 | **Rank annotation** (replaces ete4; see the deviation note below) |
-| [TimeTree 5](https://timetree.org/) API (`/mrca/id/{ncbi ids}`; [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9400175)) | Divergence times (Mya) | No redistribution | Dated tree, used for H_rank vs H_time. Cached locally and never published |
+| [TimeTree 5](https://timetree.org/) API (`/mrca/id/{ncbi ids}`; [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9400175)) | Divergence times (Mya) | No redistribution (timetree.org footer: "Redistribution of TimeTree data and its transformations are not permitted") | Dated tree, used for H_rank vs H_time. Cached locally and never published |
 | NCBI Taxonomy | Classification, taxids | Public domain | Taxids for TimeTree via Wikidata P685 |
 | VertLife, Upham 2019, Fish Tree of Life | Dated trees for single clades | Various | Not used (no all-animal coverage) |
 
@@ -60,7 +60,7 @@ This is the companion to [literature-review.md](literature-review.md). It covers
 
 - **Lexical:** character 3-gram Jaccard distance, the shared head noun (last word of the common name), and token count.
 - **Frequency:**
-  - [infini-gram](https://infini-gram.readthedocs.io/en/latest/api.html) count API (index `v4_piletrain_llama` pairs with Pythia's training data);
+  - [infini-gram](https://infini-gram.readthedocs.io/en/latest/api.html) count API (index `v4_piletrain_llama` is the Pile train set, Pythia's training data; counts are in Llama-2 tokens, not Pythia's GPT-NeoX tokens);
   - Wikipedia pageviews (Wikimedia REST API);
   - `wordfreq` 3.1.1 (data frozen around 2021).
 - **Co-occurrence:** static word embeddings, and the model's own input embedding matrix.
@@ -74,7 +74,7 @@ This is the companion to [literature-review.md](literature-review.md). It covers
 
 ## 6. Engineering
 
-- **Python and PyTorch:** Python 3.12 via `uv`. PyTorch 2.15 with CUDA 13.2 wheels, because the RTX 5070 (Blackwell, sm_120) needs CUDA ≥ 12.8 builds ([uv PyTorch guide](https://docs.astral.sh/uv/guides/integration/pytorch/)).
+- **Python and PyTorch:** Python 3.12 via `uv`. PyTorch 2.15 with CUDA 13.2 wheels, because the RTX 5070 (Blackwell, sm_120) needs CUDA ≥ 12.8 builds ([PyTorch 2.7 release notes](https://pytorch.org/blog/pytorch-2-7/)). Verified locally: `torch.cuda.get_arch_list()` contains `sm_120`. The index is configured following the [uv PyTorch guide](https://docs.astral.sh/uv/guides/integration/pytorch/).
 - **Live training dashboard:** [trackio](https://github.com/gradio-app/trackio), a local dashboard with a wandb-compatible API.
 - **Paper:** Typst via the `typst` PyPI package. Figures with matplotlib; interactive figures with Plotly.
 - **Website:** a static site on GitHub Pages.

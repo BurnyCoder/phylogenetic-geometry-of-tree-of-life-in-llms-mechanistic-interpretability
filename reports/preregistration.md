@@ -321,4 +321,16 @@ The result is the smallest detectable TA_within at 80% power, which is reported 
 ---
 
 ## Deviations
-*(none yet; any change after registration is listed here with date and reason)*
+All deviations below were made **before any activation was extracted** (species set frozen 2026-11-20 07:51, `data/FREEZE.json`, species.csv sha256 `f1b24cf4…`).
+
+1. **2026-11-20 — sitelinks threshold.** The registration specified no minimum number of sitelinks for candidates. At ≥15 sitelinks only 4 of 10 echinoderms were available, so the candidate pool uses **≥5 sitelinks**. Ranking is still by sitelinks, so strata already filled at ≥15 are unaffected.
+2. **2026-11-20 — reptiles stratum.** OTT flags "Reptilia" as barren and inconsistent. Reptiles are therefore defined as Testudines ∪ Lepidosauria ∪ Crocodylia, which is extant non-avian reptiles, as intended.
+3. **2026-11-20 — extinct taxa.** Taxa flagged extinct in OTT are excluded, because TimeTree and the extant tree do not cover them consistently. The thylacine is not flagged and remains.
+4. **2026-11-20 — extra polysemy rule.** A name whose English Wikipedia title needed a parenthetical qualifier (e.g. "Beluga (sturgeon)") is flagged as polysemous, because the bare name is ambiguous by Wikipedia's own judgment. This moved "beluga" to the sensitivity set.
+5. **2026-11-20 — common-name casing.** Names keep Wikipedia's sentence case for non-initial words. The first word is lowercased unless it is a proper noun: a WordNet capitalized-only lemma, a possessive of an unknown name, or a compass/ocean word before a capitalized word. Six compound words remain capitalized ("Megamouth shark", "Redback spider", …); these are documented in `reports/experiments/learnings.md`.
+6. **2026-11-20 — conflict-set placements.**
+   - "dog" (Canis familiaris, a subspecies in OTT) is placed at its species, *Canis lupus*.
+   - "little brown bat" (*Myotis lucifugus*, a broken taxon in the synthetic tree) is placed at its congener *Myotis myotis*. Every triplet using it splits above genus, so the answers are unchanged.
+   - Silverfish's scientific name was corrected to *Lepisma saccharina*.
+7. **2026-11-20 — batch size 1 for extraction.** Batched bf16 forward passes on Qwen3.5-2B differ by up to 2.5% relative norm from unbatched ones (not caused by padding), so every prompt is run alone. This is exact and reproducible.
+8. **2026-11-20 — S1 reference distance, clarified.** Edge-count path length (S1, as registered) is *not* consistent with rooted triplets (unit test `test_path_length_is_not_triplet_consistent`). S1 is kept as registered. The LCA-depth ultrametric (max depth − depth(LCA)), which is triplet-consistent, is added as an **exploratory** second reference distance for the Mantel analysis.
