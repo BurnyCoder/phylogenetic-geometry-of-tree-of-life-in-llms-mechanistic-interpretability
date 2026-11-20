@@ -154,6 +154,11 @@ Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-
 *(no stage-2 results for pilot_pythia410m_prefix)*
 
 
+### Stage 3 — behavior and causal tests
+
+*(no stage-3 results for pilot_pythia410m_prefix)*
+
+
 ### Stage 4 — ablations
 
 *(no stage-4 results for pilot_pythia410m_prefix)*
@@ -162,6 +167,11 @@ Per triplet (pilot_pythia410m, layer 8; ✓ = representation closer to the tree-
 ### Addendum A — habitat gradient (held-out species)
 
 *(no habitat-addendum results for pilot_pythia410m_prefix)*
+
+
+### Stage 6 — sensitivity
+
+*(no stage-6 results for pilot_pythia410m_prefix)*
 
 
 ## Run `qwen35_2b`
@@ -356,6 +366,32 @@ Selectivity (model − shuffled-tree, held-out families): **0.763**
 | TA_within | 0.471 | 0.444 | -0.027 | +0.002 |
 
 
+### Stage 3 — behavior and causal tests
+
+**Behavior** (answer-letter log-odds, averaged over both answer orders; binomial test vs 0.5, two-sided)
+
+| test | n | accuracy | binomial p |
+|---|---|---|---|
+| conflict triplets: chose the tree-closer animal | 36 | 0.306 | 0.029 |
+| within-stratum species triplets: chose the tree-closer animal | 300 | 0.567 | 0.024 |
+| class word correct (argmax over candidate class words) | 385 | 0.909 | – |
+
+On the same species triplets, the layer-6 representation is closer to the tree-closer animal in 0.613 of cases; behavior and representation agree on 0.633.
+
+Class-word accuracy by stratum: amphibians 1.00, arachnids 0.93, birds 0.99, cartilaginous fish 1.00, cnidarians 0.80, crustaceans 0.87, echinoderms 0.50, insects 0.76, mammals 0.97, molluscs 0.65, ray-finned fish 0.96, reptiles 0.97.
+
+
+**Causal tests, final run (deviation 19)** (layer 6; k = 10 probe subspace fit on half of the families; 188 held-out species; captured variance 0.100)
+
+| hypothesis | probe subspace | random subspaces: mean [max] | rank p | Holm p | secondary |
+|---|---|---|---|---|---|
+| C-abl: drop in log P(correct class) | 0.083 | 0.016 [0.058] (n = 20) | 0.048 | – | Wilcoxon over species p = <0.001 |
+| C-swap: answer switches to the source's class | 0.065 | 0.029 [0.045] (n = 10) | 0.091 | – | no edit: 0.020 (200 pairs) |
+
+Off-target next-token loss on neutral sentences: no edit 3.2728, probe subspace ablated 3.2324, random ablated 3.2553.
+
+
+
 ### Stage 4 — ablations
 
 **Single-change ablations** (TA_within on the stage-1b triplets; modal layer 6)
@@ -414,6 +450,34 @@ Held-out: 79 mammals, 80 birds; axis = oriented PC1 of layer 21 (primary set).
 | B2_aerial_positive | Spearman ρ = -0.157 | 0.917 | 0.917 |
 
 
+### Stage 6 — sensitivity
+
+Layer 6; main-run TA_within 0.475. Mean ± SD [2.5th, 97.5th percentile] over repetitions; margin = model minus the best of the untrained and nuisance controls in the same repetition.
+
+| perturbation | repetitions | TA_within | min | margin over best control (min) |
+|---|---|---|---|---|
+| triplet sampling seed | 20 | 0.474 ± 0.002 [0.469, 0.476] | 0.467 | 0.077 (0.070) |
+| 80% species subsample | 20 | 0.475 ± 0.019 [0.442, 0.511] | 0.437 | 0.084 (0.044) |
+| template halves (4 of 8) | 20 | 0.475 ± 0.004 [0.469, 0.481] | 0.469 | – (best layer: 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 22) |
+| leave one template out | 8 | 0.478 ± 0.005 [0.471, 0.483] | 0.471 | – (best layer: 6, 6, 6, 6, 6, 6, 6, 6) |
+| single template | 8 | 0.467 ± 0.006 [0.458, 0.475] | 0.456 | – (best layer: 6, 6, 22, 6, 24, 22, 6, 6) |
+| cross-fit family-split seed | 20 | 0.472 ± 0.004 [0.466, 0.478] | 0.466 | – (modal layer: 6, 6, 6, 6, 6, 6, 6, 6, 7, 6, 6, 6, 6, 6, 21, 6, 7, 6, 6, 6) |
+
+**Triplets per decision node K** (one draw each)
+
+| K | within triplets | qwen35_2b | qwen35_2b_random | pythia410m_step0 | char3 | token_count | log_popularity |
+|---|---|---|---|---|---|---|---|
+| 50 | 3710 | 0.472 | 0.380 | 0.398 | 0.337 | 0.381 | 0.368 |
+| 100 | 6466 | 0.476 | 0.384 | 0.396 | 0.331 | 0.389 | 0.366 |
+| 200 | 11097 | 0.476 | 0.382 | 0.395 | 0.333 | 0.381 | 0.363 |
+| 400 | 18631 | 0.475 | 0.385 | 0.397 | 0.332 | 0.379 | 0.369 |
+
+**Flat probe, 20 fresh seeds** (folds and init): held-out Pearson r 0.750 ± 0.012 [0.728, 0.768]; within-group held-out Spearman 0.338 ± 0.033 [0.281, 0.399].
+
+Mantel r vs path length under 80% species subsamples: 0.362 ± 0.009 [0.349, 0.376]; under template halves: 0.361 ± 0.006 [0.349, 0.368].
+
+
+
 ## Run `qwen35_2b_prefix`
 
 ### Stage 1a — top-3 PCA checks per layer
@@ -462,6 +526,11 @@ Held-out: 79 mammals, 80 birds; axis = oriented PC1 of layer 21 (primary set).
 *(no stage-2 results for qwen35_2b_prefix)*
 
 
+### Stage 3 — behavior and causal tests
+
+*(no stage-3 results for qwen35_2b_prefix)*
+
+
 ### Stage 4 — ablations
 
 *(no stage-4 results for qwen35_2b_prefix)*
@@ -470,3 +539,13 @@ Held-out: 79 mammals, 80 birds; axis = oriented PC1 of layer 21 (primary set).
 ### Addendum A — habitat gradient (held-out species)
 
 *(no habitat-addendum results for qwen35_2b_prefix)*
+
+
+### Stage 6 — sensitivity
+
+*(no stage-6 results for qwen35_2b_prefix)*
+
+
+## Stage 5 — more models (scale and training dynamics)
+
+*(no stage-5 results yet)*
