@@ -165,6 +165,54 @@ def stage2_table(run: str) -> str:
     return "\n".join(out) + "\n"
 
 
+def stage4_table(run: str) -> str:
+    """Ablation variants, polysemous inclusion, probe dimension/metric, geodesic k sweep."""
+    r = _load(RESULTS_DIR / run / "stage4" / "results.json")
+    if not r:
+        return f"*(no stage-4 results for {run})*\n"
+    out = [f"**Single-change ablations** (TA_within on the stage-1b triplets; modal layer {r['modal_layer']})\n",
+           "| variant | TA_within (modal layer) | max over layers (layer) | Mantel r (modal) |", "|---|---|---|---|"]
+    for k, v in r["variants"].items():
+        extra = ""
+        if "common_names_same_triplets_modal" in v:
+            extra = f" (common names on the same triplets: {v['common_names_same_triplets_modal']:.3f})"
+        out.append(f"| {k}{extra} | {v['ta_within_modal']:.3f} | {v['ta_within_max']:.3f} ({v['argmax_layer']}) | "
+                   f"{v['mantel_pathlen_modal']:.3f} |")
+    if "polysemous_included" in r:
+        p = r["polysemous_included"]
+        out.append(f"\nPolysemous names included (n = {p['n_species']}): TA_within {p['ta_within_modal']:.3f} "
+                   f"(primary set {p['ta_within_primary_modal']:.3f}).\n")
+    out += ["\n**Probe ablations** (held-out families, mean of 3 seeds)\n",
+            "| probe | held-out r | within-group held-out Spearman | train r |", "|---|---|---|---|"]
+    for k, v in r["probe"].items():
+        out.append(f"| {k} | {v['test_test_pearson']:.3f} | {v.get('test_test_within_group_spearman', float('nan')):.3f} | "
+                   f"{v['train_train_pearson']:.3f} |")
+    g = r["geodesic_k_sweep"]
+    out += [f"\n**kNN geodesic, k sweep** (smallest connected k = {g['smallest_connected_k']})\n",
+            "| k | Mantel r vs path length | TA_within |", "|---|---|---|"]
+    for k, v in g["values"].items():
+        out.append(f"| {k} | {v['mantel_pathlen']:.3f} | {v['ta_within']:.3f} |")
+    return "\n".join(out) + "\n"
+
+
+def eco_table(run: str) -> str:
+    """Addendum A (habitat gradient on held-out species)."""
+    r = _load(RESULTS_DIR / run / "eco" / "results.json")
+    if not r:
+        return f"*(no habitat-addendum results for {run})*\n"
+    out = [f"Held-out: {r['n_mammals']} mammals, {r['n_birds']} birds; axis = oriented PC1 of layer {r['layer']} (primary set).\n",
+           "| test | statistic | one-sided p | Holm p |", "|---|---|---|---|"]
+    for k, v in r["tests"].items():
+        if "p" not in v:
+            out.append(f"| {k} | not evaluable (n = {v['n']}) | – | – |")
+        elif "rho" in v:
+            out.append(f"| {k} | Spearman ρ = {v['rho']:.3f} | {p_fmt(v['p'])} | {p_fmt(v['holm_p'])} |")
+        else:
+            out.append(f"| {k} | median {v['median']:.2f} (n = {v['n']}) vs ground {v['median_ground']:.2f} "
+                       f"(n = {v['n_ground']}) | {p_fmt(v['p'])} | {p_fmt(v['holm_p'])} |")
+    return "\n".join(out) + "\n"
+
+
 def probe_bar_png(run: str) -> None:
     """Bar chart of held-out-family probe correlation: model vs controls (error bars = seed sd)."""
     r = _load(RESULTS_DIR / run / "stage2" / "results.json")
@@ -209,7 +257,9 @@ def write_results_md(runs: list[str]) -> Path:
         parts += [f"\n## Run `{run}`\n", "### Stage 1a — top-3 PCA checks per layer\n", stage1a_table(run),
                   "\n### Stage 1b — triplet accuracy and secondary hypotheses\n", stage1b_tables(run),
                   "\n### Conflict triplets (phylogeny vs folk/lexical)\n", conflict_table(run),
-                  "\n### Stage 2 — geometry and flat-subspace probe\n", stage2_table(run)]
+                  "\n### Stage 2 — geometry and flat-subspace probe\n", stage2_table(run),
+                  "\n### Stage 4 — ablations\n", stage4_table(run),
+                  "\n### Addendum A — habitat gradient (held-out species)\n", eco_table(run)]
     path = RESULTS_DIR / "RESULTS.md"
     path.write_text("\n".join(parts), encoding="utf-8")
     for run in runs:
@@ -218,6 +268,7 @@ def write_results_md(runs: list[str]) -> Path:
         (RESULTS_DIR / run / "SUMMARY.md").write_text(
             "\n".join([f"# Run `{run}` (auto-generated; do not edit)\n", "## Stage 1a\n", stage1a_table(run),
                        "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run),
-                       "\n## Stage 2\n", stage2_table(run)]),
+                       "\n## Stage 2\n", stage2_table(run), "\n## Stage 4\n", stage4_table(run),
+                       "\n## Addendum A (habitat gradient)\n", eco_table(run)]),
             encoding="utf-8")
     return path

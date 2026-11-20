@@ -188,3 +188,61 @@ Selectivity (model − shuffled-tree, held-out families): **0.763**
 |---|---|---|---|---|
 | Mantel Spearman vs path length | 0.362 | 0.251 | -0.110 | +0.066 |
 | TA_within | 0.471 | 0.444 | -0.027 | +0.002 |
+
+
+## Stage 4
+
+**Single-change ablations** (TA_within on the stage-1b triplets; modal layer 6)
+
+| variant | TA_within (modal layer) | max over layers (layer) | Mantel r (modal) |
+|---|---|---|---|
+| main (last token, per-template centering) | 0.475 | 0.475 (6) | 0.362 |
+| raw cosine (no centering) | 0.424 | 0.446 (9) | 0.293 |
+| z-scored dimensions | 0.480 | 0.480 (6) | 0.375 |
+| stratum-centered | 0.483 | 0.483 (6) | -0.052 |
+| mean over name tokens | 0.399 | 0.425 (4) | 0.234 |
+| raw text (no chat template) | 0.482 | 0.482 (6) | 0.366 |
+| scientific binomials (genus-split triplets) (common names on the same triplets: 0.530) | 0.332 | 0.386 (20) | 0.134 |
+
+Polysemous names included (n = 414): TA_within 0.470 (primary set 0.475).
+
+
+**Probe ablations** (held-out families, mean of 3 seeds)
+
+| probe | held-out r | within-group held-out Spearman | train r |
+|---|---|---|---|
+| angular_k2 | 0.631 | 0.117 | 0.780 |
+| angular_k3 | 0.716 | 0.230 | 0.904 |
+| angular_k5 | 0.737 | 0.285 | 0.938 |
+| angular_k10 | 0.750 | 0.351 | 0.959 |
+| angular_k20 | 0.753 | 0.345 | 0.966 |
+| euclid_k2 | 0.699 | 0.202 | 0.853 |
+| euclid_k5 | 0.730 | 0.298 | 0.912 |
+| euclid_k10 | 0.736 | 0.342 | 0.932 |
+| poincare_k2 | 0.675 | 0.194 | 0.843 |
+| poincare_k5 | 0.721 | 0.245 | 0.918 |
+| poincare_k10 | 0.728 | 0.309 | 0.932 |
+| angular_k10_shuffled_tree | 0.034 | 0.034 | 0.585 |
+
+**kNN geodesic, k sweep** (smallest connected k = 3)
+
+| k | Mantel r vs path length | TA_within |
+|---|---|---|
+| 3 | 0.251 | 0.448 |
+| 6 | 0.391 | 0.474 |
+| 10 | 0.386 | 0.470 |
+| 20 | 0.432 | 0.469 |
+| 40 | 0.401 | 0.476 |
+| angular | 0.362 | 0.475 |
+
+
+## Addendum A (habitat gradient)
+
+Held-out: 79 mammals, 80 birds; axis = oriented PC1 of layer 21 (primary set).
+
+| test | statistic | one-sided p | Holm p |
+|---|---|---|---|
+| M1_marine_lt_ground | median -0.58 (n = 6) vs ground 1.68 (n = 61) | <0.001 | <0.001 |
+| M2_aerial_gt_ground | not evaluable (n = 0) | – | – |
+| B1_water_negative | Spearman ρ = -0.385 | <0.001 | <0.001 |
+| B2_aerial_positive | Spearman ρ = -0.157 | 0.917 | 0.917 |
