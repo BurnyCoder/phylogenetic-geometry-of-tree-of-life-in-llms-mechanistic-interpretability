@@ -173,17 +173,23 @@ def circle_png(coords: np.ndarray, evr: np.ndarray, labels: list[str], path: Pat
 def line_by_layer_png(series: dict[str, np.ndarray], path: Path, title: str, ylabel: str,
                       hlines: dict[str, float] | None = None, bands: dict[str, tuple] | None = None) -> None:
     """Metric vs layer for several representations (optional reference lines / CI bands)."""
-    fig, ax = plt.subplots(figsize=(8, 4.5))
-    for name, y in series.items():
-        ax.plot(np.arange(len(y)), y, marker="o", ms=3, label=name)
+    # Validated palette in fixed order (blue, orange, green, gray), then dashed repeats; markers vary too,
+    # so identity never relies on color alone (dataviz skill: fixed order, secondary encoding).
+    pal, mk = ["#2a78d6", "#eb6834", "#1baf7a", "#8a8984"], ["o", "s", "^", "D"]
+    fig, ax = plt.subplots(figsize=(9, 4.5))
+    for i, (name, y) in enumerate(series.items()):
+        ax.plot(np.arange(len(y)), y, marker=mk[i % 4], ms=4, lw=2, color=pal[i % 4],
+                ls="-" if i < 4 else "--", label=name)
         if bands and name in bands:
             lo, hi = bands[name]
-            ax.fill_between(np.arange(len(y)), lo, hi, alpha=0.2)
+            ax.fill_between(np.arange(len(y)), lo, hi, alpha=0.15, color=pal[i % 4])
+    n_x = max(len(y) for y in series.values())
     for name, v in (hlines or {}).items():
-        ax.axhline(v, ls="--", lw=1, color="0.4")
-        ax.text(0, v, f" {name}", va="bottom", fontsize=8, color="0.3")
+        ax.axhline(v, ls=":", lw=1, color="0.45")
+        ax.text(n_x - 0.5, v, f"{name} ", va="bottom", ha="right", fontsize=7.5, color="0.3")
+    ax.grid(axis="y", color="0.92")
     ax.set_xlabel("layer (0 = embeddings)"); ax.set_ylabel(ylabel); ax.set_title(title, fontsize=10)
-    ax.legend(fontsize=8)
+    ax.legend(fontsize=8, loc="upper left", bbox_to_anchor=(1.01, 1.0), frameon=False)
     fig.tight_layout()
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=150)
@@ -217,4 +223,41 @@ def pca_spotlight_png(coords: np.ndarray, evr: np.ndarray, strata: np.ndarray, p
     fig.tight_layout()
     path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(path, dpi=130)
+    plt.close(fig)
+
+
+def strip_png(rows: dict[str, dict[str, list]], path: Path, title: str, xlabel: str,
+              vlines: dict[str, float] | None = None) -> None:
+    """Horizontal strip plot: one row per perturbation family, one dot per repetition.
+
+    ``rows[family][series] = values``. Series colors use the validated palette
+    (first series blue #2a78d6, second gray #8a8984), with a marker change as the
+    secondary encoding; small vertical offsets separate the series inside a row.
+    """
+    colors, markers = ["#2a78d6", "#8a8984", "#eb6834"], ["o", "s", "^"]
+    series = list(dict.fromkeys(s for r in rows.values() for s in r))
+    fig, ax = plt.subplots(figsize=(8, 0.9 * len(rows) + 1.4))
+    rng = np.random.default_rng(0)  # fixed jitter so the figure is reproducible
+    for yi, (fam, r) in enumerate(rows.items()):
+        for si, s in enumerate(series):
+            if s not in r:
+                continue
+            v = np.asarray(r[s], float)
+            y = yi + (si - (len(series) - 1) / 2) * 0.22 + rng.uniform(-0.05, 0.05, len(v))
+            ax.scatter(v, y, s=28, color=colors[si % 3], marker=markers[si % 3], edgecolor="white", linewidth=0.8,
+                       label=s if yi == 0 or s not in rows[list(rows)[0]] else None, zorder=3)
+    for name, v in (vlines or {}).items():
+        ax.axvline(v, ls="--", lw=1, color="0.45", zorder=1)
+        ax.text(v, len(rows) - 0.45, f" {name}", fontsize=8, color="0.3", rotation=90, va="top")
+    ax.set_yticks(range(len(rows)), list(rows))
+    ax.set_ylim(-0.6, len(rows) - 0.4)
+    ax.invert_yaxis()
+    ax.grid(axis="x", color="0.9", zorder=0)
+    ax.set_xlabel(xlabel); ax.set_title(title, fontsize=10)
+    handles, labels = ax.get_legend_handles_labels()
+    uniq = dict(zip(labels, handles))
+    ax.legend(uniq.values(), uniq.keys(), fontsize=8, loc="lower right")
+    fig.tight_layout()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(path, dpi=150)
     plt.close(fig)

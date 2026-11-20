@@ -308,7 +308,7 @@ def phase_report(cfg: RunConfig) -> None:
     from phylogeo.report import write_results_md
 
     runs = sorted(p.name for p in RESULTS_DIR.iterdir() if (p / "stage1a").exists() or (p / "stage1b").exists())
-    log.info("report written to %s", write_results_md(runs))
+    log.info("report written to %s", write_results_md(runs, cfg.name))
 
 
 def phase_stage2(cfg: RunConfig) -> None:
@@ -330,6 +330,20 @@ def phase_stage3_causal(cfg: RunConfig) -> None:
     from phylogeo.stage3 import run_stage3
 
     run_stage3(cfg, load_species, load_conflict, act_dir, out_dir, write_json, causal_only=True)
+
+
+def phase_stage6(cfg: RunConfig) -> None:
+    """Stage 6: sensitivity to triplet seeds, templates, species subsamples, split and probe seeds."""
+    from phylogeo.stage6 import run_stage6
+
+    run_stage6(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
+
+
+def phase_examples(cfg: RunConfig) -> None:
+    """Nearest-neighbour output examples for rule-chosen query species, per representation."""
+    from phylogeo.examples import run_examples
+
+    run_examples(cfg, load_species, layer_distances, act_dir, out_dir, write_json)
 
 
 def phase_site(cfg: RunConfig) -> None:

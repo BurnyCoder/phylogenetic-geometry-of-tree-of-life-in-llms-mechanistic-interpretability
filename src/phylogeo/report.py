@@ -12,6 +12,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
+
 from phylogeo.config import RESULTS_DIR
 
 
@@ -213,6 +215,214 @@ def eco_table(run: str) -> str:
     return "\n".join(out) + "\n"
 
 
+def stage3_table(run: str) -> str:
+    """Behavioral judgments and the causal tests (final run; first run kept as superseded)."""
+    r = _load(RESULTS_DIR / run / "stage3" / "results.json")
+    if not r:
+        return f"*(no stage-3 results for {run})*\n"
+    b, c, s = r["behavior_conflict"], r["behavior_species_triplets"], r["class_accuracy"]
+    L = r["layer"]
+    out = ["**Behavior** (answer-letter log-odds, averaged over both answer orders; binomial test vs 0.5, two-sided)\n",
+           "| test | n | accuracy | binomial p |", "|---|---|---|---|",
+           f"| conflict triplets: chose the tree-closer animal | {b['n']} | {b['accuracy']:.3f} | {p_fmt(b['binom_p'])} |",
+           f"| within-stratum species triplets: chose the tree-closer animal | {c['n']} | "
+           f"{c['behavioral_accuracy']:.3f} | {p_fmt(c['binom_p'])} |",
+           f"| class word correct (argmax over candidate class words) | {s['n']} | {s['accuracy']:.3f} | – |",
+           f"\nOn the same species triplets, the layer-{L} representation is closer to the tree-closer animal in "
+           f"{c['representation_pairwise_accuracy_same_triplets']:.3f} of cases; behavior and representation agree on "
+           f"{c['agreement_behavior_vs_representation']:.3f}.\n",
+           "Class-word accuracy by stratum: " + ", ".join(f"{k} {v:.2f}" for k, v in s["by_stratum"].items()) + ".\n"]
+    for tag, ka, ks in (("final run (deviation 19)", "C_abl", "C_swap"), ("first run (superseded; p floor too high)",
+                                                                           "C_abl_v1", "C_swap_v1")):
+        if ka not in r:
+            continue
+        a, w = r[ka], r[ks]
+        holm_p = r.get("causal_holm", {}) if ka == "C_abl" else {}
+        na, ns = a.get("n_random_subspaces", len(a["random_mean_drops"])), len(w["switch_rate_random"])
+        out += [f"\n**Causal tests, {tag}** (layer {L}; k = 10 probe subspace fit on half of the families; "
+                f"{a['n_test_species']} held-out species; captured variance {a['probe_var_captured']:.3f})\n",
+                "| hypothesis | probe subspace | random subspaces: mean [max] | rank p | Holm p | secondary |",
+                "|---|---|---|---|---|---|",
+                f"| C-abl: drop in log P(correct class) | {a['mean_drop_logp_probe']:.3f} | "
+                f"{np.mean(a['random_mean_drops']):.3f} [{np.max(a['random_mean_drops']):.3f}] (n = {na}) | "
+                f"{p_fmt(a['p_rank_vs_random'])} | {p_fmt(holm_p['C_abl']) if holm_p else '–'} | "
+                f"Wilcoxon over species p = {p_fmt(a['wilcoxon_p_probe_gt_random'])} |",
+                f"| C-swap: answer switches to the source's class | {w['switch_rate_probe']:.3f} | "
+                f"{np.mean(w['switch_rate_random']):.3f} [{np.max(w['switch_rate_random']):.3f}] (n = {ns}) | "
+                f"{p_fmt(w['p_rank_vs_random'])} | {p_fmt(holm_p['C_swap']) if holm_p else '–'} | "
+                f"no edit: {w['switch_rate_no_edit']:.3f} ({w['n_pairs']} pairs) |"]
+        if "mean_base_logp_correct" in a:
+            out.append(f"\nMean log P(correct class) without editing: {a['mean_base_logp_correct']:.3f}.")
+        out.append(f"\nOff-target next-token loss on neutral sentences: no edit {a['neutral_loss_base']:.4f}, probe "
+                   f"subspace ablated {a['neutral_loss_probe_ablated']:.4f}, random ablated "
+                   f"{a['neutral_loss_random_ablated']:.4f}"
+                   + (" (first run: baseline on a different sentence set, not comparable)." if ka.endswith("v1")
+                      else ".") + "\n")
+    return "\n".join(out) + "\n"
+
+
+def stage5_table() -> str:
+    """Scale and training-dynamics runs (one row per run)."""
+    r = _load(RESULTS_DIR / "stage5" / "summary.json")
+    if not r:
+        return "*(no stage-5 results yet)*\n"
+    head = ["| run | parameters | step | layers | TA_within max (rel. depth) | cross-fitted TA_within | max-T p | "
+            "Mantel r (modal layer) |", "|---|---|---|---|---|---|---|---|"]
+
+    def row(x):
+        return (f"| {x['run']} | {x['params'] / 1e9:.2f}B | {x['step'] if x['step'] is not None else 'final'} | "
+                f"{x['n_layers']} | {x['ta_within_max']:.3f} ({x['best_layer_rel_depth']:.2f}) | "
+                f"{x['crossfit_ta_within']:.3f} | {p_fmt(x['maxT_p'])} | {x['mantel_pathlen_modal']:.3f} |")
+
+    final = sorted([x for x in r["runs"] if x["step"] is None], key=lambda x: (x["model_id"].split("/")[0], x["params"]))
+    ck = sorted([x for x in r["runs"] if x["step"] is not None], key=lambda x: x["step"])
+    ref = ", ".join(f"{k} {v:.3f}" for k, v in r["reference_ta_within"].items())
+    out = ["**Scale** (final checkpoints)\n", *head, *[row(x) for x in final],
+           f"\nReference TA_within from stage 1b (same triplets): {ref}; chance 0.333. The max-T p uses 199 "
+           "within-stratum permutations (floor 0.005).\n"]
+    if ck:
+        out += ["\n**Training dynamics** (Pythia-1.4B checkpoints)\n", *head, *[row(x) for x in ck]]
+    return "\n".join(out) + "\n"
+
+
+def stage6_table(run: str) -> str:
+    """Spread of the headline numbers under each perturbation."""
+    r = _load(RESULTS_DIR / run / "stage6" / "results.json")
+    if not r:
+        return f"*(no stage-6 results for {run})*\n"
+
+    def ms(s):
+        return f"{s['mean']:.3f} ± {s['sd']:.3f} [{s['p2.5']:.3f}, {s['p97.5']:.3f}]"
+
+    out = [f"Layer {r['layer']}; main-run TA_within {r['main_run'][run]:.3f}. Mean ± SD [2.5th, 97.5th percentile]"
+           " over repetitions; margin = model minus the best of the untrained and nuisance controls in the same "
+           "repetition.\n", "| perturbation | repetitions | TA_within | min | margin over best control (min) |",
+           "|---|---|---|---|---|"]
+    for key, label in (("triplet_seed", "triplet sampling seed"), ("species_subsample", "80% species subsample")):
+        b = r[key]
+        out.append(f"| {label} | {len(b[run]['values'])} | {ms(b[run])} | {b[run]['min']:.3f} | "
+                   f"{b['margin_vs_best_control']['mean']:.3f} ({b['margin_vs_best_control']['min']:.3f}) |")
+    for key, label in (("half", "template halves (4 of 8)"), ("leave_one_out", "leave one template out"),
+                       ("single", "single template")):
+        t = r["templates"][key]
+        out.append(f"| {label} | {len(t['ta_within']['values'])} | {ms(t['ta_within'])} | {t['ta_within']['min']:.3f}"
+                   f" | – (best layer: {', '.join(map(str, t['argmax_layer']))}) |")
+    cf = r["crossfit_seed"]
+    out.append(f"| cross-fit family-split seed | {len(cf['modal_layer'])} | {ms(cf['crossfit_ta_within'])} | "
+               f"{cf['crossfit_ta_within']['min']:.3f} | – (modal layer: {', '.join(map(str, cf['modal_layer']))}) |")
+    k = r["k_per_node"]
+    out += ["\n**Triplets per decision node K** (one draw each)\n",
+            "| K | within triplets | " + " | ".join(r["representations"]) + " |",
+            "|---|---|" + "---|" * len(r["representations"])]
+    out += [f"| {K} | {v['n_within']} | " + " | ".join(f"{v[x]:.3f}" for x in r["representations"]) + " |"
+            for K, v in k.items()]
+    p = r["probe_seed"]
+    out.append(f"\n**Flat probe, {len(p['test_test_pearson']['values'])} fresh seeds** (folds and init): held-out "
+               f"Pearson r {ms(p['test_test_pearson'])}; within-group held-out Spearman "
+               f"{ms(p['test_test_within_group_spearman'])}.\n")
+    sp = r["species_subsample"]["mantel_pathlen_model"]
+    out.append(f"Mantel r vs path length under 80% species subsamples: {ms(sp)}; under template halves: "
+               f"{ms(r['templates']['half']['mantel_pathlen'])}.\n")
+    return "\n".join(out) + "\n"
+
+
+def key_results_md(run: str = "qwen35_2b") -> str:
+    """Headline table for README.md and reports/summary.md, built only from results JSON."""
+    R = RESULTS_DIR / run
+    b, c, s2 = _load(R / "stage1b" / "results.json"), _load(R / "conflict" / "conflict.json"), _load(R / "stage2" / "results.json")
+    if not b:
+        return "*(no results yet)*\n"
+    h, sec, pt = b["H1"], b["secondary"], b["point_ta_within"]
+    L = h["modal_layer"]
+    req = max(h["required_comparisons"], key=lambda k: pt.get(k, 0))
+    verdict = lambda ok: "supported" if ok else "not supported"
+    rows = [f"| Tree order *within* coarse groups, beyond names and popularity (H1, primary) | TA_within at layer {L} "
+            f"= {h['ta_within_modal']:.3f} [95% CI {h['ci95'][0]:.3f}, {h['ci95'][1]:.3f}], cross-fitted "
+            f"{h['crossfit_ta_within']:.3f}; max-T p {p_fmt(h['maxT_p'])}; strongest required control {req} "
+            f"{pt[req]:.3f}; chance 0.333 | {verdict(h['supported'])} |",
+            f"| Global distance correlation with the tree (S1) | Mantel Spearman r = "
+            f"{sec['S1']['mantel_spearman_pathlen_modal']:.3f}, Holm p {p_fmt(sec['S1']['holm_p'])} | "
+            f"{verdict(sec['S1']['holm_p'] < 0.05)} |",
+            f"| Order within taxonomic orders (S2) | TA = {sec['S2']['ta_modal']:.3f}, Holm p "
+            f"{p_fmt(sec['S2']['holm_p'])} | {verdict(sec['S2']['holm_p'] < 0.05)} |",
+            f"| Survives when spelling points the wrong way (S3) | TA = {sec['S3']['ta_modal']:.3f}, Holm p "
+            f"{p_fmt(sec['S3']['holm_p'])} | {verdict(sec['S3']['holm_p'] < 0.05)} |",
+            f"| Survives when GloVe co-occurrence points the wrong way (S4) | TA = {sec['S4']['ta_modal']:.3f}, Holm p "
+            f"{p_fmt(sec['S4']['holm_p'])} | {verdict(sec['S4']['holm_p'] < 0.05)} |",
+            f"| Distances track divergence time beyond topology (S5) | partial Spearman "
+            f"{sec['S5']['pooled_partial_spearman']:.3f}, Holm p {p_fmt(sec['S5']['holm_p'])} | "
+            f"{verdict(sec['S5']['holm_p'] < 0.05)} |"]
+    if c:
+        q = c["summary"][run]
+        rows.append(f"| Phylogeny-vs-folk conflict triplets (whale: hippo or whale shark?) | representation picks the "
+                    f"tree-closer animal in {q['phylo_choice']}/{q['n']} (binomial p {p_fmt(q['binom_p_two_sided'])}) "
+                    f"| {('follows the tree' if q['accuracy'] > 0.5 else 'follows the folk/ecological partner') if q['binom_p_two_sided'] < 0.05 else 'no significant preference'} |")
+    if s2:
+        pm, ps, pg = s2["probe"]["model"], s2["probe"]["shuffled_tree"], s2["probe"]["glove"]
+        rows.append(f"| Learned 10-d flat subspace generalizes to held-out families (exploratory) | held-out r = "
+                    f"{pm['test_test_pearson'][0]:.3f} ± {pm['test_test_pearson'][1]:.3f} vs shuffled tree "
+                    f"{ps['test_test_pearson'][0]:.3f}, GloVe input {pg['test_test_pearson'][0]:.3f} | exploratory |")
+        d = s2["delta_rel"]
+        rows.append(f"| Tree-like (hyperbolic) metric (exploratory) | Gromov δ_rel = {d['model']:.3f} vs matched Gaussian "
+                    f"{d['matched_gaussian_mean']:.3f}, class-blob {d['class_blob_mean']:.3f}, exact tree 0 | "
+                    f"exploratory |")
+    s3 = _load(R / "stage3" / "results.json")
+    if s3 and "C_abl" in s3 and "causal_holm" in s3:
+        a, w, hp = s3["C_abl"], s3["C_swap"], s3["causal_holm"]
+        rows += [f"| Ablating the probe subspace hurts class answers more than random subspaces (C-abl) | drop "
+                 f"{a['mean_drop_logp_probe']:.3f} vs {np.mean(a['random_mean_drops']):.3f} nats; rank p "
+                 f"{p_fmt(a['p_rank_vs_random'])}, Holm {p_fmt(hp['C_abl'])} | {verdict(hp['C_abl'] < 0.05)} |",
+                 f"| Swapping the subspace switches the class answer (C-swap) | switch rate {w['switch_rate_probe']:.3f} "
+                 f"vs random mean {np.mean(w['switch_rate_random']):.3f}; rank p {p_fmt(w['p_rank_vs_random'])}, "
+                 f"Holm {p_fmt(hp['C_swap'])} | {verdict(hp['C_swap'] < 0.05)} |"]
+    if s3:
+        bt = s3["behavior_species_triplets"]
+        rows.append(f"| The model *says* which species are related (exploratory) | chooses the tree-closer animal in "
+                    f"{bt['behavioral_accuracy']:.3f} of {bt['n']} within-group triplets (binomial p "
+                    f"{p_fmt(bt['binom_p'])}) | exploratory |")
+    s4 = _load(R / "stage4" / "results.json")
+    if s4:
+        v = s4["variants"]["scientific binomials (genus-split triplets)"]
+        rows.append(f"| Latin binomials carry the same structure (exploratory) | TA {v['ta_within_modal']:.3f} vs common "
+                    f"names on the same triplets {v['common_names_same_triplets_modal']:.3f} | no |")
+    e = _load(R / "eco" / "results.json")
+    if e:
+        t = e["tests"]
+        rows.append(f"| Late-layer top PC is an aquatic ↔ terrestrial habitat axis (Addendum A, held-out species) | "
+                    f"marine vs ground mammals Holm p {p_fmt(t['M1_marine_lt_ground']['holm_p'])}; waterbird ρ = "
+                    f"{t['B1_water_negative']['rho']:.3f} (Holm p {p_fmt(t['B1_water_negative']['holm_p'])}); aerial "
+                    f"birds ρ = {t['B2_aerial_positive']['rho']:.3f} | aquatic end supported, aerial end not |")
+    s6 = _load(R / "stage6" / "results.json")
+    if s6:
+        lo = min(s6["triplet_seed"][run]["min"], s6["species_subsample"][run]["min"],
+                 s6["templates"]["half"]["ta_within"]["min"], s6["crossfit_seed"]["crossfit_ta_within"]["min"])
+        mg = min(s6["triplet_seed"]["margin_vs_best_control"]["min"],
+                 s6["species_subsample"]["margin_vs_best_control"]["min"])
+        rows.append(f"| Robust to seeds, template subsets, species subsamples (stage 6) | lowest TA_within over "
+                    f"{s6['n_rep']} repetitions of each perturbation {lo:.3f}; smallest margin over the best control {mg:.3f} | "
+                    f"{'robust' if lo > 0.40 and mg > 0 else 'partly robust'} |")
+    s5 = _load(RESULTS_DIR / "stage5" / "summary.json")
+    if s5:
+        fin = sorted([x for x in s5["runs"] if x["step"] is None], key=lambda x: x["params"])
+        rows.append("| Other models (stage 5; cross-fitted TA_within) | " + "; ".join(
+            f"{x['run']} {x['crossfit_ta_within']:.3f}" for x in fin) + " | descriptive |")
+    head = [f"*Qwen3.5-2B unless noted. Generated by `python -m phylogeo.run --phases report` from `results/`; "
+            "do not edit by hand.*\n", "| Question | Result | Verdict |", "|---|---|---|"]
+    return "\n".join(head + rows) + "\n"
+
+
+def inject_block(path: Path, text: str, tag: str = "KEY-RESULTS") -> bool:
+    """Replace the text between <!-- {tag}:START --> and <!-- {tag}:END --> in ``path``."""
+    if not path.exists():
+        return False
+    s = path.read_text(encoding="utf-8")
+    a, z = f"<!-- {tag}:START -->", f"<!-- {tag}:END -->"
+    if a not in s or z not in s:
+        return False
+    path.write_text(s[: s.index(a) + len(a)] + "\n" + text + s[s.index(z):], encoding="utf-8")
+    return True
+
+
 def probe_bar_png(run: str) -> None:
     """Bar chart of held-out-family probe correlation: model vs controls (error bars = seed sd)."""
     r = _load(RESULTS_DIR / run / "stage2" / "results.json")
@@ -249,7 +459,7 @@ def power_table() -> str:
     return "\n".join(out) + "\n"
 
 
-def write_results_md(runs: list[str]) -> Path:
+def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
     """Aggregate all generated tables into results/RESULTS.md."""
     parts = ["# Results (auto-generated by `python -m phylogeo.run --phases report`; do not edit)\n",
              "## Power simulation\n", power_table()]
@@ -258,17 +468,25 @@ def write_results_md(runs: list[str]) -> Path:
                   "\n### Stage 1b — triplet accuracy and secondary hypotheses\n", stage1b_tables(run),
                   "\n### Conflict triplets (phylogeny vs folk/lexical)\n", conflict_table(run),
                   "\n### Stage 2 — geometry and flat-subspace probe\n", stage2_table(run),
+                  "\n### Stage 3 — behavior and causal tests\n", stage3_table(run),
                   "\n### Stage 4 — ablations\n", stage4_table(run),
-                  "\n### Addendum A — habitat gradient (held-out species)\n", eco_table(run)]
+                  "\n### Addendum A — habitat gradient (held-out species)\n", eco_table(run),
+                  "\n### Stage 6 — sensitivity\n", stage6_table(run)]
+    parts += ["\n## Stage 5 — more models (scale and training dynamics)\n", stage5_table()]
     path = RESULTS_DIR / "RESULTS.md"
     path.write_text("\n".join(parts), encoding="utf-8")
+    from phylogeo.config import REPO_ROOT
+
+    for doc in (REPO_ROOT / "README.md", REPO_ROOT / "reports" / "summary.md"):  # generated headline blocks
+        inject_block(doc, key_results_md(main))
     for run in runs:
         probe_bar_png(run)
     for run in runs:  # per-run summary next to the run's results (linked from experiment notes)
         (RESULTS_DIR / run / "SUMMARY.md").write_text(
             "\n".join([f"# Run `{run}` (auto-generated; do not edit)\n", "## Stage 1a\n", stage1a_table(run),
                        "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run),
-                       "\n## Stage 2\n", stage2_table(run), "\n## Stage 4\n", stage4_table(run),
-                       "\n## Addendum A (habitat gradient)\n", eco_table(run)]),
+                       "\n## Stage 2\n", stage2_table(run), "\n## Stage 3\n", stage3_table(run),
+                       "\n## Stage 4\n", stage4_table(run), "\n## Addendum A (habitat gradient)\n", eco_table(run),
+                       "\n## Stage 6\n", stage6_table(run)]),
             encoding="utf-8")
     return path
