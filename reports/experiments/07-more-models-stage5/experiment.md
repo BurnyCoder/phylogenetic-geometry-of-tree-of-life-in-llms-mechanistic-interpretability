@@ -43,9 +43,16 @@ Numbers are in [`results/RESULTS.md`](../../../results/RESULTS.md), section "Sta
    - It jumps by step 1000 and then keeps rising slowly to the final checkpoint.
    - The Mantel correlation with path length rises over the same period, from about zero to its final value.
    - Within-group tree order is therefore *learned* from text and keeps improving late in training. An untrained network does not provide it.
-4. **Untrained references differ by architecture.** Pythia-1.4B at step 0 is near chance, while the untrained Pythia-410m and random-init Qwen3.5-2B are above chance. The required untrained controls therefore matter, and a single "untrained baseline" number should not be generalized across architectures.
+4. **Untrained references differ by architecture.** Pythia-1.4B at step 0 is near chance. Untrained Pythia-410m is above chance by its own max-T test. Random-init Qwen3.5-2B is not, once the layer choice is accounted for (corrected by the 2026-11-22 audit; its value at its selected layer is above 1/3). The required untrained controls therefore matter, and a single "untrained baseline" number should not be generalized across architectures.
 
 ## Caveats
 - **Lighter analysis.** Only 199 permutations (p floor 0.005), cross-fitting with 10 splits and no bootstrap CIs. For the main model this gives a slightly different cross-fitted value than stage 1b.
 - **Untrained twins.** Only Pythia-410m and Pythia-1.4B have untrained versions in this study.
 - **Layer counts.** These differ across models, so the best layer is compared by relative depth.
+
+## Audit note (2026-11-22)
+From the [independent audit](../../reviews/2026-11-22-independent-audit.md):
+- **Reference lines are now like-for-like.** The figure plots cross-fitted values for every model, but the untrained reference lines used each control's full-sample value at its selected layer, which is optimistic. They are now cross-fitted too. Point 1's comparison of the two smallest Pythia models with the untrained Pythia-410m therefore reads "about equal" rather than "below".
+- **One size accounting.** Qwen parameter counts were checkpoint totals including a vision encoder and an MTP head, while Pythia used nominal sizes. All models now use nominal sizes from the model names.
+- **Steps 0 and 1 of Pythia-1.4B give identical numbers** because their stored activations are identical. The two checkpoint files differ on the Hub. Plausibly, the first update at the warm-up learning rate is far below bfloat16 resolution, and the models are loaded in bfloat16. This was not verified at the weight level.
+- **Cross-fitting here uses 10 family splits**, so Qwen3.5-2B's value differs slightly from the stage-1b value with 20 splits; the key-results table now says so.

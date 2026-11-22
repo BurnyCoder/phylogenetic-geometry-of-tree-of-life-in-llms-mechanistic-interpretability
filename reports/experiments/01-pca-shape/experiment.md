@@ -57,7 +57,7 @@ After the review fixes (deviations 11–18), the species set changed: names were
 All numbers are in the auto-generated table in [`results/RESULTS.md`](../../../results/RESULTS.md) → Run `qwen35_2b` → Stage 1a, and in `checks.json`. The qualitative shape is unchanged from descriptions 1–2.
 
 **Calibration (positive and negative controls)**
-- **Days of the week and months form clean circles in calendar order** (PC1–PC2, layer 12; `calib_days_layer12_pc12.png`, `calib_months_layer12_pc12.png`). This reproduces Engels et al. in Qwen3.5-2B, so the pipeline recovers known low-dimensional geometry.
+- **Days of the week and months form clean circles in calendar order** (PC1–PC2, layer 12; `calib_days_layer12_pc12.png`, `calib_months_layer12_pc12.png`). This is judged by eye (no circularity statistic) and is consistent with the circles reported by Engels et al., so the pipeline recovers known low-dimensional geometry.
 - **The synthetic Brownian-motion-on-the-tree cloud** (`calib_synthetic_brownian_tree.png`) shows long, clean arms per clade in the top 3 PCs. That is what a dominant tree signal looks like. The real species cloud looks very different.
 - **Random-init Qwen** (`calib_random_init_grid.png`; column "C1 random-init"):
   - At layer 0 its class purity equals the trained model's. Layer-0 structure is therefore pure token identity: shared head nouns get the same embedding even with random weights.
@@ -88,3 +88,9 @@ Birds and insects are phylogenetically distant but are both flyers. The dominant
   - Late layers: a curved, ecology-like gradient through the classes.
   - **No visible nested branching inside classes**, unlike the synthetic tree.
 - **Verdict (exploratory):** H1a is **partially supported**. The top-3 PCs show class-level arms and some order-level clustering, beyond the lexical and random-init references. The overall top-3 shape is closer to "clusters + ecological gradient" (alternatives b/c) than to the nested tree of the Brownian calibration. As preregistered, this does not decide the question for higher dimensions; stage 1b (triplet accuracy over all 2,048 dimensions) does.
+
+## Audit note (2026-11-22)
+From the [independent audit](../../reviews/2026-11-22-independent-audit.md):
+- **The formal H1a checks do not discriminate.** C1–C3 already pass at layer 2, where the representation is close to the token embedding, and C2/C3 were not computed for the random-init model. The "tree-consistent" label therefore says only that classes and orders cluster, which word identity already produces. The figure caption on the site now says so. The verdict above (partially supported; clusters plus an ecological gradient, not a nested tree) stands.
+- **"Clean circles"** for days and months is a visual reading of 7 and 12 points in calendar order, not a test.
+- **The cetacean guess** in the mammal zoom-in ("probably the cetaceans") was never checked and is not a result.

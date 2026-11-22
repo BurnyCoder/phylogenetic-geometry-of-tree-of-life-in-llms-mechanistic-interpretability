@@ -331,7 +331,7 @@ def fig_per_stratum(run) -> dict | None:
     clear = [st for st, v in ps.items() if v["ci95"][0] > 1 / 3]
     below = [st for st, v in ps.items() if v["ci95"][1] < 1 / 3]
     verdict = "clear in " + (", ".join(sorted(clear)) or "no stratum") + (
-        f"; below chance in {', '.join(sorted(below))}" if below else "")
+        "; below chance in " + ", ".join(f"{b} ({ps[b]['n_nodes']} nodes)" for b in sorted(below)) if below else "")
     return rec("strata", "Which groups carry the signal?", "mixed", verdict,
                "TA_within per stratum with family-block bootstrap CIs. Colour = super-group (blue vertebrates, orange "
                "arthropods, aqua other invertebrates). Only strata whose whole CI lies above chance show clear "
@@ -410,8 +410,9 @@ def fig_secondary(run) -> dict | None:
                "S2–S4 matched by untrained networks",
                "Registered secondary subsets (S2–S4) and a post-hoc spelling-neutral subset. Where spelling or GloVe "
                "co-occurrence disagree with the tree, the trained model does no better than untrained networks, so "
-               "phylogenetic information beyond those statistics is not shown. It does beat them where spelling has "
-               "no preference.", fig, (1100, 520))
+               "robustness to misleading spelling or co-occurrence is not shown. Where spelling carries no information "
+               "(names share no character 3-gram) it beats them, and the untrained networks are at chance there; "
+               "co-occurrence is not ruled out.", fig, (1100, 520))
 
 
 def fig_conflict(run) -> dict | None:
@@ -461,8 +462,12 @@ def fig_probe(run) -> dict | None:
                     hovertemplate="<b>%{x}</b><br>%{y:.3f} (± SD over seeds)<extra></extra>", row=1, col=col)
     fig.add_hline(pr["class_only_predictor_pearson_all_pairs"], line_dash="dash", line_color=AQUA, row=1, col=1,
                   annotation_text="class-only predictor", annotation_font_color=AQUA, annotation_font_size=11)
-    fig.add_hline(pr["raw_angular_within_stratum_spearman_all_species"], line_dash="dash", line_color=BLUE, row=1,
-                  col=2, annotation_text="raw distances, no probe", annotation_font_color=BLUE, annotation_font_size=11)
+    au = _load(RESULTS_DIR / run / "audit" / "results.json")  # raw distances on the SAME held-out pairs (audit)
+    raw = (au["probe_vs_raw_heldout"]["raw_angular_heldout_within_stratum_spearman"] if au
+           else pr["raw_angular_within_stratum_spearman_all_species"])
+    fig.add_hline(raw, line_dash="dash", line_color=BLUE, row=1, col=2,
+                  annotation_text="raw distances, no probe" + (" (same held-out pairs)" if au else " (all species)"),
+                  annotation_font_color=BLUE, annotation_font_size=11)
     fig.update_yaxes(title_text="held-out families (5-fold)", row=1, col=1)
     _style(fig, 520, legend=False)
     beaten = pr["class_blob"]["test_test_pearson"][0] >= pr["model"]["test_test_pearson"][0]
@@ -470,8 +475,10 @@ def fig_probe(run) -> dict | None:
                "class-only input does as well" if beaten else "beats the class-only input",
                "Probe trained to predict tree distance from representations, evaluated on held-out families (error bars "
                "= SD over seeds). An input that carries only class membership (aqua) matches or beats the model on all "
-               "pairs, so that headline correlation mostly measures coarse groups. Inside strata the probe adds little "
-               "over raw distances.", fig, (1100, 540))
+               "pairs, so that headline correlation mostly measures coarse groups. Inside strata the probe "
+               + ("scores below the raw distances on the same held-out pairs: it adds no within-group order."
+                  if raw > pr["model"]["test_test_within_stratum_spearman"][0] else "adds little over raw distances."),
+               fig, (1100, 540))
 
 
 def fig_treeness(run) -> dict | None:
@@ -617,13 +624,14 @@ def fig_scale(run) -> dict | None:
                       annotation_font_size=10, annotation_font_color=MUTED, annotation_position="bottom right")
     for col in (1, 2):
         _chance(fig, "y", 1, col)
-    fig.update_xaxes(type="log", title_text="parameters (log)", row=1, col=1)
+    fig.update_xaxes(type="log", title_text="parameters (nominal, log)", row=1, col=1)
     fig.update_xaxes(type="log", title_text="training step (log; step 0 plotted at 0.5)", row=1, col=2)
     fig.update_yaxes(title_text="cross-fitted TA_within", row=1, col=1)
     _legend_below(_style(fig, 540))
     return rec("scale", "More models: grows with scale, learned during training", "positive", "descriptive (stage 5)",
                "Same species, triplets and metric for every model (199 permutations, lighter than stage 1b). Dotted "
-               "lines: untrained and name-statistic references. Within each family the effect grows with size; in "
+               "lines: untrained networks (cross-fitted, like the model values) and name-statistic references. Parameters are "
+               "nominal sizes. Within each family the effect grows with size; in "
                "Pythia-1.4B it stays near chance up to step 512 and appears by step 1000.", fig, (1150, 560))
 
 
@@ -696,7 +704,8 @@ def fig_neighbor_levels(run) -> dict | None:
                "far more same-order neighbours than untrained",
                f"For every species, its {d['k']} nearest species at layer {d['layer']}, coloured by the closest shared "
                "rank (dark = same genus ... light = different phylum). The tree row is the ground-truth ceiling (ties in "
-               "tree distance broken by table order).", fig, (1100, 400))
+               "tree distance broken by table order). Descriptive: names that share a head noun (e.g. two sharks) are not "
+               "excluded here, unlike in the confirmatory metric.", fig, (1100, 400))
 
 
 def fig_neighbor_examples(run, n_show: int = 5) -> dict | None:
@@ -957,9 +966,11 @@ def fig_pca3d(run: str, tree, control: str = "qwen35_2b_random") -> dict | None:
     snap = _pair_fig([(np.array(d["reps"][q]["coords"][L]), pca3d_title(d, q, L, lim)) for q in (run, control)],
                      d["names"], d["strata"], tree, lim)
     k = sum("tree-consistent" in c["reading"] for c in checks) if checks else 0
+    first = next((c["layer"] for c in checks or [] if "tree-consistent" in c["reading"]), None)
     r = rec("pca3d", "Top-3 principal components in 3-D, animated through all layers: trained vs random init", "mixed",
-            f"trained: H1a checks tree-consistent in {k}/{len(checks or [])} layers; by eye: class arms, no nested "
-            "branching",
+            f"trained: H1a checks pass in {k}/{len(checks or [])} layers"
+            + (f", already at near-lexical layer {first}, so they do not discriminate" if first is not None and first <= 2 else "")
+            + "; by eye: class arms, no nested branching",
             "Left: the trained model. Right: the same architecture with random weights (the untrained control), at the "
             "same layer. Each point is one species at the last token of its name (mean over 8 prompts), projected on that "
             "layer's top three principal components. Consecutive layers are rotated onto each other (orthogonal "

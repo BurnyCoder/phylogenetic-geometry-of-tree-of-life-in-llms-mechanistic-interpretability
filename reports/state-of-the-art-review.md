@@ -12,7 +12,7 @@ This is the companion to [literature-review.md](literature-review.md). It covers
 | Mean over several prompt templates to average out context | Analogous to Goodfire pooling over many genome windows; Gurnee & Tegmark instead *test sensitivity* to prepended prompts (§3.3) | Yes, 8 templates; split-half template reliability reported |
 | Mean over the entity's tokens | Goodfire Evo 2 pools over 2 kb of tokens | Secondary readout |
 | Whitened unembeddings ("causal inner product") | [Park et al. 2024](https://arxiv.org/abs/2406.01506) | No. Whitening can manufacture orthogonality ([critique](https://d2jud02ci9yv69.cloudfront.net/2025-04-28-feature-geometry-65/blog/feature-geometry/)) |
-| Subtract the mean over entities before cosine (removes the shared anisotropic direction) | Anisotropy of contextual representations ([Ethayarajh 2019](https://aclanthology.org/D19-1006/)); mean removal ([Mu & Viswanath 2018](https://arxiv.org/abs/1702.01417)); rogue dimensions dominate cosine ([Timkey & van Schijndel 2021](https://arxiv.org/abs/2109.04404)) | Yes, per template (z-scoring as sensitivity analysis) |
+| Subtract the mean over entities before cosine (removes the shared anisotropic direction) | Anisotropy of contextual representations ([Ethayarajh 2019](https://aclanthology.org/D19-1006/)); mean removal ([Mu, Bhat & Viswanath 2018](https://arxiv.org/abs/1702.01417)); rogue dimensions dominate cosine ([Timkey & van Schijndel 2021](https://arxiv.org/abs/2109.04404)) | Yes, per template (z-scoring as sensitivity analysis) |
 
 **Libraries.**
 - Plain Hugging Face `transformers` (`output_hidden_states=True`) is the simplest exact route for residual-stream reads.
@@ -20,7 +20,7 @@ This is the companion to [literature-review.md](literature-review.md). It covers
 - TransformerLens 4.x replaced `HookedTransformer.from_pretrained` with `TransformerBridge` ([repo](https://github.com/TransformerLensOrg/TransformerLens)). Not needed here.
 
 **Model choice.** The user picked **Qwen3.5-2B**, the post-trained release ([model card](https://huggingface.co/Qwen/Qwen3.5-2B)).
-- Basics: Apache-2.0, 2.27B parameters, bf16. It is a fine-tune of Qwen3.5-2B-Base.
+- Basics: Apache-2.0, bf16, 2.27B parameters in the checkpoint. That total includes a vision encoder (about 0.33B) and a multi-token-prediction head (about 0.06B); the language model alone is about 1.88B (safetensors header on the Hub, checked 2026-11-22). It is a fine-tune of Qwen3.5-2B-Base.
 - Architecture:
   - 24 decoder layers, hidden size 2048;
   - layers follow a 3:1 pattern of Gated-DeltaNet linear attention to full attention (read from `config.json`: `layer_types`, `full_attention_interval=4`);

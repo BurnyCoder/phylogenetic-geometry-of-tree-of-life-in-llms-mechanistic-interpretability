@@ -88,3 +88,11 @@ Running log of what was learned from the literature, from errors, and from the e
 - **Use depth-first order for distance heatmaps.** `RefTree.preorder` is breadth-first, so it interleaves clades. Leaves have to be taken in depth-first order for clades to appear as blocks, and a unit test checks this.
 - **A read-only folder breaks `uv sync` on Windows.** A read-only attribute on `phylogeo-0.1.0.dist-info` made uv fail with "Access is denied" and drop the editable install. No process was holding the folder. `attrib -R` on that folder fixed it.
 
+
+## From the independent audit (2026-11-22)
+- **Compare like with like.** The flat probe's within-stratum score was computed on held-out pairs but compared with raw distances over all species. On the same held-out pairs the raw distances scored higher, which reversed "the probe adds little" into "the probe adds nothing". *Lesson:* any comparison table needs one evaluation set per column.
+- **"Above chance" needs the test, not the point estimate.** The random-init control's value at its selected layer was above 1/3, but its own max-T test over layers was not significant. *Lesson:* report a control's significance with the same layer-selection correction as the main model.
+- **Choose the bootstrap block for the dependence you expect.** Family blocks gave a positive margin over the untrained networks; order blocks, which also capture shared ancestry above the family, did not. *Lesson:* preregister the resampling level from the structure of the claim (here: most decision nodes split orders), and report a coarser level as a sensitivity analysis.
+- **"No shared token" is not "no shared spelling".** "fly" and " fly" are different tokens. The character-3-gram-neutral subset, not the token-disjoint one, is the test of a name-form explanation.
+- **Check citation titles against the arXiv page, not the blog post.** Two reference-list titles were blog-post titles, or invented descriptive titles, attached to arXiv ids.
+- **Heredocs on Windows Git Bash can rewrite backslashes.** A Python edit script passed through a heredoc lost one level of backslash escaping, so escaped `\n` sequences became real newlines inside string literals and broke a module. *Lesson:* write edit scripts with a file-writing tool and check that the module still parses after every scripted edit.

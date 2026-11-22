@@ -49,3 +49,6 @@ The interpretation above overstates the result in three places ([review](../../r
 - **Link to the conflict triplets is withdrawn.** The untrained networks behave the same on those triplets (final review M4).
 
 The registered reading stands: the geometry mixes ecology with taxonomy.
+
+## Audit note (2026-11-22)
+From the [independent audit](../../reviews/2026-11-22-independent-audit.md): the M1 Mann–Whitney p-value is exact. SciPy used the exact null distribution, and counting the rank arrangements by hand gives the same value. Holm was applied over the 3 evaluable tests, not the 4 registered ones, because M2 has no bats. With 4 tests the conclusions are unchanged. The name-cue caveat above is the main limitation: all 6 marine mammal names contain "sea", "seal", "whale" or "porpoise".

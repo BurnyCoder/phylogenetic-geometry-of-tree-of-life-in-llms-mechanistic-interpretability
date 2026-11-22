@@ -53,3 +53,9 @@ The probe interpretation above ("a trained probe can isolate it") is **withdrawn
 - **The within-group metric was flawed.** It pooled all same-stratum pairs into one Spearman, which a group-mean predictor already scores well on. The corrected metric is the mean of the per-stratum Spearman values. On it the model's probe shows some within-stratum order, but no more than the raw distances without any probe.
 - **Neighbour-joining** is now also compared with trees built from class-blob inputs.
 - **Numbers:** `results/qwen35_2b/SUMMARY.md`, stage 2.
+
+## Audit note (2026-11-22)
+From the [independent audit](../../reviews/2026-11-22-independent-audit.md); numbers in `results/qwen35_2b/SUMMARY.md`, section "Independent audit":
+- **The probe-vs-raw comparison was not like-for-like.** The probe's within-stratum value is computed on held-out pairs of each fold, but the raw-distance value it was compared with was computed over all species. On the *same* held-out pairs (the stage-2 folds and seeds), raw angular distances without any probe score *higher* than the probe. The probe therefore adds no within-stratum order; it loses some. README, paper and figures now use the matched comparison.
+- **The strata-only predictor** is fit on the same pairs it is scored on, so it is an in-sample reference, not a held-out result. The class-blob probe is the held-out comparison.
+- **Neighbour joining.** "About a fifth of the reference splits are recovered" is confirmed by counting shared splits directly; the reference has polytomies, so that fraction is not exactly 1 − normalized RF.

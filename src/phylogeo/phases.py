@@ -407,6 +407,13 @@ def phase_scale(cfg: RunConfig) -> None:
     run_scale(cfg, load_species, layer_distances, out_dir, write_json)
 
 
+def phase_audit(cfg: RunConfig) -> None:
+    """Independent audit (2026-11-22): re-derive and stress-test headline numbers; no forward passes."""
+    from phylogeo.audit import run_audit
+
+    run_audit(cfg, load_species, layer_distances, out_dir, write_json)
+
+
 def phase_scale_summary(cfg: RunConfig) -> None:
     """Stage 5: aggregate all runs into results/stage5/ (summary.json, scale.png, training_dynamics.png)."""
     from phylogeo.stage5 import summarize
