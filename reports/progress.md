@@ -1,5 +1,20 @@
 # Progress
 
+## 2026-11-22: tree order inside groups, in 3-D (post hoc visualization)
+
+- **Done.** The H1 highlight in the README now has an animated 3-D figure (also an interactive card on the site with a group dropdown). It shows every group with ≥ 20 H1 decision nodes (birds, mammals, ray-finned fish, insects) in three columns:
+  - a perfect tree code (Brownian motion on the reference tree);
+  - Qwen3.5-2B at the H1 layer;
+  - the same network with random weights.
+- **Method.**
+  - Every panel uses unit-length vectors, centred on the group, then top-3 PCA. Unit length makes the picture approximate the cosine geometry H1 scores; raw-norm PCA made random weights look tree-like.
+  - The reference subtree is fitted into each cloud with least-squares internal nodes (squared-change parsimony, equal to Brownian-motion ancestral states; the phylomorphospace approach).
+- **Numbers per panel.** Triplet accuracy in 3-D and in all dimensions on the H1 triplets, tree fit vs species shuffles, and per-group paired family-block bootstrap CIs of trained minus random. All are generated into the README table from `results/qwen35_2b/viz/within3d.json`.
+- **Caveat found.**
+  - In the 3-D view the trained model beats random weights in birds and mammals.
+  - In all dimensions no single group's CI excludes zero; only the pooled H1 test does.
+  - The README states this next to the figure.
+
 ## 2026-11-22: independent audit of results, methods and claims
 
 - **Done.** Every claim was traced to code and results. The headline numbers were re-derived from stored activations with independent code (new phase `audit`; no model inference or training), and every citation was re-checked on the web. Report: [reviews/2026-11-22-independent-audit.md](reviews/2026-11-22-independent-audit.md).
