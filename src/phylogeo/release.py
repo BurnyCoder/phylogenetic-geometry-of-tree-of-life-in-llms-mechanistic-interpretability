@@ -100,8 +100,8 @@ Code, preregistration and paper: https://github.com/BurnyCoder/phylogenetic-geom
 
 **Limitations.**
 - The probe is fit to path length in the Open Tree topology; it is not a model of divergence times.
-- It was trained on English common names; Latin binomials carry no comparable structure.
-- **The held-out correlation mainly reflects coarse groups.**{cb_txt} Within groups the probe adds little over the raw representation distances (see the paper).
+- It was trained on English common names; Latin binomials carry much weaker structure.
+- **The held-out correlation mainly reflects coarse groups.**{cb_txt} Within groups, on the same held-out pairs, the raw representation distances keep more tree order than the probe does, so the probe adds no within-group order (independent audit, 2026-11-22; see the paper).
 """
     (out / "README.md").write_text(card, encoding="utf-8")
     log.info("release probe written to %s (fit r = %.3f)", out, fit_r)
