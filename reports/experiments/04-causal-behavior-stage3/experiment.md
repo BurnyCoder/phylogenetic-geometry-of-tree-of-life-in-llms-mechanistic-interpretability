@@ -87,3 +87,8 @@ Numbers are in [`results/RESULTS.md`](../../../results/RESULTS.md), section "Sta
 - **One layer, one probe split.** Effects at other layers and other family splits were not tested.
 - **Disclosed forking path.** The decision to rerun with 99 subspaces was made after a favourable first run, because the first design could not pass its own threshold. Deviation 20 discloses this, and both runs are reported.
 - **Random subspaces.** They are restricted to the top-64 principal components. This makes them comparable in variance, but they do not span the whole residual stream.
+
+## Audit note (2026-11-22)
+From the [independent audit](../../reviews/2026-11-22-independent-audit.md); numbers in `results/qwen35_2b/SUMMARY.md`, section "Independent audit":
+- **Variance matching checked on the held-out species.** The interventions act on held-out species, but the random subspaces were matched on training species. The random subspaces were redrawn exactly (same seed and fold) and measured on the held-out species: they lose about as much variance there as the probe does (the probe's held-out share is bounded from its stored all-species and training shares). The final run is therefore roughly matched where the interventions act. The first run's random subspaces were smaller, so "the first run under-matched its random controls" holds.
+- **Registered numbers re-derived.** The rank p-values, Holm adjustment and the exact McNemar p were recomputed from the stored per-subspace values and agree.

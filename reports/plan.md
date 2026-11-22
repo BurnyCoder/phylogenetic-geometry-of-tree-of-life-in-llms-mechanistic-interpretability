@@ -106,7 +106,7 @@ All other analyses are exploratory and BH-corrected.
 - **Normalization (pre-specified):** subtract the species-mean per template, average over templates, then cosine distance. Sensitivity checks: per-dimension z-scoring and raw cosine. Whitening is never primary.
 - **Noise ceiling:** split-half template reliability.
 - **Numerics:** exact bf16, with the whole model on the GPU. No CPU offload and no quantization (quantization perturbs geometry and bitsandbytes is fragile on sm_120).
-  - [Qwen/Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B): Apache-2.0, not gated, 2.27B parameters, about 4.6 GB in bf16. It is a fine-tune of Qwen3.5-2B-Base.
+  - [Qwen/Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B): Apache-2.0, not gated, 2.27B parameters in the checkpoint (about 1.88B in the language model; the rest is a vision encoder and an MTP head), about 4.6 GB in bf16. It is a fine-tune of Qwen3.5-2B-Base.
   - Architecture: 24 layers, d=2048, a hybrid of 3 Gated-DeltaNet linear-attention blocks per full-attention block.
   - It needs a one-time download to `D:\AI\hf_cache`.
   - Load the text decoder only. The checkpoint ships as multimodal `Qwen3_5ForConditionalGeneration`, so verify the hidden states against the full model.

@@ -73,7 +73,7 @@ Source: https://www.goodfire.com/research/phylogeny-manifold. The post is the on
 ### 2.1 Goodfire neural-geometry series
 Index: https://www.goodfire.com/research/neural-geometry. The index gives short summaries of six posts; the methods are in the individual posts and papers.
 
-- **"Steering Along Manifolds"** (Wurgaft et al.; [post](https://www.goodfire.com/research/manifold-steering), [arXiv 2605.05115](https://arxiv.org/abs/2605.05115), [code](https://github.com/goodfire-ai/causalab/tree/manifold_steering))
+- **"Steering Along Manifolds to Control Neural Networks"** (Wurgaft et al.; [post](https://www.goodfire.com/research/manifold-steering); paper: "Manifold Steering Reveals the Shared Geometry of Neural Network Representation and Behavior", [arXiv 2605.05115](https://arxiv.org/abs/2605.05115); [code](https://github.com/goodfire-ai/causalab/tree/manifold_steering))
   - Model and readout: Llama-3.1-8B, layer 28, residual stream at the last-token position.
   - Tasks: prompts such as "What day is k days after z?", with weekdays, months, letters and ages.
   - Manifold fitting:
@@ -85,7 +85,7 @@ Index: https://www.goodfire.com/research/neural-geometry. The index gives short 
     - isometry (Pearson between distance matrices) of geodesic vs behavior: 0.99 for weekdays, 0.89 for months, vs 0.89 and 0.53 for linear distance;
     - manifold steering lowers a cumulative Bhattacharyya-energy proxy for distance from the model's natural output distribution by about 2.8× on average vs linear steering (p < 0.001).
   - Controls: no random or shuffled control.
-- **"A Geometric Calculator"** (Feucht et al.; [post](https://www.goodfire.com/research/a-geometric-calculator), [arXiv 2605.01148](https://arxiv.org/abs/2605.01148)): Llama-3.1-8B adds numbers using circular representations at several moduli *(post only)*.
+- **"A Geometric Calculator Inside a Neural Network"** (Feucht et al.; [post](https://www.goodfire.com/research/a-geometric-calculator); paper: "Arithmetic in the Wild: Llama uses Base-10 Addition to Reason About Cyclic Concepts", [arXiv 2605.01148](https://arxiv.org/abs/2605.01148)): to reason about cyclic concepts such as months, Llama-3.1-8B reuses base-10 addition with Fourier features of periods 2, 5 and 10, rather than the concept's own period, and then maps the sum back.
 - **"Can SAEs Capture Neural Geometry?"** (Bhalla et al.; [post](https://www.goodfire.com/research/can-saes-capture-neural-geometry); paper "Do Sparse Autoencoders Capture Concept Manifolds?", [arXiv 2604.28119](https://arxiv.org/abs/2604.28119)): SAE features fragment manifolds, a "dilution" regime.
 
 ### 2.2 Engels et al. 2024, "Not All Language Model Features Are One-Dimensionally Linear"
@@ -164,22 +164,29 @@ Sources: [arXiv 2310.02207](https://arxiv.org/abs/2310.02207), [code](https://gi
 
 ## 4. Language models, species, and taxonomy
 
-**Gap.** No peer-reviewed study was found that tests whether text-LLM hidden states for species names reflect the phylogenetic tree of life. Searches covered arXiv, Semantic Scholar via Consensus, GitHub and Hugging Face, as of 2026-11-20.
+**Gap.** No study was found that tests text-LLM hidden states for species names against a phylogeny. Searches covered arXiv, Semantic Scholar via Consensus, GitHub and Hugging Face, as of 2026-11-20, and were repeated on 2026-11-22. Related work tests *lexical* (WordNet-style) taxonomies, which include animal categories, mostly in unembeddings or through behaviour (see the list below and §2.4, §2.6).
 
 Closest work:
-1. **phylotext-mammals** (student project, preregistered, results locked 2026-11-11; [repo](https://github.com/jadencutinha/phylotext-mammals))
+1. **phylotext-mammals** ("lineage-or-charisma"; Cutinha, Princeton COS398 independent work, preregistered, results locked 2026-11-11; [repo](https://github.com/jadencutinha/phylotext-mammals))
    - Method: sentence-embedding models (bge-large, mpnet) applied to Wikipedia descriptions with the species name masked, compared with the Upham 2019 mammal tree using Mantel tests. Partial Mantel and MRM control for EltonTraits ecology and for pageviews or article length.
    - Results:
      - 4,611 mammals: Mantel r = −0.028, not significant;
      - within-order r is positive for some orders (Artiodactyla 0.28, Primates 0.14);
      - leaving common-name head nouns unmasked raises r to about 0.19.
    - Main lessons: popularity and head-noun leakage are the key confounds.
-2. **llm_internal_representations** ([repo](https://github.com/alexgarciaduran/llm_internal_representations)): 87 organisms in mBERT, GPT-2 and Qwen2.5-0.5B, all layers, Mantel test against taxonomic rank depth. ρ ≈ 0.36–0.39. Rank-based ground truth only, with no dated tree and no confound controls.
+2. **llm_internal_representations** ([repo](https://github.com/alexgarciaduran/llm_internal_representations)): 87 organisms from five kingdoms in mBERT, GPT-2 and Qwen2.5-0.5B, all layers, Mantel test against taxonomic rank depth with a shuffled-label null. ρ ≈ 0.36–0.39. Rank-based ground truth only, with no dated tree and no lexical, popularity or untrained-network controls.
 3. **Taxonomy question answering:**
    - LLMs classify IUCN species from kingdom to family in a multiple-choice format at 94.9% accuracy overall: 91.8% with phylogenetically close distractors vs 98.0% with random ones (Uryu 2025, [arXiv 2510.02830](https://arxiv.org/abs/2510.02830));
    - the BAGEL animal-knowledge benchmark ([arXiv 2604.16241](https://arxiv.org/abs/2604.16241)) *(abstract only)*.
    - These test labels, not geometry.
 4. **Grand et al. 2022** ([Nature Human Behaviour](https://doi.org/10.1038/s41562-022-01316-8)): projecting GloVe vectors onto semantic axes recovers animal size and dangerousness. Folk-ecological dimensions like these are confounds for phylogeny.
+5. **Lexical taxonomies in language models** (added 2026-11-22; these test WordNet-style or curated taxonomies, not a phylogeny):
+   - Sun et al. 2024, "Are Large Language Models a Good Replacement of Taxonomies?" (TaxoGlimpse, PVLDB; [arXiv 2406.11131](https://arxiv.org/abs/2406.11131)): question answering over taxonomies including NCBI; accuracy falls toward the leaves.
+   - He et al. 2024, "Language Models as Hierarchy Encoders" (NeurIPS; [arXiv 2401.11374](https://arxiv.org/abs/2401.11374)): re-trains encoders in hyperbolic space on WordNet.
+   - Rodriguez, Mueller & Misra 2025, "Characterizing the Role of Similarity in the Property Inferences of Language Models" (NAACL; [arXiv 2410.22590](https://arxiv.org/abs/2410.22590)): taxonomy vs similarity in property inheritance, with representational analyses.
+   - Misra, Rayz & Ettinger 2023, COMPS (EACL; [arXiv 2210.01963](https://arxiv.org/abs/2210.01963)): property inheritance over taxonomic concepts.
+   - Ravichander et al. 2020, hypernymy probing in BERT (*SEM; [ACL Anthology](https://aclanthology.org/2020.starsem-1.10/)).
+   - Probes for tree depth and distance in hidden states: Sakata et al. 2026 ([arXiv 2604.07886](https://arxiv.org/abs/2604.07886)); Dawes et al. 2026, H-Probes ([arXiv 2605.00847](https://arxiv.org/abs/2605.00847)), with ablations of the probed subspaces *(abstracts only)*.
 
 ---
 
@@ -216,3 +223,7 @@ Closest work:
   - Hyperbolicity Atlas controls; Kissane et al. scope.
   - arXiv 2510.02830 details.
 - Full report: [reviews/2026-11-20-fact-check-literature.md](reviews/2026-11-20-fact-check-literature.md).
+- 2026-11-22: second, independent fact-check ([reviews/2026-11-22-independent-audit.md](reviews/2026-11-22-independent-audit.md)). Corrections:
+  - paper titles of Wurgaft et al. and Feucht et al. (the post titles had been paired with the arXiv ids), and the Feucht et al. summary;
+  - the "gap" statement now separates phylogeny from lexical taxonomies, and related work on lexical taxonomies was added (§4, item 5);
+  - llm_internal_representations covers five kingdoms and uses a shuffled-label null; phylotext-mammals authorship.

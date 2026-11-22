@@ -1,5 +1,19 @@
 # Progress
 
+## 2026-11-22: independent audit of results, methods and claims
+
+- **Done.** Every claim was traced to code and results. The headline numbers were re-derived from stored activations with independent code (new phase `audit`; no model inference or training), and every citation was re-checked on the web. Report: [reviews/2026-11-22-independent-audit.md](reviews/2026-11-22-independent-audit.md).
+- **Reproduced.** TA_within over all qualifying triplets, without the per-node cap, matches the sampled values; the max-T, Holm, rank-p, McNemar, binomial and exact Mann–Whitney values re-derive.
+- **Corrected.**
+  - Random-init Qwen is not above chance by its own max-T test.
+  - Untrained networks are at chance on triplets whose names share no character 3-gram.
+  - On the same held-out pairs, raw distances keep more within-stratum order than the flat probe.
+  - Two reference titles, author details and the Qwen parameter counts; the novelty claim now separates phylogeny from lexical taxonomies.
+- **New caveat.** The H1 margin over the untrained networks excludes zero with the registered family-level bootstrap, but not with orders as blocks. H1 stays supported as registered.
+- **Regenerated.** Tables, site, figures and paper.
+- **Status.** The planned work is complete. Remaining items are follow-ups listed in the README to-do: order-level resampling registered for any replication, a co-occurrence-neutral analysis, larger models.
+
+
 ## 2026-11-20 18:10: 3-D view now trained vs random init, side by side
 
 - **Player.** Trained Qwen3.5-2B (left) and random-init Qwen3.5-2B (right) are shown at the same layer, with one clock and linked cameras.
