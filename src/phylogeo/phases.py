@@ -369,7 +369,15 @@ def phase_viz_data(cfg: RunConfig) -> None:
     eco = RESULTS_DIR / cfg.name / "eco" / "results.json"
     layers = [L] + ([int(json.loads(eco.read_text())["layer"])] if eco.exists() else [])
     build_viz_data(cfg.name, [cfg.extra.get("random_init_run", "qwen35_2b_random"), "pythia410m_step0"], layers,
-                   out_dir(cfg.name, "viz"), seed=cfg.seed)
+                   out_dir(cfg.name, "viz"), seed=cfg.seed, cfg=cfg)
+    # Consistency check: the within-group view must reproduce the stage-1b per-group accuracy of the model.
+    w3 = json.loads((out_dir(cfg.name, "viz") / "within3d.json").read_text())
+    ref = json.loads((RESULTS_DIR / cfg.name / "stage1b" / "results.json").read_text())["per_stratum_ta_within_modal"]
+    for g, rec in w3["groups"].items():
+        got = rec["panels"][cfg.name]["ta_full"]
+        if abs(got - ref[g]) > 1e-9:
+            raise ValueError(f"within3d {g}: TA_within {got} != stage-1b {ref[g]} (triplets or layer differ)")
+    log.info("within3d: per-group TA_within matches stage 1b for %s", sorted(w3["groups"]))
 
 
 def phase_site(cfg: RunConfig) -> None:

@@ -763,6 +763,37 @@ def n_outside(P, lim: float) -> int:
     return int((np.abs(np.asarray(P)) > lim).any(1).sum())
 
 
+TREE_GRAY = "#b9b8b2"  # recessive line colour for tree edges that span several highlighted clades
+
+
+def _tree_lines(tree, pos: np.ndarray, scene: str, nodes, color: str = TREE_GRAY, name: str = "reference tree",
+                group: str = "tree", showlegend: bool = False, width: float = 1.5, opacity: float = 0.5):
+    """One Scatter3d line trace: the edge from each node in ``nodes`` to its parent, at positions ``pos`` [N, 3]
+    (None breaks the line between edges, so one trace draws many segments)."""
+    xs, ys, zs = ([c for v in nodes for c in (pos[tree.parent[v], k], pos[v, k], None)] for k in range(3))
+    return go.Scatter3d(x=xs, y=ys, z=zs, mode="lines", line={"color": color, "width": width}, opacity=opacity,
+                        name=name, legendgroup=group, showlegend=showlegend, hoverinfo="skip", scene=scene)
+
+
+def _point_traces(coords: np.ndarray, names, labels, style: dict, scene: str, showlegend: bool, size: float = 3.5,
+                  detail=None) -> list:
+    """One Scatter3d marker trace per label in ``style`` (label -> (colour, symbol)), in style order; labels with
+    no points are skipped. Hover shows the name and ``detail`` (per point) or the label. Legend groups are keyed
+    by label, so one legend click toggles a label in every panel."""
+    labels, names = np.asarray(labels), np.asarray(names)
+    detail = labels if detail is None else np.asarray(detail)
+    out = []
+    for s, (color, sym) in style.items():
+        m = labels == s
+        if m.any():
+            out.append(go.Scatter3d(x=coords[m, 0], y=coords[m, 1], z=coords[m, 2], mode="markers", name=s,
+                                    legendgroup=s, showlegend=showlegend, text=names[m], customdata=detail[m],
+                                    scene=scene, marker={"color": color, "symbol": sym, "size": size,
+                                                         "line": {"color": SURFACE, "width": 0.5}},
+                                    hovertemplate="<b>%{text}</b><br>%{customdata}<extra></extra>"))
+    return out
+
+
 def _cloud_traces(coords: np.ndarray, names, strata, tree, scene: str, showlegend: bool, lim: float) -> list:
     """Scatter3d traces for one panel: the reference tree drawn with internal nodes at the centroid of their
     descendant leaves (as in stage 1a, computed from all species), then one marker trace per stratum
@@ -771,22 +802,10 @@ def _cloud_traces(coords: np.ndarray, names, strata, tree, scene: str, showlegen
     from phylogeo.viz.pca import STRATUM_STYLE, overlay_positions
 
     pos = _clip(overlay_positions(tree, coords), lim)
-    coords = _clip(coords, lim)
     seg = [v for v in range(tree.N) if v != tree.root]
-    xs, ys, zs = ([c for v in seg for c in (pos[tree.parent[v], k], pos[v, k], None)] for k in range(3))
-    out = [go.Scatter3d(x=xs, y=ys, z=zs, mode="lines", line={"color": "#b9b8b2", "width": 1.5}, opacity=0.5,
-                        name="reference tree (centroids)", legendgroup="tree", showlegend=showlegend, hoverinfo="skip",
-                        scene=scene)]
-    strata, names = np.asarray(strata), np.asarray(names)
-    for s, (color, _, sym) in STRATUM_STYLE.items():
-        m = strata == s
-        if m.any():
-            out.append(go.Scatter3d(x=coords[m, 0], y=coords[m, 1], z=coords[m, 2], mode="markers", name=s,
-                                    legendgroup=s, showlegend=showlegend, text=names[m], scene=scene,
-                                    marker={"color": color, "symbol": sym, "size": 3.5,
-                                            "line": {"color": SURFACE, "width": 0.5}},
-                                    hovertemplate="<b>%{text}</b><br>" + s + "<extra></extra>"))
-    return out
+    return [_tree_lines(tree, pos, scene, seg, name="reference tree (centroids)", showlegend=showlegend),
+            *_point_traces(_clip(coords, lim), names, strata, {s: (c, sym) for s, (c, _, sym) in STRATUM_STYLE.items()},
+                           scene, showlegend)]
 
 
 def _pair_fig(panels: list[tuple[np.ndarray, str]], names, strata, tree, lim: float, eye=(1.3, 0.8, 0.6)) -> go.Figure:
@@ -988,6 +1007,7 @@ def fig_pca3d(run: str, tree, control: str = "qwen35_2b_random") -> dict | None:
     r["html"] = _player_html(d, run, control)
     r["pca3d"] = d
     r["control"] = control
+    r["gif"] = lambda path: export_pca3d_gif(r, tree, path)  # README animation (export_pngs)
     return r
 
 
@@ -1003,13 +1023,7 @@ def pca3d_title(d: dict, rep: str, layer: float, lim: float, P=None) -> str:
 
 def export_pca3d_gif(r: dict, tree, path: Path, steps: int = 2, size=(1080, 500)) -> Path:
     """README animation: trained (left) and random-init (right) side by side, sweeping layers 0 -> last
-    (``steps`` interpolated frames per layer) while both cameras turn together; rendered with kaleido in one batch
-    and assembled with Pillow (https://pillow.readthedocs.io/)."""
-    import tempfile
-
-    import plotly.io as pio
-    from PIL import Image
-
+    (``steps`` interpolated frames per layer) while both cameras turn together (assembled by :func:`_save_gif`)."""
     d, run, ctl = r["pca3d"], "qwen35_2b", r["control"]
     C = {k: np.array(d["reps"][k]["coords"]) for k in (run, ctl)}
     lims = _lims(C[run])  # one box per layer, shared by both panels
@@ -1029,13 +1043,269 @@ def export_pca3d_gif(r: dict, tree, path: Path, steps: int = 2, size=(1080, 500)
                          x=0.5, y=0.0, xref="paper", yref="paper", xanchor="center", yanchor="bottom", showarrow=False,
                          font={"size": 12, "color": INK2})
         figs.append(f.update_layout(showlegend=False, margin={"l": 0, "r": 0, "t": 6, "b": 26}))
+    return _save_gif(figs, path, size, duration=180)
+
+
+def gif_palette():
+    """Fixed 'P'-mode palette for the GIFs: the exact chart colours, each blended 30/55/80% toward the surface (for
+    anti-aliased edges), plus a 40-step gray ramp for text and grid. Adaptive (median-cut) palettes spend their
+    entries on the many gray pixels and shifted aqua to a grayish teal, so series colours did not match the legend.
+    Pillow: https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.quantize"""
+    from PIL import Image
+
+    rgb = lambda h: np.array([int(h[i:i + 2], 16) for i in (1, 3, 5)], float)
+    surf = rgb(SURFACE)
+    keep = [SURFACE, INK, INK2, MUTED, GRID, AXIS, LIGHTGRAY, TREE_GRAY, OTHER_ORDERS[1], BLUE, ORANGE, AQUA, GRAY]
+    cols = [rgb(h) + (surf - rgb(h)) * t for h in keep for t in (0, 0.3, 0.55, 0.8)]
+    cols += [np.full(3, v) for v in np.linspace(11, 252, 40)]
+    cols += [surf] * (256 - len(cols))  # pad with the background, never with black
+    img = Image.new("P", (1, 1))
+    img.putpalette(np.clip(np.rint(cols), 0, 255).astype(np.uint8).ravel().tolist())
+    return img
+
+
+def _save_gif(figs: list[go.Figure], path: Path, size: tuple[int, int], duration: int) -> Path:
+    """Render Plotly frames with kaleido in one batch (https://plotly.com/python/static-image-export/) and assemble
+    a looping GIF with Pillow (https://pillow.readthedocs.io/), every frame mapped to :func:`gif_palette`."""
+    import tempfile
+
+    import plotly.io as pio
+    from PIL import Image
+
+    pal = gif_palette()
     with tempfile.TemporaryDirectory() as tmp:
         files = [Path(tmp) / f"f{j:03d}.png" for j in range(len(figs))]
         pio.write_images(figs, files, width=size[0], height=size[1], scale=1)
-        frames = [Image.open(f).convert("RGB").quantize(colors=80, method=Image.Quantize.MEDIANCUT) for f in files]
-        frames[0].save(path, save_all=True, append_images=frames[1:], duration=180, loop=0, optimize=True)
-    log.info("animated GIF (%d frames) written to %s", len(figs), path)
+        frames = [Image.open(f).convert("RGB").quantize(palette=pal, dither=Image.Dither.NONE) for f in files]
+        frames[0].save(path, save_all=True, append_images=frames[1:], duration=duration, loop=0, optimize=True)
+    log.info("animated GIF (%d frames, %.1f MB) written to %s", len(figs), path.stat().st_size / 1e6, path)
     return path
+
+
+# ======================================================================================
+# Tree order inside groups, in 3-D, with the reference tree fitted into each cloud (post hoc)
+# ======================================================================================
+
+OTHER_ORDERS = ("other orders", "#bdbcb6", "circle")  # recessive gray bucket, never a 4th hue (dataviz rule)
+ORDER_HUES = [(BLUE, "circle"), (ORANGE, "diamond"), (AQUA, "square")]  # validated 3-hue set; symbol = redundancy
+GLYPH = {"circle": "●", "diamond": "◆", "square": "■"}
+
+
+def _within_columns(w3: dict) -> list[tuple[str, str]]:
+    """(key, label) of the three columns: the expected tree shape, the model, its untrained twin."""
+    return [("expected", "Expected: a perfect tree code"), (w3["main"], f"Qwen3.5-2B, layer {w3['layer']}"),
+            (w3["control"], "Qwen3.5-2B, random weights")]
+
+
+def _order_style(orders: np.ndarray) -> tuple[dict, np.ndarray]:
+    """Colour key for one group: its 3 largest orders get the validated hues (ties broken by name), every other
+    order (and a blank order) folds into gray 'other orders'. Returns (label -> (colour, symbol), per-species label)."""
+    names, counts = np.unique(orders[orders != ""], return_counts=True)
+    top = [n for _, n in sorted(zip(-counts, names))][:3]
+    style = dict(zip(top, ORDER_HUES)) | {OTHER_ORDERS[0]: OTHER_ORDERS[1:]}
+    return style, np.where(np.isin(orders, top), orders, OTHER_ORDERS[0])
+
+
+def _within_group(g: dict, df, tree) -> dict:
+    """Per-group drawing inputs: the group's reference subtree (leaves in the order of g['idx']), names, colour
+    labels and hover detail (order · family)."""
+    idx = np.array(g["idx"])
+    d = df.iloc[idx]
+    style, labels = _order_style(d["order"].to_numpy())
+    detail = [f"{o or '(no order)'} · {f or '(no family)'}" for o, f in zip(d["order"], d["family"])]
+    return {"sub": tree.subtree(list(idx)), "names": d["common_name"].tolist(), "labels": labels, "style": style,
+            "detail": detail}
+
+
+def _within_box(C: np.ndarray) -> float:
+    """Half-width of a panel's cube: holds every species unless a few lie beyond 1.5x the 95th-percentile extent
+    (only the random-weight mammals have such outliers); those are clipped and counted in the title."""
+    m = np.abs(C).max(1)
+    return round(1.05 * float(min(m.max(), 1.5 * np.quantile(m, 0.95))), 3)
+
+
+def _within_traces(g: dict, key: str, gd: dict, scene: str, showlegend: bool) -> tuple[list, float, int]:
+    """Traces for one panel, its box half-width and the number of species outside the box: the reference subtree
+    fitted into the 3-D points (phylomorphospace, :func:`phylogeo.viz.pca.fit_tree_positions`) and the species.
+    Branches whose whole clade lies inside one highlighted order wear that order's colour; deeper branches are
+    gray. Lines are opaque: semi-transparent 3-D lines break marker depth sorting in WebGL (markers render cut)."""
+    from phylogeo.viz.pca import fit_tree_positions
+
+    C, sub, labels = np.array(g["panels"][key]["coords"]), gd["sub"], gd["labels"]
+    lim = _within_box(C)
+    pos = _clip(fit_tree_positions(sub, C), lim)  # fitted on all points; segments leaving the box are not drawn
+    by_colour: dict[str, list[int]] = {}
+    for v in range(sub.N):
+        if v == sub.root:
+            continue
+        labs = set(labels[sub.members[v]])
+        one = labs.pop() if len(labs) == 1 else OTHER_ORDERS[0]
+        by_colour.setdefault(gd["style"][one][0] if one != OTHER_ORDERS[0] else LIGHTGRAY, []).append(v)
+    lines = [_tree_lines(sub, pos, scene, vs, color=c, name="reference tree, fitted", showlegend=showlegend and
+                         c == LIGHTGRAY, width=1.5 if c == LIGHTGRAY else 2.5, opacity=1.0)
+             for c, vs in by_colour.items()]
+    pts = _point_traces(_clip(C, lim), gd["names"], labels, gd["style"], scene, showlegend, size=4.5,
+                        detail=gd["detail"])
+    return lines + pts, lim, n_outside(C, lim)
+
+
+def _within_title(w3: dict, g: dict, key: str, label: str, n_out: int = 0) -> str:
+    """Panel title: what it is, triplet accuracy of the 3-D picture and of all dimensions, the tree fit, and how
+    many species fall outside the box (never silently dropped)."""
+    p = g["panels"][key]
+    return (f"<b>{label}</b><br>triplet accuracy: 3-D {p['ta_3d']:.3f} · all {w3['hidden_size']} dims "
+            f"{p['ta_full']:.3f}<br>tree fit {p['fit_ratio']:.2f} (1 = random species)"
+            + (f" · {n_out} outside the box" if n_out else ""))
+
+
+def _within_scene(dx, dy, lim: float, eye) -> dict:
+    """One 3-D scene: equal axes in a cube of half-width ``lim`` (no ticks; PCs are unitless), recessive grid."""
+    ax = {"range": [-lim, lim], "showticklabels": False, "backgroundcolor": SURFACE, "gridcolor": GRID,
+          "zerolinecolor": AXIS, "showspikes": False}
+    font = {"size": 11, "color": MUTED}
+    return {"domain": {"x": dx, "y": dy}, "aspectmode": "cube", "camera": {"eye": dict(zip("xyz", eye))},
+            **{f"{a}axis": {**ax, "title": {"text": f"PC{k}", "font": font}} for k, a in enumerate("xyz", start=1)}}
+
+
+def _within_key(name: str, g: dict, style: dict) -> str:
+    """Row header: group, decision nodes, and the colour key (coloured glyph, label in ink)."""
+    key = "   ".join(f"<span style='color:{c}'>{GLYPH[s]}</span> {o}" for o, (c, s) in style.items())
+    return f"<b>{name}</b> ({g['n_nodes']} decision nodes)   {key}   · coloured branches: a clade inside one order"
+
+
+def _within_grid(w3: dict, groups: list, gds: dict, eye=(1.7, 1.25, 0.8), row_px: int = 400, width: int = 1200):
+    """Static grid (PNG / GIF frames): one row per group, columns = expected tree, model, random weights."""
+    fig, cols, R = go.Figure(), _within_columns(w3), len(groups)
+    H = R * row_px
+    head, title = 26 / H, 54 / H  # header line and 3-line panel titles, as fractions of the figure height
+    _style(fig, H, legend=False).update_layout(margin={"l": 0, "r": 0, "t": 4, "b": 0}, width=width)
+    for i, (name, g) in enumerate(groups):
+        y1 = 1 - i / R
+        fig.add_annotation(text=_within_key(name, g, gds[name]["style"]), x=0.005, y=y1, xref="paper", yref="paper",
+                           showarrow=False, xanchor="left", yanchor="top", font={"size": 13, "color": INK})
+        for j, (key, label) in enumerate(cols):
+            n = i * len(cols) + j
+            sc = "scene" if n == 0 else f"scene{n + 1}"
+            tr, lim, n_out = _within_traces(g, key, gds[name], sc, showlegend=False)
+            fig.add_traces(tr)
+            fig.update_layout({sc: _within_scene([j / 3 + 0.004, (j + 1) / 3 - 0.004],
+                                                 [y1 - 1 / R + 24 / H, y1 - head - title], lim, eye)})
+            fig.add_annotation(text=_within_title(w3, g, key, label, n_out), x=(j + 0.5) / 3, y=y1 - head, xref="paper",
+                               yref="paper", showarrow=False, xanchor="center", yanchor="top",
+                               font={"size": 11.5, "color": INK2})
+    return fig
+
+
+def _within_dropdown(w3: dict, groups: list, gds: dict, eye=(1.5, 1.1, 0.7)) -> go.Figure:
+    """Site version: three linked-size scenes and a dropdown that switches the group (few WebGL contexts)."""
+    fig, cols = go.Figure(), _within_columns(w3)
+    _legend_below(_style(fig, 640), bottom=60, itemsizing="constant").update_layout(margin={"l": 0, "r": 0, "t": 120})
+    spans, layouts = [], []
+    for i, (name, g) in enumerate(groups):
+        n0, lay, titles = len(fig.data), {}, []
+        for j, (key, label) in enumerate(cols):
+            sc = "scene" if j == 0 else f"scene{j + 1}"
+            tr, lim, n_out = _within_traces(g, key, gds[name], sc, showlegend=(j == 0))
+            for t in tr:
+                t.visible = i == 0
+            fig.add_traces(tr)
+            for a in "xyz":
+                lay[f"{sc}.{a}axis.range"] = [-lim, lim]
+            titles.append(_within_title(w3, g, key, label, n_out))
+            if i == 0:
+                fig.update_layout({sc: _within_scene([j / 3 + 0.004, (j + 1) / 3 - 0.004], [0.0, 0.86], lim, eye)})
+        lay["annotations"] = [{"text": t, "x": (j + 0.5) / 3, "y": 1.0, "xref": "paper", "yref": "paper",
+                               "showarrow": False, "xanchor": "center", "yanchor": "top",
+                               "font": {"size": 12, "color": INK2}} for j, t in enumerate(titles)]
+        spans.append((n0, len(fig.data)))
+        layouts.append(lay)
+    buttons = [{"label": f"{name} ({g['n_nodes']} decision nodes)", "method": "update",
+                "args": [{"visible": [a <= k < b for k in range(len(fig.data))]}, layouts[i]]}
+               for i, ((name, g), (a, b)) in enumerate(zip(groups, spans))]
+    fig.update_layout(updatemenus=[{"type": "dropdown", "buttons": buttons, "x": 0.0, "y": 1.0, "xanchor": "left",
+                                    "yanchor": "bottom", "pad": {"b": 12}, "showactive": True}],
+                      annotations=layouts[0]["annotations"])
+    return fig
+
+
+def export_within3d_gif(w3: dict, groups: list, gds: dict, path: Path, n_frames: int = 24,
+                        size=(1080, 1360)) -> Path:
+    """README animation: the static grid with all scene cameras turning together, one full turn (24 frames keep
+    the file a few MB for GitHub)."""
+    R = len(groups)
+    figs = [_within_grid(w3, groups, gds, eye=(2.0 * np.cos(th), 2.0 * np.sin(th), 0.8), row_px=size[1] // R,
+                         width=size[0]) for th in 0.6 + 2 * np.pi * np.arange(n_frames) / n_frames]
+    return _save_gif(figs, path, (size[0], (size[1] // R) * R), duration=200)
+
+
+def fig_within3d(run: str, tree, df) -> dict | None:
+    """3-D views of tree order inside the large groups: a perfect tree code, the model, and its random-weight
+    twin, each with the reference subtree fitted into the cloud (post hoc; data from ``within3d.json``)."""
+    w3 = _load(RESULTS_DIR / run / "viz" / "within3d.json")
+    if not w3 or not w3["groups"]:
+        return None
+    groups = sorted(w3["groups"].items(), key=lambda kv: -kv[1]["n_nodes"])
+    gds = {name: _within_group(g, df, tree) for name, g in groups}
+    clear = {s: [name for name, g in groups if g[f"diff_ci95_{s}"][0] > 0] for s in ("3d", "full")}
+    kind = ("positive" if len(clear["full"]) == len(groups) else
+            "negative" if not clear["3d"] and not clear["full"] else "mixed")
+    verdict = (f"beats random weights in {len(clear['3d'])}/{len(groups)} groups in 3-D"
+               + (f" ({', '.join(clear['3d'])})" if clear["3d"] else "")
+               + f", in {len(clear['full'])}/{len(groups)} in all dimensions (per-group CIs)")
+    caption = (f"Post hoc, descriptive. Groups: every group with at least {w3['min_nodes']} decision nodes in the H1 "
+               f"test (one row each in the static view). Left: a perfect tree code (Brownian motion on the reference "
+               f"tree), middle: "
+               f"Qwen3.5-2B at layer {w3['layer']} (the H1 layer), right: the same network with random weights. Every "
+               "panel goes through one pipeline: species vectors scaled to unit length (the geometry the cosine-based "
+               "H1 test scores), centred on the group, top three principal components. Colours: the group's three "
+               "largest orders; gray: all other orders. Lines: the reference tree fitted into the points "
+               "(phylomorphospace: internal nodes where the total squared branch length is smallest, i.e. Brownian-"
+               "motion ancestral states); branches inside one coloured order wear its colour. Titles give the "
+               f"triplet accuracy of the 3-D picture and of all {w3['hidden_size']} dimensions (chance 1/3), and the "
+               f"tree fit: squared length of the fitted tree over its mean across {w3['n_fit_perm']} shuffles of the "
+               "species (1 = no better than a random assignment). The tree fit uses every species, including names that "
+               "share a head noun (\"… beetle\"), so shared words can lower it even in the random-weight network; the "
+               "triplet accuracies exclude such names, as H1 does. Three dimensions keep only part of the order, even "
+               "for the perfect tree code. Drag to rotate, hover for names, pick a group above.")
+    r = rec("within3d", "Tree order inside groups, in 3-D: trained vs random weights, with the tree fitted in", kind,
+            verdict, caption, _within_dropdown(w3, groups, gds), (1200, 400 * len(groups)))
+    r["png_fig"] = _within_grid(w3, groups, gds)
+    r["gif"] = lambda path: export_within3d_gif(w3, groups, gds, path)
+    r["within3d"], r["groups"], r["clear"] = w3, groups, clear
+    return r
+
+
+def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
+    """README block next to the H1 highlight: the animated grid (linked to its interactive card) and a generated
+    table of the per-group numbers, with trained-minus-random CIs."""
+    w3, groups = r["within3d"], r["groups"]
+    main, ctl, D = w3["main"], w3["control"], w3["hidden_size"]
+
+    def cell(g, k, ci):
+        p = g["panels"]
+        return f"{p[main][k]:.3f} / {p[ctl][k]:.3f} [{g[ci][0]:+.3f}, {g[ci][1]:+.3f}]"
+
+    rows = [f"| {name} ({g['n_nodes']}) | {cell(g, 'ta_3d', 'diff_ci95_3d')} | {cell(g, 'ta_full', 'diff_ci95_full')} | "
+            + " / ".join(f"{g['panels'][k]['fit_ratio']:.2f}" for k in ("expected", main, ctl)) + " |"
+            for name, g in groups]
+    return (f'<p align="center"><a href="{SITE_URL}#fig-within3d"><img src="{png_dir}/within3d.gif" alt="{r["title"]}" '
+            f'width="100%"></a><br><b>{r["title"]}</b> (animated here; interactive on the site)<br>'
+            f'{KIND_LABEL[r["kind"]]}: {r["verdict"]}</p>\n\n'
+            f"*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; post hoc, descriptive.* "
+            + r["caption"].replace("Post hoc, descriptive. ", "").replace(" Drag to rotate, hover for names, pick a "
+                                                                            "group above.", "")
+            + " Internal-node placement follows squared-change parsimony ([Maddison 1991](https://search.r-project.org/"
+            "CRAN/refmans/castor/html/asr_squared_change_parsimony.html)) as in phylomorphospace plots ([Sidlauskas "
+            "2008](https://doi.org/10.1111/j.1558-5646.2008.00519.x); phytools `phylomorphospace3d`, [Revell 2012]"
+            "(https://doi.org/10.1111/j.2041-210X.2011.00169.x)).\n\n"
+            f"| group (decision nodes) | triplet accuracy, 3-D view: trained / random weights [difference, 95% CI] | "
+            f"all {D} dimensions: trained / random weights [difference, 95% CI] | tree fit, lower = better: perfect "
+            "tree / trained / random weights |\n|---|---|---|---|\n" + "\n".join(rows)
+            + f"\n\nCIs: paired family-block bootstrap ({w3['n_boot']} draws) of trained minus random weights, on the "
+            f"H1 triplets of each group. The difference excludes zero in {len(r['clear']['3d'])} of {len(groups)} groups "
+            f"in the 3-D view and in {len(r['clear']['full'])} of {len(groups)} in all {D} dimensions. Group by group, "
+            "the picture therefore shows the separation more sharply than the full space does; the confirmatory "
+            "evidence is the registered H1 test, which pools all groups (key-results table below).\n")
 
 
 def build_figures(run: str = "qwen35_2b") -> list[dict]:
@@ -1045,7 +1315,8 @@ def build_figures(run: str = "qwen35_2b") -> list[dict]:
     df, tree = load_species()
     builders = [lambda: fig_pca3d(run, tree), lambda: fig_taxonomy(df), lambda: fig_distance_heatmaps(run, df),
                 lambda: fig_expected_pca(run),
-                lambda: fig_h1_forest(run), lambda: fig_layer_profile(run), lambda: fig_per_stratum(run),
+                lambda: fig_h1_forest(run), lambda: fig_within3d(run, tree, df), lambda: fig_layer_profile(run),
+                lambda: fig_per_stratum(run),
                 lambda: fig_depth_profile(run), lambda: fig_neighbor_levels(run), lambda: fig_neighbor_examples(run),
                 lambda: fig_secondary(run), lambda: fig_conflict(run), lambda: fig_probe(run), lambda: fig_treeness(run),
                 lambda: fig_causal(run), lambda: fig_habitat(run), lambda: fig_scale(run), lambda: fig_sensitivity(run)]
@@ -1085,11 +1356,9 @@ def export_pngs(figs: list[dict], out: Path) -> dict[str, Path]:
     for r in figs:
         w, h = r["png_size"]
         p = out / f"{r['key']}.png"
-        r["fig"].write_image(p, width=w, height=h, scale=1.6)
+        r.get("png_fig", r["fig"]).write_image(p, width=w, height=h, scale=1.6)  # static layout may differ from the site's
         paths[r["key"]] = p
-        if "pca3d" in r:  # the animated record also gets a GIF for the README
-            from phylogeo.phases import load_species
-
-            paths[r["key"] + "_gif"] = export_pca3d_gif(r, load_species()[1], out / f"{r['key']}.gif")
+        if "gif" in r:  # animated records also get a GIF for the README
+            paths[r["key"] + "_gif"] = r["gif"](out / f"{r['key']}.gif")
     log.info("exported %d figure files (PNG, GIF) to %s", len(paths), out)
     return paths

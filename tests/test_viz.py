@@ -70,6 +70,80 @@ def test_aligned_pca3_keeps_within_layer_geometry_and_removes_axis_flips():
     assert np.abs(C[1] - C[0]).max() < 2e-2  # aligned back onto the previous layer
 
 
+def test_unit_group_pca3_ignores_vector_norms():
+    """The 3-D within-group view uses unit-length vectors (the geometry cosine distance scores), so rescaling
+    each species' vector by any positive factor leaves the picture unchanged."""
+    from phylogeo.viz.viz_data import unit_group_pca3
+
+    rng = np.random.default_rng(3)
+    X = rng.normal(size=(40, 16))
+    idx = np.arange(5, 35)
+    C, evr = unit_group_pca3(X, idx)
+    C2, _ = unit_group_pca3(X * rng.uniform(0.1, 10, size=(40, 1)), idx)
+    assert C.shape == (30, 3) and len(evr) == 3 and np.allclose(C, C2, atol=1e-6)
+
+
+def test_within_group_3d_view_keeps_tree_order_of_brownian_motion(tree30):
+    """Positive and negative control for the 3-D view: Brownian motion on the tree keeps triplet order above
+    chance in 3 dimensions; the same points with shuffled species are at chance (1/3)."""
+    from phylogeo.stats.triplets import sample_triplets, ta
+    from phylogeo.viz.viz_data import euclidean, unit_group_pca3
+    from tests.conftest import brownian_on_tree
+
+    rng = np.random.default_rng(4)
+    X = brownian_on_tree(tree30, 64, rng)
+    trip = sample_triplets(tree30, 50, rng)
+    idx = np.arange(30)
+    acc = ta(euclidean(unit_group_pca3(X, idx)[0]), trip)
+    acc0 = np.mean([ta(euclidean(unit_group_pca3(X[rng.permutation(30)], idx)[0]), trip) for _ in range(20)])
+    # Even a perfect tree code loses part of its order in 3 of 64 dimensions (about 0.58 here), so the bound is
+    # "clearly above chance", not near 1.
+    assert acc > 0.5 and abs(acc0 - 1 / 3) < 0.08
+
+
+def test_point_traces_follow_the_given_labels_and_style():
+    """Points are grouped and coloured by the labels passed in (here taxonomic orders), not by stratum."""
+    from phylogeo.viz.figures import _point_traces
+
+    C = np.zeros((4, 3))
+    style = {"Carnivora": ("#2a78d6", "circle"), "other orders": ("#bdbcb6", "circle")}
+    tr = _point_traces(C, ["lion", "wolf", "cow", "pig"], ["Carnivora", "Carnivora", "other orders", "other orders"],
+                       style, "scene", showlegend=True)
+    assert [t.name for t in tr] == ["Carnivora", "other orders"]
+    assert tr[0].marker.color == "#2a78d6" and list(tr[0].text) == ["lion", "wolf"]
+
+
+def test_within3d_readme_block_takes_every_number_from_the_data():
+    """The README block next to the H1 highlight is generated: table cells and the summary count come from the
+    within3d record, so no hand-typed number can go stale."""
+    import plotly.graph_objects as go
+
+    from phylogeo.viz.figures import SITE_URL, rec, within3d_md
+
+    panel = lambda t3, tf, fit: {"ta_3d": t3, "ta_full": tf, "fit_ratio": fit}
+    g = {"n_nodes": 43, "diff_ci95_3d": [0.031, 0.266], "diff_ci95_full": [-0.025, 0.291],
+         "panels": {"expected": panel(0.67, 0.876, 0.03), "m": panel(0.418, 0.533, 0.33), "c": panel(0.281, 0.398, 0.48)}}
+    w3 = {"main": "m", "control": "c", "hidden_size": 2048, "n_boot": 1000, "layer": 6}
+    r = rec("within3d", "title", "mixed", "verdict", "Post hoc, descriptive. caption", go.Figure())
+    r.update(within3d=w3, groups=[("mammals", g)], clear={"3d": ["mammals"], "full": []})
+    md = within3d_md(r)
+    assert f"{SITE_URL}#fig-within3d" in md and "reports/figures/viz/within3d.gif" in md
+    assert "| mammals (43) | 0.418 / 0.281 [+0.031, +0.266] | 0.533 / 0.398 [-0.025, +0.291] | 0.03 / 0.33 / 0.48 |" in md
+    assert "in 1 of 1 groups in the 3-D view and in 0 of 1 in all 2048 dimensions" in md
+
+
+def test_gif_palette_keeps_series_colours_exact():
+    """GIF frames are mapped to a fixed palette, so blue, orange and aqua markers keep their legend colours."""
+    from PIL import Image
+
+    from phylogeo.viz.figures import AQUA, BLUE, GRAY, ORANGE, gif_palette
+
+    hexes = [BLUE, ORANGE, AQUA, GRAY]
+    px = np.array([[[int(h[i:i + 2], 16) for i in (1, 3, 5)] for h in hexes]], np.uint8)
+    out = np.array(Image.fromarray(px).quantize(palette=gif_palette(), dither=Image.Dither.NONE).convert("RGB"))
+    assert (out == px).all()
+
+
 def test_shared_box_holds_the_trained_model_and_counts_what_it_hides():
     """The per-layer box contains every trained-model point; points outside it are clipped (NaN) and counted."""
     from phylogeo.viz.figures import _clip, _lim_at, _lims, n_outside

@@ -11,6 +11,9 @@ activations once and writes three small files to ``results/<run>/viz/``:
   tree, the same synthetic positive control as stage 1a) and of the observed representations.
 - ``neighbors.json``: the 10 nearest species of every species under the tree, the model and the
   untrained controls, each labelled with its taxonomic relation to the query.
+- ``pca3d.json``: top-3 PCA at every layer, aligned layer to layer (animated 3-D view).
+- ``within3d.json``: per large group, 3-D views of the expected tree shape, the model and its
+  untrained twin, with the reference subtree fitted into each cloud (post hoc; :func:`within_group_3d`).
 """
 
 from __future__ import annotations
@@ -71,8 +74,9 @@ def nearest(D: np.ndarray, k: int) -> np.ndarray:
     return np.argsort(D, axis=1, kind="stable")[:, :k]
 
 
-def build_viz_data(main: str, controls: list[str], layers: list[int], out: Path, seed: int = 0, k: int = 10) -> None:
-    """Write distances.npz, pca2d.json and neighbors.json for ``main`` (see module docstring)."""
+def build_viz_data(main: str, controls: list[str], layers: list[int], out: Path, seed: int = 0, k: int = 10,
+                   cfg=None) -> None:
+    """Write distances.npz, pca2d.json, neighbors.json, pca3d.json and (with ``cfg``) within3d.json for ``main``."""
     from phylogeo.baselines import class_oracle
     from phylogeo.geometry import cosine_distance, species_vectors
     from phylogeo.phases import act_dir, load_species
@@ -127,7 +131,82 @@ def build_viz_data(main: str, controls: list[str], layers: list[int], out: Path,
         "names": names, "strata": strata.tolist(), "modal_layer": L, "reps": p3,
         "tree": {"n": int(tree.n), "parent": tree.parent.tolist(), "postorder": list(reversed(tree.preorder))}}),
         encoding="utf-8")
+    # 5. Within-group 3-D views with the fitted tree (post hoc; README figure next to the H1 highlight). Needs the
+    #    run config to rebuild the H1 triplets and bootstrap settings. Xb is centred like species_vectors centres.
+    if cfg is not None:
+        Xc = Xb - Xb.mean(0)
+        w3 = within_group_3d({main: V[main][L], controls[0]: V[controls[0]][L]}, Xc,
+                             {"expected": cosine_distance(Xc), main: D[main], controls[0]: D[controls[0]]},
+                             df, tree, cfg)
+        (out / "within3d.json").write_text(json.dumps({"layer": L, **w3}), encoding="utf-8")
     log.info("viz data written to %s (layers %s, controls %s)", out, layers, controls)
+
+
+def unit_group_pca3(X: np.ndarray, idx: np.ndarray, seed: int = 0) -> tuple[np.ndarray, list[float]]:
+    """Top-3 PCA of one group's species vectors after scaling each vector to unit length (centred on the group
+    mean by :func:`pca3`). Unit length matters: H1 scores cosine distance, and for unit vectors
+    ||u - v||^2 = 2 (1 - cos), so 3-D Euclidean distances approximate exactly that geometry. Without it, name-
+    dependent vector norms dominate the top PCs (random-init Qwen then looks as tree-like as the trained model)."""
+    U = X / np.linalg.norm(X, axis=1, keepdims=True)
+    return pca3(U[idx], seed)
+
+
+def euclidean(C: np.ndarray) -> np.ndarray:
+    """[n, n] Euclidean distances between the rows of C (what the eye sees in a 3-D scatter)."""
+    return np.linalg.norm(C[:, None] - C[None], axis=-1)
+
+
+def within_group_3d(V: dict[str, np.ndarray], expected: np.ndarray, D_full: dict[str, np.ndarray], df, tree, cfg,
+                    min_nodes: int = 20, n_fit_perm: int = 999) -> dict:
+    """Post-hoc 3-D views of tree order *inside* groups (README figure next to the H1 highlight).
+
+    For every stratum with >= ``min_nodes`` H1 decision nodes, each representation (``expected`` Brownian motion on
+    the tree, the model, its untrained twin) goes through the same pipeline: unit-length vectors, group-centred
+    top-3 PCA. Reported per panel: triplet accuracy of the 3-D picture and of all dimensions (cosine, as in H1) on
+    the H1 triplets of that group, and how well the reference subtree fits the 3-D points (fitted squared edge
+    length vs shuffled species, :func:`phylogeo.viz.pca.tree_fit_test`). Per group: paired family-block bootstrap
+    CIs of model minus untrained, in 3-D and in all dimensions (same draws, so the difference is paired).
+    """
+    from phylogeo.analysis import _rng
+    from phylogeo.stats.triplets import (clade_bootstrap_ta, distinct_mask, sample_triplets, ta,
+                                         within_group_mask)
+    from phylogeo.viz.pca import tree_fit_test
+
+    strata = df["stratum"].to_numpy()
+    fam = np.where(df["family"] != "", df["family"], df["genus"]).astype(object)  # bootstrap blocks, as in stage 1b
+    trip = sample_triplets(tree, cfg.k_per_node, _rng(cfg, "triplets"))  # the H1 triplets (same RNG stream)
+    within = within_group_mask(trip, strata) & distinct_mask(trip, df["head_noun"].to_numpy())
+    main, ctl = list(V)
+    reps = {"expected": expected, **V}
+    out = {}
+    for g in sorted(np.unique(strata)):
+        m = within & (strata[trip.a] == g)
+        n_nodes = int(len(np.unique(trip.node[m])))
+        if n_nodes < min_nodes:
+            continue
+        idx = np.where(strata == g)[0]
+        sub = tree.subtree(list(idx))  # reference topology of the group, leaves in the order of idx
+        panels, D3 = {}, {}
+        for r, X in reps.items():
+            C, evr = unit_group_pca3(X, idx, cfg.seed)
+            full = np.zeros((len(df), 3))
+            full[idx] = C
+            D3[r] = euclidean(full)
+            ratio, p = tree_fit_test(sub, C, n_fit_perm, _rng(cfg, f"within3d_fit_{g}_{r}"))
+            panels[r] = {"coords": np.round(C, 3).tolist(), "evr": [round(e, 4) for e in evr],
+                         "ta_3d": float(ta(D3[r], trip, m)), "ta_full": float(ta(D_full[r], trip, m)),
+                         "fit_ratio": ratio, "fit_p": p}
+        bo = clade_bootstrap_ta([D3[main], D3[ctl], D_full[main], D_full[ctl]], trip, m, fam, tree, cfg.n_boot,
+                                _rng(cfg, f"within3d_{g}"))
+        out[g] = {"idx": idx.tolist(), "n_nodes": n_nodes, "n_triplets": int(m.sum()), "panels": panels,
+                  "diff_ci95_3d": np.nanpercentile(bo[0] - bo[1], [2.5, 97.5]).tolist(),
+                  "diff_ci95_full": np.nanpercentile(bo[2] - bo[3], [2.5, 97.5]).tolist()}
+        log.info("within3d %s (%d nodes): 3-D TA %s %.3f vs %s %.3f; full %.3f vs %.3f; tree fit %.2f vs %.2f "
+                 "(expected %.2f)", g, n_nodes, main, panels[main]["ta_3d"], ctl, panels[ctl]["ta_3d"],
+                 panels[main]["ta_full"], panels[ctl]["ta_full"], panels[main]["fit_ratio"],
+                 panels[ctl]["fit_ratio"], panels["expected"]["fit_ratio"])
+    return {"main": main, "control": ctl, "min_nodes": min_nodes, "n_fit_perm": n_fit_perm, "n_boot": cfg.n_boot,
+            "hidden_size": int(V[main].shape[-1]), "groups": out}
 
 
 def pca3(X: np.ndarray, seed: int = 0) -> tuple[np.ndarray, list[float]]:
