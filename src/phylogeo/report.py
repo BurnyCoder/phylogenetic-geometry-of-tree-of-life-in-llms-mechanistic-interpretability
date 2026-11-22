@@ -397,7 +397,7 @@ def stage5_table() -> str:
     ck = sorted([x for x in r["runs"] if x["step"] is not None], key=lambda x: x["step"])
     ref = ", ".join(f"{k} {v:.3f}" for k, v in r["reference_ta_within"].items())
     out = ["**Scale** (final checkpoints)\n", *head, *[row(x) for x in final],
-           f"\nReference TA_within from stage 1b (same triplets): {ref}; chance 0.333. The max-T p uses 199 "
+           f"\nReference TA_within from stage 1b (same triplets; untrained networks cross-fitted, name baselines have no layer): {ref}; chance 0.333. Parameters are nominal sizes. The max-T p uses 199 "
            "within-stratum permutations (floor 0.005).\n"]
     if ck:
         out += ["\n**Training dynamics** (Pythia-1.4B checkpoints)\n", *head, *[row(x) for x in ck]]
@@ -462,11 +462,18 @@ def key_results_md(run: str = "qwen35_2b") -> str:
     req = max(h["required_comparisons"], key=lambda k: pt.get(k, 0))
     verdict = lambda ok: "supported" if ok else "not supported"
     dci = h["diff_ci95_vs"].get(req, [float("nan")] * 2)
+    floor = " (permutation floor)" if h["maxT_p"] <= 1.0 / 1000 + 1e-9 else ""  # 1/(1000+1): no permutation reached it
+    au = _load(R / "audit" / "results.json")
     rows = [f"| Tree order *within* coarse groups, beyond untrained networks, spelling, name length and popularity "
             f"(H1, primary) | TA_within at layer {L} = {h['ta_within_modal']:.3f} [95% CI {h['ci95'][0]:.3f}, "
-            f"{h['ci95'][1]:.3f}], cross-fitted {h['crossfit_ta_within']:.3f}; max-T p {p_fmt(h['maxT_p'])} (permutation "
-            f"floor); margin over the strongest required control ({req}, {pt[req]:.3f}) "
+            f"{h['ci95'][1]:.3f}], cross-fitted {h['crossfit_ta_within']:.3f}; max-T p {p_fmt(h['maxT_p'])}{floor}; margin over the strongest required control ({req}, {pt[req]:.3f}) "
             f"{pt[run] - pt[req]:+.3f} [{dci[0]:+.3f}, {dci[1]:+.3f}]; chance 0.333 | {verdict(h['supported'])} |"]
+    unt = [k for k in h["required_comparisons"] if k in b["models"]]
+    if unt:
+        rows.append("| Are the untrained networks themselves above chance? (own max-T test over layers) | " + "; ".join(
+            f"{k}: max-T p {p_fmt(b['models'][k]['maxT_p'])}, cross-fitted {b['models'][k]['crossfit_ta_within']:.3f}, "
+            f"{pt[k]:.3f} at its selected layer" for k in unt) + " | " + "; ".join(
+            f"{k} {'yes' if b['models'][k]['maxT_p'] < 0.05 else 'no'}" for k in unt) + " |")
     ps = ex.get("per_stratum_ci95")
     if ps:
         big = sorted(ps.items(), key=lambda kv: -kv[1]["n_nodes"])[:2]
@@ -498,10 +505,18 @@ def key_results_md(run: str = "qwen35_2b") -> str:
     tie = phv.get("char3_tie_lexically_neutral")
     if tie:
         ctl = [k for k in tie if k not in ("n_triplets", run, f"{run}_ci95") and not k.startswith("diff_")]
-        rows.append(f"| Lexically neutral triplets: spelling has no preference (post hoc) | TA = {tie[run]:.3f} (n = "
-                    f"{tie['n_triplets']}); " + ", ".join(f"{k} {tie[k]:.3f}, diff CI [{tie[f'diff_ci95_vs_{k}'][0]:+.3f}, "
+        above = all(tie[f"diff_ci95_vs_{k}"][0] > 0 for k in ctl)
+        ln = au["lexically_neutral"] if au else None
+        defn = (f"{ln['n_no_shared_char3gram']} of {ln['n']} share no character 3-gram" if ln else "no unique closest pair")
+        rows.append(f"| Lexically neutral triplets: character 3-grams pick no pair (post hoc; {defn}) | TA = {tie[run]:.3f} "
+                    f"(n = {tie['n_triplets']}); " + ", ".join(f"{k} {tie[k]:.3f}, diff CI [{tie[f'diff_ci95_vs_{k}'][0]:+.3f}, "
                                                          f"{tie[f'diff_ci95_vs_{k}'][1]:+.3f}]" for k in ctl)
-                    + " | above the untrained controls |")
+                    + ("; untrained networks' own CIs " + ", ".join(
+                        f"{k} [{ln['by_rep'][k]['ci95'][0]:.3f}, {ln['by_rep'][k]['ci95'][1]:.3f}]" for k in ctl
+                        if k in ln["by_rep"]) if ln else "")
+                    + f" | {'above' if above else 'not above'} the untrained controls"
+                    + ("; the untrained networks are at chance here" if ln and all(
+                        ln["by_rep"][k]["ci95"][0] <= 1 / 3 for k in ctl if k in ln["by_rep"]) else "") + " |")
     rows.append(f"| Distances track divergence time beyond topology (S5) | partial Spearman "
                 f"{sec['S5']['pooled_partial_spearman']:.3f}, Holm p {p_fmt(sec['S5']['holm_p'])} | "
                 f"{verdict(sec['S5']['holm_p'] < 0.05)} (no time signal detected; low power by design) |")
@@ -523,10 +538,16 @@ def key_results_md(run: str = "qwen35_2b") -> str:
         txt = (f"held-out r = {pm['test_test_pearson'][0]:.3f}{ws(pm)}; shuffled tree {psh['test_test_pearson'][0]:.3f}")
         if cb:
             txt += f"; class-only (class-blob) input {cb['test_test_pearson'][0]:.3f}{ws(cb)}"
-        if "raw_angular_within_stratum_spearman_all_species" in pr:
+        pv = au["probe_vs_raw_heldout"] if au else None
+        if pv:
+            txt += (f"; raw angular distances without a probe on the same held-out pairs, within-stratum "
+                    f"{pv['raw_angular_heldout_within_stratum_spearman']:.3f}")
+        elif "raw_angular_within_stratum_spearman_all_species" in pr:
             txt += f"; raw distances without a probe, within-stratum {pr['raw_angular_within_stratum_spearman_all_species']:.3f}"
+        worse = pv and pv["raw_angular_heldout_within_stratum_spearman"] > pv["probe_heldout_within_stratum_spearman"]
         rows.append(f"| Learned 10-d flat subspace (Goodfire-style probe; exploratory) | {txt} | all-pairs r reflects "
-                    "coarse groups; within strata the probe adds little over raw distances |")
+                    "coarse groups; within strata the probe " + ("does not add order over raw distances (it scores lower)"
+                                                               if worse else "adds little over raw distances") + " |")
         d = s2["delta_rel"]
         rows.append(f"| Tree-like (hyperbolic) metric (exploratory) | Gromov δ_rel = {d['model']:.3f} vs matched Gaussian "
                     f"{d['matched_gaussian_mean']:.3f}, class-blob {d['class_blob_mean']:.3f}, exact tree 0 | "
@@ -571,8 +592,24 @@ def key_results_md(run: str = "qwen35_2b") -> str:
         rows.append(f"| Late-layer top PC orders aquatic → terrestrial (Addendum A, held-out species) | marine vs ground "
                     f"mammals (n = {t['M1_marine_lt_ground']['n']}) Holm p {p_fmt(t['M1_marine_lt_ground']['holm_p'])}; "
                     f"waterbird ρ = {t['B1_water_negative']['rho']:.3f} (Holm p {p_fmt(t['B1_water_negative']['holm_p'])}); "
-                    f"aerial birds ρ = {t['B2_aerial_positive']['rho']:.3f} | aquatic end supported (name cues not "
-                    "controlled), aerial end not |")
+                    f"aerial birds ρ = {t['B2_aerial_positive']['rho']:.3f} (Holm p {p_fmt(t['B2_aerial_positive']['holm_p'])}) | "
+                    + ("aquatic end supported (name cues not controlled)"
+                       if max(t['M1_marine_lt_ground']['holm_p'], t['B1_water_negative']['holm_p']) < 0.05
+                       else "aquatic end not supported")
+                    + (", aerial end not" if t['B2_aerial_positive']['holm_p'] >= 0.05 else ", aerial end supported")
+                    + " |")
+    if au:
+        sd = au["bootstrap_family_seeds_min_lower"]
+        ob = au["bootstrap_order_block"]
+        tight = min(sd, key=sd.get)
+        rows.append(f"| Is the H1 margin stable? (audit, post hoc) | lowest lower CI bound over 5 extra family-block "
+                    f"bootstrap seeds: {tight} {sd[tight]:+.3f}; with orders as blocks ({au['n_orders']} orders instead of "
+                    f"{au['n_families']} families): " + ", ".join(f"{k} [{v[0]:+.3f}, {v[1]:+.3f}]" for k, v in ob.items()
+                                                                  if k in unt) + " | "
+                    + ("stable" if min(sd.values()) > 0 and all(ob[k][0] > 0 for k in ob) else
+                       "passes with the registered family blocks"
+                       + (f" (in all 5 seeds)" if min(sd.values()) > 0 else " but not in every seed")
+                       + "; not with order blocks vs " + ", ".join(k for k in ob if ob[k][0] <= 0)) + " |")
     s6 = _load(R / "stage6" / "results.json")
     if s6:
         lo = min(s6["triplet_seed"][run]["min"], s6["species_subsample"][run]["min"],
@@ -585,7 +622,8 @@ def key_results_md(run: str = "qwen35_2b") -> str:
     s5 = _load(RESULTS_DIR / "stage5" / "summary.json")
     if s5:
         fin = sorted([x for x in s5["runs"] if x["step"] is None], key=lambda x: x["params"])
-        rows.append("| Other models (stage 5; cross-fitted TA_within) | " + "; ".join(
+        rows.append("| Other models (stage 5; cross-fitted TA_within with 10 family splits, so qwen35_2b differs slightly "
+                    "from the H1 row, which uses 20) | " + "; ".join(
             f"{x['run']} {x['crossfit_ta_within']:.3f}" for x in fin) + " | descriptive |")
     bh = _load(R / "exploratory_bh.json")
     foot = (f"\nExploratory p-values are corrected with BH-FDR over the {bh['n_tests']} registered exploratory tests; "
@@ -660,6 +698,50 @@ def power_table() -> str:
     return "\n".join(out) + "\n"
 
 
+def audit_table(run: str) -> str:
+    """Independent audit (2026-11-22, post hoc): re-derivations and stress tests (``phylogeo.audit``)."""
+    a = _load(RESULTS_DIR / run / "audit" / "results.json")
+    if not a:
+        return "*(no audit results)*\n"
+    e, L = a["exhaustive"], a["layer"]
+    out = ["Every item is post hoc and recomputed from stored activations without any forward pass; none changes a "
+           "registered verdict. Interpretation: `reports/reviews/2026-11-22-independent-audit.md`.\n",
+           f"**1. TA_within with independent code** (all {e['n_triplets']} resolved within-stratum, head-noun-disjoint "
+           f"triplets, {e['n_decision_nodes']} decision nodes, no per-node cap; dendropy LCAs)\n",
+           "| representation | exhaustive | reported (sampled, K = 200) |", "|---|---|---|"]
+    out += [f"| {r} | {e[f'ta_within_{r}']:.3f} | {v:.3f} |" for r, v in e["reported_sampled"].items()]
+    out += [f"\n**2. H1 paired bootstrap: Monte Carlo stability and block level** (difference {run} − control, 95% CI)\n",
+            "| control | stage 1b (families) | 5 extra family seeds: lowest lower bound | orders as blocks |",
+            "|---|---|---|---|"]
+    s1b = _load(RESULTS_DIR / run / "stage1b" / "results.json")
+    for k, lo in a["bootstrap_family_seeds_min_lower"].items():
+        d0, ob = s1b["H1"]["diff_ci95_vs"].get(k, [float("nan")] * 2), a["bootstrap_order_block"][k]
+        out.append(f"| {k} | [{d0[0]:+.3f}, {d0[1]:+.3f}] | {lo:+.3f} | [{ob[0]:+.3f}, {ob[1]:+.3f}] |")
+    ln = a["lexically_neutral"]
+    out += [f"\n**3. Lexically neutral subset** ({ln['n']} triplets; {ln['n_no_shared_char3gram']} share no character "
+            f"3-gram, {ln['n_two_way_tie_wrong_pairs']} are ties between the two wrong pairs) and triplets whose names share "
+            "no token (each network's own tokenizer); TA at each representation's layer with its own family-block CI\n",
+            "| representation | lexically neutral | no shared token |", "|---|---|---|"]
+    for r, v in ln["by_rep"].items():
+        t = a["no_shared_token"][r]
+        out.append(f"| {r} | {v['ta']:.3f} [{v['ci95'][0]:.3f}, {v['ci95'][1]:.3f}] | {t['ta']:.3f} "
+                   f"[{t['ci95'][0]:.3f}, {t['ci95'][1]:.3f}] (n = {t['n']}) |")
+    pv, cv, nj = a["probe_vs_raw_heldout"], a["causal_variance_matching"], a["nj_splits"]
+    out += [f"\n**4. Flat probe vs raw distances on the same held-out pairs** (mean per-stratum Spearman, layer {L}, "
+            f"stage-2 folds): probe {pv['probe_heldout_within_stratum_spearman']:.3f}; raw angular distance "
+            f"{pv['raw_angular_heldout_within_stratum_spearman']:.3f} (per seed "
+            + ", ".join(f"{x:.3f}" for x in pv["raw_per_seed"]) + f"); raw angular on all species "
+            f"{pv['raw_angular_all_species']:.3f}.\n",
+            f"**5. Stage-3 variance matching** (share of species-vector variance in the subspace): probe "
+            f"{cv['probe_train']:.3f} on training species, {cv['probe_all_species_v1']:.3f} on all species, at most "
+            f"{cv['probe_heldout_upper_bound']:.3f} on the held-out half; random subspaces {cv['random_train_mean']:.3f} on "
+            f"training species and {cv['random_heldout_mean']:.3f} (range {cv['random_heldout_range'][0]:.3f}–"
+            f"{cv['random_heldout_range'][1]:.3f}) on the held-out species where the interventions act.\n",
+            f"**6. Neighbour joining**: {nj['shared']} of the reference tree's {nj['reference_splits']} non-trivial splits "
+            f"recovered ({nj['fraction_reference_recovered']:.1%}).\n"]
+    return "\n".join(out) + "\n"
+
+
 def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
     """Aggregate all generated tables into results/RESULTS.md."""
     parts = ["# Results (auto-generated by `python -m phylogeo.run --phases report`; do not edit)\n",
@@ -673,6 +755,8 @@ def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
                   "\n### Stage 4 — ablations\n", stage4_table(run),
                   "\n### Addendum A — habitat gradient (held-out species)\n", eco_table(run),
                   "\n### Stage 6 — sensitivity\n", stage6_table(run)]
+        if (RESULTS_DIR / run / "audit" / "results.json").exists():
+            parts += ["\n### Independent audit (2026-11-22, post hoc)\n", audit_table(run)]
     parts += ["\n## Stage 5 — more models (scale and training dynamics)\n", stage5_table()]
     exploratory_bh(main)  # registered BH-FDR family (final review M7); read by key_results_md and the paper
     parts += ["\n## Exploratory tests: BH-FDR over the registered family\n", exploratory_bh_table(main)]
@@ -690,6 +774,8 @@ def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
                        "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run),
                        "\n## Stage 2\n", stage2_table(run), "\n## Stage 3\n", stage3_table(run),
                        "\n## Stage 4\n", stage4_table(run), "\n## Addendum A (habitat gradient)\n", eco_table(run),
-                       "\n## Stage 6\n", stage6_table(run)]),
+                       "\n## Stage 6\n", stage6_table(run)]
+                      + (["\n## Independent audit (2026-11-22)\n", audit_table(run)]
+                         if (RESULTS_DIR / run / "audit" / "results.json").exists() else [])),
             encoding="utf-8")
     return path

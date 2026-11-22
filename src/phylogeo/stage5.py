@@ -22,8 +22,12 @@ from phylogeo.config import RESULTS_DIR, RunConfig
 
 log = logging.getLogger("phylogeo.stage5")
 
-PARAMS = {  # parameter counts (from the model cards; Pythia names are nominal sizes)
-    "Qwen/Qwen3.5-0.8B": 0.85e9, "Qwen/Qwen3.5-2B": 2.27e9, "Qwen/Qwen3-1.7B": 1.7e9,
+# Nominal sizes from the model names, for every family (one accounting on the x-axis). The Qwen3.5
+# checkpoints also hold a vision encoder and a multi-token-prediction head: Qwen3.5-2B is 2.27B in total
+# (about 1.88B in the language model) and Qwen3.5-0.8B 0.87B (about 0.75B), counted from the safetensors
+# headers on the Hub (audit 2026-11-22), so totals would not be comparable with Pythia's nominal sizes.
+PARAMS = {
+    "Qwen/Qwen3.5-0.8B": 0.8e9, "Qwen/Qwen3.5-2B": 2.0e9, "Qwen/Qwen3-1.7B": 1.7e9,
     "EleutherAI/pythia-70m": 70e6, "EleutherAI/pythia-160m": 160e6, "EleutherAI/pythia-410m": 410e6,
     "EleutherAI/pythia-1b": 1.0e9, "EleutherAI/pythia-1.4b": 1.4e9, "EleutherAI/pythia-2.8b": 2.8e9,
 }
@@ -61,9 +65,14 @@ def summarize(write_json) -> dict:
     import matplotlib.pyplot as plt
 
     runs = [json.loads(p.read_text()) for p in sorted(RESULTS_DIR.glob("*/stage5/scale.json"))]
+    for r in runs:  # one size accounting for every model (see PARAMS)
+        r["params"] = PARAMS.get(r["model_id"], r["params"])
     s1b = json.loads((RESULTS_DIR / "qwen35_2b" / "stage1b" / "results.json").read_text())
-    ref = {k: s1b["point_ta_within"][k] for k in ("qwen35_2b_random", "pythia410m_step0", "char3", "glove")
-           if k in s1b["point_ta_within"]}
+    # Like-for-like reference lines: the plotted model values are cross-fitted, so the untrained networks are
+    # shown cross-fitted too (their full-sample value at the selected layer is optimistic); the name baselines
+    # have no layer to select.
+    ref = {k: (s1b["models"][k]["crossfit_ta_within"] if k in s1b["models"] else s1b["point_ta_within"][k])
+           for k in ("qwen35_2b_random", "pythia410m_step0", "char3", "glove") if k in s1b["point_ta_within"]}
     out = {"runs": runs, "reference_ta_within": ref}
     (RESULTS_DIR / "stage5").mkdir(exist_ok=True)
     write_json(RESULTS_DIR / "stage5" / "summary.json", out)
@@ -80,7 +89,7 @@ def summarize(write_json) -> dict:
         ax.text(ax.get_xlim()[0] if ax.get_xlim()[0] > 0 else 6e7, v, f" {name}", fontsize=6, va="bottom", color="0.4")
     ax.axhline(1 / 3, ls=":", lw=0.8, color="0.3")
     ax.set_xscale("log")
-    ax.set_xlabel("parameters")
+    ax.set_xlabel("parameters (nominal)")
     ax.set_ylabel("cross-fitted TA_within")
     ax.set_title("Within-stratum triplet accuracy vs model size", fontsize=9)
     ax.legend(fontsize=8)

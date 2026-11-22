@@ -26,25 +26,31 @@ REPO_URL = "https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-
 REFS = {
     "goodfire_evo2": ("Pearce, Simon, Byun, Balsam (Goodfire) 2025. Finding the Tree of Life in Evo 2.",
                       "https://www.goodfire.com/research/phylogeny-manifold"),
-    "goodfire_geom": ("Goodfire 2025-26. Neural geometry research series.", "https://www.goodfire.com/research/neural-geometry"),
+    "goodfire_geom": ("Goodfire 2026. Neural geometry research series.", "https://www.goodfire.com/research/neural-geometry"),
     "engels": ("Engels, Michaud, Liao, Gurnee, Tegmark 2024. Not All Language Model Features Are One-Dimensionally Linear.",
                "https://arxiv.org/abs/2405.14860"),
     "modell": ("Modell, Rubin-Delanchy, Whiteley 2025. The Origins of Representation Manifolds in Large Language Models.",
                "https://arxiv.org/abs/2505.18235"),
-    "wurgaft": ("Wurgaft et al. (Goodfire) 2026. Steering Along Manifolds. arXiv 2605.05115.", "https://arxiv.org/abs/2605.05115"),
+    "wurgaft": ("Wurgaft et al. (Goodfire) 2026. Manifold Steering Reveals the Shared Geometry of Neural Network "
+                "Representation and Behavior. arXiv 2605.05115.", "https://arxiv.org/abs/2605.05115"),
     "park": ("Park, Choe, Jiang, Veitch 2024. The Geometry of Categorical and Hierarchical Concepts in Large Language Models.",
              "https://arxiv.org/abs/2406.01506"),
     "gurnee": ("Gurnee, Tegmark 2023. Language Models Represent Space and Time.", "https://arxiv.org/abs/2310.02207"),
-    "nava": ("Nava, Wyart 2026. Co-occurrence statistics and hierarchical representation geometry (arXiv 2605.23821).",
-             "https://arxiv.org/abs/2605.23821"),
+    "nava": ("Nava, Wyart 2026. Hierarchical Concept Geometry in Language Models Emerges from Word Co-occurrence. "
+             "arXiv 2605.23821.", "https://arxiv.org/abs/2605.23821"),
     "hewitt": ("Hewitt, Manning 2019. A Structural Probe for Finding Syntax in Word Representations. NAACL.",
                "https://aclanthology.org/N19-1419/"),
     "nickel": ("Nickel, Kiela 2017. Poincaré Embeddings for Learning Hierarchical Representations.",
                "https://arxiv.org/abs/1705.08039"),
     "khrulkov": ("Khrulkov, Mirvakhabova, Ustinova, Oseledets, Lempitsky 2020. Hyperbolic Image Embeddings.",
                  "https://arxiv.org/abs/1904.02239"),
-    "phylotext": ("phylotext-mammals (GitHub repository, user jadencutinha).",
+    "phylotext": ("Cutinha. lineage-or-charisma / phylotext-mammals (Princeton COS398 independent work; GitHub).",
                   "https://github.com/jadencutinha/phylotext-mammals"),
+    "taxoglimpse": ("Sun et al. 2024. Are Large Language Models a Good Replacement of Taxonomies? PVLDB.",
+                    "https://arxiv.org/abs/2406.11131"),
+    "hit": ("He et al. 2024. Language Models as Hierarchy Encoders. NeurIPS.", "https://arxiv.org/abs/2401.11374"),
+    "rodriguez": ("Rodriguez, Mueller, Misra 2025. Characterizing the Role of Similarity in the Property Inferences of "
+                  "Language Models. NAACL.", "https://arxiv.org/abs/2410.22590"),
     "opentree": ("Open Tree of Life (synthetic tree and taxonomy; CC0).", "https://tree.opentreeoflife.org/"),
     "timetree": ("Kumar et al. 2022. TimeTree 5. Molecular Biology and Evolution.", "https://timetree.org/"),
     "elton": ("Wilman et al. 2014. EltonTraits 1.0. Ecology 95:2027.", "https://esapubs.org/archive/ecol/E095/178/"),
@@ -175,6 +181,15 @@ def build_paper() -> Path:
     s5, s6 = _j("stage5", "summary.json"), _j(RUN, "stage6", "results.json")
     eco, conf, ex = _j(RUN, "eco", "results.json"), _j(RUN, "conflict", "conflict.json"), _j(RUN, "examples", "neighbors.json")
     power = _j("power", "summary.json")
+    aud = _j(RUN, "audit", "results.json")  # independent audit (2026-11-22), post hoc
+    fragile = bool(aud) and any(v[0] <= 0 for k, v in aud["bootstrap_order_block"].items() if k in s1b["models"])
+    abs_fragile = (", clearly only in mammals and birds, and against the untrained networks only when families rather than "
+                   "whole orders are the bootstrap blocks" if fragile else " and clearly only in mammals and birds")
+    disc_fragile = (", and its CI against the untrained networks excludes zero only with the registered family-level "
+                    "bootstrap blocks" if fragile else "")
+    lim_fragile = ("; the paired-bootstrap margin over the untrained networks does not exclude zero when orders rather "
+                   "than families are resampled" if fragile else "")
+    concl_fragile = " but not to resampling whole orders" if fragile else ""
     h1, sec = s1b["H1"], s1b["secondary"]
     pt, ci = s1b["point_ta_within"], s1b["ci95_ta_within"]
     cs = conf["summary"][RUN]
@@ -333,7 +348,7 @@ def build_paper() -> Path:
         rows = [[esc(x["run"]), f"{x['params'] / 1e9:.2f}B", str(x["n_layers"]), f3(x["ta_within_max"]),
                  f3(x["crossfit_ta_within"]), fpv(x["maxT_p"]), f3(x["mantel_pathlen_modal"])] for x in fin]
         stage5_txt = ("\n== Other models: scale and training dynamics (stage 5, descriptive)\n"
-                      + _table(["model", "params", "layers", "max TA_within", "cross-fitted TA_within", "max-T p", "Mantel r"], rows,
+                      + _table(["model", "nominal params", "layers", "max TA_within", "cross-fitted TA_within", "max-T p", "Mantel r"], rows,
                                "Same species, triplets and metric for every model (199 permutations; p floor 0.005).")
                       + _fig("scale", "Cross-fitted TA#sub[within] vs parameter count.", "75%"))
         if ck:
@@ -410,10 +425,14 @@ def build_paper() -> Path:
             f"and the same probe trained on a class-blob input (each species at its stratum centroid plus matched noise, no "
             f"within-stratum tree) reaches held-out r = {f3(pcb['test_test_pearson'][0])}. Within strata (mean of per-stratum "
             f"Spearman on held-out pairs) the model's probe reaches "
-            f"{f3(probe['model'].get('test_test_within_stratum_spearman', [float('nan')])[0])}, the class-blob input "
-            f"{f3(pcb.get('test_test_within_stratum_spearman', [float('nan')])[0])}, and the raw angular distances without any "
-            f"probe {f3(probe.get('raw_angular_within_stratum_spearman_all_species'))}: the representation carries some "
-            f"within-stratum order, but the probe adds little to it. ")
+            f"{f3(probe['model'].get('test_test_within_stratum_spearman', [float('nan')])[0])} and the class-blob input "
+            f"{f3(pcb.get('test_test_within_stratum_spearman', [float('nan')])[0])}; "
+            + (f"the raw angular distances without any probe reach {f3(aud['probe_vs_raw_heldout']['raw_angular_heldout_within_stratum_spearman'])} "
+               f"on the same held-out pairs (audit): the representation carries some within-stratum order, and the probe does not "
+               f"add to it. " if aud else
+               f"the raw angular distances without any probe reach {f3(probe.get('raw_angular_within_stratum_spearman_all_species'))} "
+               f"over all species: the representation carries some within-stratum order, but the probe adds little to it. ")
+            + "(The strata-only predictor is fit on the same pairs it is scored on, so it is a reference, not a held-out result.) ")
     nj = s2["nj_rf"]
     nj_txt = (f" Against NJ trees built from class-blob inputs ({f3(nj['class_blob_null_mean'])}, 20 draws) the model's tree is "
               + ("closer to the reference" if nj["model"] < nj["class_blob_null_mean"] else "not closer to the reference")
@@ -424,6 +443,24 @@ def build_paper() -> Path:
         mg = min(s6["triplet_seed"]["margin_vs_best_control"]["min"], s6["species_subsample"]["margin_vs_best_control"]["min"])
         robust_txt = (f"; across all stage-6 perturbations TA#sub[within] stays at or above {f3(lo)} and the smallest margin over "
                       f"the best control is {f3(mg)}")
+    floor_txt = " (the permutation floor)" if h1["maxT_p"] <= 1.0 / 1000 + 1e-9 else ""
+    unt = [k for k in h1["required_comparisons"] if k in s1b["models"]]
+    untrained_txt = (" Of the untrained networks, " + "; ".join(
+        f"{esc(k)} has max-T p {fp(s1b['models'][k]['maxT_p'])} over layers (cross-fitted {f3(s1b['models'][k]['crossfit_ta_within'])})"
+        for k in unt) + ".")
+    audit_h1_txt = ""
+    if aud:
+        ln = aud["lexically_neutral"]["by_rep"]
+        ob = aud["bootstrap_order_block"]
+        audit_h1_txt = (" On triplets whose names share no character 3-gram, the untrained networks are at chance ("
+                        + "; ".join(f"{esc(k)} {f3(ln[k]['ta'])}, CI {f3(ln[k]['ci95'][0])}–{f3(ln[k]['ci95'][1])}" for k in unt
+                                    if k in ln)
+                        + f") while the model stays at {f3(ln[RUN]['ta'])}, so shared character strings plausibly explain the "
+                        "untrained networks' values. An independent audit recomputed TA#sub[within] over all "
+                        f"{aud['exhaustive']['n_triplets']} qualifying triplets without the per-node cap "
+                        f"({f3(aud['exhaustive'][f'ta_within_{RUN}'])}). The margin over the untrained networks depends on the "
+                        f"bootstrap block: with {aud['n_orders']} orders instead of {aud['n_families']} families as blocks its CI "
+                        "includes zero (" + "; ".join(f"{esc(k)} {ob[k][0]:+.3f} to {ob[k][1]:+.3f}" for k in unt) + ").")
     refs = "\n".join(f'+ #link("{u}")[{esc(t)}] <ref-{k}>' for k, (t, u) in REFS.items())
     today = date.today().isoformat()
     doc = f"""#set document(title: "Phylogenetic geometry of the tree of life in an LLM", author: "Libor Burian")
@@ -446,7 +483,7 @@ representations of 400 animal species names from Qwen3.5-2B (8 prompts each) and
 Life under a preregistered protocol with untrained-network, lexical, token-count, popularity and co-occurrence controls. Inside
 coarse groups and with shared head nouns excluded, rooted-triplet accuracy is {f3(h1['ta_within_modal'])} (95% CI
 {f3(h1['ci95'][0])}–{f3(h1['ci95'][1])}; chance 0.333; max-T p {fp(h1['maxT_p'])}), above every required control (primary
-hypothesis {sup(h1['supported'])}), though by a modest margin and clearly only in mammals and birds. The signal is not
+hypothesis {sup(h1['supported'])}), though by a modest margin{abs_fragile}. The signal is not
 significant on triplets where spelling or GloVe co-occurrence points the wrong way, where the model equals untrained networks;
 it is not detected in divergence times beyond topology; and on phylogeny-versus-folk conflict triplets the geometry rarely
 follows the tree, as for untrained networks. A Goodfire-style 10-dimensional probe predicts tree distances between held-out
@@ -462,8 +499,10 @@ Goodfire found that Evo 2 embeds the bacterial tree of life so that geodesic dis
 {cite('goodfire_evo2')}{cite('goodfire_geom')}. *Motivation.* Text carries phylogeny only indirectly, entangled with folk
 categories ("fish", "bugs"), shared words ("tiger shark"), popularity and co-occurrence; co-occurrence alone can produce
 hierarchical splits {cite('nava')}. Whether a text LLM's species geometry reflects the tree of life is therefore not obvious,
-and global correlations can be inflated by class-level clusters. We found no peer-reviewed study of this question; the closest
-work found sentence embeddings uncorrelated with the mammal tree {cite('phylotext')}.
+and global correlations can be inflated by class-level clusters. Prior work probes lexical taxonomies (WordNet-style
+hypernymy, including animal categories) in LLM representations or behaviour {cite('park')}{cite('nava')}{cite('hit')}{cite('taxoglimpse')}{cite('rodriguez')};
+we found no study that tests a text LLM's hidden states against a phylogeny. The closest work found sentence embeddings
+uncorrelated with the mammal tree {cite('phylotext')}.
 
 *Contributions.* (i) A preregistered, controlled test with a topology-only primary metric: node-balanced rooted-triplet accuracy
 inside coarse groups with head nouns disjoint, against a fixed set of untrained-network and nuisance controls. (ii) Goodfire-style
@@ -509,17 +548,17 @@ extraction; every deviation is timestamped in the repository. Practices follow L
 {_fig('spot', 'Layer 21, PC1–PC2; one stratum highlighted per panel. The main axis runs from aquatic groups to terrestrial ones, cutting across phylogeny.')}
 #grid(columns: 2, gutter: 6pt, figure(image("figures/months.png", width: 90%), caption: [Positive control: months form a circle.]),
   figure(image("figures/brown.png", width: 100%), caption: [What a true tree looks like (Brownian motion on the reference tree).]))
-Days and months form circles in calendar order, so the pipeline recovers known geometry. {s1a_txt}Species form class-level arms
+Days and months form closed loops in calendar order in PC1–PC2 (judged by eye; no circularity statistic), consistent with
+{cite('engels')}, so the pipeline recovers known geometry. {s1a_txt}Species form class-level arms
 in early layers and a curved band in late layers; no nested within-class branching is visible in the top three components, which
 hold only a small share of the variance.
 
 == Triplet accuracy and controls (stage 1b, confirmatory)
 {eval_tab}
 H1 is {sup(h1['supported'])}: cross-fitted TA#sub[within] {f3(h1['crossfit_ta_within'])} (modal layer {L}), max-T p
-{fp(h1['maxT_p'])} (the permutation floor), and every paired-bootstrap difference to the required controls excludes zero.
+{fp(h1['maxT_p'])}{floor_txt}, and every paired-bootstrap difference to the required controls excludes zero.
 The margin over the strongest required control is modest, and the signal is clear only in mammals and birds, which hold about
-half of the within-stratum decision nodes (Table below). The untrained networks are themselves above chance; one hypothesis is
-that name form and length cluster by family, but they stay above chance even on triplets with no shared token.
+half of the within-stratum decision nodes (Table below).{untrained_txt}{audit_h1_txt}
 {sec_tab}
 {s1_ctx} S2 passes its registered test against chance, but the untrained random-init Qwen reaches the same value; on the
 spelling- and GloVe-discordant subsets (S3, S4) the model also equals the untrained networks. On triplets where spelling has no
@@ -543,20 +582,22 @@ from the representations has normalized Robinson–Foulds distance {f3(s2['nj_rf
 {stage3_txt}{stage4_txt}{eco_txt}{stage5_txt}{stage6_txt}
 = Discussion
 *Claims and evidence.* (1) *Systematic, correlational:* Qwen3.5-2B's species geometry agrees with the tree of life within coarse
-groups beyond untrained-network, lexical, token-count and popularity controls{robust_txt}. The margin is modest and the
+groups beyond untrained-network, lexical, token-count and popularity controls{robust_txt}. The margin is modest{disc_fragile}, and the
 signal is concentrated in mammals and birds. Because ecology and body size are phylogenetically conserved and were not
 controlled, the precise claim is agreement with the tree, not phylogenetic knowledge per se. (2) *Negative for the probe:* the
 Goodfire-style flat probe generalizes to held-out families, but a class-only input does at least as well, and within strata it
-adds little over the raw distances; we therefore do not claim that a linear subspace "carries the tree". (3) *Negative:* the
+does not add order over the raw distances; we therefore do not claim that a linear subspace "carries the tree". (3) *Negative:* the
 order is not significant on triplets where spelling or GloVe co-occurrence disagree with the tree, where the model equals
-untrained networks, so we cannot claim it goes beyond such statistics; S2 is matched by an untrained network; no divergence-time
+untrained networks, so robustness to misleading spelling or co-occurrence is not shown (post hoc, on triplets whose names share
+no character 3-gram the model does exceed the untrained networks, so spelling alone does not explain it; co-occurrence is not
+ruled out); S2 is matched by an untrained network; no divergence-time
 signal is detected once topology is controlled; on conflict triplets the geometry does not follow the tree, as for untrained
 networks. (4) *Out-of-sample confirmation of a post-hoc pattern:* the top late-layer component separates aquatic from terrestrial
 animals.{causal_disc}
 
 *Implications.* For interpretability, global distance correlations with a taxonomy are weak evidence of a phylogenetic
-representation: class clusters, ecology and naming conventions all contribute, and untrained networks already reach above-chance
-values on several metrics. Topology-only, within-group metrics with untrained and nuisance controls separate these. Distance
+representation: class clusters, ecology and naming conventions all contribute, and an untrained network can exceed chance
+through shared character strings in names. Topology-only, within-group metrics with untrained and nuisance controls separate these. Distance
 probes evaluated on all held-out pairs should be compared with a class-only input, because coarse groups alone can produce high
 correlations. For the analogy with Evo 2, a text model's species geometry is better described as a mixture of folk taxonomy,
 ecology and modest phylogenetic order than as a tree-shaped manifold.
@@ -568,13 +609,14 @@ path length depends on how densely each clade is sampled; GloVe is a proxy for c
 S3 and S4 select triplets where simple statistics fail and are therefore adversarial by construction; the within-group signal
 rests mostly on mammals and birds; ecological and body-size similarity is not controlled; probes and interventions use a single
 layer chosen by cross-fitting; the conflict triplets are few and share anchors; the habitat addendum has only 6 marine mammals,
-whose names carry aquatic cues, and no bats.{causal_lim}
+whose names carry aquatic cues, and no bats{lim_fragile}.{causal_lim}
 
 = Conclusion
-Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest,
-robust margin over untrained networks and name statistics, clearly so for mammals and birds. The geometry is otherwise dominated
+Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest
+margin over untrained networks and name statistics, robust to seeds, templates and species subsamples{concl_fragile}, and
+clearly so only for mammals and birds. The geometry is otherwise dominated
 by coarse folk categories and ecology, the Goodfire-style probe mostly recovers the coarse groups, and the evidence does not show
-phylogenetic information beyond what lexical and co-occurrence statistics could supply.{causal_concl}
+phylogenetic information beyond what co-occurrence statistics could supply.{causal_concl}
 {ex_txt}
 = References
 {refs}
