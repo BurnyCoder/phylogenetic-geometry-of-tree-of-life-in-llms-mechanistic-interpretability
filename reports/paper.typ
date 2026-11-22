@@ -8,7 +8,7 @@
 #align(center)[
   #text(16pt, weight: "bold")[Do LLMs Represent a Tree of Life? \ Phylogenetic Geometry of Animal Species in Qwen3.5-2B]
   #v(4pt)
-  Libor "Burny" Burian #h(1em) · #h(1em) 2026-11-20 \
+  Libor "Burny" Burian #h(1em) · #h(1em) 2026-11-22 \
   #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability")[code, data, preregistration, interactive results]
 ]
 
@@ -18,7 +18,7 @@ representations of 400 animal species names from Qwen3.5-2B (8 prompts each) and
 Life under a preregistered protocol with untrained-network, lexical, token-count, popularity and co-occurrence controls. Inside
 coarse groups and with shared head nouns excluded, rooted-triplet accuracy is 0.475 (95% CI
 0.427–0.535; chance 0.333; max-T p \= 0.001), above every required control (primary
-hypothesis supported), though by a modest margin and clearly only in mammals and birds. The signal is not
+hypothesis supported), though by a modest margin, clearly only in mammals and birds, and against the untrained networks only when families rather than whole orders are the bootstrap blocks. The signal is not
 significant on triplets where spelling or GloVe co-occurrence points the wrong way, where the model equals untrained networks;
 it is not detected in divergence times beyond topology; and on phylogeny-versus-folk conflict triplets the geometry rarely
 follows the tree, as for untrained networks. A Goodfire-style 10-dimensional probe predicts tree distances between held-out
@@ -34,8 +34,10 @@ Goodfire found that Evo 2 embeds the bacterial tree of life so that geodesic dis
 [#link(<ref-goodfire_evo2>)[1]][#link(<ref-goodfire_geom>)[2]]. *Motivation.* Text carries phylogeny only indirectly, entangled with folk
 categories ("fish", "bugs"), shared words ("tiger shark"), popularity and co-occurrence; co-occurrence alone can produce
 hierarchical splits [#link(<ref-nava>)[8]]. Whether a text LLM's species geometry reflects the tree of life is therefore not obvious,
-and global correlations can be inflated by class-level clusters. We found no peer-reviewed study of this question; the closest
-work found sentence embeddings uncorrelated with the mammal tree [#link(<ref-phylotext>)[12]].
+and global correlations can be inflated by class-level clusters. Prior work probes lexical taxonomies (WordNet-style
+hypernymy, including animal categories) in LLM representations or behaviour [#link(<ref-park>)[6]][#link(<ref-nava>)[8]][#link(<ref-hit>)[14]][#link(<ref-taxoglimpse>)[13]][#link(<ref-rodriguez>)[15]];
+we found no study that tests a text LLM's hidden states against a phylogeny. The closest work found sentence embeddings
+uncorrelated with the mammal tree [#link(<ref-phylotext>)[12]].
 
 *Contributions.* (i) A preregistered, controlled test with a topology-only primary metric: node-balanced rooted-triplet accuracy
 inside coarse groups with head nouns disjoint, against a fixed set of untrained-network and nuisance controls. (ii) Goodfire-style
@@ -60,8 +62,8 @@ measures tree-likeness of a metric [#link(<ref-khrulkov>)[11]]. *Phylogeny in mo
 = Methods
 *Species and trees.* 400 animal species in 13 strata, chosen by a fixed rule from Wikidata (English Wikipedia common-name titles
 ranked by sitelinks, at most 3 per family, polysemous names excluded), frozen with sha256 before extraction. The reference
-topology is the Open Tree of Life induced subtree [#link(<ref-opentree>)[13]], with NCBI-first Linnaean ranks; divergence times come from
-TimeTree 5 [#link(<ref-timetree>)[14]] (secondary analysis only). *Representations.* Qwen3.5-2B [#link(<ref-qwen>)[16]] (post-trained, bf16, batch
+topology is the Open Tree of Life induced subtree [#link(<ref-opentree>)[16]], with NCBI-first Linnaean ranks; divergence times come from
+TimeTree 5 [#link(<ref-timetree>)[17]] (secondary analysis only). *Representations.* Qwen3.5-2B [#link(<ref-qwen>)[19]] (post-trained, bf16, batch
 size 1), residual stream at the last token of the name for 8 chat-formatted templates, all 25 layers; each template is
 mean-centred over species and the templates are averaged; distance is cosine. *Primary metric.* A triplet (a, b | c) is resolved
 when the most recent common ancestor of a and b lies strictly below that of all three; it is correct if d(a, b) < min(d(a, c),
@@ -69,12 +71,12 @@ d(b, c)). Accuracy is averaged per decision node (at most 200 triplets per node)
 one stratum whose three names have distinct head nouns (TA#sub[within]). *Inference.* Max-T permutation over layers (species
 shuffled within strata, 1000 permutations), family-blocked 2-fold cross-fitting of the layer (20 splits), family-block bootstrap
 CIs (1000 draws); exploratory tests are BH-corrected over the registered family. H1 additionally requires paired-bootstrap differences above zero against random-init Qwen3.5-2B, Pythia-410m
-step 0 [#link(<ref-pythia>)[17]], character 3-grams, the input embedding, name token count and log Wikipedia sitelinks. GloVe
-[#link(<ref-glove>)[18]] defines the co-occurrence-discordant subset (S4). A power simulation on the frozen tree gave a minimum detectable
+step 0 [#link(<ref-pythia>)[20]], character 3-grams, the input embedding, name token count and log Wikipedia sitelinks. GloVe
+[#link(<ref-glove>)[21]] defines the co-occurrence-discordant subset (S4). A power simulation on the frozen tree gave a minimum detectable
 TA#sub[within] of 0.386 at 80% power (40 simulations per cell, so this is a rough estimate). *Probe.* Following Goodfire, z = W(x − b) with
 d̂ = β·arccos(cos(z#sub[1], z#sub[2])), PCA-100 fitted inside each fold, whole families held out. *Causal tests.* Forward hooks
 replace the residual stream after the chosen decoder layer. *Rigor.* All hypotheses, metrics and tests were preregistered before
-extraction; every deviation is timestamped in the repository. Practices follow Lones [#link(<ref-lones>)[19]].
+extraction; every deviation is timestamped in the repository. Practices follow Lones [#link(<ref-lones>)[22]].
 
 = Results
 == What the top principal components show (stage 1a, exploratory)
@@ -82,7 +84,8 @@ extraction; every deviation is timestamped in the repository. Practices follow L
 
 #grid(columns: 2, gutter: 6pt, figure(image("figures/months.png", width: 90%), caption: [Positive control: months form a circle.]),
   figure(image("figures/brown.png", width: 100%), caption: [What a true tree looks like (Brownian motion on the reference tree).]))
-Days and months form circles in calendar order, so the pipeline recovers known geometry. Class purity of 5-nearest neighbours in PC1–3 peaks at layer 4 (0.738 vs permutation null 0.122). Species form class-level arms
+Days and months form closed loops in calendar order in PC1–PC2 (judged by eye; no circularity statistic), consistent with
+[#link(<ref-engels>)[3]], so the pipeline recovers known geometry. Class purity of 5-nearest neighbours in PC1–3 peaks at layer 4 (0.738 vs permutation null 0.122). Species form class-level arms
 in early layers and a curved band in late layers; no nested within-class branching is visible in the top three components, which
 hold only a small share of the variance.
 
@@ -112,8 +115,7 @@ hold only a small share of the variance.
 H1 is supported: cross-fitted TA#sub[within] 0.473 (modal layer 6), max-T p
 \= 0.001 (the permutation floor), and every paired-bootstrap difference to the required controls excludes zero.
 The margin over the strongest required control is modest, and the signal is clear only in mammals and birds, which hold about
-half of the within-stratum decision nodes (Table below). The untrained networks are themselves above chance; one hypothesis is
-that name form and length cluster by family, but they stay above chance even on triplets with no shared token.
+half of the within-stratum decision nodes (Table below). Of the untrained networks, qwen35\_2b\_random has max-T p \= 0.129 over layers (cross-fitted 0.354); pythia410m\_step0 has max-T p \= 0.007 over layers (cross-fitted 0.380). On triplets whose names share no character 3-gram, the untrained networks are at chance (qwen35\_2b\_random 0.350, CI 0.313–0.418; pythia410m\_step0 0.371, CI 0.328–0.436) while the model stays at 0.484, so shared character strings plausibly explain the untrained networks' values. An independent audit recomputed TA#sub[within] over all 200192 qualifying triplets without the per-node cap (0.474). The margin over the untrained networks depends on the bootstrap block: with 118 orders instead of 258 families as blocks its CI includes zero (qwen35\_2b\_random -0.009 to +0.121; pythia410m\_step0 -0.014 to +0.124).
 #figure(table(columns: 5, align: left, stroke: 0.4pt + luma(180),
     [*id*], [*statistic*], [*value*], [*max-T p*], [*Holm p*],
     [S1], [global Mantel ρ (cosine vs path length)], [0.362], [0.001], [0.005],
@@ -169,7 +171,7 @@ or ecological taxonomy; it shows only that the geometry does not follow the tree
 
 #figure(image("figures/probe.png", width: 100%), caption: [Held-out-family performance of the flat probe and its controls: all pairs (left) and within strata (right). Error bars are SDs over probe seeds.])
 
-The headline held-out correlation mainly measures coarse-group separation. A predictor that knows only the 13 strata reaches r = 0.871 with path length over all pairs, and the same probe trained on a class-blob input (each species at its stratum centroid plus matched noise, no within-stratum tree) reaches held-out r = 0.833. Within strata (mean of per-stratum Spearman on held-out pairs) the model's probe reaches 0.326, the class-blob input 0.008, and the raw angular distances without any probe 0.290: the representation carries some within-stratum order, but the probe adds little to it. kNN-geodesic distance does not order triplets better than angular distance. Gromov δ#sub[rel] of the model
+The headline held-out correlation mainly measures coarse-group separation. A predictor that knows only the 13 strata reaches r = 0.871 with path length over all pairs, and the same probe trained on a class-blob input (each species at its stratum centroid plus matched noise, no within-stratum tree) reaches held-out r = 0.833. Within strata (mean of per-stratum Spearman on held-out pairs) the model's probe reaches 0.326 and the class-blob input 0.008; the raw angular distances without any probe reach 0.401 on the same held-out pairs (audit): the representation carries some within-stratum order, and the probe does not add to it. (The strata-only predictor is fit on the same pairs it is scored on, so it is a reference, not a held-out result.) kNN-geodesic distance does not order triplets better than angular distance. Gromov δ#sub[rel] of the model
 (0.322) lies between a spectrum-matched Gaussian (0.460) and pure
 class clusters (0.188), so it does not separate trees from clusters. A neighbour-joining tree
 from the representations has normalized Robinson–Foulds distance 0.812 to the reference (permutation null
@@ -195,20 +197,20 @@ Single-change ablations are listed in the evaluation table. Normalization (z-sco
   ), caption: [Held-out-family Pearson r of the flat probe by dimension and metric (3 seeds).])
 
 == Habitat axis on held-out species (Addendum A, confirmatory)
-The stage-1a observation that the top late-layer axis orders strata from aquatic to terrestrial groups was registered as a directional hypothesis before any held-out species was selected. On 79 held-out mammals and 80 held-out birds (EltonTraits foraging strata [#link(<ref-elton>)[15]]), projected onto the fixed layer-21 PC1 axis of the primary set: M1 (marine mammals below ground-dwelling ones): median -0.581 vs ground 1.676 (n = 6), one-sided p \= 1.2e-07, Holm p \= 3.6e-07; M2 (bats above ground-dwelling mammals): not evaluable (n = 0 < 5); B1 (more water foraging, lower score; birds): ρ = -0.385, one-sided p \= 2.1e-04, Holm p \= 4.2e-04; B2 (more aerial foraging, higher score; birds): ρ = -0.157, one-sided p \= 0.917, Holm p \= 0.917. The aquatic end is confirmed and the aerial end is not. Caveats: the marine mammals are few and their names carry aquatic cues (whale, seal, porpoise, sea otter), water foraging in birds is phylogenetically clustered, and the axis holds 7.5% of the variance at that layer. The registered reading is that the geometry mixes ecology with taxonomy.
+The stage-1a observation that the top late-layer axis orders strata from aquatic to terrestrial groups was registered as a directional hypothesis before any held-out species was selected. On 79 held-out mammals and 80 held-out birds (EltonTraits foraging strata [#link(<ref-elton>)[18]]), projected onto the fixed layer-21 PC1 axis of the primary set: M1 (marine mammals below ground-dwelling ones): median -0.581 vs ground 1.676 (n = 6), one-sided p \= 1.2e-07, Holm p \= 3.6e-07; M2 (bats above ground-dwelling mammals): not evaluable (n = 0 < 5); B1 (more water foraging, lower score; birds): ρ = -0.385, one-sided p \= 2.1e-04, Holm p \= 4.2e-04; B2 (more aerial foraging, higher score; birds): ρ = -0.157, one-sided p \= 0.917, Holm p \= 0.917. The aquatic end is confirmed and the aerial end is not. Caveats: the marine mammals are few and their names carry aquatic cues (whale, seal, porpoise, sea otter), water foraging in birds is phylogenetically clustered, and the axis holds 7.5% of the variance at that layer. The registered reading is that the geometry mixes ecology with taxonomy.
 
 == Other models: scale and training dynamics (stage 5, descriptive)
 #figure(table(columns: 7, align: left, stroke: 0.4pt + luma(180),
-    [*model*], [*params*], [*layers*], [*max TA\_within*], [*cross-fitted TA\_within*], [*max-T p*], [*Mantel r*],
+    [*model*], [*nominal params*], [*layers*], [*max TA\_within*], [*cross-fitted TA\_within*], [*max-T p*], [*Mantel r*],
     [pythia70m], [0.07B], [6], [0.395], [0.379], [0.010], [0.062],
     [pythia160m], [0.16B], [12], [0.394], [0.373], [0.030], [0.048],
     [pythia410m], [0.41B], [24], [0.423], [0.416], [0.005], [0.312],
     [pythia1b], [1.00B], [16], [0.412], [0.419], [0.010], [0.368],
     [pythia14b], [1.40B], [24], [0.461], [0.446], [0.005], [0.376],
     [pythia28b], [2.80B], [32], [0.474], [0.470], [0.005], [0.420],
-    [qwen35\_08b], [0.85B], [24], [0.449], [0.432], [0.005], [0.347],
+    [qwen35\_08b], [0.80B], [24], [0.449], [0.432], [0.005], [0.347],
     [qwen3\_17b], [1.70B], [28], [0.475], [0.465], [0.005], [0.349],
-    [qwen35\_2b], [2.27B], [24], [0.475], [0.480], [0.005], [0.362],
+    [qwen35\_2b], [2.00B], [24], [0.475], [0.480], [0.005], [0.362],
   ), caption: [Same species, triplets and metric for every model (199 permutations; p floor 0.005).])
 #figure(image("figures/scale.png", width: 75%), caption: [Cross-fitted TA#sub[within] vs parameter count.])
 #figure(image("figures/dynamics.png", width: 75%), caption: [Cross-fitted TA#sub[within] over Pythia-1.4B training.])
@@ -227,20 +229,22 @@ Flat probe over 20 fresh seeds: held-out r 0.750 ± 0.012 (range 0.728–0.771).
 
 = Discussion
 *Claims and evidence.* (1) *Systematic, correlational:* Qwen3.5-2B's species geometry agrees with the tree of life within coarse
-groups beyond untrained-network, lexical, token-count and popularity controls; across all stage-6 perturbations TA#sub[within] stays at or above 0.437 and the smallest margin over the best control is 0.044. The margin is modest and the
+groups beyond untrained-network, lexical, token-count and popularity controls; across all stage-6 perturbations TA#sub[within] stays at or above 0.437 and the smallest margin over the best control is 0.044. The margin is modest, and its CI against the untrained networks excludes zero only with the registered family-level bootstrap blocks, and the
 signal is concentrated in mammals and birds. Because ecology and body size are phylogenetically conserved and were not
 controlled, the precise claim is agreement with the tree, not phylogenetic knowledge per se. (2) *Negative for the probe:* the
 Goodfire-style flat probe generalizes to held-out families, but a class-only input does at least as well, and within strata it
-adds little over the raw distances; we therefore do not claim that a linear subspace "carries the tree". (3) *Negative:* the
+does not add order over the raw distances; we therefore do not claim that a linear subspace "carries the tree". (3) *Negative:* the
 order is not significant on triplets where spelling or GloVe co-occurrence disagree with the tree, where the model equals
-untrained networks, so we cannot claim it goes beyond such statistics; S2 is matched by an untrained network; no divergence-time
+untrained networks, so robustness to misleading spelling or co-occurrence is not shown (post hoc, on triplets whose names share
+no character 3-gram the model does exceed the untrained networks, so spelling alone does not explain it; co-occurrence is not
+ruled out); S2 is matched by an untrained network; no divergence-time
 signal is detected once topology is controlled; on conflict triplets the geometry does not follow the tree, as for untrained
 networks. (4) *Out-of-sample confirmation of a post-hoc pattern:* the top late-layer component separates aquatic from terrestrial
 animals. (5) *Causal (interventions):* C-swap is supported (Holm p \= 0.020) but the effect is small (5.5% of pairs switch, 2.0% without an edit); C-abl is not supported (Holm p \= 0.120). The phylogeny probe does not beat a class-only subspace (ablation p \= 0.966, interchange p \= 0.773), so the interventions show that the model uses this subspace for coarse class answers, not that it uses within-class phylogenetic structure.
 
 *Implications.* For interpretability, global distance correlations with a taxonomy are weak evidence of a phylogenetic
-representation: class clusters, ecology and naming conventions all contribute, and untrained networks already reach above-chance
-values on several metrics. Topology-only, within-group metrics with untrained and nuisance controls separate these. Distance
+representation: class clusters, ecology and naming conventions all contribute, and an untrained network can exceed chance
+through shared character strings in names. Topology-only, within-group metrics with untrained and nuisance controls separate these. Distance
 probes evaluated on all held-out pairs should be compared with a class-only input, because coarse groups alone can produce high
 correlations. For the analogy with Evo 2, a text model's species geometry is better described as a mixture of folk taxonomy,
 ecology and modest phylogenetic order than as a tree-shaped manifold.
@@ -252,13 +256,14 @@ path length depends on how densely each clade is sampled; GloVe is a proxy for c
 S3 and S4 select triplets where simple statistics fail and are therefore adversarial by construction; the within-group signal
 rests mostly on mammals and birds; ecological and body-size similarity is not controlled; probes and interventions use a single
 layer chosen by cross-fitting; the conflict triplets are few and share anchors; the habitat addendum has only 6 marine mammals,
-whose names carry aquatic cues, and no bats. The causal readout is the class word, so it cannot test within-class phylogeny directly; the class-only subspace captures more variance than the phylogeny probe (14.4% vs 12.3%) and was not variance-matched to it.
+whose names carry aquatic cues, and no bats; the paired-bootstrap margin over the untrained networks does not exclude zero when orders rather than families are resampled. The causal readout is the class word, so it cannot test within-class phylogeny directly; the class-only subspace captures more variance than the phylogeny probe (14.4% vs 12.3%) and was not variance-matched to it.
 
 = Conclusion
-Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest,
-robust margin over untrained networks and name statistics, clearly so for mammals and birds. The geometry is otherwise dominated
+Within this preregistered design, Qwen3.5-2B's species geometry agrees with the tree of life inside coarse groups by a modest
+margin over untrained networks and name statistics, robust to seeds, templates and species subsamples but not to resampling whole orders, and
+clearly so only for mammals and birds. The geometry is otherwise dominated
 by coarse folk categories and ecology, the Goodfire-style probe mostly recovers the coarse groups, and the evidence does not show
-phylogenetic information beyond what lexical and co-occurrence statistics could supply. Causal interventions show that the probe subspace is used for class answers, but give no evidence for a phylogeny-specific causal role.
+phylogenetic information beyond what co-occurrence statistics could supply. Causal interventions show that the probe subspace is used for class answers, but give no evidence for a phylogeny-specific causal role.
 
 = Output examples
 Nearest neighbours (3) of the most-linked species of every stratum (query rule fixed in advance), under the reference tree, the model, the random-init control, character 3-grams and GloVe.
@@ -282,17 +287,20 @@ Fraction of each species' 5 nearest neighbours in the same taxonomic order: qwen
 
 = References
 + #link("https://www.goodfire.com/research/phylogeny-manifold")[Pearce, Simon, Byun, Balsam (Goodfire) 2025. Finding the Tree of Life in Evo 2.] <ref-goodfire_evo2>
-+ #link("https://www.goodfire.com/research/neural-geometry")[Goodfire 2025-26. Neural geometry research series.] <ref-goodfire_geom>
++ #link("https://www.goodfire.com/research/neural-geometry")[Goodfire 2026. Neural geometry research series.] <ref-goodfire_geom>
 + #link("https://arxiv.org/abs/2405.14860")[Engels, Michaud, Liao, Gurnee, Tegmark 2024. Not All Language Model Features Are One-Dimensionally Linear.] <ref-engels>
 + #link("https://arxiv.org/abs/2505.18235")[Modell, Rubin-Delanchy, Whiteley 2025. The Origins of Representation Manifolds in Large Language Models.] <ref-modell>
-+ #link("https://arxiv.org/abs/2605.05115")[Wurgaft et al. (Goodfire) 2026. Steering Along Manifolds. arXiv 2605.05115.] <ref-wurgaft>
++ #link("https://arxiv.org/abs/2605.05115")[Wurgaft et al. (Goodfire) 2026. Manifold Steering Reveals the Shared Geometry of Neural Network Representation and Behavior. arXiv 2605.05115.] <ref-wurgaft>
 + #link("https://arxiv.org/abs/2406.01506")[Park, Choe, Jiang, Veitch 2024. The Geometry of Categorical and Hierarchical Concepts in Large Language Models.] <ref-park>
 + #link("https://arxiv.org/abs/2310.02207")[Gurnee, Tegmark 2023. Language Models Represent Space and Time.] <ref-gurnee>
-+ #link("https://arxiv.org/abs/2605.23821")[Nava, Wyart 2026. Co-occurrence statistics and hierarchical representation geometry (arXiv 2605.23821).] <ref-nava>
++ #link("https://arxiv.org/abs/2605.23821")[Nava, Wyart 2026. Hierarchical Concept Geometry in Language Models Emerges from Word Co-occurrence. arXiv 2605.23821.] <ref-nava>
 + #link("https://aclanthology.org/N19-1419/")[Hewitt, Manning 2019. A Structural Probe for Finding Syntax in Word Representations. NAACL.] <ref-hewitt>
 + #link("https://arxiv.org/abs/1705.08039")[Nickel, Kiela 2017. Poincaré Embeddings for Learning Hierarchical Representations.] <ref-nickel>
 + #link("https://arxiv.org/abs/1904.02239")[Khrulkov, Mirvakhabova, Ustinova, Oseledets, Lempitsky 2020. Hyperbolic Image Embeddings.] <ref-khrulkov>
-+ #link("https://github.com/jadencutinha/phylotext-mammals")[phylotext-mammals (GitHub repository, user jadencutinha).] <ref-phylotext>
++ #link("https://github.com/jadencutinha/phylotext-mammals")[Cutinha. lineage-or-charisma / phylotext-mammals (Princeton COS398 independent work; GitHub).] <ref-phylotext>
++ #link("https://arxiv.org/abs/2406.11131")[Sun et al. 2024. Are Large Language Models a Good Replacement of Taxonomies? PVLDB.] <ref-taxoglimpse>
++ #link("https://arxiv.org/abs/2401.11374")[He et al. 2024. Language Models as Hierarchy Encoders. NeurIPS.] <ref-hit>
++ #link("https://arxiv.org/abs/2410.22590")[Rodriguez, Mueller, Misra 2025. Characterizing the Role of Similarity in the Property Inferences of Language Models. NAACL.] <ref-rodriguez>
 + #link("https://tree.opentreeoflife.org/")[Open Tree of Life (synthetic tree and taxonomy; CC0).] <ref-opentree>
 + #link("https://timetree.org/")[Kumar et al. 2022. TimeTree 5. Molecular Biology and Evolution.] <ref-timetree>
 + #link("https://esapubs.org/archive/ecol/E095/178/")[Wilman et al. 2014. EltonTraits 1.0. Ecology 95:2027.] <ref-elton>

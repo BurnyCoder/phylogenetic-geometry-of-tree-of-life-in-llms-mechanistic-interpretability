@@ -712,7 +712,7 @@
       "run": "qwen35_08b",
       "model_id": "Qwen/Qwen3.5-0.8B",
       "revision": "2fc06364715b967f1860aea9cf38778875588b17",
-      "params": 850000000.0,
+      "params": 800000000.0,
       "step": null,
       "n_layers": 24,
       "ta_within_by_layer": [
@@ -753,7 +753,7 @@
       "run": "qwen35_2b",
       "model_id": "Qwen/Qwen3.5-2B",
       "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
-      "params": 2270000000.0,
+      "params": 2000000000.0,
       "step": null,
       "n_layers": 24,
       "ta_within_by_layer": [
@@ -837,8 +837,8 @@
     }
   ],
   "reference_ta_within": {
-    "qwen35_2b_random": 0.3821440208863703,
-    "pythia410m_step0": 0.4018847314160518,
+    "qwen35_2b_random": 0.35399119560293246,
+    "pythia410m_step0": 0.37975943909302096,
     "char3": 0.3315345058168394,
     "glove": 0.39547609430336356
   }

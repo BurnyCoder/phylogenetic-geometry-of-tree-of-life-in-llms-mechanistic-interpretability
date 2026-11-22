@@ -542,6 +542,45 @@ Mantel r vs path length under 80% species subsamples: 0.362 ± 0.009 [0.349, 0.3
 
 
 
+### Independent audit (2026-11-22, post hoc)
+
+Every item is post hoc and recomputed from stored activations without any forward pass; none changes a registered verdict. Interpretation: `reports/reviews/2026-11-22-independent-audit.md`.
+
+**1. TA_within with independent code** (all 200192 resolved within-stratum, head-noun-disjoint triplets, 174 decision nodes, no per-node cap; dendropy LCAs)
+
+| representation | exhaustive | reported (sampled, K = 200) |
+|---|---|---|
+| qwen35_2b | 0.474 | 0.475 |
+| qwen35_2b_random | 0.381 | 0.382 |
+| pythia410m_step0 | 0.397 | 0.402 |
+
+**2. H1 paired bootstrap: Monte Carlo stability and block level** (difference qwen35_2b − control, 95% CI)
+
+| control | stage 1b (families) | 5 extra family seeds: lowest lower bound | orders as blocks |
+|---|---|---|---|
+| qwen35_2b_random | [+0.014, +0.163] | +0.010 | [-0.009, +0.121] |
+| pythia410m_step0 | [+0.008, +0.146] | +0.001 | [-0.014, +0.124] |
+| char3 | [+0.085, +0.216] | +0.085 | [+0.061, +0.188] |
+| input_embedding | [+0.074, +0.203] | +0.071 | [+0.045, +0.185] |
+| token_count | [+0.046, +0.175] | +0.043 | [+0.019, +0.144] |
+| log_popularity | [+0.066, +0.198] | +0.066 | [+0.044, +0.147] |
+
+**3. Lexically neutral subset** (6306 triplets; 6287 share no character 3-gram, 5 are ties between the two wrong pairs) and triplets whose names share no token (each network's own tokenizer); TA at each representation's layer with its own family-block CI
+
+| representation | lexically neutral | no shared token |
+|---|---|---|
+| qwen35_2b | 0.484 [0.432, 0.553] | 0.478 [0.430, 0.536] (n = 9486) |
+| qwen35_2b_random | 0.350 [0.313, 0.418] | 0.377 [0.336, 0.433] (n = 9486) |
+| pythia410m_step0 | 0.371 [0.328, 0.436] | 0.392 [0.339, 0.438] (n = 9299) |
+
+**4. Flat probe vs raw distances on the same held-out pairs** (mean per-stratum Spearman, layer 6, stage-2 folds): probe 0.326; raw angular distance 0.401 (per seed 0.492, 0.412, 0.435, 0.341, 0.326); raw angular on all species 0.290.
+
+**5. Stage-3 variance matching** (share of species-vector variance in the subspace): probe 0.123 on training species, 0.100 on all species, at most 0.076 on the held-out half; random subspaces 0.126 on training species and 0.074 (range 0.060–0.089) on the held-out species where the interventions act.
+
+**6. Neighbour joining**: 70 of the reference tree's 388 non-trivial splits recovered (18.0%).
+
+
+
 ## Run `qwen35_2b_prefix`
 
 ### Stage 1a — top-3 PCA checks per layer
@@ -622,11 +661,11 @@ Mantel r vs path length under 80% species subsamples: 0.362 ± 0.009 [0.349, 0.3
 | pythia1b | 1.00B | final | 16 | 0.412 (0.50) | 0.419 | 0.010 | 0.368 |
 | pythia14b | 1.40B | final | 24 | 0.461 (0.71) | 0.446 | 0.005 | 0.376 |
 | pythia28b | 2.80B | final | 32 | 0.474 (0.53) | 0.470 | 0.005 | 0.420 |
-| qwen35_08b | 0.85B | final | 24 | 0.449 (0.79) | 0.432 | 0.005 | 0.347 |
+| qwen35_08b | 0.80B | final | 24 | 0.449 (0.79) | 0.432 | 0.005 | 0.347 |
 | qwen3_17b | 1.70B | final | 28 | 0.475 (0.29) | 0.465 | 0.005 | 0.349 |
-| qwen35_2b | 2.27B | final | 24 | 0.475 (0.25) | 0.480 | 0.005 | 0.362 |
+| qwen35_2b | 2.00B | final | 24 | 0.475 (0.25) | 0.480 | 0.005 | 0.362 |
 
-Reference TA_within from stage 1b (same triplets): qwen35_2b_random 0.382, pythia410m_step0 0.402, char3 0.332, glove 0.395; chance 0.333. The max-T p uses 199 within-stratum permutations (floor 0.005).
+Reference TA_within from stage 1b (same triplets; untrained networks cross-fitted, name baselines have no layer): qwen35_2b_random 0.354, pythia410m_step0 0.380, char3 0.332, glove 0.395; chance 0.333. Parameters are nominal sizes. The max-T p uses 199 within-stratum permutations (floor 0.005).
 
 
 **Training dynamics** (Pythia-1.4B checkpoints)
