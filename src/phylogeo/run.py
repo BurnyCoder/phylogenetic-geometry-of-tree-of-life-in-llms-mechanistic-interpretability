@@ -14,6 +14,7 @@ Global context: wraps the pipeline phases, each implemented in its own module:
   eco      -> eco.py            Addendum A: habitat axis on held-out species
   scale    -> stage5.py         stage 5 per-run summary (scale_summary: all runs + figures)
   stage6   -> stage6.py         sensitivity to seeds, templates, species subsamples
+  audit    -> audit.py          independent re-derivation and stress tests of headline numbers
   report   -> report.py         regenerate all tables, RESULTS.md and README/summary blocks
   site     -> site.py           static GitHub Pages explorer in site/
   paper    -> paper.py          reports/paper.typ -> reports/paper.pdf (Typst)
