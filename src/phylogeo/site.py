@@ -3,7 +3,8 @@
 Global context: the ``site`` phase
 1. builds the labelled interactive figures (``viz/figures.py``), embeds them as Plotly HTML cards with a
    verdict badge, and exports a PNG of each to ``reports/figures/viz/``;
-2. injects a gallery of those PNGs, each linking to its interactive card, near the top of README.md;
+2. injects a gallery of those PNGs, each linking to its interactive card, near the top of README.md, and the
+   animated 3-D within-group view next to the H1 highlight (``WITHIN3D`` block);
 3. adds a nearest-neighbour explorer for every species (data: ``results/<run>/viz/neighbors.json``);
 4. keeps the generated tables and the stage PNGs below (report.py's Markdown converted to HTML).
 Deployed by .github/workflows/pages.yml.
@@ -152,7 +153,7 @@ document.getElementById('nn-q').addEventListener('input', nnRender); nnRender();
 
 
 def build_site(run: str = "qwen35_2b") -> Path:
-    from phylogeo.viz.figures import build_figures, export_pngs, readme_gallery_md
+    from phylogeo.viz.figures import build_figures, export_pngs, readme_gallery_md, within3d_md
 
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -160,6 +161,9 @@ def build_site(run: str = "qwen35_2b") -> Path:
     figs = build_figures(run)
     export_pngs(figs, PNG_DIR)
     inject_block(REPO_ROOT / "README.md", readme_gallery_md(figs), tag="FIGURES")
+    for r in figs:  # the 3-D within-group view also sits next to the H1 highlight in the README
+        if r["key"] == "within3d":
+            inject_block(REPO_ROOT / "README.md", within3d_md(r), tag="WITHIN3D")
     nav, cards = figure_cards(figs)
     s1a = RESULTS_DIR / run / "stage1a"
     a_dir = SITE / "assets" / "stage1a"
