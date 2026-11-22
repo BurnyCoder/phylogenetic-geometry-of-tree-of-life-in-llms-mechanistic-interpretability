@@ -10,11 +10,15 @@ from phylogeo.geometry import (
     smallest_connected_k,
     species_vectors,
 )
+from phylogeo.data.tree import RefTree
 from phylogeo.viz.pca import (
+    fit_tree_positions,
+    fitted_sq_length,
     knn_purity,
     overlay_length_test,
     overlay_positions,
     pca_top3,
+    tree_fit_test,
 )
 from tests.conftest import brownian_on_tree
 
@@ -95,6 +99,41 @@ def test_overlay_length_detects_tree_signal(tree30):
     Z = rng.normal(size=(30, 3))
     _, _, p0 = overlay_length_test(tree30, Z, n_perm=199, rng=rng)
     assert p0 > 0.01
+
+
+def test_fitted_tree_star_centre_is_the_leaf_mean():
+    """Star tree: minimizing sum ||x_leaf - x_centre||^2 puts the centre at the mean; leaves stay put."""
+    t = RefTree("(a,b,c,d);", list("abcd"))
+    X = np.random.default_rng(0).normal(size=(4, 3))
+    pos = fit_tree_positions(t, X)
+    assert np.allclose(pos[t.root], X.mean(0)) and np.allclose(pos[:4], X)
+
+
+def test_fitted_tree_matches_hand_solution_on_a_chain():
+    """((a,b),c), unit edges: d/du and d/dr of (u-a)^2+(u-b)^2+(r-u)^2+(r-c)^2 give u = (2a+2b+c)/5 and
+    r = (a+b+3c)/5; with a = b = 0, c = 5: u = 1, r = 3 (not the centroids 0 and 5/3)."""
+    t = RefTree("((a,b),c);", list("abc"))
+    pos = fit_tree_positions(t, np.array([[0.0], [0.0], [5.0]]))
+    u = t.parent[0]
+    assert pos[u, 0] == pytest.approx(1.0) and pos[t.root, 0] == pytest.approx(3.0)
+
+
+def test_fitted_tree_is_never_longer_than_the_centroid_overlay(tree30):
+    """The fit is the least-squares placement, so its squared edge length is <= that of any other placement."""
+    X = np.random.default_rng(1).normal(size=(30, 3))
+    cen = overlay_positions(tree30, X)
+    child = np.arange(tree30.N) != tree30.root
+    sq_cen = float(((cen[child] - cen[tree30.parent[child]]) ** 2).sum())
+    assert fitted_sq_length(tree30, X) <= sq_cen + 1e-9
+
+
+def test_tree_fit_ratio_detects_tree_signal_and_not_noise(tree30):
+    """Brownian motion on the tree fits far better than shuffled labels (ratio << 1); i.i.d. noise does not."""
+    rng = np.random.default_rng(0)
+    ratio, p = tree_fit_test(tree30, brownian_on_tree(tree30, 3, rng), 199, rng)
+    assert ratio < 0.7 and p < 0.01
+    ratio0, p0 = tree_fit_test(tree30, rng.normal(size=(30, 3)), 199, rng)
+    assert 0.8 < ratio0 < 1.2 and p0 > 0.01
 
 
 def test_knn_purity_chance():

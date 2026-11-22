@@ -52,6 +52,54 @@ def overlay_positions(tree: RefTree, coords: np.ndarray) -> np.ndarray:
     return pos
 
 
+def _fit_operator(tree: RefTree) -> np.ndarray:
+    """[N - n, n] matrix A with internal-node positions = A @ leaf positions for the least-squares tree fit.
+
+    Minimizing sum over edges ||x_child - x_parent||^2 (unit edge lengths) with the leaves fixed is a Laplacian
+    system: L_II x_I = -L_IL x_L, where L = degree - adjacency of the tree. L_II is invertible because every
+    internal node is connected to a leaf. This is squared-change parsimony (Maddison 1991, Syst. Zool. 40), whose
+    weighted form equals the maximum-likelihood ancestral states under Brownian motion; phytools' phylomorphospace
+    (Revell 2012, https://doi.org/10.1111/j.2041-210X.2011.00169.x) draws trees in trait space with internal nodes
+    at such estimates (fastAnc). See castor's docs:
+    https://search.r-project.org/CRAN/refmans/castor/html/asr_squared_change_parsimony.html
+    """
+    L = np.zeros((tree.N, tree.N))
+    for v in range(tree.N):
+        if v != tree.root:
+            p = tree.parent[v]
+            L[v, v] += 1
+            L[p, p] += 1
+            L[v, p] -= 1
+            L[p, v] -= 1
+    I, Lf = slice(tree.n, tree.N), slice(0, tree.n)  # internal nodes are numbered n .. N-1 (RefTree)
+    return -np.linalg.solve(L[I, I], L[I, Lf])
+
+
+def fit_tree_positions(tree: RefTree, coords: np.ndarray, A: np.ndarray | None = None) -> np.ndarray:
+    """[N, k] positions of the tree fitted into a point cloud (phylomorphospace; Sidlauskas 2008, Evolution 62,
+    https://doi.org/10.1111/j.1558-5646.2008.00519.x): leaves at their coords, internal nodes where the total
+    squared edge length is smallest (see :func:`_fit_operator`; pass ``A`` to reuse it across shuffles)."""
+    A = _fit_operator(tree) if A is None else A
+    return np.vstack([coords, A @ coords])
+
+
+def fitted_sq_length(tree: RefTree, coords: np.ndarray, A: np.ndarray | None = None) -> float:
+    """Total squared edge length of the fitted tree: how much 'travel' the tree needs to reach every point."""
+    pos = fit_tree_positions(tree, coords, A)
+    child = np.arange(tree.N) != tree.root
+    return float(((pos[child] - pos[tree.parent[child]]) ** 2).sum())
+
+
+def tree_fit_test(tree: RefTree, coords: np.ndarray, n_perm: int, rng: np.random.Generator) -> tuple[float, float]:
+    """(ratio, p): fitted squared edge length relative to its mean when the species are shuffled over the same
+    points, and the one-sided permutation p for 'fits better than shuffled'. Ratio < 1 = the tree fits these
+    points better than it fits them with species assigned at random; the point cloud itself is unchanged."""
+    A = _fit_operator(tree)
+    obs = fitted_sq_length(tree, coords, A)
+    null = np.array([fitted_sq_length(tree, coords[rng.permutation(tree.n)], A) for _ in range(n_perm)])
+    return float(obs / null.mean()), float((1 + np.sum(null <= obs)) / (n_perm + 1))
+
+
 def overlay_length(tree: RefTree, coords: np.ndarray) -> float:
     """Sum of Euclidean edge lengths of the tree drawn with :func:`overlay_positions`."""
     pos = overlay_positions(tree, coords)
