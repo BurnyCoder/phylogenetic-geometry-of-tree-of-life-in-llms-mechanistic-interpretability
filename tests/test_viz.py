@@ -51,6 +51,9 @@ def test_readme_gallery_links_every_png_to_its_site_card():
     for k in ["a", "b", "c"]:
         assert f'{SITE_URL}#fig-{k}' in md and f"reports/figures/viz/{k}.png" in md
     assert md.count("<tr>") == 2  # two per row
+    figs[1]["gallery_img"] = "b_layers.gif"  # an animated record can show a GIF in its gallery cell
+    md = readme_gallery_md(figs)
+    assert "reports/figures/viz/b_layers.gif" in md and "reports/figures/viz/b.png" not in md
 
 
 def test_aligned_pca3_keeps_within_layer_geometry_and_removes_axis_flips():
@@ -81,6 +84,21 @@ def test_unit_group_pca3_ignores_vector_norms():
     C, evr = unit_group_pca3(X, idx)
     C2, _ = unit_group_pca3(X * rng.uniform(0.1, 10, size=(40, 1)), idx)
     assert C.shape == (30, 3) and len(evr) == 3 and np.allclose(C, C2, atol=1e-6)
+
+
+def test_layer_sweep_matches_the_static_view_up_to_rotation():
+    """The animated layer sweep shows, at every layer, the same 3-D picture as the static view (unit-length,
+    group-centred top-3 PCA), only rotated onto the previous layer: within-layer distances are unchanged."""
+    from phylogeo.viz.viz_data import euclidean, unit_group_pca3, unit_group_pca3_layers
+
+    rng = np.random.default_rng(5)
+    V = rng.normal(size=(3, 40, 16)) * np.array([6, 4, 3] + [1] * 13)  # [layers, species, dims], clear top-3 PCs
+    idx = np.arange(10, 40)
+    sweep = unit_group_pca3_layers(V, idx)
+    assert len(sweep["coords"]) == 3 and np.array(sweep["coords"][0]).shape == (30, 3)
+    for lay in range(3):
+        static, _ = unit_group_pca3(V[lay], idx)
+        assert np.allclose(euclidean(np.array(sweep["coords"][lay])), euclidean(static), atol=5e-3)
 
 
 def test_within_group_3d_view_keeps_tree_order_of_brownian_motion(tree30):
@@ -123,11 +141,13 @@ def test_within3d_readme_block_takes_every_number_from_the_data():
     panel = lambda t3, tf, fit: {"ta_3d": t3, "ta_full": tf, "fit_ratio": fit}
     g = {"n_nodes": 43, "diff_ci95_3d": [0.031, 0.266], "diff_ci95_full": [-0.025, 0.291],
          "panels": {"expected": panel(0.67, 0.876, 0.03), "m": panel(0.418, 0.533, 0.33), "c": panel(0.281, 0.398, 0.48)}}
+    g["panels"]["m"]["layers"] = {"coords": [[[0, 0, 0]]] * 25}
     w3 = {"main": "m", "control": "c", "hidden_size": 2048, "n_boot": 1000, "layer": 6}
     r = rec("within3d", "title", "mixed", "verdict", "Post hoc, descriptive. caption", go.Figure())
     r.update(within3d=w3, groups=[("mammals", g)], clear={"3d": ["mammals"], "full": []})
     md = within3d_md(r)
     assert f"{SITE_URL}#fig-within3d" in md and "reports/figures/viz/within3d.gif" in md
+    assert "reports/figures/viz/within3d_layers.gif" in md and "layers 0 → 24" in md  # both animations are kept
     assert "| mammals (43) | 0.418 / 0.281 [+0.031, +0.266] | 0.533 / 0.398 [-0.025, +0.291] | 0.03 / 0.33 / 0.48 |" in md
     assert "in 1 of 1 groups in the 3-D view and in 0 of 1 in all 2048 dimensions" in md
 
