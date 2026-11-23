@@ -14,6 +14,12 @@
   - In the 3-D view the trained model beats random weights in birds and mammals.
   - In all dimensions no single group's CI excludes zero; only the pooled H1 test does.
   - The README states this next to the figure.
+- **Layer sweep added (2026-11-23).** A second README GIF sweeps both networks through layers 0 → 24, with per-layer titles; the rotating layer-6 GIF stays.
+  - Each layer gets its own unit-length group PCA. Consecutive layers are aligned by orthogonal Procrustes (display only), and positions are interpolated between layers.
+  - What it shows (descriptive; 3-D triplet accuracy per layer, no CIs):
+    - Mammals and ray-finned fish: the trained model is ahead of random weights by more than 0.05 at most layers (19 and 20 of 25), from the early layers on, and the gap is largest late. At layers 0–2 random weights are level or ahead.
+    - Birds: the trained model is ahead mainly at layers 2–8, then mostly level.
+    - Insects: no consistent gap.
 
 ## 2026-11-22: independent audit of results, methods and claims
 
