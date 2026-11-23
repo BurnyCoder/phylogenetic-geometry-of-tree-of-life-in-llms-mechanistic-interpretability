@@ -1414,23 +1414,47 @@ def fig_group_view(run: str, tree, df, group: str = "birds") -> dict | None:
         a.font = {"size": 12, "color": INK2}
     for upd in (fig.update_xaxes, fig.update_yaxes):  # positions are unitless projections: no ticks or grid
         upd(showticklabels=False, showgrid=False, zeroline=False, ticks="", mirror=True, showline=True, linecolor=GRID)
+    from phylogeo.prompts import TEMPLATES
+
     v = {k: g["panels"][k]["view"]["fit_ratio_2d"] for k, _ in cols}
     r = rec(f"view_{group.replace(' ', '_')}", f"{group.capitalize()} at layer {w3['layer']}, each panel from the angle "
             "where its tree looks best: ground truth vs trained vs random weights", "example",
             f"tree fit in the best view: ground truth {v['expected']:.2f} · trained {v[w3['main']]:.2f} · random "
             f"weights {v[w3['control']]:.2f} (1 = random species)",
-            f"The 3-D within-group view of {group} ({g['n_nodes']} decision nodes), seen from one camera angle per panel "
-            "and drawn flat. Angle rule, identical for every panel: of 2,000 evenly spread viewing directions, the one "
-            "where the fitted reference tree is shortest relative to a random assignment of the species (exact "
-            "expectation, no shuffles). Random weights get their best angle too, so the comparison is not "
-            "cherry-picked; it is a display choice, not a test. Left: a perfect tree code (Brownian motion on the "
-            f"reference tree); middle: Qwen3.5-2B at layer {w3['layer']} (the H1 layer); right: the same network with "
-            "random weights. Colours: the three largest orders, gray: other orders; lines: the reference tree fitted "
-            "into the points, coloured inside one order. Names are shown where they fit (hover on the site for every "
-            "name). Titles: triplet accuracy and tree fit in this view, in 3-D and (accuracy) in all "
-            f"{w3['hidden_size']} dimensions.", fig, (1650, 800))
+            group_view_caption(w3, g, group, len(df), len(TEMPLATES)), fig, (1650, 800))
     r["in_gallery"] = False  # shown at the top of the README instead
     return r
+
+
+def group_view_caption(w3: dict, g: dict, group: str, n_species: int, n_prompts: int) -> str:
+    """Caption of :func:`fig_group_view`: every step from activations to the flat picture, so the figure can be read
+    without the code. Counts come from the within3d record (``g``, ``w3``), the species table and the prompt list.
+    Steps: readout and per-prompt centring (:func:`phylogeo.geometry.species_vectors`), unit length and group PCA
+    (:func:`phylogeo.viz.viz_data.unit_group_pca3`), the angle (:func:`phylogeo.viz.pca.best_view`) and the fitted
+    tree (:func:`phylogeo.viz.pca.fit_tree_positions`)."""
+    D, L, e = w3["hidden_size"], w3["layer"], g["panels"]["expected"]
+    n_blocks = len(g["panels"][w3["main"]]["layers"]["coords"]) - 1  # layer 0 is the embedding output
+    return (f"The 3-D within-group view of {group} ({len(g['idx'])} species, {g['n_nodes']} decision nodes), seen from "
+            f"one camera angle per panel and drawn flat. Pipeline: Qwen3.5-2B residual stream after layer {L} (the "
+            f"output of block {L} of {n_blocks}; the H1 layer), at the last token of each species name in {n_prompts} "
+            f"prompts. Within each prompt the mean over all {n_species} species is subtracted, then the prompts are "
+            f"averaged. Each vector is scaled to unit length, centred on the {group} and projected onto the {group}' "
+            "top 3 principal components. Angle rule, identical for every panel: of 2,000 evenly spread viewing "
+            "directions, the one where the fitted reference tree is shortest relative to a random assignment of the "
+            "species (exact expectation, no shuffles). The picture is therefore not the PC1–PC2 plane but the most "
+            "tree-like view of each 3-D cloud. Random weights get their best angle too, so the comparison is not "
+            "cherry-picked, but it is a display choice, not a test: the 'this view' numbers are optimistic, and the "
+            "3-D and all-dimension numbers are the fair ones. Lines: the reference tree fitted into the points, as in "
+            "phylomorphospace plots (leaves at the species, ancestor nodes where the total squared edge length is "
+            "smallest), coloured inside one order; branch points are fitted positions, not species. Left: an ideal "
+            f"tree code, one draw of Brownian motion along the reference tree in {D} dimensions with unit edge lengths "
+            "(topology only), through the same unit-length, centring, PCA and angle steps (it has no prompts). Even "
+            f"this code keeps only part of the tree after projection: triplet accuracy {e['ta_full']:.3f} in all {D} "
+            f"dimensions, {e['ta_3d']:.3f} in 3-D and {e['view']['ta_2d']:.3f} in this view. Middle: Qwen3.5-2B; "
+            "right: the same architecture with freshly initialized weights, same tokenizer and pipeline. Colours: the "
+            "three largest orders, gray: other orders. Names are shown where they fit (hover on the site for every "
+            "name). Titles: triplet accuracy (chance 1/3) and tree fit (1 = random species) in this view, in 3-D and "
+            f"(accuracy) in all {D} dimensions.")
 
 
 def label_mask(P: np.ndarray, names, priority: np.ndarray, size_px: float = 560, char_px: float = 5.4,

@@ -152,6 +152,25 @@ def test_within3d_readme_block_takes_every_number_from_the_data():
     assert "in 1 of 1 groups in the 3-D view and in 0 of 1 in all 2048 dimensions" in md
 
 
+def test_group_view_caption_states_the_pipeline_with_numbers_from_the_data():
+    """The birds caption spells out every pipeline step (readout, centring, unit length, group PCA, chosen angle,
+    fitted tree) and takes its counts from the within3d record, the species table and the prompt list."""
+    from phylogeo.viz.figures import group_view_caption
+
+    view = lambda t2: {"ta_2d": t2}
+    g = {"idx": list(range(70)), "n_nodes": 45,
+         "panels": {"expected": {"ta_3d": 0.643, "ta_full": 0.867, "view": view(0.555)},
+                    "m": {"layers": {"coords": [[[0, 0, 0]]] * 25}}}}
+    w3 = {"main": "m", "control": "c", "hidden_size": 2048, "layer": 6}
+    cap = group_view_caption(w3, g, "birds", n_species=400, n_prompts=8)
+    assert "birds (70 species, 45 decision nodes)" in cap
+    assert "after layer 6 (the output of block 6 of 24" in cap and "in 8 prompts" in cap
+    assert "the mean over all 400 species is subtracted, then the prompts are averaged" in cap
+    assert "centred on the birds and projected onto the birds' top 3 principal components" in cap
+    assert "not the PC1–PC2 plane" in cap and "ancestor nodes" in cap
+    assert "0.867 in all 2048 dimensions, 0.643 in 3-D and 0.555 in this view" in cap
+
+
 def test_label_mask_never_overlaps_names_and_prefers_priority():
     """In the static view, a name is shown only where its text box overlaps no other shown name; when two collide,
     the higher-priority one (lower number, e.g. a highlighted order) wins; isolated points are always labelled."""
