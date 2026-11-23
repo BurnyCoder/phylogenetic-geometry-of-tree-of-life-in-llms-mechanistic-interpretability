@@ -153,7 +153,7 @@ document.getElementById('nn-q').addEventListener('input', nnRender); nnRender();
 
 
 def build_site(run: str = "qwen35_2b") -> Path:
-    from phylogeo.viz.figures import build_figures, export_pngs, readme_gallery_md, within3d_md
+    from phylogeo.viz.figures import build_figures, export_pngs, group_view_md, readme_gallery_md, within3d_md
 
     if SITE.exists():
         shutil.rmtree(SITE)
@@ -161,9 +161,11 @@ def build_site(run: str = "qwen35_2b") -> Path:
     figs = build_figures(run)
     export_pngs(figs, PNG_DIR)
     inject_block(REPO_ROOT / "README.md", readme_gallery_md(figs), tag="FIGURES")
-    for r in figs:  # the 3-D within-group view also sits next to the H1 highlight in the README
+    for r in figs:  # the within-group views also sit at the top of the README's visual summary
         if r["key"] == "within3d":
             inject_block(REPO_ROOT / "README.md", within3d_md(r), tag="WITHIN3D")
+        elif r["key"] == "view_birds":
+            inject_block(REPO_ROOT / "README.md", group_view_md(r), tag="BIRDS3D")
     nav, cards = figure_cards(figs)
     s1a = RESULTS_DIR / run / "stage1a"
     a_dir = SITE / "assets" / "stage1a"
