@@ -1007,7 +1007,7 @@ def fig_pca3d(run: str, tree, control: str = "qwen35_2b_random") -> dict | None:
     r["html"] = _player_html(d, run, control)
     r["pca3d"] = d
     r["control"] = control
-    r["gif"] = lambda path: export_pca3d_gif(r, tree, path)  # README animation (export_pngs)
+    r["gifs"] = {"pca3d": lambda path: export_pca3d_gif(r, tree, path)}  # README animation (export_pngs)
     return r
 
 
@@ -1124,15 +1124,17 @@ def _within_box(C: np.ndarray) -> float:
     return round(1.05 * float(min(m.max(), 1.5 * np.quantile(m, 0.95))), 3)
 
 
-def _within_traces(g: dict, key: str, gd: dict, scene: str, showlegend: bool) -> tuple[list, float, int]:
-    """Traces for one panel, its box half-width and the number of species outside the box: the reference subtree
-    fitted into the 3-D points (phylomorphospace, :func:`phylogeo.viz.pca.fit_tree_positions`) and the species.
-    Branches whose whole clade lies inside one highlighted order wear that order's colour; deeper branches are
-    gray. Lines are opaque: semi-transparent 3-D lines break marker depth sorting in WebGL (markers render cut)."""
+def _within_traces(C: np.ndarray, gd: dict, scene: str, showlegend: bool,
+                   lim: float | None = None) -> tuple[list, float, int]:
+    """Traces for one panel (3-D coords ``C`` of the group's species), its box half-width and the number of species
+    outside the box: the reference subtree fitted into the points (phylomorphospace,
+    :func:`phylogeo.viz.pca.fit_tree_positions`) and the species. Branches whose whole clade lies inside one
+    highlighted order wear that order's colour; deeper branches are gray. Lines are opaque: semi-transparent 3-D
+    lines break marker depth sorting in WebGL (markers render cut)."""
     from phylogeo.viz.pca import fit_tree_positions
 
-    C, sub, labels = np.array(g["panels"][key]["coords"]), gd["sub"], gd["labels"]
-    lim = _within_box(C)
+    sub, labels = gd["sub"], gd["labels"]
+    lim = _within_box(C) if lim is None else lim
     pos = _clip(fit_tree_positions(sub, C), lim)  # fitted on all points; segments leaving the box are not drawn
     by_colour: dict[str, list[int]] = {}
     for v in range(sub.N):
@@ -1149,13 +1151,32 @@ def _within_traces(g: dict, key: str, gd: dict, scene: str, showlegend: bool) ->
     return lines + pts, lim, n_outside(C, lim)
 
 
-def _within_title(w3: dict, g: dict, key: str, label: str, n_out: int = 0) -> str:
-    """Panel title: what it is, triplet accuracy of the 3-D picture and of all dimensions, the tree fit, and how
-    many species fall outside the box (never silently dropped)."""
-    p = g["panels"][key]
-    return (f"<b>{label}</b><br>triplet accuracy: 3-D {p['ta_3d']:.3f} · all {w3['hidden_size']} dims "
-            f"{p['ta_full']:.3f}<br>tree fit {p['fit_ratio']:.2f} (1 = random species)"
+def _within_title(label: str, s: dict, dims: int, n_out: int = 0) -> str:
+    """Panel title: what it is, triplet accuracy of the 3-D picture and of all ``dims`` dimensions, the tree fit
+    (from ``s``), and how many species fall outside the box (never silently dropped)."""
+    return (f"<b>{label}</b><br>triplet accuracy: 3-D {s['ta_3d']:.3f} · all {dims} dims "
+            f"{s['ta_full']:.3f}<br>tree fit {s['fit_ratio']:.2f} (1 = random species)"
             + (f" · {n_out} outside the box" if n_out else ""))
+
+
+def _within_panel(w3: dict, g: dict, key: str, label: str, t: float | None) -> tuple:
+    """(coords, stats, label, box) of one panel. ``t`` = None: the static view at the H1 layer. ``t`` = a layer
+    position: the layer sweep, with positions interpolated linearly between the two neighbouring (Procrustes-
+    aligned) layers, the box interpolated the same way, and the numbers of the nearest layer. The expected tree
+    shape has no layers and is always static."""
+    p = g["panels"][key]
+    if t is None or "layers" not in p:
+        C = np.array(p["coords"])
+        return C, p, label, _within_box(C)
+    L = p["layers"]
+    Cs = [np.array(c) for c in L["coords"]]
+    k = min(int(t), len(Cs) - 2)
+    C = Cs[k] + (Cs[k + 1] - Cs[k]) * (t - k)
+    near = int(round(t))
+    s = {m: L[m][near] for m in ("ta_3d", "ta_full", "fit_ratio")}
+    name = label.split(",")[0] + (", random weights" if key == w3["control"] else "")
+    tag = f"{name} · layer {near} of {len(Cs) - 1}" + (" (H1 layer)" if near == w3["layer"] else "")
+    return C, s, tag, _lim_at([_within_box(c) for c in Cs], t)
 
 
 def _within_scene(dx, dy, lim: float, eye) -> dict:
@@ -1173,8 +1194,10 @@ def _within_key(name: str, g: dict, style: dict) -> str:
     return f"<b>{name}</b> ({g['n_nodes']} decision nodes)   {key}   · coloured branches: a clade inside one order"
 
 
-def _within_grid(w3: dict, groups: list, gds: dict, eye=(1.7, 1.25, 0.8), row_px: int = 400, width: int = 1200):
-    """Static grid (PNG / GIF frames): one row per group, columns = expected tree, model, random weights."""
+def _within_grid(w3: dict, groups: list, gds: dict, eye=(1.7, 1.25, 0.8), row_px: int = 400, width: int = 1200,
+                 t: float | None = None):
+    """Static grid (PNG / GIF frames): one row per group, columns = expected tree, model, random weights. ``t``:
+    layer position for the layer-sweep GIF (None = the H1 layer)."""
     fig, cols, R = go.Figure(), _within_columns(w3), len(groups)
     H = R * row_px
     head, title = 26 / H, 54 / H  # header line and 3-line panel titles, as fractions of the figure height
@@ -1186,11 +1209,13 @@ def _within_grid(w3: dict, groups: list, gds: dict, eye=(1.7, 1.25, 0.8), row_px
         for j, (key, label) in enumerate(cols):
             n = i * len(cols) + j
             sc = "scene" if n == 0 else f"scene{n + 1}"
-            tr, lim, n_out = _within_traces(g, key, gds[name], sc, showlegend=False)
+            C, s, tag, box = _within_panel(w3, g, key, label, t)
+            tr, lim, n_out = _within_traces(C, gds[name], sc, showlegend=False, lim=box)
             fig.add_traces(tr)
             fig.update_layout({sc: _within_scene([j / 3 + 0.004, (j + 1) / 3 - 0.004],
                                                  [y1 - 1 / R + 24 / H, y1 - head - title], lim, eye)})
-            fig.add_annotation(text=_within_title(w3, g, key, label, n_out), x=(j + 0.5) / 3, y=y1 - head, xref="paper",
+            fig.add_annotation(text=_within_title(tag, s, w3["hidden_size"], n_out), x=(j + 0.5) / 3, y=y1 - head,
+                               xref="paper",
                                yref="paper", showarrow=False, xanchor="center", yanchor="top",
                                font={"size": 11.5, "color": INK2})
     return fig
@@ -1205,13 +1230,14 @@ def _within_dropdown(w3: dict, groups: list, gds: dict, eye=(1.5, 1.1, 0.7)) -> 
         n0, lay, titles = len(fig.data), {}, []
         for j, (key, label) in enumerate(cols):
             sc = "scene" if j == 0 else f"scene{j + 1}"
-            tr, lim, n_out = _within_traces(g, key, gds[name], sc, showlegend=(j == 0))
+            C, s, tag, box = _within_panel(w3, g, key, label, None)
+            tr, lim, n_out = _within_traces(C, gds[name], sc, showlegend=(j == 0), lim=box)
             for t in tr:
                 t.visible = i == 0
             fig.add_traces(tr)
             for a in "xyz":
                 lay[f"{sc}.{a}axis.range"] = [-lim, lim]
-            titles.append(_within_title(w3, g, key, label, n_out))
+            titles.append(_within_title(tag, s, w3["hidden_size"], n_out))
             if i == 0:
                 fig.update_layout({sc: _within_scene([j / 3 + 0.004, (j + 1) / 3 - 0.004], [0.0, 0.86], lim, eye)})
         lay["annotations"] = [{"text": t, "x": (j + 0.5) / 3, "y": 1.0, "xref": "paper", "yref": "paper",
@@ -1236,6 +1262,18 @@ def export_within3d_gif(w3: dict, groups: list, gds: dict, path: Path, n_frames:
     figs = [_within_grid(w3, groups, gds, eye=(2.0 * np.cos(th), 2.0 * np.sin(th), 0.8), row_px=size[1] // R,
                          width=size[0]) for th in 0.6 + 2 * np.pi * np.arange(n_frames) / n_frames]
     return _save_gif(figs, path, (size[0], (size[1] // R) * R), duration=200)
+
+
+def export_within3d_layers_gif(w3: dict, groups: list, gds: dict, path: Path, steps: int = 2,
+                               size=(1080, 1360)) -> Path:
+    """README animation through the layers: both networks sweep layer 0 -> last (``steps`` interpolated frames per
+    layer) while every camera makes one full turn; the expected tree shape stays fixed (it has no layers)."""
+    R = len(groups)
+    nL = len(groups[0][1]["panels"][w3["main"]]["layers"]["coords"])
+    ts = np.linspace(0, nL - 1, steps * (nL - 1) + 1)
+    figs = [_within_grid(w3, groups, gds, eye=(2.0 * np.cos(th), 2.0 * np.sin(th), 0.8), row_px=size[1] // R,
+                         width=size[0], t=float(t)) for t, th in zip(ts, 0.6 + 2 * np.pi * np.arange(len(ts)) / len(ts))]
+    return _save_gif(figs, path, (size[0], (size[1] // R) * R), duration=180)
 
 
 def fig_within3d(run: str, tree, df) -> dict | None:
@@ -1270,16 +1308,24 @@ def fig_within3d(run: str, tree, df) -> dict | None:
     r = rec("within3d", "Tree order inside groups, in 3-D: trained vs random weights, with the tree fitted in", kind,
             verdict, caption, _within_dropdown(w3, groups, gds), (1200, 400 * len(groups)))
     r["png_fig"] = _within_grid(w3, groups, gds)
-    r["gif"] = lambda path: export_within3d_gif(w3, groups, gds, path)
+    r["gifs"] = {"within3d": lambda path: export_within3d_gif(w3, groups, gds, path),
+                 "within3d_layers": lambda path: export_within3d_layers_gif(w3, groups, gds, path)}
+    r["gallery_img"] = "within3d_layers.gif"  # the README gallery shows the layer sweep instead of the PNG
     r["within3d"], r["groups"], r["clear"] = w3, groups, clear
     return r
 
 
 def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
-    """README block next to the H1 highlight: the animated grid (linked to its interactive card) and a generated
-    table of the per-group numbers, with trained-minus-random CIs."""
+    """README block next to the H1 highlight: two animations linked to the interactive card (a sweep through all
+    layers, then the H1 layer rotating) and a generated table of the per-group numbers, with trained-minus-random
+    CIs."""
     w3, groups = r["within3d"], r["groups"]
     main, ctl, D = w3["main"], w3["control"], w3["hidden_size"]
+    nL = len(groups[0][1]["panels"][main]["layers"]["coords"])
+
+    def gif(name, note):
+        return (f'<p align="center"><a href="{SITE_URL}#fig-within3d"><img src="{png_dir}/{name}.gif" '
+                f'alt="{r["title"]}: {note}" width="100%"></a><br><b>{note}</b></p>\n\n')
 
     def cell(g, k, ci):
         p = g["panels"]
@@ -1288,10 +1334,15 @@ def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
     rows = [f"| {name} ({g['n_nodes']}) | {cell(g, 'ta_3d', 'diff_ci95_3d')} | {cell(g, 'ta_full', 'diff_ci95_full')} | "
             + " / ".join(f"{g['panels'][k]['fit_ratio']:.2f}" for k in ("expected", main, ctl)) + " |"
             for name, g in groups]
-    return (f'<p align="center"><a href="{SITE_URL}#fig-within3d"><img src="{png_dir}/within3d.gif" alt="{r["title"]}" '
-            f'width="100%"></a><br><b>{r["title"]}</b> (animated here; interactive on the site)<br>'
+    return (f'<p align="center"><b>{r["title"]}</b> (animated here; interactive on the site)<br>'
             f'{KIND_LABEL[r["kind"]]}: {r["verdict"]}</p>\n\n'
-            f"*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; post hoc, descriptive.* "
+            + gif("within3d_layers", f"Through the layers: both networks sweep layers 0 → {nL - 1} (the perfect tree "
+                                     "code has no layers); each title shows that layer's numbers")
+            + gif("within3d", f"At the H1 layer ({w3['layer']}), rotating; the table below is at this layer")
+            + "*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; post hoc, descriptive.* "
+            "In the layer sweep, each layer has its own projection; consecutive layers are rotated onto each other "
+            "(orthogonal Procrustes, display only) and positions are interpolated between layers, so the clouds move "
+            "smoothly instead of flipping axes. "
             + r["caption"].replace("Post hoc, descriptive. ", "").replace(" Drag to rotate, hover for names, pick a "
                                                                             "group above.", "")
             + " Internal-node placement follows squared-change parsimony ([Maddison 1991](https://search.r-project.org/"
@@ -1340,9 +1391,9 @@ def readme_gallery_md(figs: list[dict], png_dir: str = "reports/figures/viz", pe
     hero = "".join(f'<p align="center"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/{r["key"]}.gif" '
                    f'alt="{r["title"]}" width="100%"></a><br><b>{r["title"]}</b> (animated here; interactive 3-D player '
                    f'on the site)<br>{KIND_LABEL[r["kind"]]}: {r["verdict"]}</p>\n\n' for r in figs if "pca3d" in r)
-    cells = [f'<td width="50%" valign="top"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/{r["key"]}.png" '
-             f'alt="{r["title"]}"></a><br><b>{r["title"]}</b><br>{KIND_LABEL[r["kind"]]}: {r["verdict"]}</td>'
-             for r in figs if "pca3d" not in r]
+    cells = [f'<td width="50%" valign="top"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/'
+             f'{r.get("gallery_img", r["key"] + ".png")}" alt="{r["title"]}"></a><br><b>{r["title"]}</b><br>'
+             f'{KIND_LABEL[r["kind"]]}: {r["verdict"]}</td>' for r in figs if "pca3d" not in r]
     rows = ["<tr>" + "".join(cells[i:i + per_row]) + "</tr>" for i in range(0, len(cells), per_row)]
     return ("*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; click a figure for the "
             f"interactive version on the [project site]({SITE_URL}) (hover, zoom, toggle series).*\n\n"
@@ -1358,7 +1409,7 @@ def export_pngs(figs: list[dict], out: Path) -> dict[str, Path]:
         p = out / f"{r['key']}.png"
         r.get("png_fig", r["fig"]).write_image(p, width=w, height=h, scale=1.6)  # static layout may differ from the site's
         paths[r["key"]] = p
-        if "gif" in r:  # animated records also get a GIF for the README
-            paths[r["key"] + "_gif"] = r["gif"](out / f"{r['key']}.gif")
+        for name, make in r.get("gifs", {}).items():  # animated records also get GIFs for the README
+            paths[name + "_gif"] = make(out / f"{name}.gif")
     log.info("exported %d figure files (PNG, GIF) to %s", len(paths), out)
     return paths
