@@ -178,7 +178,7 @@ def within_group_3d(V: dict[str, np.ndarray], layer: int, expected: np.ndarray, 
     from phylogeo.geometry import cosine_distance
     from phylogeo.stats.triplets import (clade_bootstrap_ta, distinct_mask, sample_triplets, ta,
                                          within_group_mask)
-    from phylogeo.viz.pca import tree_fit_test
+    from phylogeo.viz.pca import best_view, tree_fit_test
 
     strata = df["stratum"].to_numpy()
     fam = np.where(df["family"] != "", df["family"], df["genus"]).astype(object)  # bootstrap blocks, as in stage 1b
@@ -216,6 +216,13 @@ def within_group_3d(V: dict[str, np.ndarray], layer: int, expected: np.ndarray, 
             panels[r] = {"coords": sw["coords"][layer], "evr": sw["evr"][layer], **per[layer][1],
                          "layers": {"coords": sw["coords"],
                                     **{k: [p[1][k] for p in per] for k in ("ta_3d", "ta_full", "fit_ratio")}}}
+        for p in panels.values():  # the camera angle where the fitted tree looks best, by one rule for every panel
+            C = np.array(p["coords"])
+            basis, r2 = best_view(sub, C)
+            flat = np.zeros((len(df), 2))
+            flat[idx] = C @ basis
+            p["view"] = {"basis": np.round(basis, 6).tolist(), "fit_ratio_2d": r2,
+                         "ta_2d": float(ta(euclidean(flat), trip, m))}
         bo = clade_bootstrap_ta([D3[main], D3[ctl], D_full[main][layer], D_full[ctl][layer]], trip, m, fam, tree,
                                 cfg.n_boot, _rng(cfg, f"within3d_{g}"))
         out[g] = {"idx": idx.tolist(), "n_nodes": n_nodes, "n_triplets": int(m.sum()), "panels": panels,

@@ -63,6 +63,13 @@ def _fit_operator(tree: RefTree) -> np.ndarray:
     at such estimates (fastAnc). See castor's docs:
     https://search.r-project.org/CRAN/refmans/castor/html/asr_squared_change_parsimony.html
     """
+    L = _tree_laplacian(tree)
+    I, Lf = slice(tree.n, tree.N), slice(0, tree.n)  # internal nodes are numbered n .. N-1 (RefTree)
+    return -np.linalg.solve(L[I, I], L[I, Lf])
+
+
+def _tree_laplacian(tree: RefTree) -> np.ndarray:
+    """[N, N] graph Laplacian (degree - adjacency) of the tree with unit edge weights."""
     L = np.zeros((tree.N, tree.N))
     for v in range(tree.N):
         if v != tree.root:
@@ -71,8 +78,48 @@ def _fit_operator(tree: RefTree) -> np.ndarray:
             L[p, p] += 1
             L[v, p] -= 1
             L[p, v] -= 1
-    I, Lf = slice(tree.n, tree.N), slice(0, tree.n)  # internal nodes are numbered n .. N-1 (RefTree)
-    return -np.linalg.solve(L[I, I], L[I, Lf])
+    return L
+
+
+def _leaf_form(tree: RefTree) -> np.ndarray:
+    """[n, n] K with fitted squared edge length = tr(X^T K X) for leaf coords X (Kron reduction of the Laplacian onto
+    the leaves: substituting x_I = A x_L into x^T L x gives K = L_LL + L_LI A). K is PSD with K 1 = 0."""
+    L, n = _tree_laplacian(tree), tree.n
+    return L[:n, :n] + L[:n, n:] @ _fit_operator(tree)
+
+
+def fit_ratio_exact(tree: RefTree, coords: np.ndarray) -> float:
+    """Fitted squared length divided by its exact mean over random species assignments. For centred X and a
+    uniformly random permutation P, E[P^T K P] = tr(K)/(n-1) I - tr(K)/(n(n-1)) 11^T, so the mean is
+    tr(K)/(n-1) ||X||_F^2 (no shuffles needed). Works for 2-D projections as well as 3-D coords."""
+    X = coords - coords.mean(0)
+    K = _leaf_form(tree)
+    return float(np.trace(X.T @ K @ X) / (np.trace(K) / (tree.n - 1) * (X ** 2).sum()))
+
+
+def best_view(tree: RefTree, coords: np.ndarray, n_dirs: int = 2000) -> tuple[np.ndarray, float]:
+    """The camera direction from which the fitted tree looks most tree-like, and its exact 2-D fit ratio.
+
+    For each of ``n_dirs`` view directions v spread evenly over a hemisphere (Fibonacci lattice; v and -v give
+    mirror images), the orthographic image is the projection onto the plane orthogonal to v, and its exact fit
+    ratio is (tr A - v^T A v) / (c (tr B - v^T B v)) with A = X^T K X, B = X^T X, c = tr(K)/(n-1). Returns the
+    [3, 2] image-plane basis (first axis = the image's direction of largest spread, sign fixed) and the ratio.
+    The same rule is applied to every panel, so no panel gets a hand-picked angle."""
+    X = coords - coords.mean(0)
+    K = _leaf_form(tree)
+    A, B, c = X.T @ K @ X, X.T @ X, np.trace(K) / (tree.n - 1)
+    i = np.arange(n_dirs) + 0.5
+    z, phi = i / n_dirs, np.pi * (1 + 5 ** 0.5) * i  # Fibonacci hemisphere: z in (0, 1), golden-angle azimuth
+    V = np.c_[np.sqrt(1 - z ** 2) * np.cos(phi), np.sqrt(1 - z ** 2) * np.sin(phi), z]
+    ratio = (np.trace(A) - np.einsum("ij,jk,ik->i", V, A, V)) / (c * (np.trace(B) - np.einsum("ij,jk,ik->i", V, B, V)))
+    v = V[int(np.argmin(ratio))]
+    e = np.eye(3)[int(np.argmin(np.abs(v)))]  # any axis not parallel to v
+    e1 = np.cross(v, e) / np.linalg.norm(np.cross(v, e))
+    Q = np.c_[e1, np.cross(v, e1)]  # orthonormal basis of the image plane
+    _, R = np.linalg.eigh((X @ Q).T @ (X @ Q))
+    e1 = (Q @ R[:, ::-1])[:, 0]  # largest in-image spread first
+    e1 *= np.sign(e1[np.argmax(np.abs(e1))])  # deterministic sign
+    return np.c_[e1, np.cross(v, e1)], float(ratio.min())  # right-handed: a real camera view, never a mirror image
 
 
 def fit_tree_positions(tree: RefTree, coords: np.ndarray, A: np.ndarray | None = None) -> np.ndarray:

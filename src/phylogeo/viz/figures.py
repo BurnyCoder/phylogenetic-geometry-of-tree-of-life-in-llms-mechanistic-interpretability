@@ -770,9 +770,14 @@ def _tree_lines(tree, pos: np.ndarray, scene: str, nodes, color: str = TREE_GRAY
                 group: str = "tree", showlegend: bool = False, width: float = 1.5, opacity: float = 0.5):
     """One Scatter3d line trace: the edge from each node in ``nodes`` to its parent, at positions ``pos`` [N, 3]
     (None breaks the line between edges, so one trace draws many segments)."""
-    xs, ys, zs = ([c for v in nodes for c in (pos[tree.parent[v], k], pos[v, k], None)] for k in range(3))
+    xs, ys, zs = _segments(tree, pos, nodes)
     return go.Scatter3d(x=xs, y=ys, z=zs, mode="lines", line={"color": color, "width": width}, opacity=opacity,
                         name=name, legendgroup=group, showlegend=showlegend, hoverinfo="skip", scene=scene)
+
+
+def _segments(tree, pos: np.ndarray, nodes) -> list[list]:
+    """Per coordinate, the polyline (parent, child, None, ...) that draws the edge above each node in ``nodes``."""
+    return [[c for v in nodes for c in (pos[tree.parent[v], k], pos[v, k], None)] for k in range(pos.shape[1])]
 
 
 def _point_traces(coords: np.ndarray, names, labels, style: dict, scene: str, showlegend: bool, size: float = 3.5,
@@ -1136,19 +1141,25 @@ def _within_traces(C: np.ndarray, gd: dict, scene: str, showlegend: bool,
     sub, labels = gd["sub"], gd["labels"]
     lim = _within_box(C) if lim is None else lim
     pos = _clip(fit_tree_positions(sub, C), lim)  # fitted on all points; segments leaving the box are not drawn
-    by_colour: dict[str, list[int]] = {}
+    lines = [_tree_lines(sub, pos, scene, vs, color=c, name="reference tree, fitted", showlegend=showlegend and
+                         c == LIGHTGRAY, width=1.5 if c == LIGHTGRAY else 2.5, opacity=1.0)
+             for c, vs in _edge_colours(gd).items()]
+    pts = _point_traces(_clip(C, lim), gd["names"], labels, gd["style"], scene, showlegend, size=4.5,
+                        detail=gd["detail"])
+    return lines + pts, lim, n_outside(C, lim)
+
+
+def _edge_colours(gd: dict) -> dict[str, list[int]]:
+    """Tree edges grouped by colour: an edge whose whole clade lies inside one highlighted order wears that order's
+    colour, every other edge is light gray."""
+    sub, labels, out = gd["sub"], gd["labels"], {}
     for v in range(sub.N):
         if v == sub.root:
             continue
         labs = set(labels[sub.members[v]])
         one = labs.pop() if len(labs) == 1 else OTHER_ORDERS[0]
-        by_colour.setdefault(gd["style"][one][0] if one != OTHER_ORDERS[0] else LIGHTGRAY, []).append(v)
-    lines = [_tree_lines(sub, pos, scene, vs, color=c, name="reference tree, fitted", showlegend=showlegend and
-                         c == LIGHTGRAY, width=1.5 if c == LIGHTGRAY else 2.5, opacity=1.0)
-             for c, vs in by_colour.items()]
-    pts = _point_traces(_clip(C, lim), gd["names"], labels, gd["style"], scene, showlegend, size=4.5,
-                        detail=gd["detail"])
-    return lines + pts, lim, n_outside(C, lim)
+        out.setdefault(gd["style"][one][0] if one != OTHER_ORDERS[0] else LIGHTGRAY, []).append(v)
+    return out
 
 
 def _within_title(label: str, s: dict, dims: int, n_out: int = 0) -> str:
@@ -1359,6 +1370,95 @@ def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
             "evidence is the registered H1 test, which pools all groups (key-results table below).\n")
 
 
+def fig_group_view(run: str, tree, df, group: str = "birds") -> dict | None:
+    """Static side-by-side view of one group at the H1 layer: the perfect tree code (ground truth), the model and
+    its random-weight twin, each seen from the camera angle where its fitted tree looks most tree-like
+    (:func:`phylogeo.viz.pca.best_view`, the same rule for every panel), drawn flat (orthographic) with names."""
+    from phylogeo.viz.pca import fit_tree_positions
+
+    w3 = _load(RESULTS_DIR / run / "viz" / "within3d.json")
+    if not w3 or group not in w3["groups"] or "view" not in w3["groups"][group]["panels"]["expected"]:
+        return None
+    g, cols = w3["groups"][group], _within_columns(w3)
+    gd = _within_group(g, df, tree)
+    titles = [f"<b>{'Ground truth: a perfect tree code' if key == 'expected' else label}</b><br>triplet accuracy: "
+              f"this view {g['panels'][key]['view']['ta_2d']:.3f} · 3-D {g['panels'][key]['ta_3d']:.3f} · all "
+              f"{w3['hidden_size']} dims {g['panels'][key]['ta_full']:.3f}<br>tree fit: this view "
+              f"{g['panels'][key]['view']['fit_ratio_2d']:.2f} · 3-D {g['panels'][key]['fit_ratio']:.2f} "
+              "(1 = random species)" for key, label in cols]
+    fig = make_subplots(1, 3, subplot_titles=titles, horizontal_spacing=0.015)
+    labels, names, detail = gd["labels"], np.array(gd["names"]), np.array(gd["detail"])
+    for j, (key, _) in enumerate(cols, start=1):
+        p = g["panels"][key]
+        C, B = np.array(p["coords"]), np.array(p["view"]["basis"])
+        P, pos = C @ B, fit_tree_positions(gd["sub"], C) @ B  # the fit is linear: projecting it = fitting in the view
+        for c, vs in _edge_colours(gd).items():
+            xs, ys = _segments(gd["sub"], pos, vs)
+            fig.add_scatter(x=xs, y=ys, mode="lines", line={"color": c, "width": 1.2 if c == LIGHTGRAY else 2},
+                            name="reference tree, fitted", legendgroup="tree", showlegend=j == 1 and c == LIGHTGRAY,
+                            hoverinfo="skip", row=1, col=j)
+        shown = label_mask(P, names, np.array([list(gd["style"]).index(s) for s in labels]))  # coloured orders first
+        for s, (color, sym) in gd["style"].items():
+            m = labels == s
+            fig.add_scatter(x=P[m, 0], y=P[m, 1], mode="markers+text", text=np.where(shown[m], names[m], ""),
+                            textposition="top center", textfont={"size": 9, "color": INK2},
+                            customdata=np.c_[names[m], detail[m]], name=s, legendgroup=s, showlegend=j == 1,
+                            marker={"color": color, "symbol": sym, "size": 9, "line": {"color": SURFACE, "width": 1}},
+                            hovertemplate="<b>%{customdata[0]}</b><br>%{customdata[1]}<extra></extra>", row=1, col=j)
+        pad = 0.14 * float(max(np.ptp(P[:, 0]), np.ptp(P[:, 1])))  # room for names at the edges
+        fig.update_xaxes(range=[P[:, 0].min() - pad, P[:, 0].max() + pad], row=1, col=j)
+        fig.update_yaxes(range=[P[:, 1].min() - pad / 2, P[:, 1].max() + pad], scaleanchor="x" if j == 1 else f"x{j}",
+                         scaleratio=1, row=1, col=j)  # equal aspect: distances in the picture are true distances
+    _legend_below(_style(fig, 780), bottom=70, itemsizing="constant").update_layout(margin={"l": 10, "r": 10, "t": 95})
+    for a in fig.layout.annotations:
+        a.font = {"size": 12, "color": INK2}
+    for upd in (fig.update_xaxes, fig.update_yaxes):  # positions are unitless projections: no ticks or grid
+        upd(showticklabels=False, showgrid=False, zeroline=False, ticks="", mirror=True, showline=True, linecolor=GRID)
+    v = {k: g["panels"][k]["view"]["fit_ratio_2d"] for k, _ in cols}
+    r = rec(f"view_{group.replace(' ', '_')}", f"{group.capitalize()} at layer {w3['layer']}, each panel from the angle "
+            "where its tree looks best: ground truth vs trained vs random weights", "example",
+            f"tree fit in the best view: ground truth {v['expected']:.2f} · trained {v[w3['main']]:.2f} · random "
+            f"weights {v[w3['control']]:.2f} (1 = random species)",
+            f"The 3-D within-group view of {group} ({g['n_nodes']} decision nodes), seen from one camera angle per panel "
+            "and drawn flat. Angle rule, identical for every panel: of 2,000 evenly spread viewing directions, the one "
+            "where the fitted reference tree is shortest relative to a random assignment of the species (exact "
+            "expectation, no shuffles). Random weights get their best angle too, so the comparison is not "
+            "cherry-picked; it is a display choice, not a test. Left: a perfect tree code (Brownian motion on the "
+            f"reference tree); middle: Qwen3.5-2B at layer {w3['layer']} (the H1 layer); right: the same network with "
+            "random weights. Colours: the three largest orders, gray: other orders; lines: the reference tree fitted "
+            "into the points, coloured inside one order. Names are shown where they fit (hover on the site for every "
+            "name). Titles: triplet accuracy and tree fit in this view, in 3-D and (accuracy) in all "
+            f"{w3['hidden_size']} dimensions.", fig, (1650, 800))
+    r["in_gallery"] = False  # shown at the top of the README instead
+    return r
+
+
+def label_mask(P: np.ndarray, names, priority: np.ndarray, size_px: float = 560, char_px: float = 5.4,
+               line_px: float = 13) -> np.ndarray:
+    """Which points get a visible name in a static 2-D panel: greedily, in ``priority`` order (lower first), a
+    name is shown only if its text box (about ``char_px`` per character by ``line_px``, centred above the point)
+    overlaps no name already shown. Coordinates are mapped to pixels with one scale for both axes (equal aspect,
+    the panel's longer data side = ``size_px``). Unlabelled points keep their hover name on the site."""
+    span = float(max(np.ptp(P[:, 0]), np.ptp(P[:, 1]), 1e-9))
+    xy = (P - P.min(0)) / span * size_px
+    boxes, keep = [], np.zeros(len(P), bool)
+    for i in np.argsort(priority, kind="stable"):
+        w = char_px * len(names[i])
+        x0, x1, y0, y1 = xy[i, 0] - w / 2, xy[i, 0] + w / 2, xy[i, 1] + 3, xy[i, 1] + 3 + line_px
+        if all(x1 < a or x0 > b or y1 < c or y0 > d for a, b, c, d in boxes):
+            boxes.append((x0, x1, y0, y1))
+            keep[i] = True
+    return keep
+
+
+def group_view_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
+    """README block at the top of the visual summary: the static best-angle view, linked to its site card."""
+    return (f'<p align="center"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/{r["key"]}.png" '
+            f'alt="{r["title"]}" width="100%"></a><br><b>{r["title"]}</b><br>{KIND_LABEL[r["kind"]]}: '
+            f'{r["verdict"]}</p>\n\n*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; '
+            f"post hoc, descriptive.* {r['caption']}\n")
+
+
 def build_figures(run: str = "qwen35_2b") -> list[dict]:
     """All figure records whose inputs exist, in reading order (ground truth first)."""
     from phylogeo.phases import load_species
@@ -1366,7 +1466,8 @@ def build_figures(run: str = "qwen35_2b") -> list[dict]:
     df, tree = load_species()
     builders = [lambda: fig_pca3d(run, tree), lambda: fig_taxonomy(df), lambda: fig_distance_heatmaps(run, df),
                 lambda: fig_expected_pca(run),
-                lambda: fig_h1_forest(run), lambda: fig_within3d(run, tree, df), lambda: fig_layer_profile(run),
+                lambda: fig_h1_forest(run), lambda: fig_group_view(run, tree, df), lambda: fig_within3d(run, tree, df),
+                lambda: fig_layer_profile(run),
                 lambda: fig_per_stratum(run),
                 lambda: fig_depth_profile(run), lambda: fig_neighbor_levels(run), lambda: fig_neighbor_examples(run),
                 lambda: fig_secondary(run), lambda: fig_conflict(run), lambda: fig_probe(run), lambda: fig_treeness(run),
@@ -1393,7 +1494,8 @@ def readme_gallery_md(figs: list[dict], png_dir: str = "reports/figures/viz", pe
                    f'on the site)<br>{KIND_LABEL[r["kind"]]}: {r["verdict"]}</p>\n\n' for r in figs if "pca3d" in r)
     cells = [f'<td width="50%" valign="top"><a href="{SITE_URL}#fig-{r["key"]}"><img src="{png_dir}/'
              f'{r.get("gallery_img", r["key"] + ".png")}" alt="{r["title"]}"></a><br><b>{r["title"]}</b><br>'
-             f'{KIND_LABEL[r["kind"]]}: {r["verdict"]}</td>' for r in figs if "pca3d" not in r]
+             f'{KIND_LABEL[r["kind"]]}: {r["verdict"]}</td>' for r in figs
+             if "pca3d" not in r and r.get("in_gallery", True)]
     rows = ["<tr>" + "".join(cells[i:i + per_row]) + "</tr>" for i in range(0, len(cells), per_row)]
     return ("*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; click a figure for the "
             f"interactive version on the [project site]({SITE_URL}) (hover, zoom, toggle series).*\n\n"

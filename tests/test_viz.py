@@ -152,6 +152,16 @@ def test_within3d_readme_block_takes_every_number_from_the_data():
     assert "in 1 of 1 groups in the 3-D view and in 0 of 1 in all 2048 dimensions" in md
 
 
+def test_label_mask_never_overlaps_names_and_prefers_priority():
+    """In the static view, a name is shown only where its text box overlaps no other shown name; when two collide,
+    the higher-priority one (lower number, e.g. a highlighted order) wins; isolated points are always labelled."""
+    from phylogeo.viz.figures import label_mask
+
+    P = np.array([[0.0, 0.0], [0.001, 0.0], [1.0, 1.0]])  # two points on top of each other, one far away
+    keep = label_mask(P, ["osprey", "golden eagle", "mallard"], priority=np.array([1, 0, 1]))
+    assert keep.tolist() == [False, True, True]
+
+
 def test_gif_palette_keeps_series_colours_exact():
     """GIF frames are mapped to a fixed palette, so blue, orange and aqua markers keep their legend colours."""
     from PIL import Image

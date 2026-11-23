@@ -12,6 +12,9 @@ from phylogeo.geometry import (
 )
 from phylogeo.data.tree import RefTree
 from phylogeo.viz.pca import (
+    _fit_operator,
+    best_view,
+    fit_ratio_exact,
     fit_tree_positions,
     fitted_sq_length,
     knn_purity,
@@ -134,6 +137,28 @@ def test_tree_fit_ratio_detects_tree_signal_and_not_noise(tree30):
     assert ratio < 0.7 and p < 0.01
     ratio0, p0 = tree_fit_test(tree30, rng.normal(size=(30, 3)), 199, rng)
     assert 0.8 < ratio0 < 1.2 and p0 > 0.01
+
+
+def test_tree_fit_null_mean_has_a_closed_form(tree30):
+    """The fitted squared length is a quadratic form tr(X^T K X) with K 1 = 0, so its mean over random species
+    assignments is tr(K)/(n-1) * ||X - mean||^2: the exact ratio matches the permutation estimate."""
+    rng = np.random.default_rng(6)
+    X = rng.normal(size=(30, 3)) * np.array([3, 1, 0.5])
+    A = _fit_operator(tree30)
+    null = np.mean([fitted_sq_length(tree30, X[rng.permutation(30)], A) for _ in range(4000)])
+    assert fit_ratio_exact(tree30, X) == pytest.approx(fitted_sq_length(tree30, X, A) / null, rel=0.02)
+
+
+def test_best_view_looks_down_the_axis_that_hides_the_tree(tree30):
+    """Tree signal lies in the x-y plane, strong noise along z: the most tree-like 2-D view looks along z, and its
+    exact fit ratio is lower than that of a side view."""
+    rng = np.random.default_rng(7)
+    X = np.c_[brownian_on_tree(tree30, 2, rng), 4 * rng.normal(size=30)]
+    basis, ratio = best_view(tree30, X)
+    assert basis.shape == (3, 2) and np.allclose(basis.T @ basis, np.eye(2), atol=1e-9)
+    assert abs(np.cross(basis[:, 0], basis[:, 1])[2]) > 0.9
+    side = np.array([[1.0, 0.0], [0.0, 0.0], [0.0, 1.0]])
+    assert ratio < fit_ratio_exact(tree30, X @ side)
 
 
 def test_knn_purity_chance():
