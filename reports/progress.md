@@ -20,6 +20,9 @@
     - Mammals and ray-finned fish: the trained model is ahead of random weights by more than 0.05 at most layers (19 and 20 of 25), from the early layers on, and the gap is largest late. At layers 0–2 random weights are level or ahead.
     - Birds: the trained model is ahead mainly at layers 2–8, then mostly level.
     - Insects: no consistent gap.
+- **Static birds view at the top of the README (2026-11-23).** Ground truth (a perfect tree code), trained Qwen3.5-2B and random weights at layer 6, each from the camera angle where its fitted tree looks best, drawn flat with species names.
+  - The angle rule is the same for every panel: of 2,000 viewing directions, the one whose fitted tree is shortest relative to a random species assignment.
+  - That ratio has an exact expectation, tr(K)/(n−1)·‖X‖², with K the tree's leaf-reduced Laplacian, so no shuffles are needed. A test checks it against 4,000 shuffles.
 
 ## 2026-11-22: independent audit of results, methods and claims
 
