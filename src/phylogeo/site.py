@@ -73,6 +73,7 @@ def md_table_to_html(md: str) -> str:
             t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
             t = re.sub(r"`(.+?)`", r"<code>\1</code>", t)
             t = re.sub(r"(?<![*\w])\*([^*]+?)\*(?![*\w])", r"<i>\1</i>", t)  # *italic*
+            t = re.sub(r"\[([^\]]+)\]\((https://[^\s)]+)\)", r'<a href="\2">\1</a>', t)
             out.append(f"<p>{t}</p>")
     flush()
     return "\n".join(out)
@@ -152,14 +153,20 @@ document.getElementById('nn-q').addEventListener('input', nnRender); nnRender();
 </script>"""
 
 
-def build_site(run: str = "qwen35_2b") -> Path:
+def build_site(run: str = "qwen35_2b", *, reuse_media: bool = False) -> Path:
     from phylogeo.viz.figures import build_figures, export_pngs, group_view_md, readme_gallery_md, within3d_md
 
-    if SITE.exists():
-        shutil.rmtree(SITE)
-    (SITE / "assets").mkdir(parents=True)
+    (SITE / "assets").mkdir(parents=True, exist_ok=True)
     figs = build_figures(run)
-    export_pngs(figs, PNG_DIR)
+    changed = {"h1", "secondary", "conflict", "causal", "habitat", "probe", "scale", "sensitivity", "layers", "treeness"} if reuse_media else None
+    # Kaleido's long-lived renderer writes all charts before closing its one browser.
+    # https://github.com/plotly/Kaleido
+    import kaleido
+    kaleido.start_sync_server(n=1, timeout=120)
+    try:
+        export_pngs(figs, PNG_DIR, changed)
+    finally:
+        kaleido.stop_sync_server()
     inject_block(REPO_ROOT / "README.md", readme_gallery_md(figs), tag="FIGURES")
     for r in figs:  # the within-group views also sit at the top of the README's visual summary
         if r["key"] == "within3d":
@@ -190,10 +197,15 @@ def build_site(run: str = "qwen35_2b") -> Path:
 residual-stream vector at the last token of its name, averaged over 8 prompts. The figures below compare that geometry
 with the reference tree (ground truth), with untrained networks and with simple name statistics. Every chart is
 interactive (hover, zoom, click legend entries) and labelled with its verdict, computed from the results files.</p>
+<h2>Independent reanalysis of archived observations</h2>
+<p>Triplet accuracy measures agreement with the sampled reference topology. The primary family-block criterion was met.
+The order-block interval against Pythia step 0 includes zero. A paired causal switch comparison remains unevaluable.
+<a href="https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/reviews/2026-11-26-scientific-audit.md">Audit and sources</a>.</p>
+<h2>Headline results</h2>{md_table_to_html(key_results_md(run))}
 <h2>Visual summary</h2><p>{kinds}</p>{nav}
 {cards}
 {explorer_html(run)}
-<h2>Headline results</h2>{md_table_to_html(key_results_md(run))}
+<p>Stage-specific legacy image galleries and exploratory tables below preserve the original run conventions. The corrected tables above and the audit give the current hypothesis decisions.</p>
 <h2>Stage 1a — top-3 PCA, interactive 3D</h2>
 <p>Each point is one species; colour = super-group (blue vertebrates, orange arthropods, aqua other invertebrates,
 gray other), marker = stratum; thin gray lines = the reference tree with internal nodes at the centroid of their
@@ -212,7 +224,7 @@ descendants. Use the slider to move through layers.</p>
 <h2>Stage 6 — sensitivity</h2>{md_table_to_html(stage6_table(run))}{gallery(stage_imgs["stage6"])}
 <h2>Power simulation</h2>{md_table_to_html(power_table())}
 <p class="muted">All numbers are generated from <code>results/</code> by
-<code>python -m phylogeo.run --phases viz_data,report,site</code>.</p>
+<code>uv run --frozen python -m phylogeo.verification --render-only</code>.</p>
 """
     from plotly.offline import get_plotlyjs_version
 

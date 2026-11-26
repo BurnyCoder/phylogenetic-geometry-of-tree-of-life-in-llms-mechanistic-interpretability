@@ -8,12 +8,28 @@ uv run python -m phylogeo.run --config configs/<run>.yaml --phases <a,b,c> [--na
 
 Phases run in the given order. Each logs to `logs/<timestamp>_<run>.log` and to the terminal, and writes JSON and figures to `results/<run>/<stage>/`. Large arrays go to `DATA_DIR` (set in `.env`), never to git.
 
+## Reproducing the independent audit
+
+Install the frozen Python environment with `uv sync --frozen`, Pandoc with its Typst writer, and Chrome for Plotly's static export. The publication command below reads the versioned statistics in `results/scientific-verification/` and the compact figure inputs in `results/`. It generates the Markdown tables, paper, site, static figures and release cards.
+
+```powershell
+uv run --frozen python -m phylogeo.verification --render-only
+```
+
+For the full statistical replay, configure `DATA_DIR` and `HF_HOME` in the project `.env`. Download the existing activation files into `DATA_DIR/activations` with their run/name-set structure intact. Use the Qwen tokenizer snapshot at `15852e8c16360a2fea060d615a32b45270f8a8fc` and the static sentence-transformers GloVe snapshot at `e5e8fec6971be8960cfaa853a77a6ddc62a265d7` under `HF_HOME/hub`. Cache the original EltonTraits `MamFuncDat.txt` and `BirdFuncDat.txt` in `DATA_DIR/eltontraits`. Use the saved `DATA_DIR/timetree/species_node_ages.npy` for the frozen tree or refetch it with the original `dates` phase. Later API responses can change the dating result. No LLM or probe is invoked by the following command. All permutations and block resampling use recorded random streams. [Saved activations](https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations) · [Static GloVe](https://huggingface.co/sentence-transformers/average_word_embeddings_glove.6B.300d) · [Original trait files](https://esapubs.org/archive/ecol/E095/178/) · [Scientific protocol](../reports/reviews/2026-11-26-analysis-protocol.md)
+
+```powershell
+uv run --frozen python -m phylogeo.verification
+```
+
+`--reuse-unchanged-media` can reuse existing illustrations whose underlying inputs were unaffected. The ordinary publication command exports all illustrations. Original observations and prospective implementation fixes are versioned separately. The corrections cannot reconstruct missing pre/post predictions or historical fold weights. [Evidence register](../reports/reviews/2026-11-26-claim-sources.md)
+
 ## Configs (`configs/*.yaml`)
 
 | Field | Meaning |
 |---|---|
 | `name` | Run name, used for the `results/` and activation folders |
-| `model_id`, `revision` | Hugging Face model and **pinned** revision (commit hash or Pythia `stepN`) |
+| `model_id`, `revision` | Hugging Face model and revision identifier. A commit SHA is immutable; `stepN` and default branches are aliases |
 | `random_init` | `true`: same architecture with freshly initialized weights (seeded control) |
 | `chat_template` | Wrap prompts in the model's chat template (user turn, thinking disabled) |
 | `prepend_bos` | Prepend BOS (Pythia omits it by default) |

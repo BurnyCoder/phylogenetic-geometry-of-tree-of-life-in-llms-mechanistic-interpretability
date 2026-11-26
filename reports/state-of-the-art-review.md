@@ -1,80 +1,17 @@
-# State-of-the-art review: methods, data, and tools
+# Methods and reference standards
 
-*Libor "Burny" Burian, 2026-11-20.*
+Libor “Burny” Burian · revised 26 November 2026.
 
-This is the companion to [literature-review.md](literature-review.md). It covers the current best practice for each component of the pipeline, which library or source implements it, and what this project adopts. Version numbers are as of 2026-11-20.
-
-## 1. Extracting representations of entities from an LLM
-
-| Practice | Source | Adopted? |
+| Method | Use in this project | Source |
 |---|---|---|
-| Residual stream at the **last token of the entity name**, every layer | [Gurnee & Tegmark 2023](https://arxiv.org/abs/2310.02207) | Yes, primary readout |
-| Mean over several prompt templates to average out context | Analogous to Goodfire pooling over many genome windows; Gurnee & Tegmark instead *test sensitivity* to prepended prompts (§3.3) | Yes, 8 templates; split-half template reliability reported |
-| Mean over the entity's tokens | Goodfire Evo 2 pools over 2 kb of tokens | Secondary readout |
-| Whitened unembeddings ("causal inner product") | [Park et al. 2024](https://arxiv.org/abs/2406.01506) | No. Whitening can manufacture orthogonality ([critique](https://d2jud02ci9yv69.cloudfront.net/2025-04-28-feature-geometry-65/blog/feature-geometry/)) |
-| Subtract the mean over entities before cosine (removes the shared anisotropic direction) | Anisotropy of contextual representations ([Ethayarajh 2019](https://aclanthology.org/D19-1006/)); mean removal ([Mu, Bhat & Viswanath 2018](https://arxiv.org/abs/1702.01417)); rogue dimensions dominate cosine ([Timkey & van Schijndel 2021](https://arxiv.org/abs/2109.04404)) | Yes, per template (z-scoring as sensitivity analysis) |
+| Taxonomy and topology | Species matched to Open Tree IDs. The frozen induced tree retains unresolved branching. Ranked annotations use NCBI first and Open Tree as fallback. Edge counts depend on the sampled tree and contain no elapsed-time units. | [Open Tree API](https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3), [NCBI Taxonomy](https://www.ncbi.nlm.nih.gov/taxonomy), [frozen inputs](../data/FREEZE.json), [selection code](../src/phylogeo/data/species.py) |
+| Divergence time | Representative pairs provide TimeTree MRCA estimates. Missing nodes are excluded and dated ancestors are clamped for monotonicity. The test averages within-rank partial Spearman correlations, adjusting for MRCA depth. The null moves whole species within strata. Unmeasured topology can still covary with ages. | [TimeTree 5](https://doi.org/10.1093/molbev/msac174), [dating code](../src/phylogeo/data/tree.py), [replay](../results/scientific-verification/dating.json) |
+| Relationship among three taxa | A resolved rooted triple requires the sister-pair common ancestor strictly below that of all three. Each eligible decision node contributes equally. The registration gives one-third on a tied minimum, whereas historical output shared credit among tied minima. | [Formal definition](https://doi.org/10.1186/s13015-020-00175-0), [registration](preregistration.md), [both implementations](../src/phylogeo/verification/statistics.py) |
+| Permutation tests | Whole-leaf relabeling preserves pair dependencies. Maxima across the same permutations of all layers account for layer search. Exchangeability within the permuted group is an assumption. Ordinary tests treating every pair as independent overstate the available information. | [Hemerik and Goeman](https://doi.org/10.1007/s11749-017-0571-1), [Winkler et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC4010955/), [geometry calculations](../results/scientific-verification/geometry.json) |
+| Multiplicity and dependence | Holm adjustment covers five geometry predictions, two registered interventions and four habitat predictions in separate families. Unknown endpoints remain unknown. Randomization of species within taxonomic orders is a sensitivity analysis for ecology and does not model all shared ancestry. | [Holm](https://www.jstor.org/stable/4615733), [Felsenstein](https://doi.org/10.1086/284325), [current decisions](../results/scientific-verification/decisions.json) |
+| Controls and generalization | Family-disjoint layer selection, paired block intervals, random networks, input embeddings, trigrams, token counts, sitelinks and a static co-occurrence representation test different shortcuts. Sitelinks measure linked sites, a proxy for prominence. GloVe was trained independently of the Qwen training corpus. | [GloVe](https://aclanthology.org/D14-1162/), [selection bias](https://doi.org/10.1038/nn.2303), [checkpoint metadata](https://huggingface.co/Qwen/Qwen3.5-2B), [local comparators](../src/phylogeo/verification/primary.py) |
+| Graph geometry and probe | Angular-weighted nearest-neighbour shortest paths, sampled base-point hyperbolicity, neighbor joining and an unrooted RF comparison are exploratory. The angular, Euclidean and Poincaré ablations use the project's PyTorch implementation. Intrinsic dimension and an NJ rooted-triple outcome are proposals without a reported estimate. | [Goodfire](https://www.goodfire.com/research/phylogeny-manifold), [neighbor joining](https://doi.org/10.1093/oxfordjournals.molbev.a040454), [Poincaré embeddings](https://arxiv.org/abs/1705.08039), [implementation](../src/phylogeo/stage2.py), [probe](../src/phylogeo/probes/flat.py) |
+| Ecological scores | A fixed discovery PC is oriented by a prespecified contrast and projected onto held-out species. The bird quantities measure fractions of foraging activity; mammal data are categorical. Marine taxa can share ancestry and name cues. | [EltonTraits](https://esapubs.org/archive/ecol/E095/178/), [held-out data](../data/heldout_eco.csv), [verified scores and tests](../results/scientific-verification/outcomes.json) |
+| Interpretation | A control estimate near chance or a difference with a confidence interval containing zero leaves uncertainty. A claim of equivalence needs scientifically motivated bounds and an equivalence procedure. Preregistration status depends on timing for the particular decision. | [Lakens](https://doi.org/10.1177/1948550617697177), [Nosek et al.](https://doi.org/10.1073/pnas.1708274114), [dated amendments](preregistration.md#deviations) |
 
-**Libraries.**
-- Plain Hugging Face `transformers` (`output_hidden_states=True`) is the simplest exact route for residual-stream reads.
-- Hooks for causal interventions: [nnsight](https://nnsight.net/) or plain PyTorch forward hooks.
-- TransformerLens 4.x replaced `HookedTransformer.from_pretrained` with `TransformerBridge` ([repo](https://github.com/TransformerLensOrg/TransformerLens)). Not needed here.
-
-**Model choice.** The user picked **Qwen3.5-2B**, the post-trained release ([model card](https://huggingface.co/Qwen/Qwen3.5-2B)).
-- Basics: Apache-2.0, bf16, 2.27B parameters in the checkpoint. That total includes a vision encoder (about 0.33B) and a multi-token-prediction head (about 0.06B); the language model alone is about 1.88B (safetensors header on the Hub, checked 2026-11-22). It is a fine-tune of Qwen3.5-2B-Base.
-- Architecture:
-  - 24 decoder layers, hidden size 2048;
-  - layers follow a 3:1 pattern of Gated-DeltaNet linear attention to full attention (read from `config.json`: `layer_types`, `full_attention_interval=4`);
-  - the checkpoint ships as the multimodal `Qwen3_5ForConditionalGeneration`.
-- Scaling and training-dynamics controls: the Pythia suite, which has 154 public checkpoints including `step0` (random init) and open training data, the Pile ([Biderman et al. 2023](https://arxiv.org/abs/2304.01373), [model card](https://huggingface.co/EleutherAI/pythia-1.4b)).
-
-## 2. Ground-truth phylogeny
-
-| Source | What it gives | License | Use here |
-|---|---|---|---|
-| [Open Tree of Life](https://tree.opentreeoflife.org/) synthetic tree, API v3 (`tree_of_life/induced_subtree`: [synthetic-tree docs](https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3); `tnrs/match_names`: [TNRS docs](https://github.com/OpenTreeOfLife/germinator/wiki/TNRS-API-v3)) | Topology only, no branch lengths | CC0 ([data rights](https://tree.opentreeoflife.org/about/licenses)) | **Primary topology** |
-| Open Tree Taxonomy (OTT) `taxonomy/taxon_info` with lineage | Linnaean ranks (phylum, class, order, family, genus) | CC0 | **Rank annotation** (replaces ete4; see the deviation note below) |
-| [TimeTree 5](https://timetree.org/) API (`/mrca/id/{ncbi ids}`; [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC9400175)) | Divergence times (Mya) | No redistribution (timetree.org footer: "Redistribution of TimeTree data and its transformations are not permitted") | Dated tree, used for H_rank vs H_time. Cached locally and never published |
-| NCBI Taxonomy | Classification, taxids | Public domain | Taxids for TimeTree via Wikidata P685 |
-| VertLife, Upham 2019, Fish Tree of Life | Dated trees for single clades | Various | Not used (no all-animal coverage) |
-
-**Deviation from the plan.** ete4 4.4.0 failed to build on Windows with Python 3.12 (a Cython compile error in `ete4/core/operations.pyx`). Ranks therefore come from the Open Tree Taxonomy lineage instead of NCBI via ete4. OTT is itself a synthesis of NCBI, GBIF and other taxonomies ([Rees & Cranston 2017](https://doi.org/10.3897/BDJ.5.e12581)).
-
-## 3. Statistics for comparing representations with a tree
-
-| Method | Notes | Implementation |
-|---|---|---|
-| Mantel test (Pearson or Spearman, permutation) | Standard RSA-style test. Pairwise distances are not independent, so the null is generated by permuting rows and columns together | [`skbio.stats.distance.mantel`](https://scikit.bio/docs/latest/generated/skbio.stats.distance.mantel.html) (scikit-bio 0.7.4) |
-| Partial Mantel / MRM | Inflated type-I error under spatial or phylogenetic autocorrelation ([Guillot & Rousset 2013](https://doi.org/10.1111/2041-210X.12018)), so only a secondary analysis | No maintained Python package; own implementation tested against the closed-form partial correlation |
-| **Rooted-triplet accuracy** (primary) | Uses topology only and is invariant to monotone transforms. Node-balanced sampling stops large clades from dominating. Chance = 1/3. Related to the triplet distance between rooted trees ([Critchlow et al. 1996](https://doi.org/10.1093/sysbio/45.3.323)) | Own implementation, with tests |
-| Max-T permutation over layers | Controls family-wise error across the 24 layers ([Westfall & Young 1993](https://www.wiley.com/en-us/Resampling-Based+Multiple+Testing-p-9780471557616)) | Own implementation |
-| Clade-block bootstrap | Pairwise statistics are not i.i.d. Resample whole families and drop same-origin duplicate pairs | Own implementation |
-| kNN-graph geodesic distance | Smallest connected k, edges weighted by angular distance, as in [Modell et al. 2025](https://arxiv.org/abs/2505.18235) and Goodfire | `sklearn.neighbors.kneighbors_graph` + `scipy.sparse.csgraph.shortest_path` |
-| Gromov δ-hyperbolicity (four-point) | Must be compared with spectrum-matched Gaussian and non-hierarchical nulls | Own vectorised implementation, checked against brute force |
-| Neighbor-joining tree vs reference (RF, triplet distance) | NJ on representation distances | `skbio.tree.nj`; DendroPy `treecompare` |
-| Phylogenetic signal (Blomberg's K; multivariate K_mult) | [Blomberg et al. 2003](https://doi.org/10.1111/j.0014-3820.2003.tb00285.x); [Adams 2014](https://doi.org/10.1093/sysbio/syu030) | Tree-overlay length statistic, related to squared-change parsimony |
-| Learned metric subspace (Goodfire flat subspace) | Clade-holdout CV; selectivity against a shuffled-tree control ([Hewitt & Liang 2019](https://aclanthology.org/D19-1275/)) | Own implementation in PyTorch |
-| Hyperbolic probe | [Chen et al. 2021](https://arxiv.org/abs/2104.03869) | `geoopt` (Poincaré ball) |
-| Intrinsic dimension | TwoNN and MLE estimators | `scikit-dimension` (skdim 0.6.1) |
-
-## 4. Confounder covariates
-
-- **Lexical:** character 3-gram Jaccard distance, the shared head noun (last word of the common name), and token count.
-- **Frequency:**
-  - [infini-gram](https://infini-gram.readthedocs.io/en/latest/api.html) count API (index `v4_piletrain_llama` is the Pile train set, Pythia's training data; counts are in Llama-2 tokens, not Pythia's GPT-NeoX tokens);
-  - Wikipedia pageviews (Wikimedia REST API);
-  - `wordfreq` 3.1.1 (data frozen around 2021).
-- **Co-occurrence:** static word embeddings, and the model's own input embedding matrix.
-- **Ecology:** coarse habitat. [TetrapodTraits 1.0](https://doi.org/10.1371/journal.pbio.3002658) covers tetrapods only; no trait source covers all animals.
-
-## 5. Visualization (the neural-geometry practice)
-
-1. Plot the **top PCA directions** of residual-stream activations and look at the shape. This is how the days-of-week circle was found ([Engels et al. 2024](https://arxiv.org/abs/2405.14860)), and it is how Goodfire presents its manifold work.
-2. Use UMAP only for display (Goodfire Evo 2), never for metrics.
-3. Overlay structure. This project overlays the reference tree in PC space, placing each internal node at the centroid of its descendant leaves.
-
-## 6. Engineering
-
-- **Python and PyTorch:** Python 3.12 via `uv`. PyTorch 2.15 with CUDA 13.2 wheels, because the RTX 5070 (Blackwell, sm_120) needs CUDA ≥ 12.8 builds ([PyTorch 2.7 release notes](https://pytorch.org/blog/pytorch-2-7/)). Verified locally: `torch.cuda.get_arch_list()` contains `sm_120`. The index is configured following the [uv PyTorch guide](https://docs.astral.sh/uv/guides/integration/pytorch/).
-- **Live training dashboard:** [trackio](https://github.com/gradio-app/trackio), a local dashboard with a wandb-compatible API.
-- **Paper:** Typst via the `typst` PyPI package. Figures with matplotlib; interactive figures with Plotly.
-- **Website:** a static site on GitHub Pages.
+The extraction uses Transformers' hidden states and PyTorch forward hooks. The model-free verification reads stored arrays with NumPy, uses SciPy for reference statistics, DendroPy for the frozen tree, and generates its figures with Plotly. The lockfile records the environment and the data manifest records the original panel. [Pipeline](../docs/pipeline.md) · [Lockfile](../uv.lock) · [Primary architectural config](https://huggingface.co/Qwen/Qwen3.5-2B/blob/15852e8c16360a2fea060d615a32b45270f8a8fc/config.json)
