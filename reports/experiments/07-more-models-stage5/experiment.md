@@ -28,3 +28,9 @@ uv run python -m phylogeo.run --phases scale_summary
   - The family cross-fitted TA_within with 10 splits.
   - The Mantel correlation at the cross-fitted layer.
 - **Comparison lines.** The untrained references (random-init Qwen3.5-2B, Pythia-410m step 0) and the lexical baselines from stage 1b are drawn as reference lines. Pythia-1.4B step 0 is the untrained reference for the checkpoint series.
+
+## Reading the series
+
+In the Pythia size series the larger endpoint has higher accuracy than the smallest. Intermediate sizes do not give a strictly monotonic sequence. The Pythia-1.4B checkpoint curve shows an early dip and a later rise. Comparing checkpoints along that trajectory keeps the architecture fixed, while comparing Qwen with Pythia also changes the tokenizer, data, and training procedure. Identical distance-matrix digests identify duplicated measurements at the ends of the series. [All checkpoint rows and digests](../../../results/scientific-verification/scale.json) · [Scale and training plots](../../../results/RESULTS.md#stage-5--more-models-scale-and-training-dynamics)
+
+The scale runs use fewer family splits and permutations than the primary test. Each untrained comparison line needs the same cross-fitted statistic as the models on the plot. A single training trajectory gives no estimate of variation across independent training seeds. [Run configurations](../../../configs) · [Pythia suite](https://arxiv.org/abs/2304.01373)

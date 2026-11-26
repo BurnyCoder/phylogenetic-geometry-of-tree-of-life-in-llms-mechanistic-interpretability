@@ -1,9 +1,10 @@
 """Generate the hypothesis ledger, numerical tables and independent audit from versioned result files."""
 
+import csv
 import json
 from pathlib import Path
 
-from phylogeo.config import REPO_ROOT, RESULTS_DIR
+from phylogeo.config import DATA_REPO_DIR, REPO_ROOT, RESULTS_DIR
 from .statistics import MAIN, CONTROLS, OUT, holm_family, read_json, save
 
 BASE = "https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability"
@@ -93,9 +94,76 @@ def secondary_table(g, d, decisions):
                    prob(decisions["raw_p"][k]), prob(decisions["secondary_holm"][k])] for k in SECONDARY])
 
 
+def primary_details(g, archived):
+    """Show the component checks alongside the decision. Legacy-only estimates carry their scoring rule."""
+    model_rows = [[NAMES[k], v["layer"], num(v["crossfit"]), prob(v["p"])] for k, v in g["models"].items()]
+    subset_rows = []
+    subsets = [(k, g["secondary"][k]) for k in ("S2", "S2_broad", "S3", "S4")]
+    subsets.append(("No shared character trigram", g["no_shared_trigram"]))
+    for label, item in subsets:
+        comparison = item["comparison"] if label == "No shared character trigram" else item["comparisons"]
+        subset_rows.append([label, item["triplets"], num(comparison[MAIN]["ta"]),
+                            *[interval(comparison[k]["difference_ci"]) for k in CONTROLS]])
+    groups = archived["exploratory"]["per_stratum_ci95"]
+    group_rows = [[group, v["n_nodes"], num(v["ta"]), interval(v["ci95"])] for group, v in groups.items()]
+    other = {"pythia410m": "Trained Pythia-410m", "glove": "GloVe", "glove_known_names_only": "GloVe, covered names",
+             "class_oracle": "Broad group only", "rank_oracle": "Shared taxonomic ranks", "tree_oracle": "Reference topology"}
+    baseline_rows = [[label, num(archived["point_ta_within"][key])] for key, label in other.items()]
+    correlations = archived["baselines_mantel_pathlen"]
+    return "\n\n".join([
+        "Each network selects its own layer. The permutation p compares its maximum across layers with the null maxima.",
+        table(["Network", "Modal layer", "Cross-fitted TA", "Layer-max p"], model_rows),
+        "The paired intervals below resample families. S2 uses the family/genus condition. S2_broad includes all eligible within-order triples. The spelling-neutral row is exploratory.",
+        table(["Subset", "Triples", "Qwen TA", "Δ vs random Qwen, 95% CI", "Δ vs Pythia step 0, 95% CI"], subset_rows),
+        "Archived descriptive breakdown at the main model’s selected layer. Groups with few decision nodes can have wide intervals. These marginal family intervals have no multiplicity adjustment across groups.",
+        table(["Group", "Decision nodes", "TA", "Family 95% CI"], group_rows),
+        "Additional archived comparators, using the original fractional credit for tied minima. The tree oracle orders relatives by shared-ancestor depth.",
+        table(["Reference or baseline", "Within-group TA"], baseline_rows),
+        f"Global edge-count Spearman correlation is {num(correlations['class_oracle'])} for a group-only distance and {num(correlations['log_popularity'])} for log sitelinks. Both can contribute to global agreement. "
+        + evidence("geometry") + " " + src("Original breakdowns", "results/qwen35_2b/stage1b/results.json"),
+    ])
+
+
+def neighbor_examples(*, compact=False):
+    """Read the fixed queries and recorded neighbors directly from the original output file."""
+    archived = read_json(RESULTS_DIR / MAIN / "examples/neighbors.json")
+    representations = ["tree", MAIN, CONTROLS[0], "char3", "glove"] if compact else ["tree", *[r for r in archived["representations"] if r != "tree"]]
+    labels = {"tree": "Reference tree", **NAMES}
+    rows = []
+    for query in archived["queries"]:
+        neighbors = query["neighbors"]
+        cells = [neighbors[r][0] if compact else ", ".join(neighbors[r]) for r in representations]
+        rows.append([query["name"], *cells])
+    return table(["Query", *[labels[r] for r in representations]], rows)
+
+
+def neighbor_details():
+    """Explain how to read the archived query panel, alongside its full table."""
+    return ("Qwen3.5-2B and comparators. The query in each broad group has the most Wikidata sitelinks. "
+            "Each cell lists its three nearest other species. Neural representations use their own selected layers. "
+            "The reference orders neighbors by deepest common ancestor, breaking ties by edge count and then frozen row order. "
+            + src("Recorded neighbors", f"results/{MAIN}/examples/neighbors.json") + "\n\n" + neighbor_examples())
+
+
 def conflict_table(o):
     return table(["Representation", "Tree closer", "Tied", "Other closer", "Missing"],
                  [[NAMES[k], v["win"], v["tie"], v["loss"], v["unscorable"]] for k, v in o["conflict"]["summary"].items()])
+
+
+def conflict_items(o):
+    """Show every frozen challenge with its recorded category and tie-aware choices."""
+    with (DATA_REPO_DIR / "conflict_triplets.csv").open(encoding="utf-8", newline="") as stream:
+        items = {int(r["id"]): r for r in csv.DictReader(stream)}
+    representations = list(o["conflict"]["summary"])
+    labels = {1: "Tree", -1: "Other", 0: "Tie", None: "Missing"}
+    rows = []
+    for r in o["conflict"]["rows"]:
+        item = items[r["id"]]
+        details = [r["closer"], r["other"]] if r["resolved"] else ["Unresolved", "Unresolved"]
+        choices = [labels[r["choices"][k]] for k in representations] if r["resolved"] else ["—"] * len(representations)
+        rows.append([r["id"], item["anchor"], *details, item["conflict_type"], *choices])
+    return table(["Item", "Anchor", "Tree-closer animal", "Alternative", "Conflict type",
+                  *[NAMES[k] for k in representations]], rows)
 
 
 def causal_table(o):

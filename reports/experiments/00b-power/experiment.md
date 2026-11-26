@@ -11,3 +11,7 @@ How large must the within-stratum triplet accuracy (TA_within) be for the H1 tes
 - **Synthetic data.** Representations are simulated as a standardized class-blob component (each species at its stratum centroid plus noise, so clusters with no within-class tree) plus `signal` × a standardized Brownian-motion-on-the-tree component in 256 dimensions.
 - **Signal grid:** {0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.5}, 40 simulations each.
 - **Test.** Each simulation runs the real analysis: node-balanced within-stratum, head-noun-disjoint triplets (K = 200 per node), cosine distance, and the within-stratum permutation test (199 permutations).
+
+## Reading the simulation
+
+With only the broad-group component, within-group accuracy averaged close to chance on this tree. Increasing the simulated tree component increased detection at the higher signal settings. The generated table gives the observed rejection fraction and an exact binomial interval at every grid point. A small grid and finite repetitions limit the precision of a detectable-effect threshold. No joint-power or divergence-time claim follows from this simulation. [Power curve and intervals](../../../results/RESULTS.md#power-simulation) · [Original draws summarized by signal](../../../results/power/power.json)

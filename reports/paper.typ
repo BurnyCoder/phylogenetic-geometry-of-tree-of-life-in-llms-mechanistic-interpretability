@@ -178,6 +178,31 @@ All 21 archived scale rows were recalculated from ordered name vectors. Identica
 Within-group agreement is an association with a sampled synthetic topology. Edge counts depend on taxon sampling. A rank or a depth in this tree is not elapsed evolutionary time. Selection on English common names and Wikipedia sitelinks, repeated clades, and shared ecological and lexical traits limit generalization. Untrained comparisons refer to individual checkpoints. A confidence interval containing chance or zero leaves a range of plausible effects; equivalence would require an explicit margin. Neither the distance correlations nor the intervention archive identify a phylogeny-specific causal mechanism. #link("https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3")[Open Tree] #link("https://doi.org/10.1093/molbev/msac174")[TimeTree] #link("https://doi.org/10.1177/1948550617697177")[Equivalence tests]
 
 #pagebreak()
+== Species selection, model readout and related work
+<species-selection-model-readout-and-related-work>
+Wikidata and English Wikipedia supplied candidates, common names and sitelinks. Selection used broad taxonomic groups and a family cap. Open Tree supplied the induced topology. NCBI-first ranks, with Open Tree fallback, annotate the tips. A deep sister pair can have a longer edge-count path than a shallow outgroup, so the shared ancestor determines the correct pair on each resolved triple. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/data/species.csv")[Frozen panel] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/preregistration.md")[Selection and amendments]
+
+The archived Qwen runs used its text decoder in chat format. Token offsets located each name in several sentence frames. The last name token supplied the primary readout. The embedding layer can already encode a shared final token. Untrained networks, spelling, the input embedding, token count and sitelinks are the primary controls. Static GloVe embeddings and a rank oracle provide additional comparisons. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/src/phylogeo/prompts.py")[Prompt construction] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/qwen35_2b/SUMMARY.md#stage-1b")[Baseline tables]
+
+Goodfire's bacterial genome comparison motivated graph shortest paths and an angular distance probe with clade holdouts. Engels et al. found calendar circles in language-model features. Modell et al. describe conditions under which distances along a manifold recover conceptual distances. Work on lexical hierarchies and co-occurrence gives a competing explanation for a tree-like arrangement of names. #link("https://www.goodfire.com/research/phylogeny-manifold")[Goodfire] · #link("https://arxiv.org/abs/2405.14860")[Engels et al.] · #link("https://arxiv.org/abs/2505.18235")[Modell et al.] · #link("https://arxiv.org/abs/2406.01506")[Park et al.] · #link("https://arxiv.org/abs/2605.23821")[Nava and Wyart] · #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/literature-review.md")[Literature review]
+== Visual checks
+<visual-checks>
+The early stage compared uncolored and labeled projections with the embedding layer, random weights, calendar words and a simulated Brownian tree. Broad class clusters can produce a short tree overlay. A calendar loop illustrates what an ordered low-dimensional feature looks like in this pipeline. The habitat hypothesis arose after inspection of the discovery plots. The subsequent fixed-axis calculation used different species. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/experiments/01-pca-shape/experiment.md")[Discovery record] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/experiments/06-habitat-addendum/experiment.md")[Held-out habitat]
+
+#figure(image("figures/viz/pca_expected.png", height: 7cm, width: 100%, fit: "contain"), caption: [Reference simulation and animal-name projections. Each condition has its own principal components.])
+
+#pagebreak()
+== Probe design, ablations and sensitivity
+<probe-design-ablations-and-sensitivity>
+The angular probe applies a learned linear map to PCA coordinates. A learned scale converts angular separation into predicted tree distance. The loss combines squared distance error with a reconstruction term. Historical cross-validation assigned whole families to folds. Shuffled targets, random weights and a class-centroid-plus-noise input check different explanations for a good fit. Within a stratum, probe and raw distances can be compared on the same held-out pairs. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/src/phylogeo/probes/flat.py")[Probe implementation] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/experiments/03-geometry-probes-stage2/experiment.md")[Fold design and limitations]
+
+Raw text, per-dimension standardization and within-stratum centering yield estimates close to the main score on this panel. The token readout and common versus scientific name choice give larger changes. Species subsampling produces more variation than triplet resampling in the archived draws. The template runs record model-only scores. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/qwen35_2b/stage4/results.json")[Ablations] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/qwen35_2b/stage6/results.json")[Per-draw scores]
+
+#figure(image("figures/viz/probe.png", height: 7.3cm, width: 100%, fit: "contain"), caption: [Held-out probe and class-only comparisons. The raw within-stratum comparator uses the same held-out pairs.])
+
+#figure(image("figures/viz/sensitivity.png", height: 7.3cm, width: 100%, fit: "contain"), caption: [Variation across analysis choices in the archived sensitivity study.])
+
+#pagebreak()
 == Appendix and reproducibility
 <appendix-and-reproducibility>
 At the embedding layer, 221 distinct name pairs have exactly zero angular distance. Preserving those sparse edges and excluding self by row index gives minimum connected k=9 (archived 11) and graph-distance Spearman 0.039 (archived 0.053). At the H1 layer k=3, graph Spearman is 0.251 and angular Spearman is 0.362. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/scientific-verification/graph.json")[Frozen-data calculation]
@@ -186,7 +211,39 @@ The public archive includes the frozen names, tree topology, activations, unalte
 
 The command `uv run --frozen python -m phylogeo.verification --render-only` rebuilds the public output from saved statistics. Omitting the flag replays statistics from archived inputs. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/docs/pipeline.md")[Reproduction instructions] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/reports/reviews/2026-11-26-claim-sources.md")[Claim and source register] #link("https://doi.org/10.1038/nn.2303")[Selection bias] #link("https://pmc.ncbi.nlm.nih.gov/articles/PMC4010955/")[Exchangeability]
 
-#figure(image("figures/viz/view_birds.png", height: 9cm, width: 100%, fit: "contain"), caption: [Bird examples from the archived PCA display. The camera angle was optimized for this view. The reference overlay uses the known topology.])
+#figure(image("figures/viz/view_birds.png", height: 8cm, width: 100%, fit: "contain"), caption: [Bird examples from the archived PCA display. The camera angle was optimized for this view. The reference overlay uses the known topology.])
+
+#figure(image("figures/months.png", height: 5cm, width: 100%, fit: "contain"), caption: [Calendar calibration. Months in calendar order, shown in a projection from the original run.])
+
+#pagebreak()
+== Output examples
+<output-examples>
+The query is the species with the most Wikidata sitelinks in each broad group, chosen by the same rule throughout. Each column lists its first archived neighbor. The neural representations use their own selected layers. The tree ranks by deepest shared ancestor, then by edge count. Remaining distance ties use frozen row order. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/src/phylogeo/examples.py")[Selection rule]
+
+#figure(
+  align(center)[#table(
+    columns: 6,
+    align: (auto,auto,auto,auto,auto,auto,),
+    table.header([Query], [Reference tree], [Qwen3.5-2B], [Random Qwen], [Character trigrams], [GloVe],),
+    table.hline(),
+    [axolotl], [fire salamander], [budgerigar], [capybara], [hylotrupes], [aardwolf],
+    [diving bell spider], [Redback spider], [great raft spider], [Mediterranean recluse spider], [great diving beetle], [great diving beetle],
+    [common ostrich], [greylag goose], [northern giraffe], [North American beaver], [common roach], [common quail],
+    [great white shark], [Shortfin mako shark], [tiger shark], [tiger shark], [great white pelican], [great white pelican],
+    [Portuguese man o\' war], [Nomura\'s jellyfish], [lion\'s mane jellyfish], [Mediterranean mussel], [European mantis], [Spanish slug],
+    [coconut crab], [red king crab], [Japanese spider crab], [velvet crab], [velvet crab], [pea crab],
+    [crown-of-thorns starfish], [orange knobby star], [common starfish], [western capercaillie], [common starfish], [common starfish],
+    [housefly], [stable fly], [stable fly], [Atlantic cod], [house mouse], [silverfish],
+    [lion], [snow leopard], [wolf], [bonobo], [lion\'s mane jellyfish], [lion\'s mane jellyfish],
+    [common octopus], [giant Pacific octopus], [giant Pacific octopus], [mimic octopus], [mimic octopus], [common cuttlefish],
+    [sea lamprey], [pouched lamprey], [European river lamprey], [Mediterranean mussel], [brook lamprey], [loggerhead sea turtle],
+    [goldfish], [Crucian carp], [zebrafish], [garfish], [garfish], [Crucian carp],
+    [Komodo dragon], [Asian water monitor], [Gila monster], [greylag goose], [emperor dragonfly], [lion],
+  )]
+  , kind: table
+  )
+
+The full output lists three neighbors per query under every representation, including trained Pythia and step-zero Pythia. #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/RESULTS.md#nearest-neighbor-examples")[Full comparison table] #link("https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/qwen35_2b/examples/neighbors.json")[Original examples]
 
 #v(6pt)
 *AI statement.* Codex wrote the independent verification code and this revision of the paper to Libor Burian’s specification. The original implementation and manuscript attributed their drafting to Claude Code. Human cleanup and rewriting are in progress.

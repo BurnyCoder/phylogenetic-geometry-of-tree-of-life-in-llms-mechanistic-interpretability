@@ -129,9 +129,9 @@ def stage1b_tables(run: str) -> str:
     if not r:
         return f"*(no stage-1b results for {run})*\n"
     if run == "qwen35_2b" and "score_rule" not in r:
-        from phylogeo.verification.publication import assemble, controls_table, secondary_table
+        from phylogeo.verification.publication import assemble, controls_table, primary_details, secondary_table
         g, d, _, decisions = assemble()
-        return controls_table(g) + "\n\n" + secondary_table(g, d, decisions) + "\n"
+        return "\n\n".join((controls_table(g), secondary_table(g, d, decisions), primary_details(g, r))) + "\n"
     h = r["H1"]
     out = [f"**H1 (primary)** — n = {r['n_species']} species, {r['n_triplets']} sampled triplets, "
            f"{r['n_within']} within-stratum head-noun-disjoint.\n",
@@ -203,10 +203,13 @@ def stage1b_tables(run: str) -> str:
 def conflict_table(run: str) -> str:
     c = _load(RESULTS_DIR / run / "conflict" / "conflict.json")
     if run == "qwen35_2b" and c and "ties" not in c["summary"][run]:
-        from phylogeo.verification.publication import conflict_table as verified_table
+        from phylogeo.verification.publication import conflict_items, conflict_table as verified_table, evidence, src
         verified = _load(RESULTS_DIR / "scientific-verification/outcomes.json")
-        return (verified_table(verified) + "\n\nThe full per-item outcomes are in "
-                "[the source table](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/scientific-verification/outcomes.json).\n")
+        return "\n\n".join([verified_table(verified),
+                            "Each row below gives the closer partner under each representation. A tie means equal "
+                            "distances. Several questions reuse the same animals. "
+                            + src("Frozen questions", "data/conflict_triplets.csv") + " " + evidence("outcomes"),
+                            conflict_items(verified)]) + "\n"
 
     if not c:
         return f"*(no conflict results for {run})*\n"
@@ -280,10 +283,17 @@ def stage2_table(run: str) -> str:
             f"{g['geodesic_ta'][lay] - g['angular_ta'][lay]:+.3f} | {g['blob_gain_ta'][lay]:+.3f} |"]
     if run == "qwen35_2b":
         from phylogeo.verification.statistics import OUT, read_json
-        graph = read_json(OUT / "graph.json")["by_layer"]
-        out.append(f"\nWith zero-weight edges preserved at layer zero, minimum connected k changes from "
-                   f"{graph[0]['archived_k']} to {graph[0]['k']}. Historical plots use the original graph. "
-                   "The probe's original target scale included held-out species and the layer was selected on the full panel.")
+        graph = read_json(OUT / "graph.json")
+        raw = read_json(OUT / "geometry.json")["raw_probe_comparison"]["mean"]
+        within = r["probe"]["model"]["test_test_within_stratum_spearman"][0]
+        zero = graph["by_layer"][0]
+        out.append(f"\nOn the same held-out folds, mean within-stratum Spearman was {raw:.3f} for raw angular "
+                   f"distance and {within:.3f} after projection through the fitted probe. The probe's original target "
+                   "scale included held-out species and the layer was selected on the full panel.")
+        out.append(f"\nThe archived Robinson–Foulds distance implies {graph['implied_shared_splits']} shared "
+                   f"nontrivial splits among {graph['reference_splits']} reference splits. With zero-weight edges "
+                   f"preserved at layer zero, the minimum connected k changes from {zero['archived_k']} to {zero['k']}. "
+                   "Historical plots use the original graph.")
     return "\n".join(out) + "\n"
 
 
@@ -325,10 +335,20 @@ def stage4_table(run: str) -> str:
 
 def eco_table(run: str) -> str:
     """Addendum A (habitat gradient on held-out species)."""
-    if run == "qwen35_2b":
-        from phylogeo.verification.publication import habitat_table as verified_table
-        return verified_table(_load(RESULTS_DIR / "scientific-verification/outcomes.json")) + "\n"
     r = _load(RESULTS_DIR / run / "eco" / "results.json")
+    if run == "qwen35_2b" and r:
+        from phylogeo.verification.publication import habitat_table as verified_table
+        verified = _load(RESULTS_DIR / "scientific-verification/outcomes.json")
+        h = verified["habitat"]
+        marine = r["tests"]["M1_marine_lt_ground"]
+        airborne = r["tests"]["B2_aerial_positive"]["n_nonzero_aerial"]
+        return (f"The oriented first principal component from layer {r['layer']} was applied to "
+                f"{r['n_mammals']} held-out mammals and {r['n_birds']} held-out birds. Median mammal scores were "
+                f"{marine['median']:.2f} for marine foragers (n = {h['marine']}) and {marine['median_ground']:.2f} "
+                f"for ground foragers (n = {h['ground']}). The aerial mammal group had {h['aerial']} species. "
+                f"Bird scores correlated with water foraging at Spearman ρ = {h['rho']['B1']:.3f} and aerial "
+                f"foraging at ρ = {h['rho']['B2']:.3f}. Only {airborne} birds had nonzero aerial foraging.\n\n"
+                + verified_table(verified) + "\n")
     if not r:
         return f"*(no habitat-addendum results for {run})*\n"
     out = [f"Held-out: {r['n_mammals']} mammals, {r['n_birds']} birds; axis = oriented PC1 of layer {r['layer']} (primary set).\n",
@@ -362,16 +382,36 @@ def stage3_table(run: str) -> str:
            f"{c['agreement_behavior_vs_representation']:.3f}.\n",
            "Class-word accuracy by stratum: " + ", ".join(f"{k} {v:.2f}" for k, v in s["by_stratum"].items()) + ".\n"]
     if run == "qwen35_2b" and {"C_swap", "class_control"} <= r.keys() and "endpoint" not in r["C_swap"]:
-        from phylogeo.verification.publication import causal_table as verified_table
+        from phylogeo.verification.publication import causal_table as verified_table, table
         verified = _load(RESULTS_DIR / "scientific-verification/outcomes.json")
         a, cc = r["C_abl"], r["class_control"]
-        out.extend([verified_table(verified),
-                    "The behavioral binomial calculations above assume independent questions. The same species recur.",
-                    f"Mean ablation drop was {a['mean_drop_logp_probe']:.3f} nats for the probe, "
-                    f"{a['mean_drop_logp_random']:.3f} for the random spaces and {cc['mean_drop_logp_class']:.3f} "
-                    f"for the class-only subspace. The class-only post-edit donor fraction was {cc['switch_rate_class']:.3f}. "
-                    "The original random-swap ranks test post-edit prevalence. The registered switch comparison is unevaluable."])
-        return "\n\n".join(out) + "\n"
+        variance = verified["subspace_variance"]
+        ablations = []
+        for label, key, saved in [("Original", "_v1", r["C_abl_v1"]), ("Expanded", "expanded", a)]:
+            v = verified["causal"][key]
+            ablations.append([label, v["random_ablations"], f"{v['ablation_probe']:.3f}",
+                              f"{v['ablation_random']:.3f}", p_fmt(v["ablation_rank"]),
+                              p_fmt(v["registered_holm"]["ablation"]), p_fmt(saved["wilcoxon_p_probe_gt_random"])])
+        return "\n\n".join([
+            "\n".join(out), "The behavioral binomial calculations assume independent questions. The same species recur.",
+            verified_table(verified),
+            "The original random-swap ranks test post-edit donor prevalence. The registered switch comparison "
+            "is unevaluable because the paired before-and-after predictions were not saved.",
+            table(["Ablation run", "Random spaces", "Probe drop (nats)", "Mean random drop (nats)", "Rank p",
+                   "Two-slot Holm p (upper bound)", "Species-level Wilcoxon p (secondary)"], ablations),
+            f"On {a['n_test_species']} held-out species, the expanded run recorded mean unedited log P(correct class) "
+            f"{a['mean_base_logp_correct']:.3f}. Training variance fractions were {variance['target']:.4f} for the "
+            f"probe, {variance['random_mean']:.4f} on average for the random spaces and {cc['class_var_captured']:.4f} "
+            f"for the class-only space. Neutral-sentence next-token losses were {a['neutral_loss_base']:.4f} "
+            f"unedited, {a['neutral_loss_probe_ablated']:.4f} after probe ablation and "
+            f"{a['neutral_loss_random_ablated']:.4f} after random ablation. The original run used different "
+            "sentences and weighting for its unedited baseline.",
+            f"The class-only ablation drop was {cc['mean_drop_logp_class']:.3f} nats (one-sided paired "
+            f"Wilcoxon p = {p_fmt(cc['wilcoxon_p_probe_gt_class'])} for a larger phylogeny-probe drop). "
+            f"Class-only post-edit donor prevalence was {cc['switch_rate_class']:.3f}. On that endpoint the "
+            f"probe-only and class-only counts were {cc['mcnemar_probe_only']} and {cc['mcnemar_class_only']} "
+            f"(one-sided exact McNemar p = {p_fmt(cc['mcnemar_p_probe_gt_class'])})."
+        ]) + "\n"
     for ka, ks in (("C_abl", "C_swap"), ("C_abl_v1", "C_swap_v1")):
         if ka not in r or ks not in r:
             continue
@@ -509,11 +549,16 @@ def probe_bar_png(run: str) -> None:
         if key == "test_test_pearson" and "class_only_predictor_pearson_all_pairs" in r["probe"]:
             v = r["probe"]["class_only_predictor_pearson_all_pairs"]
             ax.axhline(v, ls=":", color="0.4", lw=1)
-            ax.text(len(keys) - 0.5, v, "class-only predictor ", ha="right", va="bottom", fontsize=7, color="0.3")
+            ax.text(len(keys) - 0.5, v, "class-only predictor (in-sample) ", ha="right", va="bottom", fontsize=7, color="0.3")
         if key != "test_test_pearson" and "raw_angular_within_stratum_spearman_all_species" in r["probe"]:
             v = r["probe"]["raw_angular_within_stratum_spearman_all_species"]
+            label = "raw distances (all species)"
+            if run == "qwen35_2b":
+                from phylogeo.verification.statistics import OUT, read_json
+                v = read_json(OUT / "geometry.json")["raw_probe_comparison"]["mean"]
+                label = "raw distances (same held-out pairs)"
             ax.axhline(v, ls=":", color="0.4", lw=1)
-            ax.text(len(keys) - 0.5, v, "raw distances, no probe ", ha="right", va="bottom", fontsize=7, color="0.3")
+            ax.text(len(keys) - 0.5, v, label + " ", ha="right", va="bottom", fontsize=7, color="0.3")
         for i_, v in enumerate(m):
             ax.text(i_, v + 0.02 if v >= 0 else v - 0.06, f"{v:.2f}", ha="center", fontsize=8)
         ax.set_title(title, fontsize=9)
@@ -557,9 +602,16 @@ def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
                   "\n### Stage 4 — ablations\n", stage4_table(run),
                   "\n### Addendum A — habitat gradient (held-out species)\n", eco_table(run),
                   "\n### Stage 6 — sensitivity\n", stage6_table(run)]
+    from phylogeo.verification.publication import controls_table, neighbor_details
+    from phylogeo.verification.statistics import OUT, read_json
+    neighbor_report = ""
+    if (RESULTS_DIR / "qwen35_2b/examples/neighbors.json").is_file():
+        neighbor_report = "\n## Nearest-neighbor examples\n\n" + neighbor_details()
+        parts.append(neighbor_report)
     parts += ["\n## Stage 5 — more models (scale and training dynamics)\n", stage5_table()]
     exploratory_bh(main)  # registered BH-FDR family (final review M7); read by key_results_md and the paper
-    parts += ["\n## Exploratory tests: Historical BH adjustment over the recorded tests\n", exploratory_bh_table(main)]
+    parts += ['\n<a id="exploratory-tests-bh-fdr-over-the-registered-family"></a>\n',
+              "## Exploratory tests: Historical BH adjustment over the recorded tests\n", exploratory_bh_table(main)]
     from phylogeo.verification.publication import write_review
     write_review()
     path = RESULTS_DIR / "RESULTS.md"
@@ -568,6 +620,7 @@ def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
 
     for doc in (REPO_ROOT / "README.md", REPO_ROOT / "reports" / "summary.md"):  # generated headline blocks
         inject_block(doc, key_results_md(main))
+    inject_block(REPO_ROOT / "README.md", controls_table(read_json(OUT / "geometry.json")) + "\n", tag="CONTROL-COMPARISONS")
     for run in runs:
         probe_bar_png(run)
     for run in runs:  # per-run summary next to the run's results (linked from experiment notes)
@@ -576,6 +629,6 @@ def write_results_md(runs: list[str], main: str = "qwen35_2b") -> Path:
                        "\n## Stage 1b\n", stage1b_tables(run), "\n## Conflict triplets\n", conflict_table(run),
                        "\n## Stage 2\n", stage2_table(run), "\n## Stage 3\n", stage3_table(run),
                        "\n## Stage 4\n", stage4_table(run), "\n## Addendum A (habitat gradient)\n", eco_table(run),
-                       "\n## Stage 6\n", stage6_table(run)]),
+                       "\n## Stage 6\n", stage6_table(run)] + ([neighbor_report] if run == "qwen35_2b" and neighbor_report else [])),
             encoding="utf-8")
     return path

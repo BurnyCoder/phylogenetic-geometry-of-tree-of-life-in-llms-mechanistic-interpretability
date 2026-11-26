@@ -51,6 +51,54 @@
 | S4 | 6072 | 0.372 | 0.1528 | 0.2438 |
 | S5 | 75318 | 0.042 | 0.0470 | 0.1409 |
 
+Each network selects its own layer. The permutation p compares its maximum across layers with the null maxima.
+
+| Network | Modal layer | Cross-fitted TA | Layer-max p |
+|---|---|---|---|
+| Qwen3.5-2B | 6 | 0.473 | 0.000999 |
+| Random Qwen | 6 | 0.354 | 0.1289 |
+| Pythia-410m step 0 | 6 | 0.380 | 0.0070 |
+
+The paired intervals below resample families. S2 uses the family/genus condition. S2_broad includes all eligible within-order triples. The spelling-neutral row is exploratory.
+
+| Subset | Triples | Qwen TA | Δ vs random Qwen, 95% CI | Δ vs Pythia step 0, 95% CI |
+|---|---|---|---|---|
+| S2 | 612 | 0.544 | [-0.056, 0.276] | [-0.039, 0.277] |
+| S2_broad | 3173 | 0.445 | [-0.117, 0.129] | [-0.083, 0.167] |
+| S3 | 3029 | 0.382 | [-0.071, 0.100] | [-0.068, 0.122] |
+| S4 | 6072 | 0.372 | [-0.076, 0.090] | [-0.083, 0.078] |
+| No shared character trigram | 6287 | 0.484 | [0.046, 0.202] | [0.032, 0.185] |
+
+Archived descriptive breakdown at the main model’s selected layer. Groups with few decision nodes can have wide intervals. These marginal family intervals have no multiplicity adjustment across groups.
+
+| Group | Decision nodes | TA | Family 95% CI |
+|---|---|---|---|
+| amphibians | 4 | 0.278 | [0.000, 1.000] |
+| arachnids | 3 | 0.124 | [0.000, 0.261] |
+| birds | 45 | 0.504 | [0.373, 0.623] |
+| cartilaginous fish | 4 | 0.600 | [0.000, 1.000] |
+| cnidarians | 1 | 0.440 | [0.000, 1.000] |
+| crustaceans | 3 | 0.640 | [0.068, 1.000] |
+| echinoderms | 4 | 0.571 | [0.000, 1.000] |
+| insects | 20 | 0.343 | [0.249, 0.542] |
+| mammals | 43 | 0.533 | [0.435, 0.645] |
+| molluscs | 8 | 0.368 | [0.125, 0.912] |
+| ray-finned fish | 29 | 0.467 | [0.311, 0.585] |
+| reptiles | 10 | 0.514 | [0.316, 0.779] |
+
+Additional archived comparators, using the original fractional credit for tied minima. The tree oracle orders relatives by shared-ancestor depth.
+
+| Reference or baseline | Within-group TA |
+|---|---|
+| Trained Pythia-410m | 0.423 |
+| GloVe | 0.395 |
+| GloVe, covered names | 0.400 |
+| Broad group only | 0.333 |
+| Shared taxonomic ranks | 0.644 |
+| Reference topology | 1.000 |
+
+Global edge-count Spearman correlation is 0.508 for a group-only distance and 0.296 for log sitelinks. Both can contribute to global agreement. [Frozen-data calculation](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/scientific-verification/geometry.json) [Original breakdowns](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/qwen35_2b/stage1b/results.json)
+
 
 ## Conflict triplets
 
@@ -63,7 +111,46 @@
 | Character trigrams | 9 | 13 | 14 | 0 |
 | GloVe | 14 | 0 | 22 | 0 |
 
-The full per-item outcomes are in [the source table](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/scientific-verification/outcomes.json).
+Each row below gives the closer partner under each representation. A tie means equal distances. Several questions reuse the same animals. [Frozen questions](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/data/conflict_triplets.csv) [Frozen-data calculation](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/scientific-verification/outcomes.json)
+
+| Item | Anchor | Tree-closer animal | Alternative | Conflict type | Qwen3.5-2B | Random Qwen | Pythia-410m step 0 | Trained Pythia-410m | Character trigrams | GloVe |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | blue whale | hippopotamus | whale shark | ecology+lexical | Other | Other | Tree | Other | Other | Other |
+| 2 | Nile crocodile | house sparrow | green iguana | folk reptile | Other | Other | Tree | Other | Tie | Other |
+| 3 | Atlantic bluefin tuna | human | great white shark | folk fish | Other | Other | Other | Other | Tie | Other |
+| 4 | common starfish | human | common octopus | folk sea creature+lexical | Other | Tree | Other | Other | Other | Other |
+| 5 | Atlantic horseshoe crab | goliath birdeater | blue crab | lexical crab | Other | Other | Other | Other | Other | Other |
+| 6 | little brown bat | cattle | house mouse | folk flying mouse | Other | Tree | Tree | Other | Tree | Other |
+| 7 | rock hyrax | African bush elephant | guinea pig | folk rodent-like | Tree | Other | Tree | Tree | Tie | Tree |
+| 8 | thylacine | red kangaroo | gray wolf | convergence | Other | Other | Other | Tree | Tie | Tree |
+| 9 | European eel | human | sea lamprey | folk eel-like | Other | Tree | Other | Other | Tree | Other |
+| 10 | western honey bee | American lobster | goliath birdeater | folk bugs | Tree | Tree | Tree | Tree | Tree | Tree |
+| 11 | sugar glider | red kangaroo | southern flying squirrel | convergence | Other | Tree | Other | Tree | Tree | Other |
+| 12 | aardvark | African bush elephant | giant anteater | convergence | Other | Tree | Other | Other | Tie | Other |
+| 13 | Chinese pangolin | cat | giant anteater | convergence | Other | Other | Other | Other | Tie | Other |
+| 14 | European hedgehog | common shrew | North American porcupine | convergence spines | Tree | Other | Other | Tree | Other | Other |
+| 15 | West Indian manatee | African bush elephant | walrus | ecology | Tree | Tree | Tree | Other | Tree | Tree |
+| 16 | coelacanth | human | Atlantic bluefin tuna | folk fish | Other | Tree | Tree | Tree | Other | Other |
+| 17 | Australian lungfish | human | Atlantic salmon | folk fish | Other | Tree | Tree | Other | Tree | Tree |
+| 18 | Komodo dragon | king cobra | Nile crocodile | folk lizard-like | Other | Other | Tree | Other | Tie | Tree |
+| 19 | acorn barnacle | edible crab | common limpet | folk shell | Other | Other | Other | Other | Tree | Tree |
+| 20 | common woodlouse | American lobster | seven-spot ladybird | folk bug | Other | Tree | Tree | Other | Tie | Other |
+| 21 | elephant shrew | African bush elephant | common shrew | lexical shrew | Other | Other | Other | Other | Tree | Other |
+| 22 | red panda | raccoon | giant panda | lexical panda | Other | Other | Other | Other | Other | Other |
+| 23 | koala | red kangaroo | brown bear | folk koala bear | Tree | Other | Tree | Tree | Tie | Tree |
+| 24 | killer whale | bottlenose dolphin | blue whale | lexical whale | Other | Other | Other | Other | Other | Other |
+| 25 | Indian flying fox | little brown bat | red fox | lexical fox | Tree | Tree | Other | Other | Other | Other |
+| 26 | California sea lion | harbor seal | lion | lexical lion | Tree | Other | Other | Other | Other | Other |
+| 27 | common starfish | purple sea urchin | Atlantic cod | lexical fish | Tree | Other | Tree | Tree | Other | Tree |
+| 28 | moon jellyfish | sea anemone | Atlantic cod | lexical fish | Tree | Other | Other | Tree | Tie | Tree |
+| 29 | silverfish | western honey bee | goldfish | lexical fish | Other | Other | Other | Other | Other | Other |
+| 30 | guinea pig | house mouse | pig | lexical pig | Other | Other | Other | Other | Other | Other |
+| 31 | seahorse | Atlantic cod | horse | lexical horse | Other | Tree | Other | Other | Other | Tree |
+| 32 | electric eel | channel catfish | European eel | lexical eel | Other | Other | Other | Other | Other | Other |
+| 33 | spotted hyena | cat | dog | folk dog-like | Tree | Tree | Other | Other | Tie | Other |
+| 34 | fossa | meerkat | cat | folk cat-like | Tree | Other | Tree | Tree | Tie | Tree |
+| 35 | pronghorn | giraffe | impala | folk antelope | Other | Other | Other | Other | Tie | Tree |
+| 36 | bottlenose dolphin | cattle | great white shark | ecology | Other | Other | Other | Other | Tree | Tree |
 
 
 ## Stage 2
@@ -108,39 +195,43 @@ References without a probe: a predictor that knows only the strata reaches Pears
 | Mantel Spearman vs path length | 0.362 | 0.251 | -0.110 | +0.066 |
 | TA_within | 0.471 | 0.444 | -0.027 | +0.002 |
 
-With zero-weight edges preserved at layer zero, minimum connected k changes from 11 to 9. Historical plots use the original graph. The probe's original target scale included held-out species and the layer was selected on the full panel.
+On the same held-out folds, mean within-stratum Spearman was 0.401 for raw angular distance and 0.326 after projection through the fitted probe. The probe's original target scale included held-out species and the layer was selected on the full panel.
+
+The archived Robinson–Foulds distance implies 70 shared nontrivial splits among 388 reference splits. With zero-weight edges preserved at layer zero, the minimum connected k changes from 11 to 9. Historical plots use the original graph.
 
 
 ## Stage 3
 
 **Behavior** (answer-letter log-odds, averaged over both answer orders; binomial test vs 0.5, two-sided)
 
-
 | test | n | accuracy | binomial p |
-
 |---|---|---|---|
-
 | conflict triplets: chose the tree-closer animal | 36 | 0.306 | 0.029 |
-
 | within-stratum species triplets: chose the tree-closer animal | 300 | 0.567 | 0.024 |
-
 | class word correct (argmax over candidate class words) | 385 | 0.909 | – |
-
 
 On the same species triplets, the layer-6 representation is closer to the tree-closer animal in 0.613 of cases; behavior and representation agree on 0.633.
 
-
 Class-word accuracy by stratum: amphibians 1.00, arachnids 0.93, birds 0.99, cartilaginous fish 1.00, cnidarians 0.80, crustaceans 0.87, echinoderms 0.50, insects 0.76, mammals 0.97, molluscs 0.65, ray-finned fish 0.96, reptiles 0.97.
 
+
+The behavioral binomial calculations assume independent questions. The same species recur.
 
 | Run | Random spaces (ablation / swap) | Donor before / after | New donor bounds | Donor prevalence rank p |
 |---|---|---|---|---|
 | Original | 20 / 10 | 4 / 13 | 9–13 | 0.0909 |
 | Expanded | 99 / 99 | 4 / 11 | 7–11 | 0.0100 |
 
-The behavioral binomial calculations above assume independent questions. The same species recur.
+The original random-swap ranks test post-edit donor prevalence. The registered switch comparison is unevaluable because the paired before-and-after predictions were not saved.
 
-Mean ablation drop was 0.083 nats for the probe, 0.027 for the random spaces and 0.146 for the class-only subspace. The class-only post-edit donor fraction was 0.060. The original random-swap ranks test post-edit prevalence. The registered switch comparison is unevaluable.
+| Ablation run | Random spaces | Probe drop (nats) | Mean random drop (nats) | Rank p | Two-slot Holm p (upper bound) | Species-level Wilcoxon p (secondary) |
+|---|---|---|---|---|---|---|
+| Original | 20 | 0.083 | 0.016 | 0.048 | 0.095 | 2.9e-05 |
+| Expanded | 99 | 0.083 | 0.027 | 0.120 | 0.240 | 0.003 |
+
+On 188 held-out species, the expanded run recorded mean unedited log P(correct class) -0.352. Training variance fractions were 0.1233 for the probe, 0.1256 on average for the random spaces and 0.1445 for the class-only space. Neutral-sentence next-token losses were 3.2728 unedited, 3.2565 after probe ablation and 3.2968 after random ablation. The original run used different sentences and weighting for its unedited baseline.
+
+The class-only ablation drop was 0.146 nats (one-sided paired Wilcoxon p = 0.966 for a larger phylogeny-probe drop). Class-only post-edit donor prevalence was 0.060. On that endpoint the probe-only and class-only counts were 3 and 4 (one-sided exact McNemar p = 0.773).
 
 
 ## Stage 4
@@ -192,6 +283,8 @@ Polysemous names included (n = 414): TA_within 0.470 (primary set 0.475).
 
 ## Addendum A (habitat gradient)
 
+The oriented first principal component from layer 21 was applied to 79 held-out mammals and 80 held-out birds. Median mammal scores were -0.58 for marine foragers (n = 6) and 1.68 for ground foragers (n = 61). The aerial mammal group had 0 species. Bird scores correlated with water foraging at Spearman ρ = -0.385 and aerial foraging at ρ = -0.157. Only 9 birds had nonzero aerial foraging.
+
 | Prediction | Species-level p | Holm (four slots) | Within-order sensitivity, Holm |
 |---|---|---|---|
 | M1 | 1.2e-07 | 4.81e-07 | 0.0004 |
@@ -226,3 +319,24 @@ Layer 6; main-run TA_within 0.475. Mean ± SD [2.5th, 97.5th percentile] over re
 
 Mantel r vs path length under 80% species subsamples: 0.362 ± 0.009 [0.349, 0.376]; under template halves: 0.361 ± 0.006 [0.349, 0.368].
 
+
+
+## Nearest-neighbor examples
+
+Qwen3.5-2B and comparators. The query in each broad group has the most Wikidata sitelinks. Each cell lists its three nearest other species. Neural representations use their own selected layers. The reference orders neighbors by deepest common ancestor, breaking ties by edge count and then frozen row order. [Recorded neighbors](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/qwen35_2b/examples/neighbors.json)
+
+| Query | Reference tree | Qwen3.5-2B | Random Qwen | Pythia-410m step 0 | Trained Pythia-410m | Character trigrams | GloVe |
+|---|---|---|---|---|---|---|---|
+| axolotl | fire salamander, smooth newt, alpine newt | budgerigar, fire salamander, Indonesian coelacanth | capybara, Christmas Island red crab, western capercaillie | little owl, snowy owl, thylacine | budgerigar, quokka, meerkat | hylotrupes, colossal squid, Colorado potato beetle | aardwolf, cockchafer, olm |
+| diving bell spider | Redback spider, Darwin's bark spider, giant house spider | great raft spider, raft spider, Darwin's bark spider | Mediterranean recluse spider, great raft spider, Redback spider | raft spider, zebra spider, great raft spider | great raft spider, raft spider, Darwin's bark spider | great diving beetle, raft spider, zebra spider | great diving beetle, Sydney funnel-web spider, great raft spider |
+| common ostrich | greylag goose, western capercaillie, greater flamingo | northern giraffe, common moorhen, greater flamingo | North American beaver, goliath birdeater, European hare | Indian peafowl, Eurasian eagle-owl, mahi-mahi | common quail, common moorhen, osprey | common roach, common kestrel, common octopus | common quail, common kestrel, common raven |
+| great white shark | Shortfin mako shark, porbeagle, basking shark | tiger shark, blue shark, frilled shark | tiger shark, goblin shark, blue shark | blue shark, tiger shark, zebra shark | blue shark, frilled shark, Greenland shark | great white pelican, white stork, whale shark | great white pelican, blue shark, bull shark |
+| Portuguese man o' war | Nomura's jellyfish, lion's mane jellyfish, blue jellyfish | lion's mane jellyfish, blue jellyfish, Nomura's jellyfish | Mediterranean mussel, osprey, deathstalker | common warthog, European seabass, common redshank | ruffe, Eurasian hobby, orange knobby star | European mantis, Hermann's tortoise, Chinese mitten crab | Spanish slug, African bush elephant, house cricket |
+| coconut crab | red king crab, Japanese spider crab, heikegani | Japanese spider crab, red king crab, Christmas Island red crab | velvet crab, pea crab, Chinese alligator | velvet crab, red king crab, pea crab | pea crab, velvet crab, red king crab | velvet crab, pea crab, crab louse | pea crab, mangrove horseshoe crab, crab louse |
+| crown-of-thorns starfish | orange knobby star, common sunstar, leather star | common starfish, sunflower sea star, lion's mane jellyfish | western capercaillie, sand lizard, great diving beetle | common starfish, goldfish, garfish | common starfish, lion's mane jellyfish, blue jellyfish | common starfish, garfish, silverfish | common starfish, orange knobby star, red king crab |
+| housefly | stable fly, six-spot burnet, codling moth | stable fly, oriental cockroach, German cockroach | Atlantic cod, desert locust, mugger crocodile | emperor dragonfly, black mamba, house cricket | stable fly, emperor dragonfly, mealworm | house mouse, house sparrow, house cricket | silverfish, ruffe, cockchafer |
+| lion | snow leopard, cheetah, meerkat | wolf, cheetah, polar bear | bonobo, Eurasian woodcock, American cockroach | mountain zebra, European sea sturgeon, sterlet | wolf, Asian elephant, golden eagle | lion's mane jellyfish, emperor scorpion, grey heron | lion's mane jellyfish, leopard seal, golden eagle |
+| common octopus | giant Pacific octopus, mimic octopus, vampire squid | giant Pacific octopus, mimic octopus, European squid | mimic octopus, loggerhead sea turtle, great crested grebe | mimic octopus, giant Pacific octopus, mallard | mimic octopus, giant Pacific octopus, platypus | mimic octopus, common ostrich, common toad | common cuttlefish, mimic octopus, common starfish |
+| sea lamprey | pouched lamprey, brook lamprey, European river lamprey | European river lamprey, brook lamprey, pouched lamprey | Mediterranean mussel, European river lamprey, northern krill | European river lamprey, pouched lamprey, brook lamprey | European river lamprey, brook lamprey, pouched lamprey | brook lamprey, pouched lamprey, European river lamprey | loggerhead sea turtle, brook lamprey, hawksbill sea turtle |
+| goldfish | Crucian carp, common carp, grass carp | zebrafish, siamese fighting fish, garfish | garfish, milkfish, ocean sunfish | milkfish, garfish, silverfish | silverfish, milkfish, marbled crayfish | garfish, European goldfinch, milkfish | Crucian carp, milkfish, chimpanzee |
+| Komodo dragon | Asian water monitor, common slow worm, Gila monster | Gila monster, frilled lizard, marine iguana | greylag goose, Antarctic krill, chimpanzee | merlangius, great white pelican, Hercules beetle | Gila monster, aesculapian snake, lion | emperor dragonfly, lion, koala | lion, viviparous lizard, frilled lizard |

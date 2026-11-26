@@ -23,3 +23,9 @@ In stage 1a the dominant late-layer PCA axis ordered strata from aquatic groups 
 
 ## Method
 The axis is PC1 of the layer-21 species vectors of the 400 primary species, oriented so birds are positive and ray-finned fish negative. Held-out activations are centred with the primary set's per-template means and projected onto the axis. The original tests were one-sided and used the available members of the family. The corrected report accounts for all four registered tests, assigning no result to aerial mammals.
+
+## What the held-out species establish
+
+The marine mammals project toward the aquatic end, and more water foraging in birds is associated with a lower score on the oriented axis. Both results survive the four-test correction and the secondary permutation within orders. There are no aerial mammals in this sample, and the aerial-bird test misses its criterion. The archived species rows make it possible to inspect the marine animals’ common-name cues and concentration in few orders. [Held-out names and traits](../../../data/heldout_eco.csv) · [Corrected tests](../../../results/scientific-verification/outcomes.json)
+
+This is a fixed-axis test on new species. Multiple families and orders occur in both the discovery and evaluation panels. The projection accounts for only part of the representation variance, and common-name cues or ancestry can predict habitat. Evidence of this association does not establish that habitat caused the arrangement of the species. [Projection and interpretation](../../reviews/2026-11-26-scientific-audit.md#habitat-on-held-out-species)

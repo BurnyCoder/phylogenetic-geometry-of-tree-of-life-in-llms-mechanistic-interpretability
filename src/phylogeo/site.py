@@ -187,6 +187,11 @@ def build_site(run: str = "qwen35_2b", *, reuse_media: bool = False) -> Path:
         return '<div class="grid">' + "".join(f'<a href="{p}"><img src="{p}" loading="lazy" alt="{Path(p).stem}"></a>'
                                              for p in paths if p) + "</div>"
 
+    examples = ""
+    if run == "qwen35_2b" and (RESULTS_DIR / run / "examples/neighbors.json").is_file():
+        from phylogeo.verification.publication import neighbor_details
+        examples = '<h2 id="nearest-neighbor-examples">Nearest-neighbor examples</h2>' + md_table_to_html(neighbor_details())
+
     kinds = "".join(f'{badge(k, "")} ' for k in ICON)
     body = f"""
 <h1>Phylogenetic geometry of the tree of life in an LLM</h1>
@@ -215,6 +220,7 @@ descendants. Use the slider to move through layers.</p>
 <h2>Stage 1a — checks per layer</h2>{md_table_to_html(stage1a_table(run))}
 <h2>Stage 1b — triplet accuracy (primary) and secondary hypotheses</h2>{md_table_to_html(stage1b_tables(run))}
 {gallery(s1b_imgs)}
+{examples}
 <h2>Phylogeny-vs-folk conflict triplets</h2>{md_table_to_html(conflict_table(run))}
 <h2>Stage 2 — geometry and probes</h2>{md_table_to_html(stage2_table(run))}{gallery(stage_imgs["stage2"])}
 <h2>Stage 3 — behavior and causal tests</h2>{md_table_to_html(stage3_table(run))}

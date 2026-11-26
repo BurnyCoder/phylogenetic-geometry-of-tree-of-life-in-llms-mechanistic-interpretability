@@ -50,3 +50,9 @@ uv run python -m phylogeo.run --config configs/qwen35_2b.yaml --phases stage3_ca
   - Rule: a phylogeny-specific causal role is claimed only if the phylogeny probe beats it on both tests at p < 0.05. Ablation is tested with a one-sided Wilcoxon over species, and interchange with a one-sided exact McNemar over the same pairs.
 
 **Planned but not run:** R3-steer (geodesic vs linear-chord steering) and R3-sae (SAE features; no SAE exists for post-trained Qwen3.5-2B). Both are in the README to-do.
+
+## What the interventions distinguish
+
+The ablation asks whether removing the selected directions reduces the correct class word’s log probability more than removing a random subspace with similar captured variance. Restricting random directions to leading training-species components defines the comparison distribution. The class-only subspace captures a different variance share, so its effect size also depends on the magnitude of the edit. The neutral-sentence loss checks for a more general perturbation to next-token prediction. [Subspace variance](../../../results/scientific-verification/subspace-transcript.json) · [Ablation and off-target outcomes](../../../results/qwen35_2b/SUMMARY.md#stage-3)
+
+The swap uses pairs with different class words. A recipient can predict the donor’s class before the edit. The pre-edit and post-edit donor totals give bounds, while a test against random subspaces requires each recipient’s before-and-after outcomes under each edit. The behavioral relatedness questions reuse anchors, and the logged scores are rounded. A within-group intervention would need a readout that distinguishes relatives inside the same class. [Archived behavior trials](../../../results/scientific-verification/behavior-trials.json) · [Current causal assessment](../../../results/scientific-verification/outcomes.json)

@@ -28,3 +28,9 @@ The primary decision survives the written tie rule with family blocks. The margi
   - S3: lexical-discordant triplets;
   - S4: co-occurrence (GloVe)-discordant triplets;
   - S5: within-rank association with divergence time after adjustment for MRCA depth.
+
+## Where the signal appears
+
+The family-block margin is smallest against untrained Pythia. Its own layer-max test gives evidence of within-group ordering even before pretraining. Random Qwen also has a selected-layer estimate above one-third, with a larger layer-max p-value. Per-stratum estimates are clearest for birds and mammals. Groups with few eligible nodes have correspondingly uncertain estimates. The full breakdown reports node counts, sampling intervals, and the rank and tree oracles. [Generated results](../../../results/qwen35_2b/SUMMARY.md#stage-1b)
+
+The spelling-neutral and spelling-discordant analyses ask different questions. Removing every shared character trigram leaves a positive trained-minus-untrained margin. Requiring spelling to prefer a specific wrong pair yields a different subset, and its adjusted test falls short. The hand-selected conflict examples also reuse species and sometimes give tied spelling distances. Frequencies of choices there cannot identify a learned folk taxonomy. [Subset replay](../../../results/scientific-verification/geometry.json) · [Item-level conflict choices](../../../results/scientific-verification/outcomes.json)
