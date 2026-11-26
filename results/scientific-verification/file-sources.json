@@ -1,0 +1,4318 @@
+{
+  ".env.example": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      ".env.example"
+    ],
+    "web": []
+  },
+  ".gitattributes": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      ".gitattributes"
+    ],
+    "web": []
+  },
+  ".github/workflows/pages.yml": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      ".github/workflows/pages.yml"
+    ],
+    "web": []
+  },
+  ".gitignore": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      ".gitignore"
+    ],
+    "web": []
+  },
+  ".python-version": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      ".python-version"
+    ],
+    "web": []
+  },
+  "README.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "configs/pilot.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pilot.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/power.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/power.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step0.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step0.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step1.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step1.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step1000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step1000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step143000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step143000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step16000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step16000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step3000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step3000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step33000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step33000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step512.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step512.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step64.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step64.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step66000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step66000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step8.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step8.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia14b_step8000.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia14b_step8000.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia160m.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia160m.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia1b.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia1b.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia28b.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia28b.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia410m.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia410m.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia410m_step0.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia410m_step0.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/pythia70m.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/pythia70m.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/qwen35_08b.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/qwen35_08b.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/qwen35_2b.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/qwen35_2b.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/qwen35_2b_random.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/qwen35_2b_random.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/qwen35_2b_raw.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/qwen35_2b_raw.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "configs/qwen3_17b.yaml": {
+    "role": "Experiment settings",
+    "local": [
+      "configs/qwen3_17b.yaml",
+      "docs/pipeline.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+      "https://arxiv.org/abs/2304.01373"
+    ]
+  },
+  "data/FREEZE.json": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/conflict.csv": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/conflict_tree.nwk": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/conflict_triplets.csv": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/heldout_eco.csv": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://esapubs.org/archive/ecol/E095/178/"
+    ]
+  },
+  "data/heldout_eco_tree.nwk": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://esapubs.org/archive/ecol/E095/178/"
+    ]
+  },
+  "data/species.csv": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/species_polysemous.csv": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/species_polysemous_tree.nwk": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "data/species_tree.nwk": {
+    "role": "Frozen species, stimulus or topology input",
+    "local": [
+      "data/FREEZE.json",
+      "results/scientific-verification/geometry.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3"
+    ]
+  },
+  "docs/pipeline.md": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "logs/.gitkeep": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      "logs/.gitkeep"
+    ],
+    "web": []
+  },
+  "pyproject.toml": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      "pyproject.toml"
+    ],
+    "web": []
+  },
+  "reports/cards/activations.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/cards/probe.md": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/cards/species.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/00-pilot/experiment.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/00-pilot/learnings.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/00b-power/experiment.md": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/experiments/01-pca-shape/experiment.md": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/02-triplets-stage1b/experiment.md": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/03-geometry-probes-stage2/experiment.md": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/experiments/04-causal-behavior-stage3/experiment.md": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "reports/experiments/04-causal-behavior-stage3/learnings.md": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "reports/experiments/05-ablations-stage4/experiment.md": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/experiments/06-habitat-addendum/experiment.md": {
+    "role": "Held-out trait measurement or its display",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "data/heldout_eco.csv"
+    ],
+    "web": [
+      "https://esapubs.org/archive/ecol/E095/178/",
+      "https://doi.org/10.1086/284325"
+    ]
+  },
+  "reports/experiments/07-more-models-stage5/experiment.md": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/08-sensitivity-stage6/experiment.md": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/experiments/09-independent-verification/experiment.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/09-independent-verification/learnings.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/experiments.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/experiments/learnings.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/architecture.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/brown.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/dynamics.png": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/grid.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/mammals.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/months.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/probe.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/figures/scale.png": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/sens.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/spot.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/ta.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/causal.png": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "reports/figures/viz/conflict.png": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "reports/figures/viz/depth.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/h1.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/habitat.png": {
+    "role": "Held-out trait measurement or its display",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "data/heldout_eco.csv"
+    ],
+    "web": [
+      "https://esapubs.org/archive/ecol/E095/178/",
+      "https://doi.org/10.1086/284325"
+    ]
+  },
+  "reports/figures/viz/heatmaps.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/layers.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/neighbor_examples.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/neighbor_levels.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/pca3d.gif": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/pca3d.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/pca_expected.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/probe.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/figures/viz/scale.png": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/secondary.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/sensitivity.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/figures/viz/strata.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/taxonomy.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/treeness.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "reports/figures/viz/view_birds.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/within3d.gif": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/within3d.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/figures/viz/within3d_layers.gif": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/literature-review.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/paper.pdf": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/paper.typ": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/plan.md": {
+    "role": "Dated plan or protocol, with subsequent deviations",
+    "local": [
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://doi.org/10.1073/pnas.1708274114"
+    ]
+  },
+  "reports/planned-runs.md": {
+    "role": "Dated plan or protocol, with subsequent deviations",
+    "local": [
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://doi.org/10.1073/pnas.1708274114"
+    ]
+  },
+  "reports/preregistration.md": {
+    "role": "Dated plan or protocol, with subsequent deviations",
+    "local": [
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://doi.org/10.1073/pnas.1708274114"
+    ]
+  },
+  "reports/progress.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/reviews/2026-11-20-fact-check-literature.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-20-final-review-round1-response.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-20-final-review-round1.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-20-implementation-review-response.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-20-implementation-review.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-20-stage3-causal-review.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-22-independent-audit.md": {
+    "role": "Historical document, superseded conclusions",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "reports/reviews/2026-11-26-analysis-protocol.md": {
+    "role": "Dated plan or protocol, with subsequent deviations",
+    "local": [
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://doi.org/10.1073/pnas.1708274114"
+    ]
+  },
+  "reports/reviews/2026-11-26-claim-sources.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/reviews/2026-11-26-scientific-audit.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/state-of-the-art-review.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "reports/summary.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/RESULTS.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/SUMMARY.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/conflict/conflict.json": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_days_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_days_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_days_layer17_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_days_layer17_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_days_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_days_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_months_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_months_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_months_layer17_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_months_layer17_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_months_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_months_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/calib_synthetic_brownian_tree.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/checks.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/grid_colored_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/grid_colored_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/grid_uncolored_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/grid_uncolored_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca2d_layer12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca2d_layer12_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca2d_layer17.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca2d_layer17_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca2d_layer24.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca2d_layer24_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca3d.html": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/pca3d_uncolored.html": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/zoom_birds_layer17.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/zoom_insects_layer17.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1a/zoom_mammals_layer17.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1b/mantel_by_layer.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1b/results.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pilot_pythia410m_prefix/stage1b/ta_within_by_layer.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/power/power.json": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/power/summary.json": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/pythia14b/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step0/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step1/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step1000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step143000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step16000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step3000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step33000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step512/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step64/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step66000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step8/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia14b_step8000/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia160m/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia1b/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia28b/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia410m/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/pythia70m/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_08b/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/SUMMARY.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/audit/results.json": {
+    "role": "Previous audit, excluded from evidentiary inputs",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "results/qwen35_2b/conflict/conflict.json": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "results/qwen35_2b/eco/results.json": {
+    "role": "Held-out trait measurement or its display",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "data/heldout_eco.csv"
+    ],
+    "web": [
+      "https://esapubs.org/archive/ecol/E095/178/",
+      "https://doi.org/10.1086/284325"
+    ]
+  },
+  "results/qwen35_2b/examples/neighbors.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/exploratory_bh.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_days_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_days_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_days_layer21_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_days_layer21_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_days_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_days_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_months_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_months_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_months_layer21_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_months_layer21_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_months_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_months_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_random_init_grid.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/calib_synthetic_brownian_tree.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/checks.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/grid_colored_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/grid_colored_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/grid_uncolored_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/grid_uncolored_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca2d_layer12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca2d_layer12_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca2d_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca2d_layer21_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca2d_layer24.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca2d_layer24_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca3d.html": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/pca3d_uncolored.html": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/spotlight_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/spotlight_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/spotlight_layer21_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/spotlight_layer21_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/spotlight_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/spotlight_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/zoom_birds_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/zoom_insects_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1a/zoom_mammals_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1b/mantel_by_layer.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1b/results.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage1b/ta_within_by_layer.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage2/geodesic_vs_angular_mantel.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/qwen35_2b/stage2/geodesic_vs_angular_ta.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/qwen35_2b/stage2/probe_heldout_r.png": {
+    "role": "Held-out trait measurement or its display",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "data/heldout_eco.csv"
+    ],
+    "web": [
+      "https://esapubs.org/archive/ecol/E095/178/",
+      "https://doi.org/10.1086/284325"
+    ]
+  },
+  "results/qwen35_2b/stage2/results.json": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/qwen35_2b/stage3/results.json": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "results/qwen35_2b/stage4/results.json": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/qwen35_2b/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/stage6/results.json": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/qwen35_2b/stage6/sensitivity_ta_within.png": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "results/qwen35_2b/viz/neighbors.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/viz/pca2d.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/viz/pca3d.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b/viz/within3d.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/SUMMARY.md": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_days_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_days_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_days_layer21_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_days_layer21_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_days_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_days_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_months_layer12_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_months_layer12_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_months_layer21_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_months_layer21_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_months_layer24_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_months_layer24_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_random_init_grid.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/calib_synthetic_brownian_tree.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/checks.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/grid_colored_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/grid_colored_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/grid_uncolored_pc12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/grid_uncolored_pc23.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca2d_layer12.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca2d_layer12_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca2d_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca2d_layer21_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca2d_layer24.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca2d_layer24_uncolored.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca3d.html": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/pca3d_uncolored.html": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/run.log": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/zoom_birds_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/zoom_insects_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen35_2b_prefix/stage1a/zoom_mammals_layer21.png": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/qwen3_17b/stage5/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/behavior-trials.json": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "results/scientific-verification/dating.json": {
+    "role": "Age and topology analysis",
+    "local": [
+      "results/scientific-verification/dating.json",
+      "src/phylogeo/data/tree.py"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1093/molbev/msac174"
+    ]
+  },
+  "results/scientific-verification/decisions.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/file-sources.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/geometry.json": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/graph.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/original-observations.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/outcomes.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/release-config.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/scale.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/subspace-transcript.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/scientific-verification/web-sources.json": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/stage5/scale.png": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/stage5/summary.json": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "results/stage5/training_dynamics.png": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/.nojekyll": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      "site/.nojekyll"
+    ],
+    "web": []
+  },
+  "site/assets/stage1a/calib_days_layer12_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_days_layer12_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_days_layer12_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_days_layer12_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_days_layer21_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_days_layer21_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_days_layer21_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_days_layer21_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_days_layer24_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_days_layer24_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_days_layer24_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_days_layer24_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_months_layer12_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_months_layer12_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_months_layer12_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_months_layer12_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_months_layer21_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_months_layer21_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_months_layer21_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_months_layer21_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_months_layer24_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_months_layer24_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_months_layer24_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_months_layer24_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_random_init_grid.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_random_init_grid.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/calib_synthetic_brownian_tree.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/calib_synthetic_brownian_tree.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/grid_colored_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/grid_colored_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/grid_colored_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/grid_colored_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/grid_uncolored_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/grid_uncolored_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/grid_uncolored_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/grid_uncolored_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca2d_layer12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca2d_layer12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca2d_layer12_uncolored.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca2d_layer12_uncolored.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca2d_layer21.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca2d_layer21.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca2d_layer21_uncolored.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca2d_layer21_uncolored.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca2d_layer24.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca2d_layer24.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca2d_layer24_uncolored.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca2d_layer24_uncolored.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/pca3d.html": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/pca3d.html"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/spotlight_layer12_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/spotlight_layer12_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/spotlight_layer12_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/spotlight_layer12_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/spotlight_layer21_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/spotlight_layer21_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/spotlight_layer21_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/spotlight_layer21_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/spotlight_layer24_pc12.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/spotlight_layer24_pc12.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/spotlight_layer24_pc23.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/spotlight_layer24_pc23.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/zoom_birds_layer21.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/zoom_birds_layer21.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/zoom_insects_layer21.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/zoom_insects_layer21.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1a/zoom_mammals_layer21.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1a/zoom_mammals_layer21.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1b/mantel_by_layer.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1b/mantel_by_layer.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage1b/ta_within_by_layer.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage1b/ta_within_by_layer.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage2/geodesic_vs_angular_mantel.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage2/geodesic_vs_angular_mantel.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage2/geodesic_vs_angular_ta.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage2/geodesic_vs_angular_ta.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage2/probe_heldout_r.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage2/probe_heldout_r.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage5/scale.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/stage5/scale.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage5/training_dynamics.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/stage5/training_dynamics.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/assets/stage6/sensitivity_ta_within.png": {
+    "role": "Historical graphic mirrored on the site",
+    "local": [
+      "results/qwen35_2b/stage6/sensitivity_ta_within.png"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "site/index.html": {
+    "role": "Research report, frozen statistic or publication mirror",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "results/scientific-verification/decisions.json"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/__init__.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/analysis.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/audit.py": {
+    "role": "Previous audit, excluded from evidentiary inputs",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "src/phylogeo/baselines.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/behavior.py": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "src/phylogeo/causal.py": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "src/phylogeo/config.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/data/__init__.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/data/heldout.py": {
+    "role": "Held-out trait measurement or its display",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "data/heldout_eco.csv"
+    ],
+    "web": [
+      "https://esapubs.org/archive/ecol/E095/178/",
+      "https://doi.org/10.1086/284325"
+    ]
+  },
+  "src/phylogeo/data/ncbi.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/data/opentree.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/data/species.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/data/tree.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/eco.py": {
+    "role": "Held-out trait measurement or its display",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "data/heldout_eco.csv"
+    ],
+    "web": [
+      "https://esapubs.org/archive/ecol/E095/178/",
+      "https://doi.org/10.1086/284325"
+    ]
+  },
+  "src/phylogeo/examples.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/extract.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/geometry.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/paper.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/phases.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/probes/__init__.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "src/phylogeo/probes/flat.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "src/phylogeo/prompts.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/py.typed": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/release.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/report.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/run.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/simulate.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/site.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/stage2.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "src/phylogeo/stage3.py": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "src/phylogeo/stage4.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "src/phylogeo/stage5.py": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/stage6.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "src/phylogeo/stats/__init__.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/stats/mantel.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/stats/triplets.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/treeness.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "src/phylogeo/verification/__init__.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/__main__.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/cards.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/dating.py": {
+    "role": "Age and topology analysis",
+    "local": [
+      "results/scientific-verification/dating.json",
+      "src/phylogeo/data/tree.py"
+    ],
+    "web": [
+      "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+      "https://doi.org/10.1093/molbev/msac174"
+    ]
+  },
+  "src/phylogeo/verification/graph.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/outcomes.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/primary.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/publication.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/scale.py": {
+    "role": "Archived checkpoint observation or its display",
+    "local": [
+      "results/scientific-verification/scale.json",
+      "results/stage5/summary.json"
+    ],
+    "web": [
+      "https://arxiv.org/abs/2304.01373",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/sources.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/verification/statistics.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/viz/__init__.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/viz/figures.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/viz/pca.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/viz/plots.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/viz/viz_data.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "src/phylogeo/webcache.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/__init__.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/conftest.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_audit.py": {
+    "role": "Previous audit, excluded from evidentiary inputs",
+    "local": [
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": []
+  },
+  "tests/test_causal.py": {
+    "role": "Conflict and intervention observations or code",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/qwen35_2b/stage3/results.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://arxiv.org/abs/2106.02997"
+    ]
+  },
+  "tests/test_geometry_pca.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_mantel.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_prompts_extract.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_scientific_verification.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_species.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_stage6.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "tests/test_tree.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_treeness_probe.py": {
+    "role": "Archived exploratory measurement, simulation or implementation",
+    "local": [
+      "results/scientific-verification/outcomes.json",
+      "results/RESULTS.md"
+    ],
+    "web": [
+      "https://aclanthology.org/D19-1275/",
+      "https://www.goodfire.com/research/phylogeny-manifold"
+    ]
+  },
+  "tests/test_triplets.py": {
+    "role": "Tree geometry, exploratory display or statistical implementation",
+    "local": [
+      "results/scientific-verification/geometry.json",
+      "results/qwen35_2b/stage1a/checks.json"
+    ],
+    "web": [
+      "https://doi.org/10.1186/s13015-020-00175-0",
+      "https://doi.org/10.1007/s11749-017-0571-1",
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "tests/test_viz.py": {
+    "role": "Implementation, regression check or operating instructions",
+    "local": [
+      "docs/pipeline.md",
+      "uv.lock",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "web": [
+      "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations"
+    ]
+  },
+  "uv.lock": {
+    "role": "Project metadata, dependency lock or deployment configuration",
+    "local": [
+      "uv.lock"
+    ],
+    "web": []
+  }
+}

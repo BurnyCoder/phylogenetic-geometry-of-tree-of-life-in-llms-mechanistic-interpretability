@@ -129,7 +129,6 @@ def cv_probe(V: np.ndarray, D_tree: np.ndarray, families: np.ndarray, k: int = 1
     distance rescaled to [0, pi]; correlations are computed on held-out pairs.
     """
     rng = np.random.default_rng(seed)
-    scale = np.pi / D_tree.max()
     res = {"test_test_pearson": [], "test_test_spearman": [], "train_test_pearson": [], "train_train_pearson": []}
     if groups is not None:
         res["test_test_within_group_spearman"] = []  # pooled over groups (kept for continuity; Simpson-prone)
@@ -139,7 +138,8 @@ def cv_probe(V: np.ndarray, D_tree: np.ndarray, families: np.ndarray, k: int = 1
         pca = PCA(n_components=min(n_pca, tr.sum() - 1), random_state=seed).fit(V[tr])
         Z = pca.transform(V)
         Z = Z / Z[tr].std()
-        m = train_probe(Z[tr], D_tree[np.ix_(tr, tr)] * scale, k=k, steps=steps, seed=seed + fi,
+        target = D_tree[np.ix_(tr, tr)]
+        m = train_probe(Z[tr], target * (np.pi / target.max()), k=k, steps=steps, seed=seed + fi,
                         tracker=tracker, tag=f"{tag}/fold{fi}", metric=metric)
         Dh = probe_distances(m, Z)
         tt = np.triu_indices(te.sum(), 1)

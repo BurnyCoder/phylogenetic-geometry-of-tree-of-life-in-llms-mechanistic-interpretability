@@ -4,7 +4,7 @@ Global context: the "habitat axis" is PC1 of the layer-21 species vectors of the
 400 primary species (Qwen3.5-2B), oriented so birds are positive and ray-finned
 fish negative. Held-out mammals and birds (data/heldout_eco.csv) are centred with
 the primary set's per-template means and projected onto that fixed axis. Then
-(one-sided, Holm across the evaluable tests):
+(one-sided, Holm across four registered slots):
   M1  marine mammals (ForStrat M) < ground mammals (G)        Mann-Whitney
   M2  aerial mammals (A) > ground mammals (G)                  Mann-Whitney (only if n_A >= 5)
   B1  Spearman(axis, % water foraging) < 0                     birds
@@ -72,9 +72,11 @@ def run_eco(cfg: RunConfig, act_dir, out_dir, write_json, layer: int = 21) -> di
     res["tests"]["B1_water_negative"] = {"rho": float(w.statistic), "p": float(w.pvalue / 2 if w.statistic < 0 else 1 - w.pvalue / 2)}
     res["tests"]["B2_aerial_positive"] = {"rho": float(a.statistic), "p": float(a.pvalue / 2 if a.statistic > 0 else 1 - a.pvalue / 2),
                                           "n_nonzero_aerial": int((b["aerial_pct_bird"].astype(float) > 0).sum())}
-    ev = {k: v["p"] for k, v in res["tests"].items() if "p" in v}
+    # Keep every registered slot in the multiplicity denominator, including the empty bat group.
+    ev = {k: v.get("p", 1.) for k, v in res["tests"].items()}
     for k, v in holm(ev).items():
-        res["tests"][k]["holm_p"] = v
+        if "p" in res["tests"][k]:
+            res["tests"][k]["holm_p"] = v
     # Descriptive: the primary 400 by stratum on the same axis, and per-species held-out scores.
     res["heldout_scores"] = h[["common_name", "stratum", "forstrat_mammal", "water_pct_bird", "aerial_pct_bird",
                                "axis_score"]].to_dict(orient="records")

@@ -259,9 +259,8 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
         if cw[a] != cw[b]:
             pairs.append((a, b))
 
-    def switches(Ux) -> np.ndarray:
-        """Per pair: 1 if writing A's subspace coordinates into B's name token makes A's class
-        word the top candidate for B."""
+    def donor_choice(Ux) -> np.ndarray:
+        """Per-pair post-edit donor-class prevalence. Baseline status is tracked separately."""
         out = []
         for a, b in pairs:
             with residual_edit(model, layer, swap_fn(Ux, H[a], pos[b][-1])):
@@ -269,14 +268,16 @@ def run_stage3(cfg: RunConfig, load_species, load_conflict, act_dir, out_dir, wr
             out.append(int(np.argmax(lp) == cw[a]))
         return np.array(out)
 
-    def switch_rate(Ux) -> float:
-        return float(switches(Ux).mean())
-
-    base_sw = np.mean([int(np.argmax(base_lp[b]) == cw[a]) for a, b in pairs])
-    sw_probe, sw_cls = switches(U), switches(U_cls)
+    before = np.array([int(np.argmax(base_lp[b]) == cw[a]) for a, b in pairs])
+    donor_probe, donor_cls = donor_choice(U), donor_choice(U_cls)
+    donor_random = np.stack([donor_choice(Ur) for Ur in Urs])
+    sw_probe, sw_cls = donor_probe * (1 - before), donor_cls * (1 - before)
     sr_probe = float(sw_probe.mean())
-    sr_rand = [switch_rate(Ur) for Ur in Urs]
-    res["C_swap"] = {"n_pairs": len(pairs), "n_random_subspaces": n_rand, "switch_rate_no_edit": float(base_sw),
+    sr_rand = (donor_random * (1 - before)).mean(axis=1)
+    res["C_swap"] = {"endpoint": "new donor prediction among all paired trials",
+                     "pairs": pairs, "donor_before": before, "donor_after_probe": donor_probe,
+                     "donor_after_class": donor_cls, "donor_after_random": donor_random,
+                     "n_pairs": len(pairs), "n_random_subspaces": n_rand, "switch_rate_no_edit": 0.0,
                      "switch_rate_probe": sr_probe, "switch_rate_random": sr_rand,
                      "p_rank_vs_random": _rank_p(sr_probe, sr_rand)}
     res["causal_holm"] = holm({"C_abl": res["C_abl"]["p_rank_vs_random"], "C_swap": res["C_swap"]["p_rank_vs_random"]})

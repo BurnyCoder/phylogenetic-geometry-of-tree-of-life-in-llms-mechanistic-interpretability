@@ -1,5 +1,7 @@
 # Experiment 00: pilot on Pythia-410m (pipeline debugging)
 
+The pilot was a pipeline-development run on a different model. Its outcomes describe that run and do not supply a replication of the primary hypothesis. [Independent analysis](../../reviews/2026-11-26-scientific-audit.md) · [Dated original experiment record](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/cc36b9134981497d6006359183261381c25177ac/reports/experiments/00-pilot/experiment.md)
+
 **Status:** done, 2026-11-20. The pilot was declared in the preregistration; it is used only to debug the pipeline, and its results do not change any hypothesis.
 
 ## What was run

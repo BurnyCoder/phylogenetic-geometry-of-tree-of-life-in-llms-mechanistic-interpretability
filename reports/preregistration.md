@@ -7,6 +7,8 @@
 
 ---
 
+**Editorial note, 26 November 2026.** The status above records the initial registration. The sections below also contain subsequent amendments. The final panel and nuisance controls followed exploratory plots from an earlier freeze. Commit history establishes the order of public records. [Initial registration](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/f9c19b9/reports/preregistration.md) · [Independent replay and current decisions](reviews/2026-11-26-scientific-audit.md)
+
 ## 1. Domain and question
 
 **Domain.** The mechanistic interpretability of how large language models represent structured world knowledge, here the tree of life.
@@ -19,7 +21,7 @@
 **Motivation.**
 - Goodfire found a curved phylogenetic manifold in the DNA model Evo 2 ([post](https://www.goodfire.com/research/phylogeny-manifold)).
 - Goodfire's neural-geometry series found circles and other manifolds for concepts such as days of the week ([index](https://www.goodfire.com/research/neural-geometry)).
-- No peer-reviewed study tests a text LLM against the phylogeny ([literature review](literature-review.md)).
+- The registration’s literature search identified related organism and lexical-hierarchy projects ([literature review](literature-review.md)).
 
 ---
 
@@ -100,7 +102,7 @@ Each triplet is (anchor, phylogenetic partner, folk/lexical partner). The *phylo
 | 35 | pronghorn | giraffe | impala | folk "antelope" |
 | 36 | bottlenose dolphin | cattle | great white shark | ecology |
 
-The names are resolved through Open Tree TNRS to species, or to the type species for genus-level names such as seahorse, using the same pipeline. Their representations are extracted with the same templates. They form a separate set and are **not** part of the 400-species primary analysis.
+The names are resolved through Open Tree TNRS to species, or to the type species for genus-level names such as seahorse, using the same pipeline. Their representations are extracted with the same templates. They form a separate conflict-item analysis. Many names resolve to tree IDs also present in the primary panel. [Verified overlap](../results/scientific-verification/geometry.json)
 
 ### 2.4 Reference trees
 - **Primary: topology.** The Open Tree of Life synthetic tree, induced subtree over the species' OTT ids ([API v3](https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3); data CC0). Polytomies are kept as polytomies.
@@ -318,6 +320,8 @@ The result is the smallest detectable TA_within at 80% power, which is reported 
 | S5 ≈ 0 | The model encodes Linnaean rank structure, not divergence time |
 | Conflict triplets mostly follow the folk partner | The geometry is folk-taxonomic even if it is tree-like |
 
+**Interpretive correction, 26 November 2026.** The table above preserves the original predictions. Failure of a lexical-discordant or co-occurrence-discordant test alone cannot identify the cause of the primary association. A nonsignificant partial correlation with age leaves uncertainty about temporal information. The curated conflict stimuli describe responses to particular items. [Current decisions, estimates and uncertainty](reviews/2026-11-26-scientific-audit.md)
+
 ---
 
 ## Addendum A (registered 2026-11-20 09:45, before the held-out species were selected or extracted): the habitat-gradient hypothesis
@@ -342,7 +346,7 @@ The result is the smallest detectable TA_within at 80% power, which is reported 
 **Reading.** If H_eco holds, the dominant top-PC axis encodes habitat or locomotion across clades, i.e. the geometry mixes ecology with taxonomy. If it fails, the stage-1a ordering is not supported as ecological.
 
 ## Deviations
-All deviations below were made **before any activation was extracted** (species set frozen 2026-11-20 07:51, `data/FREEZE.json`, species.csv sha256 `f1b24cf4…`).
+The original freeze preceded extraction on that panel. Later deviations have different timings. Deviations 11–18 accompanied the refreeze after Qwen stage-1a exploration. Deviations 19–20 followed the first intervention results and preceded the expanded run. See the dated entries and the [commit history](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/commits/main/reports/preregistration.md).
 
 1. **2026-11-20 — sitelinks threshold.** The registration specified no minimum number of sitelinks for candidates. At ≥15 sitelinks only 4 of 10 echinoderms were available, so the candidate pool uses **≥5 sitelinks**. Ranking is still by sitelinks, so strata already filled at ≥15 are unaffected.
 2. **2026-11-20 — reptiles stratum.** OTT flags "Reptilia" as barren and inconsistent. Reptiles are therefore defined as Testudines ∪ Lepidosauria ∪ Crocodylia, which is extant non-avian reptiles, as intended.

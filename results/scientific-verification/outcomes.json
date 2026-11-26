@@ -1,0 +1,967 @@
+{
+  "causal": {
+    "_v1": {
+      "pairs": 200,
+      "before": 4,
+      "after": 13,
+      "net": 9,
+      "new_donor_bounds": [
+        9,
+        13
+      ],
+      "ablation_rank": 0.047619047619047616,
+      "donor_prevalence_rank": 0.09090909090909091,
+      "historical_holm": {
+        "ablation": 0.09523809523809523,
+        "prevalence": 0.09523809523809523
+      },
+      "registered_holm": {
+        "ablation": 0.09523809523809523,
+        "new_switch": null
+      },
+      "random_prevalence_mean": 0.029000000000000005,
+      "ablation_probe": 0.08258166164159775,
+      "ablation_random": 0.016350018221419304,
+      "random_ablations": 20,
+      "random_interchanges": 10
+    },
+    "expanded": {
+      "pairs": 200,
+      "before": 4,
+      "after": 11,
+      "net": 7,
+      "new_donor_bounds": [
+        7,
+        11
+      ],
+      "ablation_rank": 0.12,
+      "donor_prevalence_rank": 0.01,
+      "historical_holm": {
+        "ablation": 0.12,
+        "prevalence": 0.02
+      },
+      "registered_holm": {
+        "ablation": 0.24,
+        "new_switch": null
+      },
+      "random_prevalence_mean": 0.02505050505050505,
+      "ablation_probe": 0.08258166164159775,
+      "ablation_random": 0.027074057548430352,
+      "random_ablations": 99,
+      "random_interchanges": 99
+    }
+  },
+  "class_control": {
+    "class_var_captured": 0.1444624662399292,
+    "mean_drop_logp_class": 0.14567910134792328,
+    "p_rank_class_vs_random": 0.01,
+    "wilcoxon_p_probe_gt_class": 0.9663569331169128,
+    "switch_rate_class": 0.06,
+    "mcnemar_probe_only": 3,
+    "mcnemar_class_only": 4,
+    "mcnemar_p_probe_gt_class": 0.7734375,
+    "phylogeny_specific": false
+  },
+  "conflict": {
+    "layer": 6,
+    "rows": [
+      {
+        "id": 1,
+        "anchor": "blue whale",
+        "closer": "hippopotamus",
+        "other": "whale shark",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 2,
+        "anchor": "Nile crocodile",
+        "closer": "house sparrow",
+        "other": "green iguana",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": -1
+        }
+      },
+      {
+        "id": 3,
+        "anchor": "Atlantic bluefin tuna",
+        "closer": "human",
+        "other": "great white shark",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": -1
+        }
+      },
+      {
+        "id": 4,
+        "anchor": "common starfish",
+        "closer": "human",
+        "other": "common octopus",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 5,
+        "anchor": "Atlantic horseshoe crab",
+        "closer": "goliath birdeater",
+        "other": "blue crab",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 6,
+        "anchor": "little brown bat",
+        "closer": "cattle",
+        "other": "house mouse",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 7,
+        "anchor": "rock hyrax",
+        "closer": "African bush elephant",
+        "other": "guinea pig",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": 1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 8,
+        "anchor": "thylacine",
+        "closer": "red kangaroo",
+        "other": "gray wolf",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": 1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 9,
+        "anchor": "European eel",
+        "closer": "human",
+        "other": "sea lamprey",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 10,
+        "anchor": "western honey bee",
+        "closer": "American lobster",
+        "other": "goliath birdeater",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": 1,
+          "pythia410m": 1,
+          "char3": 1,
+          "glove": 1
+        }
+      },
+      {
+        "id": 11,
+        "anchor": "sugar glider",
+        "closer": "red kangaroo",
+        "other": "southern flying squirrel",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": 1,
+          "char3": 1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 12,
+        "anchor": "aardvark",
+        "closer": "African bush elephant",
+        "other": "giant anteater",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": -1
+        }
+      },
+      {
+        "id": 13,
+        "anchor": "Chinese pangolin",
+        "closer": "cat",
+        "other": "giant anteater",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": -1
+        }
+      },
+      {
+        "id": 14,
+        "anchor": "European hedgehog",
+        "closer": "common shrew",
+        "other": "North American porcupine",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": 1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 15,
+        "anchor": "West Indian manatee",
+        "closer": "African bush elephant",
+        "other": "walrus",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": 1
+        }
+      },
+      {
+        "id": 16,
+        "anchor": "coelacanth",
+        "closer": "human",
+        "other": "Atlantic bluefin tuna",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": 1,
+          "pythia410m": 1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 17,
+        "anchor": "Australian lungfish",
+        "closer": "human",
+        "other": "Atlantic salmon",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": 1
+        }
+      },
+      {
+        "id": 18,
+        "anchor": "Komodo dragon",
+        "closer": "king cobra",
+        "other": "Nile crocodile",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 19,
+        "anchor": "acorn barnacle",
+        "closer": "edible crab",
+        "other": "common limpet",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": 1
+        }
+      },
+      {
+        "id": 20,
+        "anchor": "common woodlouse",
+        "closer": "American lobster",
+        "other": "seven-spot ladybird",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": 1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": -1
+        }
+      },
+      {
+        "id": 21,
+        "anchor": "elephant shrew",
+        "closer": "African bush elephant",
+        "other": "common shrew",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 22,
+        "anchor": "red panda",
+        "closer": "raccoon",
+        "other": "giant panda",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 23,
+        "anchor": "koala",
+        "closer": "red kangaroo",
+        "other": "brown bear",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": 1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 24,
+        "anchor": "killer whale",
+        "closer": "bottlenose dolphin",
+        "other": "blue whale",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 25,
+        "anchor": "Indian flying fox",
+        "closer": "little brown bat",
+        "other": "red fox",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 26,
+        "anchor": "California sea lion",
+        "closer": "harbor seal",
+        "other": "lion",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 27,
+        "anchor": "common starfish",
+        "closer": "purple sea urchin",
+        "other": "Atlantic cod",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": 1,
+          "char3": -1,
+          "glove": 1
+        }
+      },
+      {
+        "id": 28,
+        "anchor": "moon jellyfish",
+        "closer": "sea anemone",
+        "other": "Atlantic cod",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": 1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 29,
+        "anchor": "silverfish",
+        "closer": "western honey bee",
+        "other": "goldfish",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 30,
+        "anchor": "guinea pig",
+        "closer": "house mouse",
+        "other": "pig",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 31,
+        "anchor": "seahorse",
+        "closer": "Atlantic cod",
+        "other": "horse",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": 1
+        }
+      },
+      {
+        "id": 32,
+        "anchor": "electric eel",
+        "closer": "channel catfish",
+        "other": "European eel",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": -1,
+          "glove": -1
+        }
+      },
+      {
+        "id": 33,
+        "anchor": "spotted hyena",
+        "closer": "cat",
+        "other": "dog",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": 1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": -1
+        }
+      },
+      {
+        "id": 34,
+        "anchor": "fossa",
+        "closer": "meerkat",
+        "other": "cat",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": 1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": 1,
+          "pythia410m": 1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 35,
+        "anchor": "pronghorn",
+        "closer": "giraffe",
+        "other": "impala",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 0,
+          "glove": 1
+        }
+      },
+      {
+        "id": 36,
+        "anchor": "bottlenose dolphin",
+        "closer": "cattle",
+        "other": "great white shark",
+        "resolved": true,
+        "choices": {
+          "qwen35_2b": -1,
+          "qwen35_2b_random": -1,
+          "pythia410m_step0": -1,
+          "pythia410m": -1,
+          "char3": 1,
+          "glove": 1
+        }
+      }
+    ],
+    "summary": {
+      "qwen35_2b": {
+        "win": 11,
+        "tie": 0,
+        "loss": 25,
+        "unscorable": 0,
+        "nominal_p_decisive": 0.028816719655878845
+      },
+      "qwen35_2b_random": {
+        "win": 13,
+        "tie": 0,
+        "loss": 23,
+        "unscorable": 0,
+        "nominal_p_decisive": 0.13249816396273675
+      },
+      "pythia410m_step0": {
+        "win": 13,
+        "tie": 0,
+        "loss": 23,
+        "unscorable": 0,
+        "nominal_p_decisive": 0.13249816396273675
+      },
+      "pythia410m": {
+        "win": 10,
+        "tie": 0,
+        "loss": 26,
+        "unscorable": 0,
+        "nominal_p_decisive": 0.011330984183587134
+      },
+      "char3": {
+        "win": 9,
+        "tie": 13,
+        "loss": 14,
+        "unscorable": 0,
+        "nominal_p_decisive": 0.4048728942871094
+      },
+      "glove": {
+        "win": 14,
+        "tie": 0,
+        "loss": 22,
+        "unscorable": 0,
+        "nominal_p_decisive": 0.24298495403490966
+      }
+    }
+  },
+  "behavior": {
+    "source": "bg4_stage3_qwen.out",
+    "n": 300,
+    "distinct_anchors": 170,
+    "distinct_species": 291,
+    "positive_rounded": 170,
+    "ties_at_log_precision": 9,
+    "accuracy": 0.5666666666666667
+  },
+  "habitat": {
+    "n_heldout": 159,
+    "birds": 80,
+    "marine": 6,
+    "ground": 61,
+    "aerial": 0,
+    "marine_orders": {
+      "Carnivora": 3,
+      "Artiodactyla": 3
+    },
+    "axis_max_abs_error": 2.798981839563508e-05,
+    "p": {
+      "M1": 1.2024566670690888e-07,
+      "M2": null,
+      "B1": 0.00021179065999288692,
+      "B2": 0.9172797456923002
+    },
+    "holm": {
+      "M1": 4.809826668276355e-07,
+      "M2": null,
+      "B1": 0.0006353719799786607,
+      "B2": 1.0
+    },
+    "rho": {
+      "B1": -0.3848617144693185,
+      "B2": -0.1565777428295368
+    },
+    "order_conditional_p": {
+      "B1": 0.0074,
+      "B2": 0.9931,
+      "M1": 0.0001,
+      "M2": null
+    },
+    "order_conditional_holm": {
+      "B1": 0.0222,
+      "B2": 1.0,
+      "M1": 0.0004,
+      "M2": null
+    }
+  },
+  "exploratory": {
+    "power_reps": 40,
+    "power": [
+      {
+        "signal": 0.0,
+        "ta_within_mean": 0.32335347448087315,
+        "ta_within_sd": 0.019300222550094753,
+        "power": 0.0,
+        "binomial_ci": [
+          0.0,
+          0.08809730287880237
+        ]
+      },
+      {
+        "signal": 0.05,
+        "ta_within_mean": 0.3313059557565964,
+        "ta_within_sd": 0.027523706141861323,
+        "power": 0.1,
+        "binomial_ci": [
+          0.027925415294219318,
+          0.2366373998760999
+        ]
+      },
+      {
+        "signal": 0.1,
+        "ta_within_mean": 0.3366549382197432,
+        "ta_within_sd": 0.018454265643685602,
+        "power": 0.025,
+        "binomial_ci": [
+          0.0006327449320494196,
+          0.13158585848276577
+        ]
+      },
+      {
+        "signal": 0.15,
+        "ta_within_mean": 0.3477341226568825,
+        "ta_within_sd": 0.021125970369633595,
+        "power": 0.2,
+        "binomial_ci": [
+          0.09052240939999068,
+          0.35647801867923473
+        ]
+      },
+      {
+        "signal": 0.2,
+        "ta_within_mean": 0.35842169756777464,
+        "ta_within_sd": 0.02008029233686144,
+        "power": 0.275,
+        "binomial_ci": [
+          0.1460089919638657,
+          0.43888290717904815
+        ]
+      },
+      {
+        "signal": 0.3,
+        "ta_within_mean": 0.3860947169338479,
+        "ta_within_sd": 0.021109690650794356,
+        "power": 0.8,
+        "binomial_ci": [
+          0.6435219813207653,
+          0.9094775906000093
+        ]
+      },
+      {
+        "signal": 0.5,
+        "ta_within_mean": 0.4721705733694699,
+        "ta_within_sd": 0.02176563948687336,
+        "power": 1.0,
+        "binomial_ci": [
+          0.9119026971211976,
+          1.0
+        ]
+      }
+    ],
+    "n_layers_pca": 25,
+    "pca_readings": {
+      "partial (C1 + one of C2/C3)": 2,
+      "tree-consistent (checks 1-3 pass)": 23
+    },
+    "probe": {
+      "model": {
+        "test_test_pearson": [
+          0.7487480613634986,
+          0.009903256442358474
+        ],
+        "test_test_spearman": [
+          0.7491880722573494,
+          0.009383176614349058
+        ],
+        "train_test_pearson": [
+          0.8484457947344627,
+          0.006664474967764602
+        ],
+        "train_train_pearson": [
+          0.9593648917195964,
+          0.0003653082160916082
+        ],
+        "test_test_within_group_spearman": [
+          0.3240911310778317,
+          0.0552708606535908
+        ],
+        "test_test_within_stratum_spearman": [
+          0.3263368241256751,
+          0.03462721648316587
+        ]
+      },
+      "shuffled_tree": {
+        "test_test_pearson": [
+          -0.014529467435642967,
+          0.01255605102824394
+        ],
+        "test_test_spearman": [
+          -0.013865973919603472,
+          0.01158768614302201
+        ],
+        "train_test_pearson": [
+          0.17038417251600685,
+          0.009378078585266543
+        ],
+        "train_train_pearson": [
+          0.5622102739728507,
+          0.004818432576215341
+        ],
+        "test_test_within_group_spearman": [
+          -0.013760269642912909,
+          0.03509241642881865
+        ],
+        "test_test_within_stratum_spearman": [
+          -0.06289577038198911,
+          0.043321134892576184
+        ]
+      },
+      "random_init": {
+        "test_test_pearson": [
+          0.015689630092095168,
+          0.01307849174273624
+        ],
+        "test_test_spearman": [
+          0.012347523107477708,
+          0.014263921438556895
+        ],
+        "train_test_pearson": [
+          0.16244384033767578,
+          0.011431605634531104
+        ],
+        "train_train_pearson": [
+          0.5186141540662821,
+          0.0036367393763409354
+        ],
+        "test_test_within_group_spearman": [
+          0.0570422724893251,
+          0.018370871952259067
+        ],
+        "test_test_within_stratum_spearman": [
+          0.07449011540139913,
+          0.04844084497541215
+        ]
+      },
+      "glove": {
+        "test_test_pearson": [
+          0.4051556080661872,
+          0.0054159871714663105
+        ],
+        "test_test_spearman": [
+          0.41090910177759693,
+          0.007368474604996124
+        ],
+        "train_test_pearson": [
+          0.5875491495228028,
+          0.006001102412407318
+        ],
+        "train_train_pearson": [
+          0.845169729777087,
+          0.0013614585515076922
+        ],
+        "test_test_within_group_spearman": [
+          0.21295389410656734,
+          0.04126856691194488
+        ],
+        "test_test_within_stratum_spearman": [
+          0.27707662763065144,
+          0.030216391058261124
+        ]
+      },
+      "class_blob": {
+        "test_test_pearson": [
+          0.8331338552154504,
+          0.0057975071654718085
+        ],
+        "test_test_spearman": [
+          0.8323516225512897,
+          0.006207237090347933
+        ],
+        "train_test_pearson": [
+          0.8925541244950628,
+          0.0027836634545823527
+        ],
+        "train_train_pearson": [
+          0.9576564234004017,
+          0.00038545978650938203
+        ],
+        "test_test_within_group_spearman": [
+          0.1322201191218924,
+          0.04371517807183289
+        ],
+        "test_test_within_stratum_spearman": [
+          0.007587480038920956,
+          0.0407610522301006
+        ]
+      },
+      "selectivity_test_test": 0.7632775287991416,
+      "class_only_predictor_pearson_all_pairs": 0.8709135606500337,
+      "raw_angular_within_stratum_spearman_all_species": 0.28975960823992997
+    },
+    "gromov": {
+      "model": 0.32167333364486694,
+      "matched_gaussian_mean": 0.4599717611182526,
+      "matched_gaussian_sd": 0.009693842354767461,
+      "class_blob_mean": 0.1880713403224945,
+      "class_blob_sd": 0.006846800446510315,
+      "tree_oracle": 0.0
+    },
+    "nj": {
+      "model": 0.8123425692695214,
+      "perm_null_mean": 0.9882871536523931,
+      "perm_null_sd": 0.0008994242353328411,
+      "perm_p": 0.047619047619047616,
+      "class_blob_null_mean": 0.9539042821158688,
+      "class_blob_null_sd": 0.004108188017707828,
+      "class_blob_p": 0.047619047619047616
+    },
+    "stage4_sections": [
+      "modal_layer",
+      "variants",
+      "polysemous_included",
+      "probe",
+      "geodesic_k_sweep"
+    ],
+    "stage6_sections": [
+      "layer",
+      "n_rep",
+      "representations",
+      "main_run",
+      "triplet_seed",
+      "k_per_node",
+      "templates",
+      "species_subsample",
+      "crossfit_seed",
+      "probe_seed"
+    ],
+    "sensitivity_min": {
+      "triplet_seed": 0.4670147427666349,
+      "species_subsample": 0.4369068604252202,
+      "template_half": 0.46870408938090774
+    }
+  },
+  "subspace_variance": {
+    "source": "bg6_stage3_causal.out",
+    "source_sha256": "f3323e07bf7117ff1116e2203f44b27dbede9af285660b00661bf7389c8ced8e",
+    "line": "random subspaces from top-64 PCs; mean captured variance 0.1256 (target 0.1233)",
+    "pc_span": 64,
+    "random_mean": 0.1256,
+    "target": 0.1233
+  }
+}

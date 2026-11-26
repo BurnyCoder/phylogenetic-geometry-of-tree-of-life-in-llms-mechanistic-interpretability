@@ -1,5 +1,7 @@
 # Response to the final review, round 1 (2026-11-20)
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 The review is [2026-11-20-final-review-round1.md](2026-11-20-final-review-round1.md).
 - **How the findings were checked.** Every must-fix finding was first reproduced independently, on the CPU, from the stored activations and results before anything was changed. The class-only predictor, the class-blob probe, the pooled-metric artifact, the S2 and conflict comparisons with the untrained controls, and the per-stratum values all reproduced. Small numeric differences came only from different random draws.
 - **Where the numbers are.** Below, "now reported" means the number is generated from `results/` by the code named. Values are in [`results/RESULTS.md`](../../results/RESULTS.md); none are typed here.

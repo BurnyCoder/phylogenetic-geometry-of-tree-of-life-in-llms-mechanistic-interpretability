@@ -1,5 +1,7 @@
 # Fact-check of the literature reviews (2026-11-20)
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 **Scope.** An independent pass checked every citation and every number in [`../literature-review.md`](../literature-review.md) and [`../state-of-the-art-review.md`](../state-of-the-art-review.md) against its primary source:
 - arXiv abs pages, resolved DOIs, ACL PDFs, GitHub, Hugging Face, PyPI;
 - figure images, for numbers that appear only in figures (the Goodfire Evo 2 post).

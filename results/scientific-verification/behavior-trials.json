@@ -1,0 +1,1811 @@
+{
+  "source": "bg4_stage3_qwen.out",
+  "columns": [
+    "anchor",
+    "x",
+    "y",
+    "rounded_log_odds_x"
+  ],
+  "rows": [
+    [
+      "silver-washed fritillary",
+      "monarch butterfly",
+      "large blue",
+      "0.375"
+    ],
+    [
+      "common blue",
+      "queen Alexandra's birdwing",
+      "housefly",
+      "1.812"
+    ],
+    [
+      "great spotted woodpecker",
+      "common kingfisher",
+      "Andean condor",
+      "-0.500"
+    ],
+    [
+      "garfish",
+      "European perch",
+      "sterlet",
+      "-0.875"
+    ],
+    [
+      "Humboldt squid",
+      "mimic octopus",
+      "Spanish slug",
+      "0.125"
+    ],
+    [
+      "Gila monster",
+      "smooth snake",
+      "sand lizard",
+      "-0.375"
+    ],
+    [
+      "bonobo",
+      "rhesus macaque",
+      "nutria",
+      "1.812"
+    ],
+    [
+      "large blue",
+      "Hercules beetle",
+      "Phylloxera",
+      "0.375"
+    ],
+    [
+      "common blue",
+      "Asian giant hornet",
+      "crab louse",
+      "-0.312"
+    ],
+    [
+      "black rat",
+      "capybara",
+      "rhesus macaque",
+      "-0.875"
+    ],
+    [
+      "Eurasian sparrowhawk",
+      "Andean condor",
+      "European bee-eater",
+      "0.375"
+    ],
+    [
+      "giant clam",
+      "zebra mussel",
+      "vampire squid",
+      "-0.250"
+    ],
+    [
+      "brown bear",
+      "leopard seal",
+      "least weasel",
+      "-0.438"
+    ],
+    [
+      "scarce swallowtail",
+      "housefly",
+      "migratory locust",
+      "-0.875"
+    ],
+    [
+      "hummingbird hawk-moth",
+      "large blue",
+      "six-spot burnet",
+      "-0.188"
+    ],
+    [
+      "guinea pig",
+      "hazel dormouse",
+      "mountain hare",
+      "0.562"
+    ],
+    [
+      "green anaconda",
+      "Indian cobra",
+      "viviparous lizard",
+      "0.250"
+    ],
+    [
+      "mandrill",
+      "North American beaver",
+      "orca",
+      "-0.125"
+    ],
+    [
+      "Eurasian sparrowhawk",
+      "great cormorant",
+      "common ostrich",
+      "1.000"
+    ],
+    [
+      "pronghorn",
+      "moose",
+      "blue whale",
+      "0.750"
+    ],
+    [
+      "white wagtail",
+      "European robin",
+      "budgerigar",
+      "-0.562"
+    ],
+    [
+      "goldfish",
+      "neon tetra",
+      "milkfish",
+      "0.062"
+    ],
+    [
+      "six-spot burnet",
+      "hummingbird hawk-moth",
+      "emperor dragonfly",
+      "0.625"
+    ],
+    [
+      "john Dory",
+      "Atlantic cod",
+      "Nile perch",
+      "0.562"
+    ],
+    [
+      "common roach",
+      "goldfish",
+      "Wels catfish",
+      "-1.062"
+    ],
+    [
+      "freshwater pearl mussel",
+      "common cockle",
+      "mimic octopus",
+      "0.938"
+    ],
+    [
+      "mimic octopus",
+      "European squid",
+      "common periwinkle",
+      "0.875"
+    ],
+    [
+      "osprey",
+      "common raven",
+      "common cuckoo",
+      "0.188"
+    ],
+    [
+      "common hoopoe",
+      "common kingfisher",
+      "snowy owl",
+      "1.000"
+    ],
+    [
+      "glossy ibis",
+      "great cormorant",
+      "Eurasian woodcock",
+      "0.375"
+    ],
+    [
+      "koala",
+      "wolf",
+      "platypus",
+      "-0.688"
+    ],
+    [
+      "Eurasian coot",
+      "common crane",
+      "black stork",
+      "0.000"
+    ],
+    [
+      "saltwater crocodile",
+      "gharial",
+      "American alligator",
+      "-1.062"
+    ],
+    [
+      "baiji",
+      "orca",
+      "fin whale",
+      "0.063"
+    ],
+    [
+      "colossal squid",
+      "spirula",
+      "common octopus",
+      "0.438"
+    ],
+    [
+      "European anchovy",
+      "ruffe",
+      "European conger",
+      "0.125"
+    ],
+    [
+      "common blackbird",
+      "peregrine falcon",
+      "common ostrich",
+      "0.000"
+    ],
+    [
+      "stable fly",
+      "housefly",
+      "peppered moth",
+      "1.625"
+    ],
+    [
+      "grass snake",
+      "black mamba",
+      "marine iguana",
+      "0.062"
+    ],
+    [
+      "common periwinkle",
+      "white-lipped snail",
+      "Mediterranean mussel",
+      "0.312"
+    ],
+    [
+      "thylacine",
+      "hazel dormouse",
+      "platypus",
+      "-0.562"
+    ],
+    [
+      "Wels catfish",
+      "neon tetra",
+      "sterlet",
+      "-2.000"
+    ],
+    [
+      "reindeer",
+      "blue whale",
+      "wild horse",
+      "-0.562"
+    ],
+    [
+      "common bottlenose dolphin",
+      "northern giraffe",
+      "white rhinoceros",
+      "-0.438"
+    ],
+    [
+      "baiji",
+      "Bactrian camel",
+      "European hedgehog",
+      "0.562"
+    ],
+    [
+      "snow leopard",
+      "Eurasian otter",
+      "European hedgehog",
+      "0.062"
+    ],
+    [
+      "six-spot burnet",
+      "silver-washed fritillary",
+      "Asian hornet",
+      "-0.312"
+    ],
+    [
+      "orca",
+      "spotted hyena",
+      "European mole",
+      "0.250"
+    ],
+    [
+      "chimpanzee",
+      "Eurasian beaver",
+      "lion",
+      "0.813"
+    ],
+    [
+      "European mole",
+      "red squirrel",
+      "thylacine",
+      "0.438"
+    ],
+    [
+      "walrus",
+      "red deer",
+      "African forest elephant",
+      "-0.562"
+    ],
+    [
+      "gilt-head bream",
+      "European seabass",
+      "European eel",
+      "0.125"
+    ],
+    [
+      "king cobra",
+      "black mamba",
+      "Gaboon viper",
+      "-0.062"
+    ],
+    [
+      "Eurasian otter",
+      "red panda",
+      "harbor seal",
+      "-0.437"
+    ],
+    [
+      "oriental cockroach",
+      "titan beetle",
+      "four-spotted chaser",
+      "-0.188"
+    ],
+    [
+      "scarce swallowtail",
+      "housefly",
+      "Colorado potato beetle",
+      "-0.875"
+    ],
+    [
+      "house sparrow",
+      "k\u0101k\u0101p\u014d",
+      "golden eagle",
+      "1.312"
+    ],
+    [
+      "llama",
+      "reindeer",
+      "European mole",
+      "0.375"
+    ],
+    [
+      "common starling",
+      "barn swallow",
+      "common raven",
+      "0.188"
+    ],
+    [
+      "goldfish",
+      "milkfish",
+      "Atlantic herring",
+      "1.375"
+    ],
+    [
+      "common dolphin",
+      "narwhal",
+      "hippopotamus",
+      "0.875"
+    ],
+    [
+      "common roach",
+      "Crucian carp",
+      "neon tetra",
+      "1.062"
+    ],
+    [
+      "holly blue",
+      "scarce swallowtail",
+      "peppered moth",
+      "-0.188"
+    ],
+    [
+      "Eurasian collared dove",
+      "common wood pigeon",
+      "white wagtail",
+      "1.500"
+    ],
+    [
+      "common bottlenose dolphin",
+      "fin whale",
+      "hippopotamus",
+      "0.188"
+    ],
+    [
+      "European hare",
+      "giant anteater",
+      "thylacine",
+      "-0.500"
+    ],
+    [
+      "meadow brown",
+      "Asian hornet",
+      "Phylloxera",
+      "0.125"
+    ],
+    [
+      "six-spot burnet",
+      "Hercules beetle",
+      "Asian giant hornet",
+      "0.250"
+    ],
+    [
+      "secretarybird",
+      "corn crake",
+      "greater flamingo",
+      "1.375"
+    ],
+    [
+      "European badger",
+      "harbor seal",
+      "coyote",
+      "-1.250"
+    ],
+    [
+      "garfish",
+      "European flounder",
+      "European eel",
+      "-0.625"
+    ],
+    [
+      "wild boar",
+      "common warthog",
+      "blue whale",
+      "3.750"
+    ],
+    [
+      "black rat",
+      "North American beaver",
+      "European rabbit",
+      "-0.062"
+    ],
+    [
+      "European goldfinch",
+      "Eurasian bullfinch",
+      "common nightingale",
+      "1.812"
+    ],
+    [
+      "Atlantic mackerel",
+      "burbot",
+      "rainbow trout",
+      "-0.625"
+    ],
+    [
+      "black garden ant",
+      "scarce swallowtail",
+      "Phylloxera",
+      "-0.375"
+    ],
+    [
+      "mountain hare",
+      "European rabbit",
+      "brown rat",
+      "1.438"
+    ],
+    [
+      "common starling",
+      "great tit",
+      "greater flamingo",
+      "2.562"
+    ],
+    [
+      "natterjack toad",
+      "golden poison frog",
+      "smooth newt",
+      "-0.812"
+    ],
+    [
+      "least weasel",
+      "harbor seal",
+      "meerkat",
+      "0.062"
+    ],
+    [
+      "rainbow trout",
+      "northern pike",
+      "European flounder",
+      "0.812"
+    ],
+    [
+      "common cuttlefish",
+      "giant Pacific octopus",
+      "zebra mussel",
+      "2.000"
+    ],
+    [
+      "brown rat",
+      "European hare",
+      "aye-aye",
+      "-0.562"
+    ],
+    [
+      "three-spined stickleback",
+      "Nile perch",
+      "yellowfin tuna",
+      "0.250"
+    ],
+    [
+      "holly blue",
+      "lackey moth",
+      "Phylloxera",
+      "0.625"
+    ],
+    [
+      "European badger",
+      "giant panda",
+      "wolf",
+      "-0.938"
+    ],
+    [
+      "great egret",
+      "grey heron",
+      "black stork",
+      "0.437"
+    ],
+    [
+      "flathead grey mullet",
+      "Nile perch",
+      "Atlantic mackerel",
+      "-0.312"
+    ],
+    [
+      "little owl",
+      "European robin",
+      "western capercaillie",
+      "-1.000"
+    ],
+    [
+      "great tit",
+      "Eurasian tree sparrow",
+      "common kingfisher",
+      "2.562"
+    ],
+    [
+      "Eurasian otter",
+      "giant panda",
+      "thylacine",
+      "-0.625"
+    ],
+    [
+      "crab louse",
+      "holly blue",
+      "silverfish",
+      "0.125"
+    ],
+    [
+      "musk beetle",
+      "housefly",
+      "Phylloxera",
+      "-0.188"
+    ],
+    [
+      "European badger",
+      "red panda",
+      "walrus",
+      "-0.188"
+    ],
+    [
+      "Mediterranean mussel",
+      "common cockle",
+      "Spanish slug",
+      "0.312"
+    ],
+    [
+      "European hornet",
+      "black garden ant",
+      "Hercules beetle",
+      "0.312"
+    ],
+    [
+      "hippopotamus",
+      "moose",
+      "ring-tailed lemur",
+      "0.312"
+    ],
+    [
+      "house sparrow",
+      "European robin",
+      "Eurasian skylark",
+      "-0.125"
+    ],
+    [
+      "glossy ibis",
+      "common crane",
+      "peregrine falcon",
+      "0.625"
+    ],
+    [
+      "European edible dormouse",
+      "nutria",
+      "meerkat",
+      "-0.125"
+    ],
+    [
+      "meadow brown",
+      "monarch butterfly",
+      "green-veined white",
+      "-0.500"
+    ],
+    [
+      "European goldfinch",
+      "barn swallow",
+      "common kestrel",
+      "0.312"
+    ],
+    [
+      "stable fly",
+      "Hercules beetle",
+      "black garden ant",
+      "-0.250"
+    ],
+    [
+      "house sparrow",
+      "common raven",
+      "budgerigar",
+      "-1.688"
+    ],
+    [
+      "holly blue",
+      "Hercules beetle",
+      "silverfish",
+      "1.250"
+    ],
+    [
+      "common crane",
+      "common kestrel",
+      "greater flamingo",
+      "-0.375"
+    ],
+    [
+      "European badger",
+      "harbor seal",
+      "wolf",
+      "-0.875"
+    ],
+    [
+      "Eurasian golden oriole",
+      "common starling",
+      "k\u0101k\u0101p\u014d",
+      "-0.125"
+    ],
+    [
+      "Asian hornet",
+      "Hercules beetle",
+      "banded demoiselle",
+      "0.562"
+    ],
+    [
+      "green-veined white",
+      "silver-washed fritillary",
+      "lackey moth",
+      "-0.188"
+    ],
+    [
+      "southern hawker",
+      "Asian hornet",
+      "silverfish",
+      "1.000"
+    ],
+    [
+      "northern giraffe",
+      "okapi",
+      "orca",
+      "4.312"
+    ],
+    [
+      "lackey moth",
+      "meadow brown",
+      "housefly",
+      "-0.125"
+    ],
+    [
+      "water buffalo",
+      "Ganges river dolphin",
+      "black rhinoceros",
+      "0.062"
+    ],
+    [
+      "house mouse",
+      "red squirrel",
+      "mountain hare",
+      "0.875"
+    ],
+    [
+      "cockchafer",
+      "musk beetle",
+      "hummingbird hawk-moth",
+      "-0.312"
+    ],
+    [
+      "migratory locust",
+      "peppered moth",
+      "emperor dragonfly",
+      "0.000"
+    ],
+    [
+      "Nile perch",
+      "Atlantic mackerel",
+      "zander",
+      "-1.438"
+    ],
+    [
+      "Hercules beetle",
+      "hummingbird hawk-moth",
+      "Phylloxera",
+      "0.250"
+    ],
+    [
+      "European mantis",
+      "hylotrupes",
+      "silverfish",
+      "1.438"
+    ],
+    [
+      "European perch",
+      "Atlantic mackerel",
+      "Atlantic salmon",
+      "-0.812"
+    ],
+    [
+      "llama",
+      "Ganges river dolphin",
+      "white rhinoceros",
+      "0.062"
+    ],
+    [
+      "orca",
+      "northern giraffe",
+      "Bactrian camel",
+      "-0.438"
+    ],
+    [
+      "lion",
+      "Asian palm civet",
+      "polar bear",
+      "0.500"
+    ],
+    [
+      "house cricket",
+      "migratory locust",
+      "oriental cockroach",
+      "-0.812"
+    ],
+    [
+      "Asian hornet",
+      "Hercules beetle",
+      "Phylloxera",
+      "0.938"
+    ],
+    [
+      "Nile perch",
+      "ocean sunfish",
+      "merlangius",
+      "-0.688"
+    ],
+    [
+      "goldfish",
+      "siamese fighting fish",
+      "European eel",
+      "-0.125"
+    ],
+    [
+      "burbot",
+      "guppy",
+      "neon tetra",
+      "0.188"
+    ],
+    [
+      "common bottlenose dolphin",
+      "aye-aye",
+      "platypus",
+      "0.375"
+    ],
+    [
+      "Eurasian hobby",
+      "house sparrow",
+      "black kite",
+      "0.688"
+    ],
+    [
+      "common dolphin",
+      "fin whale",
+      "pronghorn",
+      "1.375"
+    ],
+    [
+      "common thresher",
+      "porbeagle",
+      "zebra shark",
+      "0.250"
+    ],
+    [
+      "blue whale",
+      "wild horse",
+      "black rat",
+      "-0.125"
+    ],
+    [
+      "common crane",
+      "budgerigar",
+      "northern pintail",
+      "-1.500"
+    ],
+    [
+      "golden eagle",
+      "Andean condor",
+      "common starling",
+      "3.125"
+    ],
+    [
+      "European bee-eater",
+      "black-headed gull",
+      "common cuckoo",
+      "-0.062"
+    ],
+    [
+      "common hoopoe",
+      "great spotted woodpecker",
+      "black kite",
+      "0.125"
+    ],
+    [
+      "European anchovy",
+      "European pilchard",
+      "European conger",
+      "0.625"
+    ],
+    [
+      "large blue",
+      "scarce swallowtail",
+      "lackey moth",
+      "-0.125"
+    ],
+    [
+      "black stork",
+      "grey heron",
+      "common snipe",
+      "-0.062"
+    ],
+    [
+      "black rat",
+      "guinea pig",
+      "mountain hare",
+      "1.000"
+    ],
+    [
+      "Asian giant hornet",
+      "large blue",
+      "southern hawker",
+      "0.438"
+    ],
+    [
+      "common frog",
+      "European fire-bellied toad",
+      "alpine newt",
+      "-0.500"
+    ],
+    [
+      "red king crab",
+      "signal crayfish",
+      "Antarctic krill",
+      "1.250"
+    ],
+    [
+      "sand martin",
+      "European robin",
+      "Eurasian magpie",
+      "-0.188"
+    ],
+    [
+      "common rudd",
+      "common bream",
+      "neon tetra",
+      "0.812"
+    ],
+    [
+      "American cockroach",
+      "European mantis",
+      "black garden ant",
+      "-1.625"
+    ],
+    [
+      "budgerigar",
+      "great tit",
+      "Eurasian eagle-owl",
+      "0.562"
+    ],
+    [
+      "reindeer",
+      "moose",
+      "American bison",
+      "1.188"
+    ],
+    [
+      "peregrine falcon",
+      "black stork",
+      "greater flamingo",
+      "0.500"
+    ],
+    [
+      "northern giraffe",
+      "gray whale",
+      "grey seal",
+      "0.062"
+    ],
+    [
+      "hylotrupes",
+      "peppered moth",
+      "banded demoiselle",
+      "-0.500"
+    ],
+    [
+      "black kite",
+      "common starling",
+      "common snipe",
+      "0.375"
+    ],
+    [
+      "great egret",
+      "glossy ibis",
+      "black stork",
+      "-0.062"
+    ],
+    [
+      "great spotted woodpecker",
+      "common kingfisher",
+      "Eurasian eagle-owl",
+      "-0.688"
+    ],
+    [
+      "common blue",
+      "lackey moth",
+      "Phylloxera",
+      "0.562"
+    ],
+    [
+      "European pilchard",
+      "European perch",
+      "European eel",
+      "-0.562"
+    ],
+    [
+      "Crucian carp",
+      "Wels catfish",
+      "milkfish",
+      "-0.500"
+    ],
+    [
+      "common hoopoe",
+      "great egret",
+      "greater flamingo",
+      "0.562"
+    ],
+    [
+      "okapi",
+      "Ganges river dolphin",
+      "Bactrian camel",
+      "-0.562"
+    ],
+    [
+      "neon tetra",
+      "goldfish",
+      "European anchovy",
+      "-0.625"
+    ],
+    [
+      "Eurasian golden oriole",
+      "Eurasian blue tit",
+      "budgerigar",
+      "0.500"
+    ],
+    [
+      "mountain hare",
+      "red squirrel",
+      "chimpanzee",
+      "0.562"
+    ],
+    [
+      "Hercules beetle",
+      "lackey moth",
+      "migratory locust",
+      "0.250"
+    ],
+    [
+      "European anchovy",
+      "john Dory",
+      "European conger",
+      "-0.188"
+    ],
+    [
+      "brown bear",
+      "striped hyena",
+      "wild boar",
+      "0.000"
+    ],
+    [
+      "Hercules beetle",
+      "hylotrupes",
+      "European hornet",
+      "0.750"
+    ],
+    [
+      "European seabass",
+      "three-spined stickleback",
+      "guppy",
+      "1.188"
+    ],
+    [
+      "common blue",
+      "titan beetle",
+      "crab louse",
+      "-0.188"
+    ],
+    [
+      "European goldfinch",
+      "Eurasian bullfinch",
+      "Eurasian chaffinch",
+      "-0.312"
+    ],
+    [
+      "queen Alexandra's birdwing",
+      "codling moth",
+      "crab louse",
+      "0.062"
+    ],
+    [
+      "Asian water monitor",
+      "common slow worm",
+      "puff adder",
+      "-0.125"
+    ],
+    [
+      "Wels catfish",
+      "neon tetra",
+      "common rudd",
+      "-1.000"
+    ],
+    [
+      "baiji",
+      "American bison",
+      "wild boar",
+      "0.312"
+    ],
+    [
+      "six-spot burnet",
+      "Hercules beetle",
+      "beautiful demoiselle",
+      "0.125"
+    ],
+    [
+      "least weasel",
+      "polar bear",
+      "baiji",
+      "0.000"
+    ],
+    [
+      "heikegani",
+      "Japanese spider crab",
+      "alicella",
+      "0.062"
+    ],
+    [
+      "secretarybird",
+      "little owl",
+      "common kingfisher",
+      "-0.687"
+    ],
+    [
+      "green anaconda",
+      "ball python",
+      "frilled lizard",
+      "0.812"
+    ],
+    [
+      "reindeer",
+      "moose",
+      "pronghorn",
+      "0.438"
+    ],
+    [
+      "Nile perch",
+      "neon tetra",
+      "sterlet",
+      "-2.000"
+    ],
+    [
+      "red deer",
+      "humpback whale",
+      "Eurasian beaver",
+      "-0.812"
+    ],
+    [
+      "yellowfin tuna",
+      "gilt-head bream",
+      "Atlantic cod",
+      "1.125"
+    ],
+    [
+      "giant clam",
+      "zebra mussel",
+      "white-lipped snail",
+      "-0.250"
+    ],
+    [
+      "scarce swallowtail",
+      "codling moth",
+      "crab louse",
+      "0.688"
+    ],
+    [
+      "common crane",
+      "common moorhen",
+      "black-crowned night heron",
+      "0.312"
+    ],
+    [
+      "mealworm",
+      "cockchafer",
+      "great diving beetle",
+      "0.625"
+    ],
+    [
+      "Eurasian otter",
+      "harbor seal",
+      "red fox",
+      "0.188"
+    ],
+    [
+      "smooth snake",
+      "Indian python",
+      "frilled lizard",
+      "0.562"
+    ],
+    [
+      "sand martin",
+      "common nightingale",
+      "Eurasian golden oriole",
+      "-1.250"
+    ],
+    [
+      "guppy",
+      "Nile perch",
+      "ocean sunfish",
+      "-0.250"
+    ],
+    [
+      "Ganges river dolphin",
+      "orca",
+      "gray whale",
+      "0.750"
+    ],
+    [
+      "gray whale",
+      "Ganges river dolphin",
+      "American bison",
+      "1.312"
+    ],
+    [
+      "meadow brown",
+      "large blue",
+      "European hornet",
+      "0.250"
+    ],
+    [
+      "common periwinkle",
+      "Spanish slug",
+      "freshwater pearl mussel",
+      "0.562"
+    ],
+    [
+      "chimpanzee",
+      "European hare",
+      "African buffalo",
+      "-0.562"
+    ],
+    [
+      "European robin",
+      "house sparrow",
+      "barn swallow",
+      "0.750"
+    ],
+    [
+      "orange knobby star",
+      "common starfish",
+      "loxechinus",
+      "0.000"
+    ],
+    [
+      "osprey",
+      "secretarybird",
+      "common kingfisher",
+      "-0.188"
+    ],
+    [
+      "garden tiger moth",
+      "green-veined white",
+      "six-spot burnet",
+      "-0.125"
+    ],
+    [
+      "white wagtail",
+      "sand martin",
+      "peregrine falcon",
+      "1.375"
+    ],
+    [
+      "reindeer",
+      "blue whale",
+      "common warthog",
+      "-0.562"
+    ],
+    [
+      "rhesus macaque",
+      "ring-tailed lemur",
+      "guinea pig",
+      "2.250"
+    ],
+    [
+      "common rudd",
+      "tench",
+      "milkfish",
+      "0.438"
+    ],
+    [
+      "yellowfin tuna",
+      "European flounder",
+      "rainbow trout",
+      "-0.438"
+    ],
+    [
+      "Asian palm civet",
+      "European mole",
+      "European hare",
+      "0.500"
+    ],
+    [
+      "polar bear",
+      "African buffalo",
+      "quokka",
+      "-0.375"
+    ],
+    [
+      "holly blue",
+      "titan beetle",
+      "crab louse",
+      "0.062"
+    ],
+    [
+      "western yellow wagtail",
+      "common nightingale",
+      "Eurasian blue tit",
+      "-1.062"
+    ],
+    [
+      "osprey",
+      "secretarybird",
+      "little owl",
+      "0.375"
+    ],
+    [
+      "Atlantic cod",
+      "mahi-mahi",
+      "European conger",
+      "-0.938"
+    ],
+    [
+      "Eurasian skylark",
+      "common blackbird",
+      "Eurasian golden oriole",
+      "-0.438"
+    ],
+    [
+      "European robin",
+      "common crane",
+      "little grebe",
+      "-1.000"
+    ],
+    [
+      "green anaconda",
+      "king cobra",
+      "viviparous lizard",
+      "0.312"
+    ],
+    [
+      "flathead grey mullet",
+      "ruffe",
+      "brown trout",
+      "1.062"
+    ],
+    [
+      "Eurasian skylark",
+      "Eurasian blue tit",
+      "European goldfinch",
+      "1.000"
+    ],
+    [
+      "Gr\u00e9vy's zebra",
+      "hippopotamus",
+      "African forest elephant",
+      "-0.562"
+    ],
+    [
+      "green anaconda",
+      "grass snake",
+      "Asian water monitor",
+      "-1.375"
+    ],
+    [
+      "Elkhorn coral",
+      "Snakelocks anemone",
+      "Portuguese man o' war",
+      "0.500"
+    ],
+    [
+      "common raven",
+      "Eurasian magpie",
+      "k\u0101k\u0101p\u014d",
+      "-0.250"
+    ],
+    [
+      "glossy ibis",
+      "common blackbird",
+      "mallard",
+      "-0.375"
+    ],
+    [
+      "Asian giant hornet",
+      "black garden ant",
+      "European mantis",
+      "1.562"
+    ],
+    [
+      "red deer",
+      "northern giraffe",
+      "baiji",
+      "0.125"
+    ],
+    [
+      "silver-washed fritillary",
+      "codling moth",
+      "crab louse",
+      "0.000"
+    ],
+    [
+      "garfish",
+      "john Dory",
+      "Atlantic salmon",
+      "-0.375"
+    ],
+    [
+      "common hoopoe",
+      "black stork",
+      "common wood pigeon",
+      "-0.062"
+    ],
+    [
+      "Eurasian chaffinch",
+      "Eurasian blue tit",
+      "European bee-eater",
+      "2.062"
+    ],
+    [
+      "Eurasian bullfinch",
+      "house sparrow",
+      "common starling",
+      "0.125"
+    ],
+    [
+      "Eurasian wren",
+      "great tit",
+      "common kestrel",
+      "0.500"
+    ],
+    [
+      "Eurasian woodcock",
+      "great cormorant",
+      "northern pintail",
+      "-0.562"
+    ],
+    [
+      "hummingbird hawk-moth",
+      "meadow brown",
+      "housefly",
+      "0.125"
+    ],
+    [
+      "merlangius",
+      "ruffe",
+      "rainbow trout",
+      "0.375"
+    ],
+    [
+      "Gaboon viper",
+      "black mamba",
+      "common slow worm",
+      "0.625"
+    ],
+    [
+      "brown bear",
+      "giant panda",
+      "leopard seal",
+      "0.812"
+    ],
+    [
+      "scarce swallowtail",
+      "codling moth",
+      "Asian hornet",
+      "0.625"
+    ],
+    [
+      "black kite",
+      "osprey",
+      "snowy owl",
+      "1.938"
+    ],
+    [
+      "gilt-head bream",
+      "flathead grey mullet",
+      "john Dory",
+      "0.375"
+    ],
+    [
+      "European seabass",
+      "ruffe",
+      "Atlantic cod",
+      "1.688"
+    ],
+    [
+      "green-veined white",
+      "lackey moth",
+      "housefly",
+      "0.875"
+    ],
+    [
+      "ruffe",
+      "European perch",
+      "three-spined stickleback",
+      "-1.125"
+    ],
+    [
+      "housefly",
+      "musk beetle",
+      "beautiful demoiselle",
+      "0.188"
+    ],
+    [
+      "European flounder",
+      "flathead grey mullet",
+      "yellowfin tuna",
+      "1.438"
+    ],
+    [
+      "peregrine falcon",
+      "Eurasian hobby",
+      "common blackbird",
+      "1.688"
+    ],
+    [
+      "pea crab",
+      "American lobster",
+      "Antarctic krill",
+      "0.875"
+    ],
+    [
+      "common cockle",
+      "giant clam",
+      "colossal squid",
+      "1.250"
+    ],
+    [
+      "Darwin's bark spider",
+      "goliath birdeater",
+      "deathstalker",
+      "-0.250"
+    ],
+    [
+      "secretarybird",
+      "Eurasian bullfinch",
+      "common redshank",
+      "1.188"
+    ],
+    [
+      "European goldfinch",
+      "Eurasian skylark",
+      "peregrine falcon",
+      "1.562"
+    ],
+    [
+      "ocean sunfish",
+      "European seabass",
+      "sterlet",
+      "-0.500"
+    ],
+    [
+      "common rudd",
+      "zebrafish",
+      "neon tetra",
+      "0.438"
+    ],
+    [
+      "common bottlenose dolphin",
+      "Eurasian beaver",
+      "aardvark",
+      "0.188"
+    ],
+    [
+      "flathead grey mullet",
+      "European plaice",
+      "Atlantic mackerel",
+      "0.375"
+    ],
+    [
+      "European goldfinch",
+      "Eurasian golden oriole",
+      "common quail",
+      "0.438"
+    ],
+    [
+      "three-spined stickleback",
+      "siamese fighting fish",
+      "yellowfin tuna",
+      "2.000"
+    ],
+    [
+      "brown rat",
+      "guinea pig",
+      "hazel dormouse",
+      "0.375"
+    ],
+    [
+      "moose",
+      "Ganges river dolphin",
+      "Indian rhinoceros",
+      "-0.875"
+    ],
+    [
+      "house mouse",
+      "guinea pig",
+      "red squirrel",
+      "0.250"
+    ],
+    [
+      "mountain hare",
+      "European rabbit",
+      "capybara",
+      "1.125"
+    ],
+    [
+      "common hoopoe",
+      "great spotted woodpecker",
+      "secretarybird",
+      "-0.375"
+    ],
+    [
+      "Eurasian magpie",
+      "Eurasian tree sparrow",
+      "black kite",
+      "1.562"
+    ],
+    [
+      "common nightingale",
+      "black kite",
+      "common cuckoo",
+      "-1.688"
+    ],
+    [
+      "Eurasian wren",
+      "common blackbird",
+      "European goldfinch",
+      "-0.437"
+    ],
+    [
+      "reindeer",
+      "African buffalo",
+      "baiji",
+      "0.312"
+    ],
+    [
+      "secretarybird",
+      "greylag goose",
+      "common ostrich",
+      "0.188"
+    ],
+    [
+      "North American beaver",
+      "red squirrel",
+      "mountain hare",
+      "0.312"
+    ],
+    [
+      "Hercules beetle",
+      "hylotrupes",
+      "holly blue",
+      "0.438"
+    ],
+    [
+      "pronghorn",
+      "Ganges river dolphin",
+      "common warthog",
+      "-1.375"
+    ],
+    [
+      "Portuguese man o' war",
+      "lion's mane jellyfish",
+      "precious coral",
+      "0.875"
+    ],
+    [
+      "stable fly",
+      "housefly",
+      "codling moth",
+      "0.625"
+    ],
+    [
+      "tench",
+      "common roach",
+      "Nile perch",
+      "0.688"
+    ],
+    [
+      "common roach",
+      "Crucian carp",
+      "sterlet",
+      "0.562"
+    ],
+    [
+      "aye-aye",
+      "bonobo",
+      "hazel dormouse",
+      "-0.062"
+    ],
+    [
+      "smooth snake",
+      "puff adder",
+      "green anaconda",
+      "0.250"
+    ],
+    [
+      "green-veined white",
+      "housefly",
+      "great diving beetle",
+      "-0.625"
+    ],
+    [
+      "black kite",
+      "secretarybird",
+      "common kingfisher",
+      "-0.500"
+    ],
+    [
+      "nutria",
+      "guinea pig",
+      "black rat",
+      "0.062"
+    ],
+    [
+      "gilt-head bream",
+      "mahi-mahi",
+      "yellowfin tuna",
+      "0.125"
+    ],
+    [
+      "green-veined white",
+      "holly blue",
+      "peppered moth",
+      "0.125"
+    ],
+    [
+      "humpback whale",
+      "black rat",
+      "platypus",
+      "-1.062"
+    ],
+    [
+      "mealworm",
+      "meadow brown",
+      "oriental cockroach",
+      "-0.562"
+    ],
+    [
+      "Gila monster",
+      "common slow worm",
+      "frilled lizard",
+      "-0.562"
+    ],
+    [
+      "European goldfinch",
+      "common redshank",
+      "common ostrich",
+      "0.437"
+    ],
+    [
+      "common bream",
+      "zebrafish",
+      "European anchovy",
+      "-0.375"
+    ],
+    [
+      "yellowfin tuna",
+      "mahi-mahi",
+      "Wels catfish",
+      "1.688"
+    ],
+    [
+      "hummingbird hawk-moth",
+      "European mantis",
+      "silverfish",
+      "0.187"
+    ],
+    [
+      "common roach",
+      "grass carp",
+      "goldfish",
+      "0.812"
+    ],
+    [
+      "Eurasian woodcock",
+      "western yellow wagtail",
+      "great crested grebe",
+      "-0.125"
+    ],
+    [
+      "holly blue",
+      "mealworm",
+      "Phylloxera",
+      "-0.062"
+    ],
+    [
+      "three-spined stickleback",
+      "European perch",
+      "European seabass",
+      "0.000"
+    ],
+    [
+      "green-veined white",
+      "meadow brown",
+      "garden tiger moth",
+      "-0.500"
+    ],
+    [
+      "red panda",
+      "brown bear",
+      "snow leopard",
+      "-0.438"
+    ],
+    [
+      "black rat",
+      "capybara",
+      "European rabbit",
+      "-0.438"
+    ],
+    [
+      "baiji",
+      "Ganges river dolphin",
+      "okapi",
+      "0.688"
+    ],
+    [
+      "mandrill",
+      "bonobo",
+      "red squirrel",
+      "3.188"
+    ],
+    [
+      "Eurasian bullfinch",
+      "white wagtail",
+      "common blackbird",
+      "0.000"
+    ],
+    [
+      "grey seal",
+      "red squirrel",
+      "thylacine",
+      "-0.875"
+    ],
+    [
+      "common kestrel",
+      "European bee-eater",
+      "common quail",
+      "0.500"
+    ],
+    [
+      "Atlantic herring",
+      "European pilchard",
+      "common rudd",
+      "0.125"
+    ],
+    [
+      "hylotrupes",
+      "mealworm",
+      "cockchafer",
+      "-0.250"
+    ]
+  ]
+}

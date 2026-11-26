@@ -102,7 +102,7 @@ def s5_rank_vs_time(D: np.ndarray, ages: np.ndarray, tree: RefTree, lvl: np.ndar
     null = np.array([pooled(D[np.ix_(p, p)][iu])[0] for p in (_group_perm(groups, rng) for _ in range(n_perm))])
     pval = (1 + np.sum(np.abs(null) >= abs(obs))) / (n_perm + 1)
     return {"pooled_partial_spearman": float(obs), "pooled_raw_spearman": float(raw), "p_two_sided": float(pval),
-            "maxT_p": float(pval), "n_pairs_undated_excluded": n_undated,
+            "fixed_layer_p": float(pval), "n_pairs_undated_excluded": n_undated,
             "per_bin": {(RANK_ORDER[b] if b >= 0 else "none"): v for b, v in per.items()}}
 
 
@@ -165,7 +165,12 @@ def run_stage1b(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir,
     hd = distinct_mask(trip, heads)
     within = within_group_mask(trip, strata) & hd
     shared = shared_rank_level(trip.a, trip.b, trip.c, ranks, RANK_ORDER)
-    in_order = np.isin(shared, ["order", "family", "genus"]) & hd  # S2: head-noun-disjoint (deviation 13)
+    a, b, c = trip.a, trip.b, trip.c
+    order = ranks["order"]
+    same_order = (order[a] != "") & (order[a] == order[b]) & (order[b] == order[c])
+    fine_split = np.logical_or.reduce([(v[a] != "") & (v[c] != "") & (v[a] == v[b]) & (v[b] != v[c])
+                                       for v in (ranks["family"], ranks["genus"])])
+    in_order = same_order & hd & fine_split
     log.info("triplets: %d total, %d within-stratum head-disjoint, %d within-order head-disjoint",
              len(trip), int(within.sum()), int(in_order.sum()))
 
@@ -260,6 +265,11 @@ def run_stage1b(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir,
     if len(ages) != tree.N:
         raise ValueError("node ages do not match the current tree: rerun the 'dates' phase")
     sec["S5"] = s5_rank_vs_time(Dm, ages, tree, pair_rank_level(df), strata, cfg.n_perm, _rng(cfg, "S5"))
+    from phylogeo.verification.dating import evaluate_time
+
+    time_curve = evaluate_time(D_by_run[main], tree, df, ages, draws=cfg.n_perm, rng=_rng(cfg, "S5"))
+    sec["S5"]["maxT_p"] = time_curve["partial"]["p_global_max"]
+    sec["S5"]["layer_profiles"] = time_curve
     hp = holm({k: v["maxT_p"] for k, v in sec.items()})
     for k in sec:
         sec[k]["holm_p"] = hp[k]
@@ -306,7 +316,7 @@ def run_stage1b(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir,
              for name, Dx in reps.items()}
     per_stratum = {s: float(ta(Dm, trip, within & (strata[trip.a] == s))) for s in np.unique(strata)
                    if (within & (strata[trip.a] == s)).any()}
-    res = {"n_species": len(df), "n_triplets": len(trip), "n_within": int(within.sum()),
+    res = {"score_rule": "one-third for any minimum tie", "n_species": len(df), "n_triplets": len(trip), "n_within": int(within.sum()),
            "glove_coverage": float(gok.mean()), "H1": h1, "secondary": sec, "exploratory": expl,
            "point_ta_within": point, "ci95_ta_within": ci, "paired_diff_ci95": diffs,
            "models": model_res, "depth_profile": depth,
@@ -341,7 +351,7 @@ def run_conflict(cfg: RunConfig, load_conflict, layer_distances, act_dir, out_di
     for r in [cfg.name] + cfg.extra.get("controls", []):
         if (act_dir(r, "conflict") / "last.npy").exists():
             reps[r] = layer_distances(r, "conflict")[0]
-    gv, _ok = glove_vectors(names)
+    gv, glove_known = glove_vectors(names)
     reps["char3"] = char_ngram_distance(names)[None]
     reps["glove"] = cosine_distance(gv - gv.mean(0))[None]
     leaf_of = {i: (ctree.leaf_labels.index(f"ott{o}") if f"ott{o}" in ctree.leaf_labels else None)
@@ -361,7 +371,10 @@ def run_conflict(cfg: RunConfig, load_conflict, layer_distances, act_dir, out_di
         row = {"id": int(t.id), "anchor": t.anchor, "tree_closer": names[closer], "other": names[other],
                "matches_prereg_phylo": bool(closer == p), "type": t.conflict_type, "resolved": True}
         for r, D in reps.items():
-            row[r] = (D[:, a, closer] < D[:, a, other]).astype(int).tolist()
+            delta = D[:, a, other] - D[:, a, closer]
+            row[r] = (np.sign(delta) / 2 + .5).tolist()  # 1 tree, 0 other, half a point for a tie
+            if r == "glove" and not glove_known[[a, closer, other]].all():
+                row[r] = [None]
         rows.append(row)
     ok = [x for x in rows if x["resolved"]]
     layer = int(cfg.extra.get("conflict_layer", -1))
@@ -371,10 +384,16 @@ def run_conflict(cfg: RunConfig, load_conflict, layer_distances, act_dir, out_di
     summary = {}
     for r, D in reps.items():
         l = layer if D.shape[0] > 1 else 0
-        k = int(sum(x[r][l] for x in ok))
-        summary[r] = {"layer": l, "n": len(ok), "phylo_choice": k, "accuracy": k / len(ok),
-                      "binom_p_two_sided": float(binomtest(k, len(ok), 0.5).pvalue),
-                      "accuracy_by_layer": [sum(x[r][ll] for x in ok) / len(ok) for ll in range(D.shape[0])]}
+        vals = [x[r][l] for x in ok if x[r][l] is not None]
+        k, losses = vals.count(1), vals.count(0)
+        summary[r] = {"layer": l, "n": len(vals), "phylo_choice": k, "other_choice": losses,
+                      "ties": vals.count(.5), "unscorable": len(ok) - len(vals),
+                      "accuracy": float(np.mean(vals)) if vals else None,
+                      "binom_p_two_sided": float(binomtest(k, k + losses, .5).pvalue) if k + losses else None,
+                      "accuracy_by_layer": []}
+        for ll in range(D.shape[0]):
+            choices = [x[r][ll] for x in ok if x[r][ll] is not None]
+            summary[r]["accuracy_by_layer"].append(float(np.mean(choices)) if choices else None)
         log.info("conflict %s: %d/%d choose the tree-closer partner (layer %d)", r, k, len(ok), l)
     # Does the trained model differ from the controls on the same triplets? Exact two-sided McNemar
     # on the discordant triplets (final review M4; triplets share anchors, so this is descriptive).

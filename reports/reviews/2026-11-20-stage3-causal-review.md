@@ -1,5 +1,7 @@
 # Red-team review: stage-3 causal results (2026-11-20)
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 **Scope.** The final causal run (deviations 19–20), as written up in [experiment 04](../experiments/04-causal-behavior-stage3/experiment.md), the paper section "Behaviour and causal tests", the README and the summary.
 
 **Method.**

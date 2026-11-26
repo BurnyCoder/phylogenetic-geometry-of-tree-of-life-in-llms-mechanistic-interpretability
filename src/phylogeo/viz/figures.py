@@ -205,7 +205,7 @@ def fig_expected_pca(run) -> dict | None:
     _style(fig, 900).update_layout(legend={"title": {"text": "stratum (colour = super-group)"}, "itemsizing": "constant"})
     return rec("pca_expected", "Expected vs observed shape in the top two principal components", "mixed",
                "class arms, no visible nested tree",
-               "Top left is the shape a perfect tree code would give (the stage-1a synthetic positive control): nested "
+               "Top left is the shape a Brownian reference draw would give (the stage-1a synthetic positive control): nested "
                "clusters inside clusters. The model separates coarse groups (class arms) and, in late layers, orders "
                "animals along an aquatic-to-terrestrial axis; the nesting is not visible in two components, which hold "
                "a small share of the variance. The untrained network's top components are dominated by a few outlier names. Click "
@@ -221,7 +221,11 @@ def fig_h1_forest(run) -> dict | None:
     s = _load(RESULTS_DIR / run / "stage1b" / "results.json")
     if not s:
         return None
-    pt, ci, h1 = s["point_ta_within"], s["ci95_ta_within"], s["H1"]
+    from phylogeo.verification.publication import assemble
+    g, _, _, decision = assemble()
+    family = g["family"]
+    pt = {k: v["ta"] for k, v in family.items()}
+    ci = {k: v["ci"] for k, v in family.items()}
     reps = [r for r in CATEGORY if r in pt and r in ci]
     reps.sort(key=lambda r: pt[r])
     fig = make_subplots(1, 2, column_widths=[0.56, 0.44], horizontal_spacing=0.2,
@@ -243,16 +247,10 @@ def fig_h1_forest(run) -> dict | None:
     fig.add_vline(0.40, line_dash="dot", line_color=INK2, line_width=1, row=1, col=1,
                   annotation_text="smallest effect<br>of interest 0.40", annotation_position="bottom right",
                   annotation_font_size=11, annotation_font_color=INK2)
-    fig.add_scatter(x=[0.71], y=[DISPLAY["tree_oracle"]], mode="markers+text", name="reference oracle",
-                    legendgroup="reference oracle", showlegend=False, text=[f"{pt['tree_oracle']:.2f} (off scale)"],
-                    textposition="middle left", textfont={"color": AQUA, "size": 11},
-                    marker={"color": AQUA, "symbol": "triangle-right", "size": 12},
-                    hovertemplate=f"<b>{DISPLAY['tree_oracle']}</b><br>TA_within {pt['tree_oracle']:.3f} (off scale)"
-                                  "<extra>reference oracle</extra>", row=1, col=1)
     fig.update_xaxes(range=[0.2, 0.72], title_text="TA_within (chance = 1/3)", row=1, col=1)
-    req = h1["required_comparisons"]
+    req = [k for k in family if k != run]
     for r in req:
-        lo, hi = h1["diff_ci95_vs"][r]
+        lo, hi = family[r]["difference_ci"]
         d = pt[run] - pt[r]
         fig.add_scatter(x=[d], y=[DISPLAY[r]], mode="markers", showlegend=False,
                         marker={"color": BLUE, "size": 10},
@@ -264,13 +262,12 @@ def fig_h1_forest(run) -> dict | None:
                   annotation_font_size=11, annotation_font_color=INK2)
     fig.update_xaxes(title_text="difference in TA_within (family-block bootstrap)", row=1, col=2)
     _legend_below(_style(fig, 620))
-    sup = h1["supported"]
-    return rec("h1", "Primary test (H1): tree order inside coarse groups", "positive" if sup else "negative",
-               ("H1 supported" if sup else "H1 not supported") + f" (max-T p {_p(h1['maxT_p'])})",
-               "Rooted-triplet accuracy on triplets inside one stratum whose names share no head noun, at the "
-               f"cross-fitted layer {h1['modal_layer']}. The model beats every required untrained network and name "
-               "statistic (panel B: every paired CI excludes zero), but by a modest margin; the exact tree would score 1.0 and the "
-               "Linnaean-rank oracle shows what rank information alone gives.", fig, (1150, 640))
+    sup = decision["H1"]
+    return rec("h1", "Primary test of tree agreement within groups", "positive" if sup else "negative",
+               f"Family-block criterion {'met' if sup else 'unmet'}, max-T p {_p(g['models'][run]['p'])}",
+               f"Distinct final name words, layer {decision['layer']}. Left: node-averaged triplet accuracy. "
+               "Right: paired differences against each required control. Bars show percentile intervals from "
+               "resampling families at fixed modal layers. The paper also reports order-block sensitivity.", fig, (1150, 640))
 
 
 def fig_depth_profile(run) -> dict | None:
@@ -345,8 +342,10 @@ def fig_layer_profile(run) -> dict | None:
     fig = go.Figure()
     main = {"qwen35_2b": (BLUE, "solid", 3), "qwen35_2b_random": (GRAY, "solid", 2),
             "pythia410m_step0": (GRAY, "dot", 2), "pythia410m": (BLUE, "dot", 2)}
+    replay = _load(RESULTS_DIR / "scientific-verification/geometry.json")["models"]
+    scale = _load(RESULTS_DIR / "scientific-verification/scale.json")
     for r, rec_ in s["models"].items():
-        y = rec_["ta_within_by_layer"]
+        y = replay[r]["by_layer"] if r in replay else scale[r]["by_layer"]
         color, dash, w = main.get(r, (GRAY, "solid", 1))
         fig.add_scatter(x=[i / (len(y) - 1) for i in range(len(y))], y=y, mode="lines+markers", name=DISPLAY.get(r, r),
                         line={"color": color, "dash": dash, "width": w}, marker={"size": 5, "color": color},
@@ -357,7 +356,7 @@ def fig_layer_profile(run) -> dict | None:
         r5 = json.loads(f.read_text())
         if r5["run"] in s["models"]:
             continue
-        y = r5["ta_within_by_layer"]
+        y = scale[r5["run"]]["by_layer"]
         fig.add_scatter(x=[i / (len(y) - 1) for i in range(len(y))], y=y, mode="lines", name=r5["run"],
                         legendgroup="stage 5", legendgrouptitle_text="stage-5 models (click to show)",
                         line={"color": LIGHTGRAY, "width": 1.5}, visible="legendonly",
@@ -366,7 +365,7 @@ def fig_layer_profile(run) -> dict | None:
     fig.update_xaxes(title_text="relative layer depth (0 = embeddings, 1 = last layer)")
     fig.update_yaxes(title_text="TA_within")
     _style(fig, 520).update_layout(legend={"font": {"size": 11}})
-    y = s["models"][run]["ta_within_by_layer"]
+    y = replay[run]["by_layer"]
     peak = int(np.argmax(y))
     return rec("layers", "Across layers: when does tree order appear?", "positive",
                f"peaks at layer {peak} of {len(y) - 1} ({peak / (len(y) - 1):.0%} depth)",
@@ -382,16 +381,16 @@ def fig_secondary(run) -> dict | None:
     s = _load(RESULTS_DIR / run / "stage1b" / "results.json")
     if not s:
         return None
-    ph = s["exploratory"]["posthoc_vs_untrained"]
-    rows = [("S2_within_order", "S2: inside taxonomic orders"), ("S3_lexical_discordant", "S3: spelling points the wrong way"),
-            ("S4_cooccurrence_discordant", "S4: GloVe co-occurrence points the wrong way"),
-            ("char3_tie_lexically_neutral", "spelling neutral (post hoc)")]
+    g = _load(RESULTS_DIR / "scientific-verification/geometry.json")
+    rows = [("S2", "S2: family/genus split within order"), ("S3", "S3: uniquely wrong spelling choice"),
+            ("S4", "S4: uniquely wrong GloVe choice"), ("no_shared_trigram", "no shared trigram (exploratory)")]
     fig = go.Figure()
     for i, (k, label) in enumerate(rows):
-        v = ph[k]
-        lo, hi = v["qwen35_2b_ci95"]
-        beats = all(v[f"diff_ci95_vs_{c}"][0] > 0 for c in ["qwen35_2b_random", "pythia410m_step0"])
-        ylab = f"{label}<br>{v['n_triplets']} triplets · " + ("beats both untrained ✓" if beats else "≈ untrained ✗")
+        row = g[k] if k == "no_shared_trigram" else g["secondary"][k]
+        group = row["comparison"] if k == "no_shared_trigram" else row["comparisons"]
+        v = {name: result["ta"] for name, result in group.items()}
+        lo, hi = group[run]["ci"]
+        ylab = f"{label}<br>{row['triplets']} triplets"
         fig.add_scatter(x=[v["qwen35_2b_random"], v["pythia410m_step0"], v["qwen35_2b"]], y=[ylab] * 3, mode="lines",
                         line={"color": LIGHTGRAY, "width": 6}, showlegend=False, hoverinfo="skip")
         for r in ["qwen35_2b_random", "pythia410m_step0", "qwen35_2b"]:
@@ -406,43 +405,34 @@ def fig_secondary(run) -> dict | None:
     fig.update_xaxes(title_text="triplet accuracy (model with family-block 95% CI)")
     fig.update_yaxes(autorange="reversed")
     _legend_below(_style(fig, 520)).update_layout(margin={"l": 290})
-    return rec("secondary", "Beyond spelling and co-occurrence? Model vs untrained networks", "negative",
-               "S2–S4 matched by untrained networks",
-               "Registered secondary subsets (S2–S4) and a post-hoc spelling-neutral subset. Where spelling or GloVe "
-               "co-occurrence disagree with the tree, the trained model does no better than untrained networks, so "
-               "robustness to misleading spelling or co-occurrence is not shown. Where spelling carries no information "
-               "(names share no character 3-gram) it beats them, and the untrained networks are at chance there; "
-               "co-occurrence is not ruled out.", fig, (1100, 520))
+    return rec("secondary", "Within-order and lexical subsets", "mixed", "Conditional comparisons",
+               "Points compare the trained model with both untrained networks at their modal layers. "
+               "The model interval resamples families. The table gives multiplicity-adjusted tests. "
+               "The final subset conditions on names sharing no trigram.", fig, (1100, 520))
 
 
 def fig_conflict(run) -> dict | None:
-    c = _load(RESULTS_DIR / run / "conflict" / "conflict.json")
-    if not c:
+    if run != "qwen35_2b":
         return None
-    reps = [r for r in ["qwen35_2b", "qwen35_2b_random", "pythia410m_step0", "pythia410m", "char3", "glove"]
-            if r in c["summary"]]
-    trip = [t for t in c["triplets"] if t.get("resolved")]
-    ylab = [f"{t['anchor']}: <b>{t['tree_closer']}</b> or {t['other']}?" for t in trip]
-    Z = np.array([[t[r][c["summary"][r]["layer"]] if len(t[r]) > 1 else t[r][0] for r in reps] for t in trip])
-    xlab = [f"{DISPLAY[r]}<br>{c['summary'][r]['phylo_choice']}/{c['summary'][r]['n']} tree" for r in reps]
-    fig = go.Figure(go.Heatmap(z=Z, x=xlab, y=ylab, colorscale=[[0, ORANGE], [0.5, ORANGE], [0.5, BLUE], [1, BLUE]],
-                               zmin=0, zmax=1, xgap=2, ygap=2, showscale=False,
-                               text=np.where(Z == 1, "tree", "other"), texttemplate="%{text}",
-                               textfont={"size": 10, "color": "white"},
-                               customdata=np.array([[t["type"]] * len(reps) for t in trip]),
-                               hovertemplate="%{y}<br>%{x}<br>chose the <b>%{text}</b> partner<br>type: %{customdata}"
-                                             "<extra></extra>"))
+    c = _load(RESULTS_DIR / "scientific-verification/outcomes.json")["conflict"]
+    reps = list(c["summary"])
+    trip = [t for t in c["rows"] if t["resolved"]]
+    ylab = [f"{t['anchor']}: <b>{t['closer']}</b> or {t['other']}?" for t in trip]
+    z = [[t["choices"][k] for k in reps] for t in trip]
+    labels = [[{1: "tree", 0: "tie", -1: "other", None: "missing"}[v] for v in row] for row in z]
+    xlab = [f"{DISPLAY[k]}<br>{c['summary'][k]['win']} tree · {c['summary'][k]['tie']} tied" for k in reps]
+    fig = go.Figure(go.Heatmap(z=z, x=xlab, y=ylab, zmin=-1, zmax=1, xgap=2, ygap=2,
+                              colorscale=[[0, ORANGE], [.25, ORANGE], [.25, GRAY], [.75, GRAY], [.75, BLUE], [1, BLUE]],
+                              showscale=False, text=labels, texttemplate="%{text}", textfont={"size": 10, "color": "white"},
+                              hovertemplate="%{y}<br>%{x}<br>%{text}<extra></extra>"))
     fig.update_yaxes(autorange="reversed", tickfont={"size": 11})
     fig.update_xaxes(side="top", tickfont={"size": 11})
     _style(fig, 60 + 24 * len(trip), legend=False).update_layout(margin={"l": 330, "t": 90, "b": 20})
     s = c["summary"][run]
-    return rec("conflict", "Phylogeny-vs-folk conflict triplets (ground truth in bold)", "negative",
-               f"tree partner in {s['phylo_choice']}/{s['n']}, like untrained networks",
-               "For each hand-picked triplet the bold name is the tree-closer partner (ground truth from the Open Tree "
-               "topology). Blue = the representation is closer to the tree partner, orange = closer to the folk / "
-               "ecological / lexical partner. Neural representations at the confirmatory layer; character 3-grams and "
-               "GloVe as name statistics. The trained model mostly follows the folk partner, and so do untrained "
-               "networks.", fig, (1100, 80 + 24 * len(trip)))
+    return rec("conflict", "Tree choices on hand-picked conflict items", "example",
+               f"{s['win']} tree, {s['tie']} tied, {s['loss']} other",
+               "Bold names are the closer partners on the frozen topology. Colors distinguish the two strict choices "
+               "and equal distances. Species recur across items and overlap the primary panel.", fig, (1100, 80 + 24 * len(trip)))
 
 
 def fig_probe(run) -> dict | None:
@@ -462,21 +452,19 @@ def fig_probe(run) -> dict | None:
                     hovertemplate="<b>%{x}</b><br>%{y:.3f} (± SD over seeds)<extra></extra>", row=1, col=col)
     fig.add_hline(pr["class_only_predictor_pearson_all_pairs"], line_dash="dash", line_color=AQUA, row=1, col=1,
                   annotation_text="class-only predictor", annotation_font_color=AQUA, annotation_font_size=11)
-    au = _load(RESULTS_DIR / run / "audit" / "results.json")  # raw distances on the SAME held-out pairs (audit)
-    raw = (au["probe_vs_raw_heldout"]["raw_angular_heldout_within_stratum_spearman"] if au
-           else pr["raw_angular_within_stratum_spearman_all_species"])
+    raw = _load(RESULTS_DIR / "scientific-verification/geometry.json")["raw_probe_comparison"]["mean"]
     fig.add_hline(raw, line_dash="dash", line_color=BLUE, row=1, col=2,
-                  annotation_text="raw distances, no probe" + (" (same held-out pairs)" if au else " (all species)"),
+                  annotation_text="raw distances (same held-out pairs)",
                   annotation_font_color=BLUE, annotation_font_size=11)
     fig.update_yaxes(title_text="held-out families (5-fold)", row=1, col=1)
     _style(fig, 520, legend=False)
     beaten = pr["class_blob"]["test_test_pearson"][0] >= pr["model"]["test_test_pearson"][0]
     return rec("probe", "Goodfire-style 10-d flat probe: tree or coarse groups?", "negative" if beaten else "positive",
-               "class-only input does as well" if beaten else "beats the class-only input",
+               "class-only input has higher mean r" if beaten else "model has higher mean r",
                "Probe trained to predict tree distance from representations, evaluated on held-out families (error bars "
-               "= SD over seeds). An input that carries only class membership (aqua) matches or beats the model on all "
-               "pairs, so that headline correlation mostly measures coarse groups. Inside strata the probe "
-               + ("scores below the raw distances on the same held-out pairs: it adds no within-group order."
+               "= SD over seeds). The class-centroid-plus-noise control produces a high global correlation. "
+               "These historical fits used a full-panel layer choice and target scale. Inside strata the probe "
+               + ("has a lower mean rank correlation than the raw distances on the same pairs."
                   if raw > pr["model"]["test_test_within_stratum_spearman"][0] else "adds little over raw distances."),
                fig, (1100, 540))
 
@@ -487,7 +475,7 @@ def fig_treeness(run) -> dict | None:
         return None
     d, nj = s2["delta_rel"], s2["nj_rf"]
     fig = make_subplots(1, 2, horizontal_spacing=0.14,
-                        subplot_titles=["A. Gromov δ_rel (0 = perfect tree metric)",
+                        subplot_titles=["A. Sampled base-point relative hyperbolicity",
                                         "B. Neighbour-joining tree vs reference (normalized RF)"])
     a = [("exact tree", d["tree_oracle"], 0, AQUA), ("class clusters", d["class_blob_mean"], d["class_blob_sd"], ORANGE),
          ("Qwen3.5-2B", d["model"], 0, BLUE), ("matched Gaussian", d["matched_gaussian_mean"], d["matched_gaussian_sd"], GRAY)]
@@ -513,16 +501,17 @@ def fig_causal(run) -> dict | None:
     s3 = _load(RESULTS_DIR / run / "stage3" / "results.json")
     if not s3 or "class_control" not in s3:
         return None
-    a, w, cc, hp = s3["C_abl"], s3["C_swap"], s3["class_control"], s3["causal_holm"]
+    a, w, cc = s3["C_abl"], s3["C_swap"], s3["class_control"]
+    audit = _load(RESULTS_DIR / "scientific-verification/outcomes.json")["causal"]["expanded"]
     fig = make_subplots(1, 2, horizontal_spacing=0.12,
-                        subplot_titles=[f"A. Ablation (C-abl): Holm p {_p(hp['C_abl'])}",
-                                        f"B. Interchange (C-swap): Holm p {_p(hp['C_swap'])}"])
+                        subplot_titles=[f"A. Ablation: rank p {_p(audit['ablation_rank'])}",
+                                        f"B. Post-edit donor prevalence: rank p {_p(audit['donor_prevalence_rank'])}"])
     fig.add_histogram(x=a["random_mean_drops"], nbinsx=25, marker={"color": GRAY, "line": {"color": SURFACE, "width": 1}},
                       name=f"{a['n_random_subspaces']} random subspaces", legendgroup="rand",
                       hovertemplate="drop %{x}<br>%{y} subspaces<extra>random</extra>", row=1, col=1)
     fig.add_histogram(x=w["switch_rate_random"], marker={"color": GRAY, "line": {"color": SURFACE, "width": 1}},
                       showlegend=False, legendgroup="rand", xbins={"size": 1 / w["n_pairs"]},
-                      hovertemplate="switch rate %{x}<br>%{y} subspaces<extra>random</extra>", row=1, col=2)
+                      hovertemplate="donor prevalence %{x}<br>%{y} subspaces<extra>random</extra>", row=1, col=2)
     ymax = {1: np.histogram(a["random_mean_drops"], bins=25)[0].max(),
             2: np.unique(np.round(np.array(w["switch_rate_random"]) * w["n_pairs"]), return_counts=True)[1].max()}
     for col, val, name, color, dash in [(1, a["mean_drop_logp_probe"], "phylogeny probe subspace", BLUE, "solid"),
@@ -538,18 +527,15 @@ def fig_causal(run) -> dict | None:
         pad = 0.08 * (max(vals) - min(vals))
         fig.update_xaxes(range=[min(vals) - pad, max(vals) + pad], row=1, col=col)
     fig.update_xaxes(title_text="mean drop in log P(correct class) [nats]", row=1, col=1)
-    fig.update_xaxes(title_text="share of 200 pairs whose class answer switches", row=1, col=2)
+    fig.update_xaxes(title_text="share of pairs predicting the donor class", row=1, col=2)
     fig.update_yaxes(title_text="random subspaces", row=1, col=1)
     _legend_below(_style(fig, 520)).update_layout(barmode="overlay")
-    spec = cc["phylogeny_specific"]
-    return rec("causal", "Causal tests: does the model use the probe subspace?", "positive" if spec else "mixed",
-               ("C-swap " + ("✓" if hp["C_swap"] < 0.05 else "✗") + ", C-abl " + ("✓" if hp["C_abl"] < 0.05 else "✗")
-                + ", " + ("phylogeny-specific" if spec else "not phylogeny-specific")),
-               "Gray: the null distribution from variance-matched random 10-d subspaces at the same layer, on held-out "
-               "species. Blue: the phylogeny probe subspace. Orange: a probe trained on class membership only. Ablation "
-               "of the probe is inside the random tail; interchange beats every random subspace but switches few "
-               "answers, and the class-only subspace does as well on both: the subspace is used for coarse class "
-               "answers, not shown to be used for phylogeny.", fig, (1100, 520))
+    low, high = audit["new_donor_bounds"]
+    return rec("causal", "Ablation and donor-class predictions", "mixed", "Registered switch comparison unevaluable",
+               f"Gray bars are random-subspace results. The probe and class-only edits are shown against those draws. "
+               f"Donor answers changed from {audit['before']} before to {audit['after']} after the probe edit. "
+               f"Between {low} and {high} were newly donor answers. The historical random-swap distribution "
+               "measures post-edit prevalence.", fig, (1100, 520))
 
 
 def fig_habitat(run) -> dict | None:
@@ -560,12 +546,13 @@ def fig_habitat(run) -> dict | None:
     mam = [h for h in hs if h["stratum"] == "mammals" and h.get("forstrat_mammal")]
     bird = [h for h in hs if h["stratum"] == "birds" and h.get("water_pct_bird") not in ("", None)]
     t = e["tests"]
+    family = _load(RESULTS_DIR / "scientific-verification/outcomes.json")["habitat"]["holm"]
     lab = {"M": "marine", "G": "ground", "Ar": "arboreal", "A": "aerial", "S": "scansorial"}
     fig = make_subplots(1, 2, horizontal_spacing=0.12,
                         subplot_titles=[f"A. Held-out mammals by foraging stratum (marine < ground: Holm p "
-                                        f"{_p(t['M1_marine_lt_ground']['holm_p'])})",
+                                        f"{_p(family['M1'])})",
                                         f"B. Held-out birds: water foraging (ρ = {t['B1_water_negative']['rho']:.2f}, "
-                                        f"Holm p {_p(t['B1_water_negative']['holm_p'])})"])
+                                        f"Holm p {_p(family['B1'])})"])
     cats = sorted({h["forstrat_mammal"] for h in mam}, key=lambda k: np.median([h["axis_score"] for h in mam
                                                                              if h["forstrat_mammal"] == k]))
     for k in cats:
@@ -581,24 +568,21 @@ def fig_habitat(run) -> dict | None:
                     hovertemplate="<b>%{text}</b><br>water foraging %{x}%<br>axis score %{y:.2f}<extra></extra>",
                     row=1, col=2)
     fig.update_yaxes(title_text=f"layer-{e['layer']} PC1 score (low = aquatic end)", row=1, col=1)
-    fig.update_xaxes(title_text="% of diet foraged in or on water (EltonTraits)", row=1, col=2)
+    fig.update_xaxes(title_text="foraging in or around water (EltonTraits, %)", row=1, col=2)
     _style(fig, 520, legend=False)
-    aq = t["M1_marine_lt_ground"]["holm_p"] < 0.05 and t["B1_water_negative"]["holm_p"] < 0.05
-    ae = t["B2_aerial_positive"]["holm_p"] < 0.05 and t["M2_aerial_gt_ground"].get("holm_p", 1) < 0.05
-    return rec("habitat", "Addendum A: an aquatic-to-terrestrial axis, tested on held-out species",
-               "positive" if aq and ae else "mixed" if aq or ae else "negative",
-               f"aquatic end {'confirmed' if aq else 'not confirmed'}, aerial end {'confirmed' if ae else 'not confirmed'}",
-               "The axis was found post hoc in stage 1a and then tested as a registered directional hypothesis on "
-               "species not used to find it. Marine mammals (orange) and water-foraging birds score low; the aerial "
-               "prediction failed (no bats among held-out mammals; aerial birds do not score high). Names with water "
-               "words were not controlled.", fig, (1100, 540))
+    return rec("habitat", "Foraging traits on held-out species", "mixed", "Aquatic associations in mammals and birds",
+               "The axis and its direction were chosen on discovery species. The labels show four-slot Holm p-values "
+               "for species-level tests. The table also gives within-order sensitivity. The aerial bird criterion was "
+               "unmet and the mammal sample contained no aerial group.", fig, (1100, 540))
 
 
 def fig_scale(run) -> dict | None:
     s5 = _load(RESULTS_DIR / "stage5" / "summary.json")
     if not s5:
         return None
-    runs = s5["runs"]
+    scale = _load(RESULTS_DIR / "scientific-verification/scale.json")
+    runs = [dict(r, crossfit_ta_within=scale[r["run"]]["crossfit"], maxT_p=scale[r["run"]]["p"]) for r in s5["runs"]]
+    geometry = _load(RESULTS_DIR / "scientific-verification/geometry.json")
     fig = make_subplots(1, 2, horizontal_spacing=0.1, subplot_titles=["A. Model size (cross-fitted TA_within)",
                                                                        "B. Training dynamics: Pythia-1.4B checkpoints"])
     fams = [("Qwen3.5", lambda m: "qwen3.5" in m, BLUE, "circle", "lines+markers+text"),
@@ -619,7 +603,10 @@ def fig_scale(run) -> dict | None:
                     customdata=[[r["step"], r["maxT_p"]] for r in ck],
                     hovertemplate="step %{customdata[0]}<br>TA_within %{y:.3f}<br>max-T p %{customdata[1]}<extra></extra>",
                     row=1, col=2)
-    for name, v in s5["reference_ta_within"].items():
+    for name in s5["reference_ta_within"]:
+        if name not in geometry["family"]:
+            continue
+        v = geometry["models"][name]["crossfit"] if name in geometry["models"] else geometry["family"][name]["ta"]
         fig.add_hline(v, line_dash="dot", line_color=LIGHTGRAY, row=1, col=1, annotation_text=DISPLAY.get(name, name),
                       annotation_font_size=10, annotation_font_color=MUTED, annotation_position="bottom right")
     for col in (1, 2):
@@ -628,11 +615,10 @@ def fig_scale(run) -> dict | None:
     fig.update_xaxes(type="log", title_text="training step (log; step 0 plotted at 0.5)", row=1, col=2)
     fig.update_yaxes(title_text="cross-fitted TA_within", row=1, col=1)
     _legend_below(_style(fig, 540))
-    return rec("scale", "More models: grows with scale, learned during training", "positive", "descriptive (stage 5)",
-               "Same species, triplets and metric for every model (199 permutations, lighter than stage 1b). Dotted "
-               "lines: untrained networks (cross-fitted, like the model values) and name-statistic references. Parameters are "
-               "nominal sizes. Within each family the effect grows with size; in "
-               "Pythia-1.4B it stays near chance up to step 512 and appears by step 1000.", fig, (1150, 560))
+    return rec("scale", "Model size and checkpoint trajectories", "example", "Descriptive comparisons",
+               "Each point uses saved activations, the written tie rule and family cross-fitting. Step zero is offset "
+               "to show it on the log scale. Checkpoints share one training trajectory. Size, data, architecture and "
+               "training history can covary across final models.", fig, (1150, 560))
 
 
 def fig_sensitivity(run) -> dict | None:
@@ -667,9 +653,9 @@ def fig_sensitivity(run) -> dict | None:
     fig.update_yaxes(tickvals=list(range(len(rows))), ticktext=[r[0] for r in rows], autorange="reversed", showgrid=False)
     fig.update_xaxes(title_text=f"TA_within at layer {s6['layer']} (one dot per repetition)")
     _legend_below(_style(fig, 480))
-    return rec("sensitivity", "Sensitivity: seeds, templates, species subsamples", "positive", "robust",
+    return rec("sensitivity", "Sensitivity: seeds, templates, species subsamples", "example", "Archived perturbations",
                f"{n} repetitions per perturbation. On every draw where controls were recomputed, the model stays above "
-               "the strongest untrained or name-statistic control.", fig, (1100, 500))
+               "the largest of the controls included on that particular draw. The control set varies by perturbation.", fig, (1100, 500))
 
 
 # ======================================================================================
@@ -1098,7 +1084,7 @@ GLYPH = {"circle": "●", "diamond": "◆", "square": "■"}
 
 def _within_columns(w3: dict) -> list[tuple[str, str]]:
     """(key, label) of the three columns: the expected tree shape, the model, its untrained twin."""
-    return [("expected", "Expected: a perfect tree code"), (w3["main"], f"Qwen3.5-2B, layer {w3['layer']}"),
+    return [("expected", "Expected: a Brownian reference draw"), (w3["main"], f"Qwen3.5-2B, layer {w3['layer']}"),
             (w3["control"], "Qwen3.5-2B, random weights")]
 
 
@@ -1288,7 +1274,7 @@ def export_within3d_layers_gif(w3: dict, groups: list, gds: dict, path: Path, st
 
 
 def fig_within3d(run: str, tree, df) -> dict | None:
-    """3-D views of tree order inside the large groups: a perfect tree code, the model, and its random-weight
+    """3-D views of tree order inside the large groups: a Brownian reference draw, the model, and its random-weight
     twin, each with the reference subtree fitted into the cloud (post hoc; data from ``within3d.json``)."""
     w3 = _load(RESULTS_DIR / run / "viz" / "within3d.json")
     if not w3 or not w3["groups"]:
@@ -1302,7 +1288,7 @@ def fig_within3d(run: str, tree, df) -> dict | None:
                + (f" ({', '.join(clear['3d'])})" if clear["3d"] else "")
                + f", in {len(clear['full'])}/{len(groups)} in all dimensions (per-group CIs)")
     caption = (f"Post hoc, descriptive. Groups: every group with at least {w3['min_nodes']} decision nodes in the H1 "
-               f"test (one row each in the static view). Left: a perfect tree code (Brownian motion on the reference "
+               f"test (one row each in the static view). Left: a Brownian reference draw (Brownian motion on the reference "
                f"tree), middle: "
                f"Qwen3.5-2B at layer {w3['layer']} (the H1 layer), right: the same network with random weights. Every "
                "panel goes through one pipeline: species vectors scaled to unit length (the geometry the cosine-based "
@@ -1315,7 +1301,7 @@ def fig_within3d(run: str, tree, df) -> dict | None:
                "species (1 = no better than a random assignment). The tree fit uses every species, including names that "
                "share a head noun (\"… beetle\"), so shared words can lower it even in the random-weight network; the "
                "triplet accuracies exclude such names, as H1 does. Three dimensions keep only part of the order, even "
-               "for the perfect tree code. Drag to rotate, hover for names, pick a group above.")
+               "for the Brownian reference draw. Drag to rotate, hover for names, pick a group above.")
     r = rec("within3d", "Tree order inside groups, in 3-D: trained vs random weights, with the tree fitted in", kind,
             verdict, caption, _within_dropdown(w3, groups, gds), (1200, 400 * len(groups)))
     r["png_fig"] = _within_grid(w3, groups, gds)
@@ -1347,8 +1333,8 @@ def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
             for name, g in groups]
     return (f'<p align="center"><b>{r["title"]}</b> (animated here; interactive on the site)<br>'
             f'{KIND_LABEL[r["kind"]]}: {r["verdict"]}</p>\n\n'
-            + gif("within3d_layers", f"Through the layers: both networks sweep layers 0 → {nL - 1} (the perfect tree "
-                                     "code has no layers); each title shows that layer's numbers")
+            + gif("within3d_layers", f"Through the layers: both networks sweep layers 0 → {nL - 1} (the Brownian "
+                                     "reference has no layers); each title shows that layer's numbers")
             + gif("within3d", f"At the H1 layer ({w3['layer']}), rotating; the table below is at this layer")
             + "*Generated by `python -m phylogeo.run --phases viz_data,site` from `results/`; post hoc, descriptive.* "
             "In the layer sweep, each layer has its own projection; consecutive layers are rotated onto each other "
@@ -1361,8 +1347,8 @@ def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
             "2008](https://doi.org/10.1111/j.1558-5646.2008.00519.x); phytools `phylomorphospace3d`, [Revell 2012]"
             "(https://doi.org/10.1111/j.2041-210X.2011.00169.x)).\n\n"
             f"| group (decision nodes) | triplet accuracy, 3-D view: trained / random weights [difference, 95% CI] | "
-            f"all {D} dimensions: trained / random weights [difference, 95% CI] | tree fit, lower = better: perfect "
-            "tree / trained / random weights |\n|---|---|---|---|\n" + "\n".join(rows)
+            f"all {D} dimensions: trained / random weights [difference, 95% CI] | tree fit, lower = better: Brownian "
+            "reference / trained / random weights |\n|---|---|---|---|\n" + "\n".join(rows)
             + f"\n\nCIs: paired family-block bootstrap ({w3['n_boot']} draws) of trained minus random weights, on the "
             f"H1 triplets of each group. The difference excludes zero in {len(r['clear']['3d'])} of {len(groups)} groups "
             f"in the 3-D view and in {len(r['clear']['full'])} of {len(groups)} in all {D} dimensions. Group by group, "
@@ -1371,7 +1357,7 @@ def within3d_md(r: dict, png_dir: str = "reports/figures/viz") -> str:
 
 
 def fig_group_view(run: str, tree, df, group: str = "birds") -> dict | None:
-    """Static side-by-side view of one group at the H1 layer: the perfect tree code (ground truth), the model and
+    """Static side-by-side view of one group at the H1 layer: the Brownian reference draw (ground truth), the model and
     its random-weight twin, each seen from the camera angle where its fitted tree looks most tree-like
     (:func:`phylogeo.viz.pca.best_view`, the same rule for every panel), drawn flat (orthographic) with names."""
     from phylogeo.viz.pca import fit_tree_positions
@@ -1381,7 +1367,7 @@ def fig_group_view(run: str, tree, df, group: str = "birds") -> dict | None:
         return None
     g, cols = w3["groups"][group], _within_columns(w3)
     gd = _within_group(g, df, tree)
-    titles = [f"<b>{'Ground truth: a perfect tree code' if key == 'expected' else label}</b><br>triplet accuracy: "
+    titles = [f"<b>{'Ground truth: a Brownian reference draw' if key == 'expected' else label}</b><br>triplet accuracy: "
               f"this view {g['panels'][key]['view']['ta_2d']:.3f} · 3-D {g['panels'][key]['ta_3d']:.3f} · all "
               f"{w3['hidden_size']} dims {g['panels'][key]['ta_full']:.3f}<br>tree fit: this view "
               f"{g['panels'][key]['view']['fit_ratio_2d']:.2f} · 3-D {g['panels'][key]['fit_ratio']:.2f} "
@@ -1418,8 +1404,8 @@ def fig_group_view(run: str, tree, df, group: str = "birds") -> dict | None:
 
     v = {k: g["panels"][k]["view"]["fit_ratio_2d"] for k, _ in cols}
     r = rec(f"view_{group.replace(' ', '_')}", f"{group.capitalize()} at layer {w3['layer']}, each panel from the angle "
-            "where its tree looks best: ground truth vs trained vs random weights", "example",
-            f"tree fit in the best view: ground truth {v['expected']:.2f} · trained {v[w3['main']]:.2f} · random "
+            "at the optimized viewing angle: reference, trained and random weights", "example",
+            f"tree fit in the best view: Brownian reference {v['expected']:.2f} · trained {v[w3['main']]:.2f} · random "
             f"weights {v[w3['control']]:.2f} (1 = random species)",
             group_view_caption(w3, g, group, len(df), len(TEMPLATES)), fig, (1650, 800))
     r["in_gallery"] = False  # shown at the top of the README instead
@@ -1526,13 +1512,17 @@ def readme_gallery_md(figs: list[dict], png_dir: str = "reports/figures/viz", pe
             + hero + "<table>\n" + "\n".join(rows) + "\n</table>\n")
 
 
-def export_pngs(figs: list[dict], out: Path) -> dict[str, Path]:
+def export_pngs(figs: list[dict], out: Path, changed: set[str] | None = None) -> dict[str, Path]:
     """Static PNG copy of every figure (kaleido, uses the installed Chrome) for the README and paper."""
     out.mkdir(parents=True, exist_ok=True)
     paths = {}
     for r in figs:
         w, h = r["png_size"]
         p = out / f"{r['key']}.png"
+        if changed is not None and r["key"] not in changed and p.is_file() and all(
+                (out / f"{name}.gif").is_file() for name in r.get("gifs", {})):
+            paths[r["key"]] = p
+            continue
         r.get("png_fig", r["fig"]).write_image(p, width=w, height=h, scale=1.6)  # static layout may differ from the site's
         paths[r["key"]] = p
         for name, make in r.get("gifs", {}).items():  # animated records also get GIFs for the README

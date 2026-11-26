@@ -1,5 +1,7 @@
 # Experiment 08 (stage 6): sensitivity
 
+The recorded draws vary sampling, templates and probe seeds. Control coverage varies across perturbations. These summaries give within-protocol stability. They do not measure variation across independently trained base models. [Independent analysis](../../reviews/2026-11-26-scientific-audit.md#ablations-sensitivity-and-model-scale) · [Dated original experiment record](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/cc36b9134981497d6006359183261381c25177ac/reports/experiments/08-sensitivity-stage6/experiment.md)
+
 **Status:** done 2026-11-20. The run is planned run R6-sens in [planned-runs](../../planned-runs.md).
 - **Command:**
   ```powershell
@@ -32,17 +34,3 @@ A result that depends on one of these draws is not a result. Each source is vari
 | Flat-probe seed (sets both folds and initialization) | 20 fresh seeds, disjoint from the stage-2 seeds | Held-out-family r; within-stratum held-out Spearman |
 
 The controls recomputed on every triplet and species draw are random-init Qwen3.5-2B, Pythia-410m step 0, character 3-grams, name token count and log popularity. The "margin" is the model's TA_within minus the **best** of these controls on the same draw.
-
-## Results in words
-- **Triplet sampling and K barely matter.** The spread across triplet seeds is tiny compared with the gap to the best control, and K changes nothing material.
-- **Templates barely matter.** Any half of the templates, any leave-one-out set and even a **single** template give nearly the same TA_within. The selected layer is the same (layer 6) for almost every template subset. A few single templates peak in a late layer instead.
-- **Species subsampling is the largest source of spread, but the model wins every time.** Removing a random 20% of species moves TA_within the most of all perturbations. On every one of the 20 draws the model still beats the best control on the same draw.
-- **The cross-fitted estimate and its layer are stable** across family-split seeds; the modal layer is 6 in almost all of them.
-- **The probe is stable across seeds,** both overall and within strata.
-
-## Interpretation
-The primary result, within-stratum tree order beyond untrained networks and name statistics, is not an artifact of one triplet sample, one prompt set, one species list or one split. The main uncertainty comes from *which species* are in the set. This is what the family-block bootstrap CI of stage 1b already models.
-
-## Learnings
-- Recompute the controls on the *same* perturbed draw and report the paired margin. The marginal spreads alone overstate uncertainty about the comparison.
-- With per-template centering and a last-token readout, the prompt wording is a minor factor for this model, so the representation is largely prompt-invariant.

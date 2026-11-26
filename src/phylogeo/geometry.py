@@ -52,13 +52,17 @@ def angular_distance(V: np.ndarray) -> np.ndarray:
 def knn_graph(D: np.ndarray, k: int) -> csr_matrix:
     """Symmetric kNN graph: edge i-j if j is among i's k nearest or vice versa, weight D[i, j]."""
     n = D.shape[0]
-    order = np.argsort(D, axis=1)[:, 1 : k + 1]  # skip self (distance 0)
-    rows = np.repeat(np.arange(n), k)
-    cols = order.ravel()
-    W = np.zeros_like(D)
-    W[rows, cols] = D[rows, cols]
-    W = np.maximum(W, W.T)  # symmetrize
-    return csr_matrix(W)
+    if not 1 <= k < n:
+        raise ValueError("k must be between one and the number of other species")
+    ranked = np.array(D, dtype=float, copy=True)
+    np.fill_diagonal(ranked, np.inf)
+    neighbours = np.argsort(ranked, axis=1, kind="stable")[:, :k]
+    keep = np.zeros((n, n), dtype=bool)
+    keep[np.arange(n)[:, None], neighbours] = True
+    a, b = np.where(keep | keep.T)
+    # An explicitly stored zero is a valid edge between identical representations.
+    # https://docs.scipy.org/doc/scipy/reference/sparse.csgraph.html
+    return csr_matrix((D[a, b], (a, b)), shape=D.shape)
 
 
 def smallest_connected_k(D: np.ndarray, k_max: int | None = None) -> int:
@@ -78,7 +82,7 @@ def knn_geodesic(D: np.ndarray, k: int | None = None) -> tuple[np.ndarray, int]:
 
 
 def split_half_reliability(X: np.ndarray, rng: np.random.Generator, n_splits: int = 20) -> np.ndarray:
-    """Noise ceiling per layer: Spearman between cosine-distance matrices from two random
+    """Split-half template reliability per layer: Spearman between distance matrices from two random
     template halves, Spearman-Brown corrected to the full template count. Returns [L]."""
     from phylogeo.stats.mantel import mantel_r
 
