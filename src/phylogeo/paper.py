@@ -5,7 +5,7 @@ import subprocess
 from pathlib import Path
 
 from phylogeo.config import REPO_ROOT
-from phylogeo.verification.publication import section_texts
+from phylogeo.verification.publication import neighbor_examples, section_texts, src
 
 REPORTS = REPO_ROOT / "reports"
 
@@ -67,8 +67,8 @@ def build_paper() -> Path:
         raise RuntimeError("Building the paper requires Pandoc with the Typst writer.")
     sections = section_texts()
     architecture_png(REPORTS / "figures/architecture.png")
-    def prose(title):
-        md = f"## {title}\n\n{sections[title]}\n"
+    def prose(title, body=None):
+        md = f"## {title}\n\n{sections[title] if body is None else body}\n"
         return subprocess.run([pandoc, "-f", "gfm", "-t", "typst", "--wrap=none"], input=md, encoding="utf-8",
                               stdout=subprocess.PIPE, check=True).stdout
 
@@ -87,6 +87,40 @@ def build_paper() -> Path:
 #align(center)[#text(size: 19pt, weight: "bold")[Phylogenetic geometry of animal names in language models]
 #linebreak() Libor “Burny” Burian · 26 November 2026]
 """
+    readout = (
+        "Wikidata and English Wikipedia supplied candidates, common names and sitelinks. Selection used broad taxonomic groups and a family cap. "
+        "Open Tree supplied the induced topology. NCBI-first ranks, with Open Tree fallback, annotate the tips. "
+        "A deep sister pair can have a longer edge-count path than a shallow outgroup, so the shared ancestor determines the correct pair on each resolved triple. "
+        + src("Frozen panel", "data/species.csv") + " " + src("Selection and amendments", "reports/preregistration.md") + "\n\n"
+        "The archived Qwen runs used its text decoder in chat format. Token offsets located each name in several sentence frames. "
+        "The last name token supplied the primary readout. The embedding layer can already encode a shared final token. "
+        "Untrained networks, spelling, the input embedding, token count and sitelinks are the primary controls. Static GloVe embeddings and a rank oracle provide additional comparisons. "
+        + src("Prompt construction", "src/phylogeo/prompts.py") + " " + src("Baseline tables", "results/qwen35_2b/SUMMARY.md#stage-1b") + "\n\n"
+        "Goodfire’s bacterial genome comparison motivated graph shortest paths and an angular distance probe with clade holdouts. Engels et al. found calendar circles in language-model features. "
+        "Modell et al. describe conditions under which distances along a manifold recover conceptual distances. Work on lexical hierarchies and co-occurrence gives a competing explanation for a tree-like arrangement of names. "
+        "[Goodfire](https://www.goodfire.com/research/phylogeny-manifold) · [Engels et al.](https://arxiv.org/abs/2405.14860) · "
+        "[Modell et al.](https://arxiv.org/abs/2505.18235) · [Park et al.](https://arxiv.org/abs/2406.01506) · "
+        "[Nava and Wyart](https://arxiv.org/abs/2605.23821) · " + src("Literature review", "reports/literature-review.md"))
+    probe_design = (
+        "The angular probe applies a learned linear map to PCA coordinates. A learned scale converts angular separation into predicted tree distance. "
+        "The loss combines squared distance error with a reconstruction term. Historical cross-validation assigned whole families to folds. Shuffled targets, random weights and a class-centroid-plus-noise input check different explanations for a good fit. "
+        "Within a stratum, probe and raw distances can be compared on the same held-out pairs. " + src("Probe implementation", "src/phylogeo/probes/flat.py") + " "
+        + src("Fold design and limitations", "reports/experiments/03-geometry-probes-stage2/experiment.md") + "\n\n"
+        "Raw text, per-dimension standardization and within-stratum centering yield estimates close to the main score on this panel. The token readout and common versus scientific name choice give larger changes. "
+        "Species subsampling produces more variation than triplet resampling in the archived draws. The template runs record model-only scores. "
+        + src("Ablations", "results/qwen35_2b/stage4/results.json") + " " + src("Per-draw scores", "results/qwen35_2b/stage6/results.json"))
+    visual_checks = (
+        "The early stage compared uncolored and labeled projections with the embedding layer, random weights, calendar words and a simulated Brownian tree. "
+        "Broad class clusters can produce a short tree overlay. A calendar loop illustrates what an ordered low-dimensional feature looks like in this pipeline. "
+        "The habitat hypothesis arose after inspection of the discovery plots. The subsequent fixed-axis calculation used different species. "
+        + src("Discovery record", "reports/experiments/01-pca-shape/experiment.md") + " " + src("Held-out habitat", "reports/experiments/06-habitat-addendum/experiment.md"))
+    examples = (
+        "The query is the species with the most Wikidata sitelinks in each broad group, chosen by the same rule throughout. "
+        "Each column lists its first archived neighbor. The neural representations use their own selected layers. "
+        "The tree ranks by deepest shared ancestor, then by edge count. Remaining distance ties use frozen row order. "
+        + src("Selection rule", "src/phylogeo/examples.py") + "\n\n" + neighbor_examples(compact=True) + "\n\n"
+        "The full output lists three neighbors per query under every representation, including trained Pythia and step-zero Pythia. "
+        + src("Full comparison table", "results/RESULTS.md#nearest-neighbor-examples") + " " + src("Original examples", "results/qwen35_2b/examples/neighbors.json"))
     pages = [
         preamble + prose("Abstract") + prose("Question and prior work") + prose("Registration and chronology")
         + figure("figures/architecture.png", "Data, model readouts, reference annotations and evaluation stages in the original experiment. The reanalysis starts with archived readouts.", 6.4),
@@ -99,7 +133,14 @@ def build_paper() -> Path:
         + prose("Exploratory geometry, probes and power"),
         prose("Ablations, sensitivity and model scale") + figure("figures/viz/scale.png", "Archived checkpoint trajectories. Final models differ in several characteristics. The audit identifies duplicate geometry in the scale series.", 7)
         + prose("Limitations and conclusion"),
-        prose("Appendix and reproducibility") + figure("figures/viz/view_birds.png", "Bird examples from the archived PCA display. The camera angle was optimized for this view. The reference overlay uses the known topology.", 9)
+        prose("Species selection, model readout and related work", readout) + prose("Visual checks", visual_checks)
+        + figure("figures/viz/pca_expected.png", "Reference simulation and animal-name projections. Each condition has its own principal components.", 7),
+        prose("Probe design, ablations and sensitivity", probe_design)
+        + figure("figures/viz/probe.png", "Held-out probe and class-only comparisons. The raw within-stratum comparator uses the same held-out pairs.", 7.3)
+        + figure("figures/viz/sensitivity.png", "Variation across analysis choices in the archived sensitivity study.", 7.3),
+        prose("Appendix and reproducibility") + figure("figures/viz/view_birds.png", "Bird examples from the archived PCA display. The camera angle was optimized for this view. The reference overlay uses the known topology.", 8)
+        + figure("figures/months.png", "Calendar calibration. Months in calendar order, shown in a projection from the original run.", 5),
+        prose("Output examples", examples)
         + "\n#v(6pt)\n*AI statement.* Codex wrote the independent verification code and this revision of the paper to Libor Burian’s specification. The original implementation and manuscript attributed their drafting to Claude Code. Human cleanup and rewriting are in progress.\n",
     ]
     source = REPORTS / "paper.typ"

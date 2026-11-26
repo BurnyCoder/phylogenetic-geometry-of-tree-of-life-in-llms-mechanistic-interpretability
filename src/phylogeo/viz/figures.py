@@ -1403,8 +1403,8 @@ def fig_group_view(run: str, tree, df, group: str = "birds") -> dict | None:
     from phylogeo.prompts import TEMPLATES
 
     v = {k: g["panels"][k]["view"]["fit_ratio_2d"] for k, _ in cols}
-    r = rec(f"view_{group.replace(' ', '_')}", f"{group.capitalize()} at layer {w3['layer']}, each panel from the angle "
-            "at the optimized viewing angle: reference, trained and random weights", "example",
+    r = rec(f"view_{group.replace(' ', '_')}", f"{group.capitalize()} at layer {w3['layer']}. "
+            "Each panel shows the optimized view for its condition (Brownian reference, trained or random weights).", "example",
             f"tree fit in the best view: Brownian reference {v['expected']:.2f} · trained {v[w3['main']]:.2f} · random "
             f"weights {v[w3['control']]:.2f} (1 = random species)",
             group_view_caption(w3, g, group, len(df), len(TEMPLATES)), fig, (1650, 800))
