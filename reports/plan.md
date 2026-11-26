@@ -1,5 +1,7 @@
 # Plan: Phylogenetic geometry of the tree of life in LLMs
 
+**Status, 26 November 2026.** This is the original proposed research plan. Some methods and hypotheses changed in dated amendments. The audit tested archived observations and identifies unexecuted or unevaluable analyses. [Locked retrospective protocol](reviews/2026-11-26-analysis-protocol.md) · [Completed audit and decisions](reviews/2026-11-26-scientific-audit.md)
+
 ## Context
 
 **Goal.** Test whether open-weight LLMs represent animal species with tree-of-life geometry, and characterize that geometry. Two Goodfire works serve as templates.

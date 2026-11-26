@@ -1,8 +1,11 @@
 """Index claim-bearing files and their evidence without using previous audits as evidence."""
 
 import json
+import re
 import subprocess
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from phylogeo.config import REPO_ROOT
 from .statistics import save
@@ -96,3 +99,79 @@ def original_observations():
     if set(paths) != set(expected):
         raise ValueError("An original audit input is missing from this checkout")
     save("original-observations", {"revision": rev, "git_blobs": verified})
+
+
+def check_web_sources():
+    """Check links in project Markdown. DOI registry metadata remains usable if a publisher blocks bots."""
+    import requests
+    from .publication import BASE
+
+    documents = subprocess.check_output(["git", "ls-files", "-co", "--exclude-standard", "-z", "--", "*.md"],
+                                        cwd=REPO_ROOT).decode().split("\0")
+    urls = {}
+    for path in sorted(set(filter(None, documents))):
+        body = (REPO_ROOT / path).read_text(encoding="utf-8-sig")
+        for link in re.findall(r'https?://[^\s)>\]"#]+', body):
+            link = link.rstrip(".,;`")
+            host = urlsplit(link).hostname
+            if not host or host in {"127.0.0.1", "localhost"} or link.startswith(BASE):
+                continue
+            urls.setdefault(link, set()).add(path)
+
+    def check(url):
+        host = urlsplit(url).hostname
+        target = url
+        if host == "doi.org":
+            target = "https://api.crossref.org/works/" + urlsplit(url).path.lstrip("/")
+        if host == "pmc.ncbi.nlm.nih.gov":
+            pmcid = urlsplit(url).path.rstrip("/").split("/")[-1]
+            target = f"https://www.ebi.ac.uk/europepmc/webservices/rest/search?query={pmcid}&format=json"
+        try:
+            with requests.get(target, stream=True, timeout=(6, 12),
+                              headers={"User-Agent": "PhyloGeo reference verification/1.0"}) as response:
+                record = {"http_status": response.status_code, "checked_at": response.url, "documents": sorted(urls[url])}
+                if host == "doi.org" and response.ok:
+                    record["registry_title"] = response.json()["message"].get("title", [])
+                elif host == "doi.org" and response.status_code == 429:
+                    alternate = requests.get(url, headers={"Accept": "application/vnd.citationstyles.csl+json"}, timeout=12)
+                    if alternate.ok and "json" in alternate.headers.get("content-type", ""):
+                        record.update(http_status=alternate.status_code, checked_at=alternate.url,
+                                      registry_title=alternate.json().get("title"), initial_http_status=response.status_code)
+                elif host == "pmc.ncbi.nlm.nih.gov" and response.ok:
+                    matches = [r for r in response.json()["resultList"]["result"] if r.get("pmcid") == pmcid]
+                    record["registry_title"] = [r["title"] for r in matches]
+                return record
+        except requests.RequestException as error:
+            return {"request_error": type(error).__name__, "documents": sorted(urls[url])}
+
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        ordered = sorted(urls)
+        results = dict(zip(ordered, pool.map(check, ordered), strict=True))
+    # These PMIDs are the PubMed records cross-linked by the two full-text articles.
+    pmids = {"PMC4010955": "24530839", "PMC6405018": "30930620"}
+    for url, result in results.items():
+        if 200 <= result.get("http_status", 0) < 400:
+            continue
+        parts = urlsplit(url)
+        if parts.hostname == "doi.org":
+            alternative = "https://api.openalex.org/works/" + url
+        elif parts.hostname == "pmc.ncbi.nlm.nih.gov" and parts.path.rstrip("/").split("/")[-1] in pmids:
+            pmid = pmids[parts.path.rstrip("/").split("/")[-1]]
+            alternative = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
+        else:
+            continue
+        try:
+            response = requests.get(alternative, timeout=(6, 12))
+            if response.ok:
+                record = {"initial_check": result, "documents": result["documents"],
+                          "http_status": response.status_code, "checked_at": response.url}
+                if parts.hostname == "doi.org":
+                    record["registry_title"] = response.json().get("display_name")
+                results[url] = record
+        except requests.RequestException:
+            continue
+    save("web-sources", results)
+
+
+if __name__ == "__main__":
+    check_web_sources()

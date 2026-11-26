@@ -28,7 +28,7 @@ def centered_ranks(keys, width):
     return (np.cumsum(counts) - .5 * counts - .5 * len(keys))[keys]
 
 
-def evaluate_time(d, tree, df, age, draws=1000):
+def evaluate_time(d, tree, df, age, draws=1000, rng=None):
     """Same permutation at every layer. Compare max |pooled partial rho| to its own null."""
     ii, jj = np.triu_indices(len(df), 1)
     ages = age[tree.lca[ii, jj]]
@@ -49,7 +49,7 @@ def evaluate_time(d, tree, df, age, draws=1000):
         if np.linalg.norm(residual) < 1e-10:
             raise ValueError("Age and MRCA depth are collinear in a contributing rank bin")
         bins.append((ii[m], jj[m], age_unit, dep_unit, residual / np.linalg.norm(residual)))
-    perms = [np.arange(len(df)), *permutations(df.stratum.to_numpy(), draws, stream("S5"))]
+    perms = [np.arange(len(df)), *permutations(df.stratum.to_numpy(), draws, stream("S5") if rng is None else rng)]
     weights = np.array([len(row[0]) for row in bins], dtype=float)
     weights /= weights.sum()
 

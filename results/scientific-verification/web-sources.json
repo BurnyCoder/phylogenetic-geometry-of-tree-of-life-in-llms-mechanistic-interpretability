@@ -1,0 +1,618 @@
+{
+  "https://aclanthology.org/D14-1162/": {
+    "http_status": 200,
+    "checked_at": "https://aclanthology.org/D14-1162/",
+    "documents": [
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://aclanthology.org/D19-1275/": {
+    "http_status": 200,
+    "checked_at": "https://aclanthology.org/D19-1275/",
+    "documents": [
+      "reports/literature-review.md",
+      "reports/reviews/2026-11-22-independent-audit.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ]
+  },
+  "https://aclanthology.org/N19-1419/": {
+    "http_status": 200,
+    "checked_at": "https://aclanthology.org/N19-1419/",
+    "documents": [
+      "reports/literature-review.md"
+    ]
+  },
+  "https://arxiv.org/abs/1705.08039": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/1705.08039",
+    "documents": [
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://arxiv.org/abs/1904.02239": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/1904.02239",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://arxiv.org/abs/2106.02997": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2106.02997",
+    "documents": [
+      "reports/experiments/04-causal-behavior-stage3/experiment.md",
+      "reports/literature-review.md",
+      "reports/reviews/2026-11-22-independent-audit.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ]
+  },
+  "https://arxiv.org/abs/2304.01373": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2304.01373",
+    "documents": [
+      "reports/experiments/experiments.md",
+      "reports/literature-review.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ]
+  },
+  "https://arxiv.org/abs/2310.02207": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2310.02207",
+    "documents": [
+      "reports/literature-review.md"
+    ]
+  },
+  "https://arxiv.org/abs/2405.14860": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2405.14860",
+    "documents": [
+      "reports/literature-review.md",
+      "reports/plan.md"
+    ]
+  },
+  "https://arxiv.org/abs/2406.01506": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2406.01506",
+    "documents": [
+      "README.md",
+      "reports/literature-review.md",
+      "reports/plan.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ]
+  },
+  "https://arxiv.org/abs/2505.18235": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2505.18235",
+    "documents": [
+      "README.md",
+      "reports/literature-review.md",
+      "reports/plan.md"
+    ]
+  },
+  "https://arxiv.org/abs/2605.05115": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2605.05115",
+    "documents": [
+      "reports/experiments/04-causal-behavior-stage3/experiment.md",
+      "reports/plan.md"
+    ]
+  },
+  "https://arxiv.org/abs/2605.23821": {
+    "http_status": 200,
+    "checked_at": "https://arxiv.org/abs/2605.23821",
+    "documents": [
+      "reports/plan.md"
+    ]
+  },
+  "https://burnycoder.github.io/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/": {
+    "http_status": 200,
+    "checked_at": "https://burnycoder.github.io/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://docs.astral.sh/uv/": {
+    "http_status": 200,
+    "checked_at": "https://docs.astral.sh/uv/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://doi.org/10.1007/s11749-017-0571-1": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/v1/works/10.1007%2Fs11749-017-0571-1/transform",
+    "documents": [
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": "Exact testing with random permutations",
+    "initial_http_status": 429
+  },
+  "https://doi.org/10.1038/nn.2303": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1038/nn.2303",
+    "documents": [
+      "reports/reviews/2026-11-26-analysis-protocol.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "Circular analysis in systems neuroscience: the dangers of double dipping"
+    ]
+  },
+  "https://doi.org/10.1073/pnas.1708274114": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1073/pnas.1708274114",
+    "documents": [
+      "reports/reviews/2026-11-26-analysis-protocol.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "The preregistration revolution"
+    ]
+  },
+  "https://doi.org/10.1086/284325": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1086/284325",
+    "documents": [
+      "reports/reviews/2026-11-26-analysis-protocol.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "Phylogenies and the Comparative Method"
+    ]
+  },
+  "https://doi.org/10.1093/molbev/msac174": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1093/molbev/msac174",
+    "documents": [
+      "reports/cards/species.md",
+      "reports/literature-review.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "TimeTree 5: An Expanded Resource for Species Divergence Times"
+    ]
+  },
+  "https://doi.org/10.1093/oxfordjournals.molbev.a040454": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1093/oxfordjournals.molbev.a040454",
+    "documents": [
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "The neighbor-joining method: a new method for reconstructing phylogenetic trees."
+    ]
+  },
+  "https://doi.org/10.1093/sysbio/45.3.323": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1093/sysbio/45.3.323",
+    "documents": [
+      "reports/reviews/2026-11-22-independent-audit.md",
+      "reports/reviews/2026-11-26-analysis-protocol.md"
+    ],
+    "registry_title": [
+      "The Triples Distance for Rooted Bifurcating Phylogenetic Trees"
+    ]
+  },
+  "https://doi.org/10.1111/2041-210X.12018": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/v1/works/10.1111%2F2041-210X.12018/transform",
+    "documents": [
+      "reports/reviews/2026-11-22-independent-audit.md"
+    ],
+    "registry_title": "Dismantling the Mantel tests",
+    "initial_http_status": 429
+  },
+  "https://doi.org/10.1111/j.0014-3820.2003.tb00285.x": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1111/j.0014-3820.2003.tb00285.x",
+    "documents": [
+      "reports/plan.md"
+    ],
+    "registry_title": [
+      "TESTING FOR PHYLOGENETIC SIGNAL IN COMPARATIVE DATA: BEHAVIORAL TRAITS ARE MORE LABILE"
+    ]
+  },
+  "https://doi.org/10.1111/j.1558-5646.2008.00519.x": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/v1/works/10.1111%2Fj.1558-5646.2008.00519.x/transform",
+    "documents": [
+      "README.md"
+    ],
+    "registry_title": "CONTINUOUS AND ARRESTED MORPHOLOGICAL DIVERSIFICATION IN SISTER CLADES OF CHARACIFORM FISHES: A PHYLOMORPHOSPACE APPROACH",
+    "initial_http_status": 429
+  },
+  "https://doi.org/10.1111/j.2041-210X.2011.00169.x": {
+    "initial_check": {
+      "http_status": 429,
+      "checked_at": "https://api.crossref.org/works/10.1111/j.2041-210X.2011.00169.x",
+      "documents": [
+        "README.md"
+      ]
+    },
+    "documents": [
+      "README.md"
+    ],
+    "http_status": 200,
+    "checked_at": "https://api.openalex.org/works/https://doi.org/10.1111/j.2041-210X.2011.00169.x",
+    "registry_title": "phytools: an R package for phylogenetic comparative biology (and other things)"
+  },
+  "https://doi.org/10.1177/1948550617697177": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1177/1948550617697177",
+    "documents": [
+      "reports/reviews/2026-11-26-analysis-protocol.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "Equivalence Tests"
+    ]
+  },
+  "https://doi.org/10.1186/s13015-020-00175-0": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/works/10.1186/s13015-020-00175-0",
+    "documents": [
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "Reconstruction of time-consistent species trees"
+    ]
+  },
+  "https://doi.org/10.3368/jhr.50.2.317": {
+    "http_status": 200,
+    "checked_at": "https://api.crossref.org/v1/works/10.3368%2Fjhr.50.2.317/transform",
+    "documents": [
+      "reports/reviews/2026-11-22-independent-audit.md"
+    ],
+    "registry_title": "A Practitioner\u2019s Guide to Cluster-Robust Inference",
+    "initial_http_status": 429
+  },
+  "https://esapubs.org/archive/ecol/E095/178/": {
+    "http_status": 200,
+    "checked_at": "https://esapubs.org/archive/ecol/E095/178/",
+    "documents": [
+      "README.md",
+      "docs/pipeline.md",
+      "reports/cards/species.md",
+      "reports/experiments/06-habitat-addendum/experiment.md",
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3": {
+    "http_status": 200,
+    "checked_at": "https://github.com/OpenTreeOfLife/germinator/wiki/Synthetic-tree-API-v3",
+    "documents": [
+      "reports/cards/species.md",
+      "reports/literature-review.md",
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://github.com/alexgarciaduran/llm_internal_representations": {
+    "http_status": 200,
+    "checked_at": "https://github.com/alexgarciaduran/llm_internal_representations",
+    "documents": [
+      "reports/literature-review.md",
+      "reports/plan.md"
+    ]
+  },
+  "https://github.com/gradio-app/trackio": {
+    "http_status": 200,
+    "checked_at": "https://github.com/gradio-app/trackio",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://github.com/huggingface/transformers": {
+    "http_status": 200,
+    "checked_at": "https://github.com/huggingface/transformers",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://github.com/jadencutinha/phylotext-mammals": {
+    "http_status": 200,
+    "checked_at": "https://github.com/jadencutinha/phylotext-mammals",
+    "documents": [
+      "reports/literature-review.md",
+      "reports/plan.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ]
+  },
+  "https://github.com/plotly/Kaleido": {
+    "http_status": 200,
+    "checked_at": "https://github.com/plotly/Kaleido",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://huggingface.co/BurnyCoder/phylogeo-flat-probe-qwen3.5-2b": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/BurnyCoder/phylogeo-flat-probe-qwen3.5-2b",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://huggingface.co/BurnyCoder/phylogeo-flat-probe-qwen3.5-2b/blob/main/config.json": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/BurnyCoder/phylogeo-flat-probe-qwen3.5-2b/blob/main/config.json",
+    "documents": [
+      "reports/cards/probe.md"
+    ]
+  },
+  "https://huggingface.co/EleutherAI/pythia-410m": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/EleutherAI/pythia-410m",
+    "documents": [
+      "reports/experiments/00-pilot/experiment.md",
+      "reports/experiments/experiments.md",
+      "reports/preregistration.md"
+    ]
+  },
+  "https://huggingface.co/Qwen/Qwen3-1.7B": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/Qwen/Qwen3-1.7B",
+    "documents": [
+      "reports/experiments/experiments.md"
+    ]
+  },
+  "https://huggingface.co/Qwen/Qwen3.5-0.8B": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/Qwen/Qwen3.5-0.8B",
+    "documents": [
+      "reports/experiments/experiments.md"
+    ]
+  },
+  "https://huggingface.co/Qwen/Qwen3.5-2B": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/Qwen/Qwen3.5-2B",
+    "documents": [
+      "README.md",
+      "reports/experiments/experiments.md",
+      "reports/plan.md",
+      "reports/preregistration.md",
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://huggingface.co/Qwen/Qwen3.5-2B/blob/15852e8c16360a2fea060d615a32b45270f8a8fc/config.json": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/Qwen/Qwen3.5-2B/blob/15852e8c16360a2fea060d615a32b45270f8a8fc/config.json",
+    "documents": [
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://huggingface.co/Qwen/Qwen3.5-2B/tree/15852e8c16360a2fea060d615a32b45270f8a8fc": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/Qwen/Qwen3.5-2B/tree/15852e8c16360a2fea060d615a32b45270f8a8fc",
+    "documents": [
+      "reports/literature-review.md"
+    ]
+  },
+  "https://huggingface.co/collections/BurnyCoder/phylogenetic-geometry-of-the-tree-of-life-in-llms-6afffc252e04f452d5e7d905": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/collections/BurnyCoder/phylogenetic-geometry-of-the-tree-of-life-in-llms",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-activations",
+    "documents": [
+      "README.md",
+      "docs/pipeline.md",
+      "reports/reviews/2026-11-26-claim-sources.md"
+    ]
+  },
+  "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-species": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/datasets/BurnyCoder/phylogenetic-geometry-species",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://huggingface.co/sentence-transformers/average_word_embeddings_glove.6B.300d": {
+    "http_status": 200,
+    "checked_at": "https://huggingface.co/sentence-transformers/average_word_embeddings_glove.6B.300d",
+    "documents": [
+      "docs/pipeline.md"
+    ]
+  },
+  "https://infini-gram.readthedocs.io/en/latest/api.html": {
+    "http_status": 200,
+    "checked_at": "https://infini-gram.readthedocs.io/en/latest/api.html",
+    "documents": [
+      "reports/plan.md"
+    ]
+  },
+  "https://jeetsukumaran.github.io/DendroPy/": {
+    "http_status": 200,
+    "checked_at": "https://jeetsukumaran.github.io/DendroPy/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://pillow.readthedocs.io/": {
+    "http_status": 200,
+    "checked_at": "https://pillow.readthedocs.io/en/stable/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://plotly.com/python/": {
+    "http_status": 200,
+    "checked_at": "https://plotly.com/python/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://pmc.ncbi.nlm.nih.gov/articles/PMC4010955/": {
+    "http_status": 200,
+    "checked_at": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC4010955&format=json",
+    "documents": [
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ],
+    "registry_title": [
+      "Permutation inference for the general linear model."
+    ]
+  },
+  "https://pmc.ncbi.nlm.nih.gov/articles/PMC6405018/": {
+    "http_status": 200,
+    "checked_at": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC6405018&format=json",
+    "documents": [
+      "reports/reviews/2026-11-26-analysis-protocol.md",
+      "reports/reviews/2026-11-26-scientific-audit.md"
+    ],
+    "registry_title": [
+      "Exact testing with random permutations."
+    ]
+  },
+  "https://pubmed.ncbi.nlm.nih.gov/6018555/": {
+    "http_status": 203,
+    "checked_at": "https://pubmed.ncbi.nlm.nih.gov/6018555/",
+    "documents": [
+      "reports/reviews/2026-11-22-independent-audit.md"
+    ]
+  },
+  "https://pytorch.org/": {
+    "http_status": 200,
+    "checked_at": "https://pytorch.org/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://qlever.dev/wikidata": {
+    "http_status": 200,
+    "checked_at": "https://qlever.dev/wikidata",
+    "documents": [
+      "README.md",
+      "reports/experiments/learnings.md"
+    ]
+  },
+  "https://scikit.bio/": {
+    "http_status": 200,
+    "checked_at": "https://scikit.bio/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://scipy.org/": {
+    "http_status": 200,
+    "checked_at": "https://scipy.org/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://search.r-project.org/CRAN/refmans/castor/html/asr_squared_change_parsimony.html": {
+    "http_status": 200,
+    "checked_at": "https://search.r-project.org/CRAN/refmans/castor/html/asr_squared_change_parsimony.html",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://timetree.org/": {
+    "http_status": 200,
+    "checked_at": "https://timetree.org/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://timetree.temple.edu/api": {
+    "http_status": 200,
+    "checked_at": "https://timetree.temple.edu/api",
+    "documents": [
+      "reports/plan.md",
+      "reports/preregistration.md"
+    ]
+  },
+  "https://tree.opentreeoflife.org/": {
+    "http_status": 200,
+    "checked_at": "https://browse.opentreeoflife.org/opentree/argus",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://tree.opentreeoflife.org/about/licenses": {
+    "http_status": 200,
+    "checked_at": "https://tree.opentreeoflife.org/about/licenses",
+    "documents": [
+      "reports/plan.md"
+    ]
+  },
+  "https://typst.app/": {
+    "http_status": 200,
+    "checked_at": "https://typst.app/",
+    "documents": [
+      "README.md"
+    ]
+  },
+  "https://www.goodfire.com/research/neural-geometry": {
+    "http_status": 200,
+    "checked_at": "https://www.goodfire.com/research/neural-geometry",
+    "documents": [
+      "reports/plan.md",
+      "reports/preregistration.md"
+    ]
+  },
+  "https://www.goodfire.com/research/phylogeny-manifold": {
+    "http_status": 200,
+    "checked_at": "https://www.goodfire.com/research/phylogeny-manifold",
+    "documents": [
+      "README.md",
+      "reports/cards/probe.md",
+      "reports/experiments/04-causal-behavior-stage3/experiment.md",
+      "reports/literature-review.md",
+      "reports/plan.md",
+      "reports/preregistration.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/reviews/2026-11-26-scientific-audit.md",
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://www.jstor.org/stable/4615733": {
+    "http_status": 200,
+    "checked_at": "https://www.jstor.org/stable/4615733",
+    "documents": [
+      "reports/reviews/2026-11-26-analysis-protocol.md",
+      "reports/reviews/2026-11-26-claim-sources.md",
+      "reports/state-of-the-art-review.md"
+    ]
+  },
+  "https://www.lesswrong.com/posts/fmwk6qxrpW8d4jvbd/saes-usually-transfer-between-base-and-chat-models": {
+    "http_status": 200,
+    "checked_at": "https://www.lesswrong.com/posts/fmwk6qxrpW8d4jvbd/saes-usually-transfer-between-base-and-chat-models",
+    "documents": [
+      "reports/plan.md"
+    ]
+  },
+  "https://www.ncbi.nlm.nih.gov/taxonomy": {
+    "http_status": 200,
+    "checked_at": "https://www.ncbi.nlm.nih.gov/datasets/taxonomy/",
+    "documents": [
+      "README.md",
+      "reports/state-of-the-art-review.md"
+    ]
+  }
+}

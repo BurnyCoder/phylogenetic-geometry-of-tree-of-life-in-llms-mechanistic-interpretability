@@ -1,5 +1,7 @@
 # Experiment 06: the habitat gradient (preregistration Addendum A), tested on held-out species
 
+The marine-mammal and water-foraging bird predictions meet their four-slot Holm criteria on held-out species. Aerial mammals were absent and the aerial-bird prediction did not meet its directional criterion. Both aquatic associations also survive the within-order permutation sensitivity. The marine species belong to two orders and may share lexical cues. [Independent analysis](../../reviews/2026-11-26-scientific-audit.md#habitat-on-held-out-species) · [Dated original experiment record](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/cc36b9134981497d6006359183261381c25177ac/reports/experiments/06-habitat-addendum/experiment.md)
+
 **Status:** done 2026-11-20.
 - **Registration:** the hypothesis and analysis were registered in commit `31d0e99`, **before** the held-out species were selected or extracted.
 - **Commands:**
@@ -20,35 +22,4 @@ In stage 1a the dominant late-layer PCA axis ordered strata from aquatic groups 
 - The held-out mammals include 6 marine species (sea otter, monk seal, sei whale, harbour porpoise, bearded seal, minke whale) and **no bats**.
 
 ## Method
-The axis is PC1 of the layer-21 species vectors of the 400 primary species, oriented so birds are positive and ray-finned fish negative. Held-out activations are centred with the primary set's per-template means and projected onto the axis. Tests are one-sided, Holm-corrected across the evaluable tests.
-
-## Results in words
-- **Aquatic end: confirmed.**
-  - Held-out marine mammals sit far toward the aquatic end compared with ground-dwelling mammals (M1).
-  - Among held-out birds, the more a species forages in water, the lower its axis score (B1).
-  - Both survive Holm correction.
-- **Aerial end: not confirmed.**
-  - Aerial-foraging birds do not score higher (B2). The correlation even has the opposite sign, though only 9 held-out birds forage aerially at all.
-  - The bat test (M2) is not evaluable: there are no bats in the held-out set (preregistered rule: fewer than 5 → descriptive only).
-
-## Interpretation
-The dominant top-PC direction of the late-layer species geometry encodes an **aquatic ↔ terrestrial habitat axis** that cuts across phylogeny. Whales and seals move toward fish; waterbirds move away from other birds. This confirms out of sample that the representation mixes ecology with taxonomy. It also explains why the top PCs do not look like a nested tree (stage 1a), and why where ecology and phylogeny conflict, the geometry follows ecology (stage-1b conflict triplets).
-
-The "air" part of the stage-1a ordering (birds and insects at one end) is not supported within birds. That end may reflect class identity (birds and insects as large groups) rather than flight per se.
-
-## Limitations
-- Only 6 marine mammals.
-- No bats.
-- Mammal foraging strata are coarse categorical codes.
-- The axis was defined at one layer chosen during exploration (layer 21). That choice is part of the registered addendum, but it was informed by the stage-1a plots.
-
-## Revision after the final review (round 1, 2026-11-20)
-The interpretation above overstates the result in three places ([review](../../reviews/2026-11-20-final-review-round1.md), S3):
-- **Variance share.** The axis is the *top* late-layer component, but it holds only a few percent of the variance. "Dominant" is replaced by "top component".
-- **Name cues.** All 6 marine mammals have aquatic cues in their names (whale, seal, porpoise, sea otter), and water foraging in birds is phylogenetically clustered (ducks, grebes, loons). Name cues were not controlled.
-- **Link to the conflict triplets is withdrawn.** The untrained networks behave the same on those triplets (final review M4).
-
-The registered reading stands: the geometry mixes ecology with taxonomy.
-
-## Audit note (2026-11-22)
-From the [independent audit](../../reviews/2026-11-22-independent-audit.md): the M1 Mann–Whitney p-value is exact. SciPy used the exact null distribution, and counting the rank arrangements by hand gives the same value. Holm was applied over the 3 evaluable tests, not the 4 registered ones, because M2 has no bats. With 4 tests the conclusions are unchanged. The name-cue caveat above is the main limitation: all 6 marine mammal names contain "sea", "seal", "whale" or "porpoise".
+The axis is PC1 of the layer-21 species vectors of the 400 primary species, oriented so birds are positive and ray-finned fish negative. Held-out activations are centred with the primary set's per-template means and projected onto the axis. The original tests were one-sided and used the available members of the family. The corrected report accounts for all four registered tests, assigning no result to aerial mammals.

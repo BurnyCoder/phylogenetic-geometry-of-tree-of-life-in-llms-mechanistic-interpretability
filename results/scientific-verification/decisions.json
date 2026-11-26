@@ -1,0 +1,104 @@
+{
+  "layer": 6,
+  "H1": true,
+  "raw_p": {
+    "S1": 0.000999000999000999,
+    "S2": 0.000999000999000999,
+    "S3": 0.12187812187812187,
+    "S4": 0.15284715284715283,
+    "S5": 0.04695304695304695
+  },
+  "secondary_holm": {
+    "S1": 0.004995004995004995,
+    "S2": 0.004995004995004995,
+    "S3": 0.24375624375624375,
+    "S4": 0.24375624375624375,
+    "S5": 0.14085914085914086
+  },
+  "hypotheses": [
+    [
+      "H1",
+      "Within-group rooted triples",
+      "0.473 cross-fitted",
+      "0.000999",
+      "Criterion met with family blocks"
+    ],
+    [
+      "S1",
+      "Global edge-count association",
+      "0.362 at layer 6",
+      "0.0050",
+      "Criterion met"
+    ],
+    [
+      "S2",
+      "Family/genus resolution within order",
+      "0.544 at layer 6",
+      "0.0050",
+      "Criterion met"
+    ],
+    [
+      "S3",
+      "Unique wrong spelling choice",
+      "0.382 at layer 6",
+      "0.2438",
+      "Criterion unmet"
+    ],
+    [
+      "S4",
+      "Unique wrong GloVe choice",
+      "0.372 at layer 6",
+      "0.2438",
+      "Criterion unmet"
+    ],
+    [
+      "S5",
+      "Age given rank and MRCA depth",
+      "0.042 at layer 6",
+      "0.1409",
+      "Criterion unmet"
+    ],
+    [
+      "C-abl",
+      "Candidate log-probability drop",
+      "0.083 nats",
+      "0.2400",
+      "Criterion unmet (Holm upper bound)"
+    ],
+    [
+      "C-swap",
+      "New donor-class answers",
+      "7\u201311 / 200",
+      "\u2014",
+      "Paired comparison unevaluable"
+    ],
+    [
+      "M1",
+      "Marine versus ground mammals",
+      "6 marine / 61 ground",
+      "4.81e-07",
+      "Criterion met"
+    ],
+    [
+      "M2",
+      "Aerial versus ground mammals",
+      "0 aerial",
+      "\u2014",
+      "Unevaluable"
+    ],
+    [
+      "B1",
+      "Bird water foraging",
+      "\u03c1 = -0.385",
+      "0.000635",
+      "Criterion met"
+    ],
+    [
+      "B2",
+      "Bird aerial foraging",
+      "\u03c1 = -0.157",
+      "1.0000",
+      "Criterion unmet"
+    ]
+  ]
+}

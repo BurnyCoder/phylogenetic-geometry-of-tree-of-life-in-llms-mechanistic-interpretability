@@ -267,7 +267,7 @@ def run_stage1b(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir,
     sec["S5"] = s5_rank_vs_time(Dm, ages, tree, pair_rank_level(df), strata, cfg.n_perm, _rng(cfg, "S5"))
     from phylogeo.verification.dating import evaluate_time
 
-    time_curve = evaluate_time(D_by_run[main], tree, df, ages, draws=cfg.n_perm)
+    time_curve = evaluate_time(D_by_run[main], tree, df, ages, draws=cfg.n_perm, rng=_rng(cfg, "S5"))
     sec["S5"]["maxT_p"] = time_curve["partial"]["p_global_max"]
     sec["S5"]["layer_profiles"] = time_curve
     hp = holm({k: v["maxT_p"] for k, v in sec.items()})
@@ -316,7 +316,7 @@ def run_stage1b(cfg: RunConfig, load_species, layer_distances, act_dir, out_dir,
              for name, Dx in reps.items()}
     per_stratum = {s: float(ta(Dm, trip, within & (strata[trip.a] == s))) for s in np.unique(strata)
                    if (within & (strata[trip.a] == s)).any()}
-    res = {"n_species": len(df), "n_triplets": len(trip), "n_within": int(within.sum()),
+    res = {"score_rule": "one-third for any minimum tie", "n_species": len(df), "n_triplets": len(trip), "n_within": int(within.sum()),
            "glove_coverage": float(gok.mean()), "H1": h1, "secondary": sec, "exploratory": expl,
            "point_ta_within": point, "ci95_ta_within": ci, "paired_diff_ci95": diffs,
            "models": model_res, "depth_profile": depth,

@@ -1,5 +1,7 @@
 # Response to the implementation review (2026-11-20)
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 Review: [2026-11-20-implementation-review.md](2026-11-20-implementation-review.md). Every finding below was addressed **before any confirmatory (stage-1b) statistic was computed on Qwen3.5-2B**. The preregistration logs each change as deviations 11–18.
 
 | # | Severity | Finding | Response | Where |

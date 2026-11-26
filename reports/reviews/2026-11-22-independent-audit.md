@@ -1,5 +1,7 @@
 # Independent audit of results, methods and claims (2026-11-22)
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 *Libor "Burny" Burian's project; audit performed by Claude Code on 2026-11-22.*
 
 ## Scope and method

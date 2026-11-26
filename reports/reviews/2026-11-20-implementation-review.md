@@ -1,5 +1,7 @@
 # Implementation review: statistics, leakage, extraction, preregistration conformance
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 - **Date:** 2026-11-20
 - **Reviewer role:** adversarial NeurIPS-style reviewer (Claude Code, review pass; no repository code was modified)
 - **Scope:** `reports/preregistration.md` against `src/phylogeo/**` and `tests/**` at commit `b33de68`.

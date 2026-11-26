@@ -86,9 +86,9 @@
 
 | representation | layer | chose tree-closer partner | accuracy | binomial p (vs 0.5) | McNemar vs main model: main-only / control-only, p |
 |---|---|---|---|---|---|
-| pilot_pythia410m | 8 | 10/36 | 0.28 | 0.011 | – |
-| char3 | 0 | 9/36 | 0.25 | 0.004 | – |
-| glove | 0 | 14/36 | 0.39 | 0.243 | – |
+| pilot_pythia410m | 8 | 10/36 | 0.278 | 0.011 | – |
+| char3 | 0 | 9/36 | 0.250 | 0.004 | – |
+| glove | 0 | 14/36 | 0.389 | 0.243 | – |
 
 The 36 triplets share anchors and partners (e.g. 'human' is the tree-closer partner several times), so binomial and McNemar p-values treat dependent items as independent; read them as descriptive.
 

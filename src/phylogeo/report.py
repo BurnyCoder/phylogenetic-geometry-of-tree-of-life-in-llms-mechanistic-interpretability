@@ -33,8 +33,10 @@ def fmt(x, nd: int = 3) -> str:
     return str(x)
 
 
-def p_fmt(p: float) -> str:
+def p_fmt(p: float | None) -> str:
     """Report the value itself; a permutation p at its floor 1/(n+1) shows as e.g. 0.001, never "<"."""
+    if p is None:
+        return "—"
     return f"{p:.1e}" if p < 0.0005 else f"{p:.3f}"
 
 
@@ -74,6 +76,7 @@ def exploratory_bh(run: str) -> dict:
     for f in sorted(RESULTS_DIR.glob("*/stage5/scale.json")):
         x = _load(f)
         tests[f"stage 5 max-T {x['run']}"] = x["maxT_p"]
+    tests = {k: v for k, v in tests.items() if v is not None}
     names = list(tests)
     q = false_discovery_control([tests[n] for n in names], method="bh") if names else []
     out = {"n_tests": len(names), "tests": {n: {"p": tests[n], "q": float(qq)} for n, qq in zip(names, q)}}
@@ -125,7 +128,7 @@ def stage1b_tables(run: str) -> str:
     r = _load(RESULTS_DIR / run / "stage1b" / "results.json")
     if not r:
         return f"*(no stage-1b results for {run})*\n"
-    if run == "qwen35_2b":
+    if run == "qwen35_2b" and "score_rule" not in r:
         from phylogeo.verification.publication import assemble, controls_table, secondary_table
         g, d, _, decisions = assemble()
         return controls_table(g) + "\n\n" + secondary_table(g, d, decisions) + "\n"
@@ -198,10 +201,13 @@ def stage1b_tables(run: str) -> str:
 
 
 def conflict_table(run: str) -> str:
-    if run == "qwen35_2b":
-        from phylogeo.verification.publication import conflict_table as verified_table
-        return verified_table(_load(RESULTS_DIR / "scientific-verification/outcomes.json")) + "\n"
     c = _load(RESULTS_DIR / run / "conflict" / "conflict.json")
+    if run == "qwen35_2b" and c and "ties" not in c["summary"][run]:
+        from phylogeo.verification.publication import conflict_table as verified_table
+        verified = _load(RESULTS_DIR / "scientific-verification/outcomes.json")
+        return (verified_table(verified) + "\n\nThe full per-item outcomes are in "
+                "[the source table](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/main/results/scientific-verification/outcomes.json).\n")
+
     if not c:
         return f"*(no conflict results for {run})*\n"
     out = ["| representation | layer | chose tree-closer partner | accuracy | binomial p (vs 0.5) | "
@@ -209,7 +215,7 @@ def conflict_table(run: str) -> str:
     for k, v in c["summary"].items():
         mc = v.get("mcnemar_vs_main")
         mcs = f"{mc['main_only']} / {mc['control_only']}, {p_fmt(mc['p_two_sided'])}" if mc else "–"
-        out.append(f"| {k} | {v['layer']} | {v['phylo_choice']}/{v['n']} | {v['accuracy']:.2f} | "
+        out.append(f"| {k} | {v['layer']} | {v['phylo_choice']}/{v['n']} | {fmt(v['accuracy'])} | "
                    f"{p_fmt(v['binom_p_two_sided'])} | {mcs} |")
     out.append("\nThe 36 triplets share anchors and partners (e.g. 'human' is the tree-closer partner several times), so "
                "binomial and McNemar p-values treat dependent items as independent; read them as descriptive.\n")
@@ -222,7 +228,7 @@ def conflict_table(run: str) -> str:
     for t in rows:
         marks = []
         for k, v in c["summary"].items():
-            marks.append("✓" if t[k][v["layer"]] else "✗")
+            marks.append({1: "✓", 0: "✗", .5: "Tie", None: "Missing"}[t[k][v["layer"]]])
         out.append(f"| {t['anchor']} | {t['tree_closer']} | {t['other']} | {t['type']} | " + " | ".join(marks) + " |")
     return "\n".join(out) + "\n"
 
@@ -340,9 +346,6 @@ def eco_table(run: str) -> str:
 
 def stage3_table(run: str) -> str:
     """Behavioral judgments and the causal tests (final run; first run kept as superseded)."""
-    if run == "qwen35_2b":
-        from phylogeo.verification.publication import causal_table as verified_table
-        return verified_table(_load(RESULTS_DIR / "scientific-verification/outcomes.json")) + "\n"
     r = _load(RESULTS_DIR / run / "stage3" / "results.json")
     if not r:
         return f"*(no stage-3 results for {run})*\n"
@@ -358,11 +361,23 @@ def stage3_table(run: str) -> str:
            f"{c['representation_pairwise_accuracy_same_triplets']:.3f} of cases; behavior and representation agree on "
            f"{c['agreement_behavior_vs_representation']:.3f}.\n",
            "Class-word accuracy by stratum: " + ", ".join(f"{k} {v:.2f}" for k, v in s["by_stratum"].items()) + ".\n"]
+    if run == "qwen35_2b" and {"C_swap", "class_control"} <= r.keys() and "endpoint" not in r["C_swap"]:
+        from phylogeo.verification.publication import causal_table as verified_table
+        verified = _load(RESULTS_DIR / "scientific-verification/outcomes.json")
+        a, cc = r["C_abl"], r["class_control"]
+        out.extend([verified_table(verified),
+                    "The behavioral binomial calculations above assume independent questions. The same species recur.",
+                    f"Mean ablation drop was {a['mean_drop_logp_probe']:.3f} nats for the probe, "
+                    f"{a['mean_drop_logp_random']:.3f} for the random spaces and {cc['mean_drop_logp_class']:.3f} "
+                    f"for the class-only subspace. The class-only post-edit donor fraction was {cc['switch_rate_class']:.3f}. "
+                    "The original random-swap ranks test post-edit prevalence. The registered switch comparison is unevaluable."])
+        return "\n\n".join(out) + "\n"
     for ka, ks in (("C_abl", "C_swap"), ("C_abl_v1", "C_swap_v1")):
-        if ka not in r:
+        if ka not in r or ks not in r:
             continue
         a, w = r[ka], r[ks]
         # Label by content, not by key (final review M5): only the deviation-19 design counts as final.
+        endpoint = "new donor prediction" if "donor_before" in w else "post-edit donor prevalence"
         final = ka == "C_abl" and "causal_holm" in r and a.get("n_random_subspaces", 0) >= 99
         tag = "final run (deviations 19-20)" if final else "first run (superseded: p floor above the Holm threshold)"
         holm_p = r["causal_holm"] if final else {}
@@ -375,7 +390,7 @@ def stage3_table(run: str) -> str:
                 f"{np.mean(a['random_mean_drops']):.3f} [{np.max(a['random_mean_drops']):.3f}] (n = {na}) | "
                 f"{p_fmt(a['p_rank_vs_random'])} | {p_fmt(holm_p['C_abl']) if holm_p else '–'} | "
                 f"Wilcoxon over species p = {p_fmt(a['wilcoxon_p_probe_gt_random'])} |",
-                f"| C-swap: answer switches to the source's class | {w['switch_rate_probe']:.3f} | "
+                f"| Interchange, {endpoint} | {w['switch_rate_probe']:.3f} | "
                 f"{np.mean(w['switch_rate_random']):.3f} [{np.max(w['switch_rate_random']):.3f}] (n = {ns}) | "
                 f"{p_fmt(w['p_rank_vs_random'])} | {p_fmt(holm_p['C_swap']) if holm_p else '–'} | "
                 f"no edit: {w['switch_rate_no_edit']:.3f} ({w['n_pairs']} pairs) |"]
@@ -396,10 +411,10 @@ def stage3_table(run: str) -> str:
                     f"| mean drop in log P(correct class), class-only subspace | {cc['mean_drop_logp_class']:.3f} |",
                     f"| phylogeny probe > class-only, ablation (one-sided Wilcoxon over species) p | "
                     f"{p_fmt(cc['wilcoxon_p_probe_gt_class'])} |",
-                    f"| switch rate, class-only subspace | {cc['switch_rate_class']:.3f} |",
+                    f"| {endpoint}, class-only subspace | {cc['switch_rate_class']:.3f} |",
                     f"| phylogeny probe > class-only, interchange (exact McNemar; {cc['mcnemar_probe_only']} vs "
                     f"{cc['mcnemar_class_only']} discordant pairs) p | {p_fmt(cc['mcnemar_p_probe_gt_class'])} |",
-                    f"| **phylogeny-specific causal role** (both p < 0.05) | **{fmt(cc['phylogeny_specific'])}** |"]
+                    f"| **Both probe-versus-class contrasts meet 0.05 on coarse answers** | **{fmt(cc['phylogeny_specific'])}** |"]
     return "\n".join(out) + "\n"
 
 

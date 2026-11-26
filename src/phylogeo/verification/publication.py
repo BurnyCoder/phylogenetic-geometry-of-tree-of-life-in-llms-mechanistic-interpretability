@@ -321,9 +321,27 @@ def df_summary(g):
 
 
 def write_review():
-    _, _, _, decision = assemble()
+    g, d, o, decision = assemble()
     save("decisions", decision)
     sections = section_texts()
     text = "# Independent scientific audit, 26 November 2026\n\nLibor “Burny” Burian.\n\n"
     text += "\n\n".join(f"## {name}\n\n{value}" for name, value in sections.items())
-    (REPO_ROOT / REVIEW).write_text(text + "\n", encoding="utf-8")
+    old = read_json(RESULTS_DIR / MAIN / "stage1b/results.json")
+    eco = read_json(RESULTS_DIR / MAIN / "eco/results.json")["tests"]
+    new = decision["secondary_holm"]
+    change = [
+        ["H1, cross-fitted TA", num(old["H1"]["crossfit_ta_within"]), num(g["models"][MAIN]["crossfit"]), "Written tie rule"],
+        ["S2, eligible triples", old["secondary"]["S2"]["n_triplets"], g["secondary"]["S2"]["triplets"], "Family/genus split required"],
+        ["S3, eligible triples", old["secondary"]["S3"]["n_triplets"], g["secondary"]["S3"]["triplets"], "Strictly wrong closest pair"],
+        ["S5, before Holm", prob(old["secondary"]["S5"]["maxT_p"]), prob(d["partial"]["p_global_max"]), "Fixed layer replaced by an all-layer test"],
+        ["C-swap, Holm p", prob(o["causal"]["expanded"]["historical_holm"]["prevalence"]), "Unevaluable", "New switches require aligned predictions"],
+        ["M1, Holm p", prob(eco["M1_marine_lt_ground"]["holm_p"]), prob(o["habitat"]["holm"]["M1"]), "Four registered slots"],
+        ["B1, Holm p", prob(eco["B1_water_negative"]["holm_p"]), prob(o["habitat"]["holm"]["B1"]), "Four registered slots"],
+    ]
+    change.extend([[k + ", Holm p", prob(old["secondary"][k]["holm_p"]), prob(new[k]), "Recomputed five-test family"]
+                   for k in ("S1", "S2", "S3", "S4", "S5")])
+    text += "\n\n## Original and corrected measurements\n\n" + table(
+        ["Quantity", "Originally reported", "Independent reanalysis", "Reason"], change)
+    text += "\n\n" + src("Original geometry", "results/qwen35_2b/stage1b/results.json") + " " + evidence("geometry")
+    text += " " + evidence("dating") + " " + evidence("outcomes") + ".\n"
+    (REPO_ROOT / REVIEW).write_text(text.rstrip() + "\n", encoding="utf-8")

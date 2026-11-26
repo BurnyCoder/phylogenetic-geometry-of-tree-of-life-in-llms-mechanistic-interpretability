@@ -1,5 +1,7 @@
 # Final review, round 1 (2026-11-20): adversarial NeurIPS-style and statistical review
 
+> Historical review. The [26 November reanalysis](2026-11-26-scientific-audit.md) independently rechecks the original observations and supersedes interpretations of the switch endpoint, secondary tests, tied choices and test families in earlier records.
+
 **Scope.** The whole repository at commit `3453dde`: preregistration and deviations 1–19, README, `reports/summary.md`, `reports/paper.typ`, `results/RESULTS.md`, every `results/qwen35_2b/*/results.json`, the figures, and the analysis code (`analysis.py`, `stats/`, `stage2`–`stage6`, `probes/flat.py`, `causal.py`, `behavior.py`, `eco.py`, `examples.py`, `report.py`, `paper.py`, `simulate.py`, `data/tree.py`).
 
 **Not reviewed as findings (known state).** The causal numbers in `results/qwen35_2b/stage3/results.json` come from the superseded first run, and stage 5 is still running. Only the *labelling* of the first-run numbers (M5) and the *design* of the pending rerun (M6) are reviewed.

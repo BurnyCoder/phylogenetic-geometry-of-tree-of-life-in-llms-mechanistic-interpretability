@@ -1,18 +1,11 @@
-# Learnings (all experiments)
+# Learnings across experiments
 
-Running log of what was learned from the literature, from errors, and from the experiments: what was tried, what went wrong, why, and how it was fixed. Experiment-specific learnings are in each `reports/experiments/<id>/learnings.md`.
-
-## From the literature review
-- **Goodfire's Evo 2 phylogeny result reports no controls** ([post](https://www.goodfire.com/research/phylogeny-manifold)): no permutation test, no random-init model, no shuffled tree. An independent reproduction got much weaker numbers (geodesic r 0.38 vs 0.78). *Consequence:* every geometric metric here is computed against an untrained model, lexical and co-occurrence baselines, and class-blob and Brownian-tree simulations, with permutation p-values.
-- **Global correlations are dominated by coarse classes.** With 13 strata, a pure "folk class" oracle already correlates strongly with tree distance. *Consequence:* the primary metric is *within-stratum* triplet accuracy (TA_within), not a global Mantel r.
-- **Head nouns leak phylogeny** (phylotext-mammals: unmasking head nouns raised r from ~0 to 0.19). *Consequence:* the primary metric uses only triplets whose three head nouns differ.
-- **Co-occurrence statistics alone produce hierarchical geometry** ([Nava & Wyart 2026](https://arxiv.org/abs/2605.23821)). *Consequence:* a GloVe baseline and co-occurrence-discordant triplets (S4).
-- **Whitening manufactures orthogonality** (critique of [Park et al.](https://arxiv.org/abs/2406.01506)). *Consequence:* no whitening in any primary analysis.
+The main scientific lessons concern the choice of uncertainty blocks, how to distinguish transition counts from post-edit totals, and the difference between rank, topology and time. [Independent verification](09-independent-verification/learnings.md) · [Time-ordered research notes](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/cc36b9134981497d6006359183261381c25177ac/reports/experiments/learnings.md)
 
 ## From engineering errors
 | Problem | Cause | Fix | Why this fix |
 |---|---|---|---|
-| Wikidata SPARQL query for ~20k species timed out (60 s) | The public WDQS scans all species items for the sitelinks filter | Use the [QLever](https://qlever.dev/api/wikidata) endpoint: the same query returns in 1–16 s | Same data (Wikidata), faster engine; responses cached under `DATA_DIR/cache` |
+| The original Wikidata candidate query timed out | The run did not identify a query-plan cause | The project used QLever's Wikidata backend and cached its responses under `DATA_DIR/cache` | [QLever service](https://qlever.dev/wikidata), [selection code](../../src/phylogeo/data/species.py) |
 | `ete4` failed to build (Cython error) on Windows / Python 3.12 | No wheel, compile failure in `ete4/core/operations.pyx` | Take ranks from the Open Tree Taxonomy lineage (`taxonomy/taxon_info`) | One fewer dependency. OTT is the taxonomy of the reference tree itself, so ranks and topology are consistent |
 | OTT "Reptilia" flagged barren/inconsistent | Reptilia is paraphyletic without birds; OTT does not maintain it | Reptiles = Testudines ∪ Lepidosauria ∪ Crocodylia | Same extant non-avian reptiles |
 | Unit test "tree metric gives TA = 1" failed with edge-count path length | Edge counts are not ultrametric: a shallow outgroup can be fewer edges away than a deep sister | Added `RefTree.lca_depth_distance()` (max depth − depth(LCA)) as the triplet-consistent oracle; logged as deviation 8 | Mathematical fact; S1 kept as registered |
@@ -27,78 +20,3 @@ Running log of what was learned from the literature, from errors, and from the e
 | A probe script run outside the package wrote a config to the C: Hugging Face cache | `.env` (HF_HOME) is loaded only when `phylogeo.config` is imported, and some modules import transformers first | `phylogeo/__init__.py` now imports `config`, so `.env` is loaded on any package import | Models must never land on the nearly full C: drive |
 | trackio dashboard showed "No projects" while probes were training | trackio stores runs under `HF_HOME/trackio`. The training process loaded `.env` (HF_HOME on D:), but `uv run trackio show` did not | Launch the dashboard with the same `HF_HOME` (README) | Both sides read the same database |
 | Running extraction, power simulation and TimeTree dating in parallel failed with "paging file is too small" (os error 1455) and a 1.5 MiB `ArrayMemoryError` | The Windows commit limit is 50.6 GB (32 GB RAM + a 19.8 GB pagefile on the almost-full C: drive, which cannot grow); other apps already commit about 34 GB; loading a 4.5 GB safetensors file needs commit headroom | Run GPU jobs **sequentially**. The user's paging-file settings and running apps (WSL, browsers) were left untouched | Changing system settings is the user's decision. Sequential runs cost only minutes |
-
-## From the independent implementation review
-- **Simple nuisance variables can pass a sophisticated test.**
-  - A 1-D "representation" holding only the number of name tokens, or only log Wikipedia popularity, reaches within-stratum triplet accuracy ≈ 0.38–0.40 with p < 0.02.
-  - The reason is that naming conventions ("X-crested Y-warbler") and popularity are clustered by family.
-  - *Lesson:* every metric needs controls for the cheapest *non-semantic* explanations, not only for the obvious lexical ones. Both are now required H1 baselines.
-- **Global centering + cosine can manufacture structure.** If the spread of points depends on a covariate that is clustered by clade (popularity), centering on the global mean turns norm heterogeneity into apparent within-group structure (review simulation: TA 0.37 with zero phylogeny). *Lesson:* report a stratum-centered variant.
-- **A decision rule must fail loudly.** H1 could be declared "supported" when a control's activations were missing. *Lesson:* decision functions take the full required set and return "not evaluable" otherwise.
-- **Taxonomy databases have holes.** OTT leaves Primates as "no rank"; NCBI lacks classes for turtles and crocodilians and has merged taxids. *Lesson:* use NCBI first, resolve merged ids, fall back to OTT, and test known cases (chimpanzee and siamang share an order).
-- **Imputation can create impossible data.** Giving undated tree nodes their child's age produced 0-Mya phylum-level splits. *Lesson:* leave missing values missing (NaN) and exclude them.
-- **Time and topology are nearly collinear within rank bins** (|ρ| up to 0.99). *Lesson:* control for topology (partial correlation) before claiming the model encodes divergence *time*.
-- **HTTP decoding defaults bite.** `requests` decodes text without a charset as ISO-8859-1, so "Grévy's" became "GrÃ©vy's" in a frozen dataset. *Lesson:* force UTF-8 for SPARQL CSV, and grep frozen data for mojibake.
-- **Plots: never two blues for two classes.** Two near-identical blues hid the mammal/fish distinction. *Lesson:* validate palettes with a script (dataviz `validate_palette.js`); for >3 categories in a scatter, use composite color × marker encoding and spotlight small multiples.
-
-## From the pilot (Pythia-410m)
-- **The stage-1a checks C1, C2, C3 and C3b all pass at layer 0 (token embeddings).** At layer 0 the last-name-token vector is the embedding of the head noun ("shark", "crab", "frog"). Species sharing a head noun are usually related, so lexical identity alone produces class purity, order purity and a short tree overlay. *Consequence:* the stage-1a checks cannot separate lexical from phylogenetic structure, and layer 0 must be reported as the lexical reference for every stage-1a effect size. The decisive test is H1, whose triplets are head-noun-disjoint. C3b (within-stratum shuffle) was added after the pilot to separate "tree" from "clusters" (deviation 10).
-
-## From stages 3–6 and the release
-- **A permutation-style test against n random controls cannot give p < 1/(n+1).**
-  - Stage 3 first compared the probe subspace with 20 and 10 random subspaces, so the smallest possible p-values were 0.048 and 0.091.
-  - The registered Holm family of 2 needs p ≤ 0.025, so the test could never succeed whatever the data.
-  - *Lesson:* before running a rank test, compute its p-value floor against the corrected threshold.
-  - Fixed before the rerun, with 99 subspaces (deviation 19).
-- **Variance-match random controls on the set they are drawn from.**
-  - *What went wrong.* The first causal run measured the probe's captured variance on all species but matched the random subspaces on the training species, so the random controls were under-matched.
-  - *Effect.* Matching both on the training species raised the random ablation drops. C-abl then stopped being significant: about one random subspace in nine matched the probe ([experiment 04](04-causal-behavior-stage3/learnings.md)).
-- **A causal test inherits its probe's confounds.** The probe was trained on path length, which the coarse groups dominate, and the readout was the class word. A class-only subspace switched answers as often and ablated more, so the positive C-swap shows class use, not phylogeny use. *Lesson:* pair a causal test with a subspace that carries only the confound.
-- **Compare like with like in off-target checks.**
-  - The no-edit loss was token-weighted over 20 sentences, while the edited losses were unweighted means over the first 10. That apparent effect was an artifact.
-  - *Lesson:* compute baseline and intervention with the same function, and pass the edit as an argument (a unit test now checks that an identity edit reproduces the baseline exactly).
-- **Recompute controls on the same perturbed draw** (stage 6). Comparing marginal spreads overstates uncertainty about the model-vs-control gap; the paired margin is the quantity of interest.
-- **The prompt barely matters with centering and a last-token readout.** Even a single template reproduces the main TA_within (stage 6). Species composition is the main source of variance, which is why the family-block bootstrap is the right CI.
-- **Hugging Face token location.**
-  - With `HF_HOME` moved to D:, `huggingface_hub` looks for the token under `HF_HOME`, but `hf auth login` had stored it in `~/.cache/huggingface/token`, which caused a 401 on upload.
-  - The release code falls back to the default token path. The token is never logged or copied.
-- **API drift.** `HfApi.upload_large_folder` no longer exists in huggingface_hub 2.4; `upload_folder` now splits large folders into several commits and resumes when re-run.
-- **Generated text blocks keep docs honest.** The README and summary headline tables are injected by the `report` phase between markers, so no hand-typed number can go stale.
-
-## From the final independent review (round 1)
-- **A probe's all-pairs correlation can be produced by the coarse groups alone.**
-  - A predictor that knows only the 13 strata correlates highly with tree path length.
-  - A probe trained on a class-blob input (coarse groups, no within-group tree) generalized to held-out families as well as the model.
-  - Shuffled-tree and random-input controls cannot detect this, because they destroy the class structure too.
-  - *Lesson:* every distance probe needs a **class-only input** control, and it should be judged on a within-group metric.
-- **Pooled within-group correlations have a Simpson-type flaw.** When groups differ in typical within-group distance, one Spearman over all same-group pairs rewards any predictor that knows the group means. *Lesson:* compute the correlation per group and average; check the metric with a group-mean predictor, which should score about 0.
-- **Compare every positive secondary result with the untrained controls, not only with chance.**
-  - S2 passed against chance but was matched by an untrained network.
-  - The conflict-triplet pattern was also present in untrained networks.
-  - *Lesson:* report paired control comparisons for every subset.
-- **Label results by content, not by storage key.** A report labelled whatever sat under `C_abl` as "final", which published superseded numbers as final on the public site.
-- **Registered corrections must exist in code.** The BH-FDR correction was registered and advertised in the README but never implemented. *Lesson:* grep the code for each registered statistical procedure before writing it up.
-- **Cosine distance depends on the origin.** The reviewer found that residualizing covariates without re-centring made H1 look fragile. *Lesson:* re-centre after any linear adjustment before using cosine distances.
-
-## From the visualization pass (2026-11-20)
-- **Define a figure once; export it twice.**
-  - Each chart is one Plotly figure. The site embeds it interactively, and kaleido exports a PNG of it for the README, where GitHub renders no JavaScript.
-  - Verdict badges are computed from the results files, so a label cannot disagree with its chart.
-- **Sparse bins dominate a line chart.** In the depth profile, the "same genus" level had only 3 triplets, yet its drop to 0 was the most visible feature. Levels with fewer than 30 triplets are now omitted, and every point shows its n on hover.
-- **Use depth-first order for distance heatmaps.** `RefTree.preorder` is breadth-first, so it interleaves clades. Leaves have to be taken in depth-first order for clades to appear as blocks, and a unit test checks this.
-- **A read-only folder breaks `uv sync` on Windows.** A read-only attribute on `phylogeo-0.1.0.dist-info` made uv fail with "Access is denied" and drop the editable install. No process was holding the folder. `attrib -R` on that folder fixed it.
-
-
-## From the independent audit (2026-11-22)
-- **Compare like with like.** The flat probe's within-stratum score was computed on held-out pairs but compared with raw distances over all species. On the same held-out pairs the raw distances scored higher, which reversed "the probe adds little" into "the probe adds nothing". *Lesson:* any comparison table needs one evaluation set per column.
-- **"Above chance" needs the test, not the point estimate.** The random-init control's value at its selected layer was above 1/3, but its own max-T test over layers was not significant. *Lesson:* report a control's significance with the same layer-selection correction as the main model.
-- **Choose the bootstrap block for the dependence you expect.** Family blocks gave a positive margin over the untrained networks; order blocks, which also capture shared ancestry above the family, did not. *Lesson:* preregister the resampling level from the structure of the claim (here: most decision nodes split orders), and report a coarser level as a sensitivity analysis.
-- **"No shared token" is not "no shared spelling".** "fly" and " fly" are different tokens. The character-3-gram-neutral subset, not the token-disjoint one, is the test of a name-form explanation.
-- **Check citation titles against the arXiv page, not the blog post.** Two reference-list titles were blog-post titles, or invented descriptive titles, attached to arXiv ids.
-- **A 3-D picture must use the metric the test uses (within-group 3-D view, post hoc).**
-  - The first check used top-3 PCA of the raw species vectors within a group. In mammals, random-init Qwen came out *more* tree-like than the trained model. Vector norms, which depend on the name, dominated the top components.
-  - H1 scores cosine distance, and for unit vectors ‖u − v‖² = 2(1 − cos). Scaling every vector to unit length before PCA makes the picture a rank-3 approximation of the geometry H1 tests. The choice is tested: `unit_group_pca3` ignores norms.
-  - Even then, the picture can exaggerate. The random-weight network loses more of its (mostly lexical) order in 3-D than the trained model does. So the per-group trained-vs-random difference is clearer in the 3-D view (CIs exclude zero in birds and mammals) than in all dimensions, where no single group's CI excludes zero; only the pooled H1 test does.
-  - *Lesson:* before showing a 3-D view as evidence, compute the test's own metric on the 3-D coordinates *and* in full space, for the model and the control, and print both next to the picture. Even a perfect tree code (Brownian motion) loses much of its triplet order in 3 dimensions.
-- **Fit the tree; don't just overlay it.** Centroid overlays put each internal node at the mean of its leaves. The least-squares fit (squared-change parsimony, equal to Brownian-motion ancestral states; the phylomorphospace approach) is the placement the points support best. Its squared length divided by its mean over species shuffles gives a per-panel fit score, so trained and random-init panels are compared on one scale.
-- **Heredocs on Windows Git Bash can rewrite backslashes.** A Python edit script passed through a heredoc lost one level of backslash escaping, so escaped `\n` sequences became real newlines inside string literals and broke a module. *Lesson:* write edit scripts with a file-writing tool and check that the module still parses after every scripted edit.

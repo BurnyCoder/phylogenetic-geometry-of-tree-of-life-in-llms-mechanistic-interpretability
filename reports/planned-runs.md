@@ -1,5 +1,7 @@
 # Planned runs (run matrix)
 
+Original run matrix. Actual measurements, deviations and the model-free reanalysis are documented in the [independent audit](reviews/2026-11-26-scientific-audit.md) and [experiment index](experiments/experiments.md).
+
 *Libor "Burny" Burian, 2026-11-20. This matrix is fixed by the [preregistration](preregistration.md).*
 
 **What every run shares unless the row says otherwise:**

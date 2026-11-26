@@ -1,5 +1,7 @@
 # Experiment 01 (stage 1a): do the species look like a tree in the top-3 PCA directions?
 
+PCA views, tree overlays and optimized camera angles are descriptive. A short overlay shows neighbouring projected coordinates for related leaves, including species in compact class clusters. It cannot establish a branching manifold. [Independent analysis](../../reviews/2026-11-26-scientific-audit.md#exploratory-geometry-probes-and-power) · [Dated original experiment record](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/cc36b9134981497d6006359183261381c25177ac/reports/experiments/01-pca-shape/experiment.md)
+
 **Hypothesis H1a** (preregistered, exploratory): in some layer's top-3 PCs, species form a branching tree: clade arms with nested sub-branches, and a tree overlay shorter than the shuffled-leaf null.
 
 ## Setup
@@ -52,45 +54,3 @@
 
 ## Re-run on the re-frozen species set
 After the review fixes (deviations 11–18), the species set changed: names were fixed, and *Hippopotamus*, *Dugong* and others were added. The pre-fix plots had already been seen, so the anti-bias step cannot be repeated blind for the re-run. The re-run is compared against descriptions 1–2 above.
-
-## Re-run results (re-frozen set, `results/qwen35_2b/stage1a/`)
-All numbers are in the auto-generated table in [`results/RESULTS.md`](../../../results/RESULTS.md) → Run `qwen35_2b` → Stage 1a, and in `checks.json`. The qualitative shape is unchanged from descriptions 1–2.
-
-**Calibration (positive and negative controls)**
-- **Days of the week and months form clean circles in calendar order** (PC1–PC2, layer 12; `calib_days_layer12_pc12.png`, `calib_months_layer12_pc12.png`). This is judged by eye (no circularity statistic) and is consistent with the circles reported by Engels et al., so the pipeline recovers known low-dimensional geometry.
-- **The synthetic Brownian-motion-on-the-tree cloud** (`calib_synthetic_brownian_tree.png`) shows long, clean arms per clade in the top 3 PCs. That is what a dominant tree signal looks like. The real species cloud looks very different.
-- **Random-init Qwen** (`calib_random_init_grid.png`; column "C1 random-init"):
-  - At layer 0 its class purity equals the trained model's. Layer-0 structure is therefore pure token identity: shared head nouns get the same embedding even with random weights.
-  - In deeper layers it falls to near chance, while the trained model's purity rises sharply.
-
-**Spotlight small multiples** (`spotlight_layer21_pc12.png`). At layer 21 the curved band orders the strata:
-- **One end:** cartilaginous fish, cnidarians, echinoderms, molluscs, crustaceans; ray-finned fish and the "other" group (lampreys, lungfish, coelacanths) on a lower arm.
-- **Middle:** amphibians, reptiles, mammals.
-- **Other end:** insects and birds.
-
-Birds and insects are phylogenetically distant but are both flyers. The dominant top-PC axis therefore looks like a habitat / locomotion gradient (water → land → air), not phylogeny. This is a **post-hoc, exploratory observation**. It is turned into a testable hypothesis in stage 4: within mammals, marine species should sit toward the aquatic end and bats toward the aerial end. The test will use EltonTraits foraging strata, on a held-out species sample, before any claim is made.
-
-**Zoom-in, mammals, layer 21** (`zoom_mammals_layer21.png`):
-- Rodents and lagomorphs cluster together; this is Glires, a real clade.
-- Primates cluster.
-- A tight artiodactyl group sits at the far end of PC1; to be identified, probably the cetaceans.
-- So some order-level structure is present (C2 mammals above its null and above the layer-0 lexical value).
-
-## Reading of H1a (preregistered rule + shape judgment)
-- **Formal checks.** C1, C2 and C3 beat their permutation nulls in every layer from 2 to 24, so the preregistered rule labels these layers "tree-consistent (checks 1–3 pass)". In layers 0–1, C2 for birds fails.
-- **Effect sizes against the lexical reference (layer 0) and the random-init model:**
-  - Class purity (C1) roughly doubles from layer 0 to layers 4–5 and 20–21.
-  - Order purity *within birds* (C2) rises from a non-significant value at layer 0 to clearly above its null in middle and late layers.
-  - Order-level structure within the coarse classes is therefore not just head-noun identity.
-- **Branching beyond the coarse classes in the top 3 PCs (C3b, exploratory)** is significant but **no larger than at layer 0**: the overlay/within-stratum-null ratio is about the same as the lexical reference. In the top 3 PCs, the within-class tree signal is not stronger than what word identity alone produces.
-- **Shape by eye:**
-  - Layers 4–5: a class-level star (arms = coarse classes radiating from a centre).
-  - Late layers: a curved, ecology-like gradient through the classes.
-  - **No visible nested branching inside classes**, unlike the synthetic tree.
-- **Verdict (exploratory):** H1a is **partially supported**. The top-3 PCs show class-level arms and some order-level clustering, beyond the lexical and random-init references. The overall top-3 shape is closer to "clusters + ecological gradient" (alternatives b/c) than to the nested tree of the Brownian calibration. As preregistered, this does not decide the question for higher dimensions; stage 1b (triplet accuracy over all 2,048 dimensions) does.
-
-## Audit note (2026-11-22)
-From the [independent audit](../../reviews/2026-11-22-independent-audit.md):
-- **The formal H1a checks do not discriminate.** C1–C3 already pass at layer 2, where the representation is close to the token embedding, and C2/C3 were not computed for the random-init model. The "tree-consistent" label therefore says only that classes and orders cluster, which word identity already produces. The figure caption on the site now says so. The verdict above (partially supported; clusters plus an ecological gradient, not a nested tree) stands.
-- **"Clean circles"** for days and months is a visual reading of 7 and 12 points in calendar order, not a test.
-- **The cetacean guess** in the mammal zoom-in ("probably the cetaceans") was never checked and is not a result.
