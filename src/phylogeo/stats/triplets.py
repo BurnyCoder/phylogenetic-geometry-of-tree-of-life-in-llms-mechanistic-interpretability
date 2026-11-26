@@ -80,13 +80,13 @@ def sample_triplets(tree: RefTree, k_per_node: int, rng: np.random.Generator) ->
 def triplet_scores(D: np.ndarray, a: np.ndarray, b: np.ndarray, c: np.ndarray) -> np.ndarray:
     """Correctness of each triplet under distance matrix D (or a stack [L, n, n]).
 
-    Score = 1/(number of pairs tied at the minimum) if d(a,b) is a minimum, else 0.
-    So: strictly correct -> 1, three-way tie -> 1/3, two-way tie with ab -> 1/2.
+    Section 4.1 of the registration assigns one-third credit to a tied minimum.
+    The historical shared-minimum rule is available in verification.statistics for replay.
     """
     dab, dac, dbc = D[..., a, b], D[..., a, c], D[..., b, c]
     m = np.minimum(np.minimum(dab, dac), dbc)
     n_min = (dab == m).astype(float) + (dac == m) + (dbc == m)
-    return np.where(dab == m, 1.0 / n_min, 0.0)
+    return np.where(n_min > 1, 1 / 3, (dab == m).astype(float))
 
 
 def node_balanced_mean(scores: np.ndarray, node: np.ndarray, mask: np.ndarray | None = None,
@@ -138,7 +138,7 @@ def distinct_mask(trip: Triplets, labels: np.ndarray) -> np.ndarray:
 
 
 def discordant_mask(B: np.ndarray, trip: Triplets) -> np.ndarray:
-    """True where baseline distance B strictly picks a wrong pair (score 0)."""
+    """True where exactly one alternative to the sister pair is strictly closest."""
     return triplet_scores(B, trip.a, trip.b, trip.c) == 0.0
 
 

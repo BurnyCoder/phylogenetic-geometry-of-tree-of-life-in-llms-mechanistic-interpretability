@@ -42,7 +42,8 @@ def probe_subspace(V: np.ndarray, D: np.ndarray, train: np.ndarray, k: int = 10,
     pca = PCA(n_components=min(n_pca, train.sum() - 1), random_state=seed).fit(V[train])
     Z = pca.transform(V)
     s = Z[train].std()
-    m = train_probe(Z[train] / s, D[np.ix_(train, train)] * (np.pi / D.max()), k=k, steps=steps, seed=seed)
+    target = D[np.ix_(train, train)]
+    m = train_probe(Z[train] / s, target * (np.pi / target.max()), k=k, steps=steps, seed=seed)
     M = m.W.detach().numpy() @ pca.components_ / s
     U = orthonormal(M)
     Vc = V[train] - V[train].mean(0)  # same species set as the variance-matched random subspaces (deviation 20)

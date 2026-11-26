@@ -1,0 +1,8 @@
+{
+  "source": "bg6_stage3_causal.out",
+  "source_sha256": "f3323e07bf7117ff1116e2203f44b27dbede9af285660b00661bf7389c8ced8e",
+  "line": "random subspaces from top-64 PCs; mean captured variance 0.1256 (target 0.1233)",
+  "pc_span": 64,
+  "random_mean": 0.1256,
+  "target": 0.1233
+}

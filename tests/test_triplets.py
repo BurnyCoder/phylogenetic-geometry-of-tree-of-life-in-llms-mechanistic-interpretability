@@ -62,7 +62,7 @@ def test_tie_handling():
     D = np.zeros((3, 3))
     assert triplet_scores(D, a, b, c)[0] == pytest.approx(1 / 3)
     D2 = np.array([[0, 1, 1], [1, 0, 2], [1, 2, 0]], float)  # d_ab = d_ac < d_bc
-    assert triplet_scores(D2, a, b, c)[0] == pytest.approx(1 / 2)
+    assert triplet_scores(D2, a, b, c)[0] == pytest.approx(1 / 3)
     D3 = np.array([[0, 1, 2], [1, 0, 2], [2, 2, 0]], float)
     assert triplet_scores(D3, a, b, c)[0] == 1.0
     D4 = np.array([[0, 3, 1], [3, 0, 2], [1, 2, 0]], float)
@@ -87,8 +87,8 @@ def test_layers_vectorized(tree30, rng):
 def test_discordant_mask(tree30, rng):
     trip = sample_triplets(tree30, k_per_node=50, rng=rng)
     assert not discordant_mask(tree30.lca_depth_distance(), trip).any()  # perfect baseline never wrong
-    m = discordant_mask(-tree30.lca_depth_distance(), trip)  # anti-tree baseline is always wrong
-    assert m.all()
+    m = discordant_mask(-tree30.lca_depth_distance(), trip)  # both wrong alternatives tie
+    assert not m.any()
 
 
 def test_maxT_null_and_signal(tree30, rng):

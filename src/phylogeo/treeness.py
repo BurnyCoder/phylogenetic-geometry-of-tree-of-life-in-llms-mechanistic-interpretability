@@ -69,7 +69,7 @@ def nj_newick(D: np.ndarray, labels: list[str]) -> str:
 
 
 def rf_normalized(newick_a: str, newick_b: str) -> float:
-    """Unrooted Robinson-Foulds distance / its maximum (DendroPy), 0 = identical topology."""
+    """Unrooted RF divided by the binary-tree upper bound; unresolved reference splits reduce the attainable maximum."""
     import dendropy
     from dendropy.calculate import treecompare
 

@@ -181,8 +181,8 @@ def date_tree(tree: RefTree, ncbi_by_leaf: list[int], tries: int = 8) -> np.ndar
 
     Local: for internal node v, pick one representative leaf from each of two
     different children (up to ``tries`` different pairs) and query the MRCA age.
-    Undated nodes inherit the age of their oldest dated child (or 0). Ages are
-    then made monotone (a parent is never younger than any child).
+    Undated internal nodes retain NaN. Dated nodes are clamped to the maximum
+    age of their dated descendants to avoid a temporal inversion.
     Global: produces the dated ultrametric tree for secondary hypothesis S5.
     """
     age = np.zeros(tree.N)  # leaves = 0 Mya

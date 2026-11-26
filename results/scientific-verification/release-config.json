@@ -1,0 +1,13 @@
+{
+  "model_id": "Qwen/Qwen3.5-2B",
+  "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+  "layer": 6,
+  "readout": "last name token",
+  "k": 10,
+  "metric": "angular",
+  "z_scale": 0.3095661699771881,
+  "target_scale": 0.06829549246934333,
+  "per_template_centering": true,
+  "n_species": 400,
+  "fit_pearson_all_species": 0.9472501775813282
+}
