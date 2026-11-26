@@ -21,7 +21,7 @@ Libor “Burny” Burian · 26 November 2026. Each row links to the original exp
 | Conflict triplet | Cases where folk intuition and phylogeny disagree (a whale is closer to a hippo than to a whale shark) |
 
 ## Models (networks)
-| Model | Role | Architecture | Training | Objective / data | Params | Layers × width |
+| Model | Role | Architecture | Training | Objective / data | Approximate scale-series size label | Layers × width |
 |---|---|---|---|---|---|---|
 | [Qwen/Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B) (rev `15852e8`) | **primary** | hybrid decoder: 3 Gated-DeltaNet linear-attention blocks per full-attention block | pretrained, then post-trained by Qwen (released model, not trained by us) | next-token prediction on large web/code/multilingual corpora, then instruction/chat post-training | 2.27B | 24 × 2048 |
 | Qwen3.5-2B random init | untrained control | same | none (random weights, seed 0) | – | 2.27B | 24 × 2048 |
@@ -33,7 +33,7 @@ Libor “Burny” Burian · 26 November 2026. Each row links to the original exp
 | Pythia-1.4B at 12 checkpoints (steps 0 … 143000) | stage 5: training dynamics | GPT-NeoX decoder | EleutherAI checkpoints | the Pile | 1.4B | 24 × 2048 |
 
 **Trained by us.** Only small probes: the stage-2 flat-subspace probe, a 10 × 100 linear map plus a scale, trained with Adam (lr 1e-3, 2,000 full-batch steps, α = 0.01), with 5-fold family-holdout CV and 5 seeds.
-The training settings and revisions are recorded in the configs and dated registration amendments.
+The size column follows the original scale-analysis metadata. The study used text inputs and language-layer readouts. Published multimodal checkpoint sizes include additional weights. The configs and dated amendments give the training settings and revisions. [Scale metadata](../../results/stage5/summary.json) · [Qwen checkpoint configuration](https://huggingface.co/Qwen/Qwen3.5-2B/blob/15852e8c16360a2fea060d615a32b45270f8a8fc/config.json)
 - The sensitivity sweep over seeds is stage 6 ([08](08-sensitivity-stage6/experiment.md)); the sweep over k and metric is stage 4 ([05](05-ablations-stage4/experiment.md)).
 
 ## Experiments
@@ -49,9 +49,19 @@ The training settings and revisions are recorded in the configs and dated regist
 | 06 | Habitat axis on held-out species (Addendum A) | addendum | done | [06-habitat-addendum](06-habitat-addendum/experiment.md) |
 | 07 | More models: scale, architecture, training dynamics | 5 | done | [07-more-models-stage5](07-more-models-stage5/experiment.md) |
 | 08 | Sensitivity (triplet/probe/split seeds, templates, species subsamples) | 6 | done | [08-sensitivity-stage6](08-sensitivity-stage6/experiment.md) |
-
-| – | Output examples (nearest neighbours of rule-chosen species) | report | done | `results/qwen35_2b/examples/neighbors.json`, paper section "Output examples" |
+| – | Nearest neighbors of the most-linked species in each stratum | report | archived | [All examples and comparators](../../results/RESULTS.md#nearest-neighbor-examples) |
+| 09 | Independent reanalysis of archived measurements | verification | complete | [09-independent-verification](09-independent-verification/experiment.md) |
 
 ## Independent verification
 
 [Experiment and original-data inputs](09-independent-verification/experiment.md) · [Learnings](09-independent-verification/learnings.md) · [Original chronological overview](https://github.com/BurnyCoder/phylogenetic-geometry-of-tree-of-life-in-llms-mechanistic-interpretability/blob/cc36b9134981497d6006359183261381c25177ac/reports/experiments/experiments.md)
+
+## In plain language
+
+In plain language, putting nearly all birds together can produce a high global tree correlation even if the model treats relatives within birds indiscriminately. For each of three species from the same broad group, the tree identifies the pair that shares a more recent common ancestor. The primary question asks whether the model places that pair closest together. A strictly increasing transformation of representation distances preserves their ordering. Giving each eligible branching point equal weight limits the influence of nodes with many sampled triples. [Reference and scoring](../../src/phylogeo/stats/triplets.py) · [Registration](../preregistration.md)
+
+## Methodology choices and why
+
+The last name token can depend on all preceding parts of a multiword name in a causal decoder. Reading it in several prompts and subtracting the mean over species within each prompt reduces shared template offsets. Comparisons with the mean over name tokens, raw text, and uncentered cosine check the consequences of those choices. Extraction used single prompts after a batch check found differences in the recorded bfloat16 readouts. [Extraction](../../src/phylogeo/extract.py) · [Ablations](05-ablations-stage4/experiment.md) · [Engineering record](learnings.md)
+
+Character trigrams measure overlapping strings, and sitelinks measure prominence across Wikimedia sites. Neither measures Qwen’s exposure to a name during pretraining. The static GloVe comparison tests one form of distributional similarity. The shuffled-tree and class-centroid probe controls ask different questions about what can predict a large all-pairs correlation. [Lexical baselines](../../src/phylogeo/baselines.py) · [Probe experiment](03-geometry-probes-stage2/experiment.md)

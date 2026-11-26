@@ -23,3 +23,9 @@ Common and scientific names must be compared on the same eligible triples at the
   - metric angular / Euclidean / Poincaré at k ∈ {2, 5, 10};
   - within-group held-out evaluation, compared with the shuffled-tree probe.
 - Geodesic: the kNN k used for the graph.
+
+## What changed the scores
+
+At the common-name layer, omitting centering or taking the mean over the tokens of a name lowers within-group accuracy. Raw-text prompts, within-stratum centering and per-dimension standardization yield values close to the main estimate on this panel. These are one-change-at-a-time descriptions. The scientific-name comparison restricts both representations to the same genus-split triples and also excludes shared final words. This matters because a binomial contains its genus explicitly. [Readout and matched-binomial tables](../../../results/qwen35_2b/SUMMARY.md#stage-4)
+
+Euclidean, angular and Poincaré probes were compared at several output dimensions. Metric, bottleneck size and coarse-group information can all affect held-out correlation. The associated table records each comparison and seed spread. It also distinguishes a pooled within-group correlation from the mean of correlations calculated separately in each eligible stratum. [Probe ablations](../../../results/qwen35_2b/stage4/results.json) · [Held-out comparison](../03-geometry-probes-stage2/experiment.md)

@@ -7,7 +7,7 @@ The recorded draws vary sampling, templates and probe seeds. Control coverage va
   ```powershell
   uv run python -m phylogeo.run --config configs/qwen35_2b.yaml --phases stage6
   ```
-  It runs on the CPU, using the stored activations.
+  This historical phase reads stored activations and fits new probes in its probe-seed sweep. The [saved results](../../../results/qwen35_2b/stage6/results.json) contain the per-seed values for a model-free comparison.
 - **Numbers:** auto-generated in [`results/qwen35_2b/SUMMARY.md`](../../../results/qwen35_2b/SUMMARY.md), section "Stage 6".
 - **Figure:** [`sensitivity_ta_within.png`](../../../results/qwen35_2b/stage6/sensitivity_ta_within.png).
 
@@ -34,3 +34,7 @@ A result that depends on one of these draws is not a result. Each source is vari
 | Flat-probe seed (sets both folds and initialization) | 20 fresh seeds, disjoint from the stage-2 seeds | Held-out-family r; within-stratum held-out Spearman |
 
 The controls recomputed on every triplet and species draw are random-init Qwen3.5-2B, Pythia-410m step 0, character 3-grams, name token count and log popularity. The "margin" is the model's TA_within minus the **best** of these controls on the same draw.
+
+## What varied most
+
+Species subsampling produced a wider spread of model accuracy than resampling the triplets on the fixed panel. In both sets of archived draws the model’s margin over the strongest control evaluated on that draw stayed positive. The template runs retained above-chance model point estimates across single templates, leave-one-out sets, and template halves. Those template rows contain model-only scores. The probe-seed rows jointly change fold assignment and initialization. These are different sources of variation, and the sample percentiles describe the actual perturbations used. [Generated perturbation table](../../../results/qwen35_2b/SUMMARY.md#stage-6) · [Per-draw scores](../../../results/qwen35_2b/stage6/results.json)
